@@ -14,8 +14,6 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->timestamps();
 		});
-
-		// git test
 	}
 
 	public function down()
