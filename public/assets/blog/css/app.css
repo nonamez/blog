@@ -372,7 +372,7 @@ article.post section.post-content .post-tags a:hover {
 article.post section.post-content .image {
 	margin: 10px 0px;
 	text-align: center;
-	background: #F7F7F7;
+	/*background: #F7F7F7;*/
 }
 article.post section.post-content .image:hover {
 	opacity: 0.9;
