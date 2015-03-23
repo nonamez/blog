@@ -9,6 +9,8 @@ class CreateBlgTranslatedPosts extends Migration {
 	{
 		Schema::create('blg_translated_posts', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+			
 			$table->increments('id')->unsigned();
 			$table->integer('post_id')->unsigned()->index();
 			$table->enum('locale', Config::get('app.locales'))->default('en');

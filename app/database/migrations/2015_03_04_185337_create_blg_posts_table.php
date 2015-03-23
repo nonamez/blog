@@ -9,6 +9,8 @@ class CreateBlgPostsTable extends Migration {
 	{
 		Schema::create('blg_posts', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
 			$table->timestamps();
 		});

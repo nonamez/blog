@@ -7,7 +7,10 @@ class CreateBlgTagsTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('blg_tags', function(Blueprint $table) {
+		Schema::create('blg_tags', function(Blueprint $table) 
+		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
 			$table->string('slug', 255)->unique()->index();
 			$table->string('name', 255);

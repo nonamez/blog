@@ -9,6 +9,8 @@ class CreateBlgPostsTagsTable extends Migration {
 	{		
 		Schema::create('blg_posts_tags', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
 			$table->integer('post_id')->unsigned()->index();
 			$table->foreign('post_id')->references('id')->on('blg_translated_posts')->onDelete('cascade');
