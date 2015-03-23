@@ -14,6 +14,8 @@ class CreateBlgPostsTagsTable extends Migration {
 			$table->foreign('post_id')->references('id')->on('blg_translated_posts')->onDelete('cascade');
 			$table->integer('tag_id')->unsigned()->index();
 			$table->foreign('tag_id')->references('id')->on('blg_tags')->onDelete('cascade');
+
+			$table->unique(['post_id','tag_id']);
 		});
 	}
 
