@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$this->call('FirstPostAndTagSeeder');
+		$this->call('UserSeeder');
 		
 		Eloquent::reguard();
 	}

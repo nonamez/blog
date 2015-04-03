@@ -1,5 +1,4 @@
 <?php
-
 Route::get('/', function() {
 	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
 		return Redirect::to('/' . substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
@@ -17,5 +16,17 @@ Route::group(['prefix' => $locale], function() {
 	
 	Route::get('/auth', function() {
 		return View::make('auth');
+	});
+	
+	Route::get('/auth', function() {
+		return View::make('auth');
+	});
+
+	Route::post('/auth', array('as' => 'auth_path', 'uses' => 'UserController@authorize'));
+	
+	Route::group(array('before' => 'auth'), function() {
+		Route::get('/admin', function() {
+			return 'admin';
+		});
 	});
 });
