@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->string('password');
 			$table->boolean('is_admin')->default(FALSE);
+			$table->boolean('banned')->default(FALSE);
 			$table->rememberToken();
 			$table->timestamps();
 		});
