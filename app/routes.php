@@ -14,8 +14,8 @@ Route::get('/{locale}', 'Site\BlogController@posts')->where('locale', implode('|
 Route::group(['prefix' => $locale], function() {
 	Route::get('/post/{slug}', array('as' => 'post', 'uses' => 'Site\BlogController@post'));
 	Route::get('/tag/{slug}', array('as' => 'tag', 'uses' => 'Site\BlogController@postsByTag'));
+	
+	Route::get('/auth', function() {
+		return View::make('auth');
+	});
 });
-
-Route::get('/' . $locale . '/about', array('as' => 'about', function() {
-	return View::make('about');
-}));
