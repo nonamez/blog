@@ -19,6 +19,7 @@ a {
 
 a:hover, a:focus {
 	color: #00526e;
+	text-decoration: none;
 }
 
 hr {
@@ -130,12 +131,6 @@ h6 .small,
 /**
  * Main
  */
-body {
-	overflow-y: scroll;
-}
-a, a:hover {
-	text-decoration: none;
-}
 .container {
 	max-width: 960px;
 }
