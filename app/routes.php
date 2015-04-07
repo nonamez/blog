@@ -14,15 +14,15 @@ Route::group(['prefix' => $locale], function() {
 	Route::get('/post/{slug}', array('as' => 'post', 'uses' => 'Site\BlogController@post'));
 	Route::get('/tag/{slug}', array('as' => 'tag', 'uses' => 'Site\BlogController@postsByTag'));
 	
-	Route::get('/auth', function() {
-		return View::make('auth');
-	});
+	Route::get('/about', array('as' => 'about', function() {
+		return View::make('about');
+	}));
 	
 	Route::get('/auth', function() {
 		return View::make('auth');
 	});
 
-	Route::post('/auth', array('as' => 'auth_path', 'uses' => 'UserController@authorize'));
+	Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize'));
 	
 	Route::group(array('before' => 'auth'), function() {
 		Route::get('/admin', function() {
