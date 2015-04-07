@@ -24,7 +24,7 @@
 								<h3 class="panel-title">Sign In</h3>
 							</div>
 							<div class="panel-body">
-								{{ Form::open(['route' => 'auth_path', 'class' => 'form-horizontal']) }}
+								{{ Form::open(['route' => 'auth', 'class' => 'form-horizontal']) }}
 									<div class="form-group">
 										<label class="col-sm-4 control-label">Email</label>
 										<div class="col-sm-8">

@@ -8,6 +8,12 @@ Route::get('/', function() {
 
 $locale = App::getLocale();
 
+/*
+|--------------------------------------------------------------------------
+| Fron-end Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/{locale}', 'Site\BlogController@posts')->where('locale', implode('|', Config::get('app.locales')));
 
 Route::group(['prefix' => $locale], function() {
@@ -17,16 +23,27 @@ Route::group(['prefix' => $locale], function() {
 	Route::get('/about', array('as' => 'about', function() {
 		return View::make('about');
 	}));
-	
-	Route::get('/auth', function() {
-		return View::make('auth');
-	});
+});
 
-	Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize'));
-	
-	Route::group(array('before' => 'auth'), function() {
-		Route::get('/admin', function() {
-			return 'admin';
-		});
-	});
+/*
+|--------------------------------------------------------------------------
+| Auth Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/auth', function() {
+	return View::make('auth');
+});
+
+Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize'));
+
+
+/*
+|--------------------------------------------------------------------------
+| Back-end Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
+	Route::resource('posts', 'Admin\PostController');
 });
