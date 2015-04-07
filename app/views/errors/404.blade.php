@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/blog/css/app.css') }}">
 </head>
-<body class="home-template">
+<body>
 	<div class="container" style="padding-top:5%">
 		<div class="row">
 			<div class="col-md-12">

@@ -3,7 +3,7 @@
 <head>
 	@include('includes.head')
 </head>
-<body class="home-template">
+<body>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
