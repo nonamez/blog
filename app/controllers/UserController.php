@@ -8,7 +8,7 @@ class UserController extends Controller {
 		);
 		
 		if (Auth::attempt($input))
-			return Redirect::intended('/');
+			return Redirect::intended('/admin');
 		
 		return Redirect::back()->withInput()->with(array('notice' => Lang::get('errors.incorrect_login')));
 	}
