@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ Config::get('app.locale') }}">
 <head>
-	@include('includes.head')
+	@include('includes.blog.head')
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				@include('includes.header')
+				@include('includes.blog.header')
 			</div>
 			<div class="col-md-12">
 				@yield('content')
@@ -15,7 +15,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				@include('includes.footer')
+				@include('includes.blog.footer')
 			</div>
 		</div>
 		<a href="#" id="back-to-top" class="back-to-top hidden-xs"><i class="fa fa-angle-up"></i></a>
@@ -25,7 +25,7 @@
 	</a>
 	<script src="{{ asset('/assets/plugins/jquery/jquery-2.1.3.min.js') }}"></script>
 	<script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('/assets/blog/js/app.js')}}"></script>
+	<script src="{{ asset('/assets/blog/app.js')}}"></script>
 	@yield('custom_scripts')
 </body>
 </html>

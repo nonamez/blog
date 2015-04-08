@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.blog')
 @section('content')
 <main class="content" role="main">
 	@forelse ($posts as $post)
@@ -40,7 +40,6 @@
 </main>
 @stop
 @section('custom_scripts')
-<script src="{{asset('assets/blog/js/app.js')}}"></script>
 <script type="text/javascript">
 	var posts = [];
 

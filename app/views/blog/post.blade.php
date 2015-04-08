@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.blog')
 @section('content')
 <main class="content" role="main">
 	<article class="post post-standalone" id="post-{{ $post['id'] }}" style="border-top: 1px solid #efefef">
@@ -39,7 +39,6 @@
 </main>
 @stop
 @section('custom_scripts')
-<script src="{{asset('assets/blog/js/app.js')}}"></script>
 <script type="text/javascript">	
 	jQuery('#show-disqus').on('click', function() {
 		jQuery(this).next().show();
