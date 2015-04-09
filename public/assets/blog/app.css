@@ -8,17 +8,17 @@ html {
 body {
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 15px;
-	line-height: 1.4;
+	line-height: 145%;
 	color: #222222;
 	background-color: #ffffff;
 }
 
 a {
-	color: #008cba;
+	color: #00526e;
 }
 
 a:hover, a:focus {
-	color: #00526e;
+	color: #222222;
 	text-decoration: none;
 }
 
@@ -40,6 +40,7 @@ h6,
 .h6 {
 
   font-weight: 300;
+  color: #404040;
 }
 h1 small,
 h2 small,
