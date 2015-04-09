@@ -1,6 +1,7 @@
 <?php
 namespace Admin;
 
+use Config;
 use View;
 
 class PostController extends \BaseController {
@@ -10,23 +11,14 @@ class PostController extends \BaseController {
 		return View::make('admin.posts.index');
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
-		//
+		$locales = Config::get('app.locales');
+		
+		return View::make('admin.posts.create')->with('locales', array_combine($locales, $locales));
 	}
 
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
 		//
