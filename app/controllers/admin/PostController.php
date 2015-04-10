@@ -1,8 +1,15 @@
 <?php
 namespace Admin;
 
-use Config;
 use View;
+use Input;
+use Config;
+use Redirect;
+use Validator;
+
+use Blog\Models\Post;
+use Blog\Models\Tag;
+use Blog\Models\TranslatedPost;
 
 class PostController extends \BaseController {
 
@@ -21,7 +28,30 @@ class PostController extends \BaseController {
 
 	public function store()
 	{
-		//
+		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
+		
+		$rules = array(
+			'slug'    => array('required', 'unique:blg_translated_posts'),
+			'title'   => array('required', 'min:5'),
+			'locale'  => array('required', 'in:' . implode(',', Config::get('app.locales'))),
+			'status'  => array('required', 'in:draft,published'),
+			'content' => array('required', 'min:10'),
+		);
+		
+		$validator = Validator::make(Input::all('text', 'title', 'image'), $rules);
+
+		if ($validator->fails())
+			return Redirect::back()->withInput()->withErrors($validator);
+		
+		$translated_post = new TranslatedPost($data);
+		
+		$post = new Post;
+		
+		$post->save();
+		
+		$post->translated()->save($translated_post);
+		
+		return Redirect::to('/admin');
 	}
 
 
