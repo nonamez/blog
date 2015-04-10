@@ -45,7 +45,7 @@ Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize')
 */
 
 Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
-	Route::get('/', 'Admin\PostController@index');
+	Route::get('/', 'Admin\PostController@getIndex');
 	
-	Route::resource('posts', 'Admin\PostController');
+	Route::controller('posts', 'Admin\PostController');
 });

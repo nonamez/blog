@@ -13,21 +13,21 @@ use Blog\Models\TranslatedPost;
 
 class PostController extends \BaseController {
 
-	public function index()
+	public function getIndex()
 	{
 		$paginated = TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
 		
 		return View::make('admin.posts.index')->with('posts', $paginated);
 	}
 
-	public function create()
+	public function getCreate()
 	{
 		$locales = Config::get('app.locales');
 		
 		return View::make('admin.posts.create')->with('locales', array_combine($locales, $locales));
 	}
 
-	public function store()
+	public function postCreate()
 	{
 		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
 		
@@ -55,53 +55,8 @@ class PostController extends \BaseController {
 		return Redirect::to('/admin');
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	public function getDelete($id)
 	{
-		//
+		
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-
 }
