@@ -47,5 +47,7 @@ Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize')
 Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
 	Route::get('/', 'Admin\PostController@index');
 	
+	// Posts
+	Route::get('/posts/delete/{post_id}/{all?}', 'Admin\PostController@delete');
 	Route::controller('posts', 'Admin\PostController');
 });

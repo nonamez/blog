@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-{{ Form::open(['action' => 'Admin\PostController@store', 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
+{{ Form::open(['action' => 'Admin\PostController@postCreate', 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
 	<div class="row with-title" data-block-title="General">
 		<div class="form-group">
 			<label class="col-md-2 control-label">Title</label>

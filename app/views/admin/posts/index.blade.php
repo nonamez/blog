@@ -11,7 +11,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($posts as $post)
+		@forelse($posts as $post)
 		<tr>
 			<td>{{ $post['title'] }}</td>
 			<td>{{ $post['slug'] }}</td>
@@ -38,7 +38,13 @@
 				</div>
 			</td>
 		</tr>
-		@endforeach
+		@empty
+		<tr>
+			<td colspan="5" class="bg-info text-center">
+				Posts not found. Want to <a href="{{ URL::action('Admin\PostController@getCreate')}}">create</a> ?
+			</td>
+		</tr>
+		@endforelse
 	</tbody>
 </table>
 @stop
