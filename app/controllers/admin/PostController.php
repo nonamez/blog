@@ -55,7 +55,27 @@ class PostController extends \BaseController {
 		return Redirect::to('/admin');
 	}
 
-	public function getDelete($id)
+	public function getDelete($id, $type = FALSE)
+	{
+		$post = TranslatedPost::find($id);
+		
+		if (is_null($post))
+			return Redirect::back()->with('notice', 'Post not found');
+		
+		$title = $post->title;
+		
+		if ($type == 'translations') {
+			$post->parent()->delete();
+			$message = 'The post "%s" and its translations successfully deleted';
+		} else {
+			$post->delete();
+			$message = 'The post "%s" successfully deleted';
+		}
+		
+		return Redirect::back()->with('notice', sprintf($message, $title));
+	}
+	
+	public function getDeleteAll($id)
 	{
 		
 	}
