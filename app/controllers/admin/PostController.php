@@ -13,7 +13,7 @@ use Blog\Models\TranslatedPost;
 
 class PostController extends \BaseController {
 
-	public function getIndex()
+	public function index()
 	{
 		$paginated = TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
 		
@@ -55,7 +55,7 @@ class PostController extends \BaseController {
 		return Redirect::to('/admin');
 	}
 
-	public function getDelete($id, $all = FALSE)
+	public function delete($id, $all = FALSE)
 	{
 		$post = TranslatedPost::find($id);
 		
@@ -73,10 +73,5 @@ class PostController extends \BaseController {
 		}
 		
 		return Redirect::back()->with('notice', sprintf($message, $title));
-	}
-	
-	public function getDeleteAll($id)
-	{
-		
 	}
 }

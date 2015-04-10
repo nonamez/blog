@@ -28,10 +28,10 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								<a href="{{ URL::action('Admin\PostController@getDelete', array($post['id'])) }}">Current</a>
+								<a href="{{ URL::action('Admin\PostController@delete', array($post['id'])) }}">Current</a>
 							</li>
 							<li>
-								<a href="{{ URL::action('Admin\PostController@getDelete', array($post['id'], 'all')) }}">All</a>
+								<a href="{{ URL::action('Admin\PostController@delete', array($post['id'], 'all')) }}">All</a>
 							</li>
 						</ul>
 					</div>
