@@ -15,7 +15,9 @@ class PostController extends \BaseController {
 
 	public function index()
 	{
-		return View::make('admin.posts.index');
+		$paginated = TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
+		
+		return View::make('admin.posts.index')->with('posts', $paginated);
 	}
 
 	public function create()
@@ -24,7 +26,6 @@ class PostController extends \BaseController {
 		
 		return View::make('admin.posts.create')->with('locales', array_combine($locales, $locales));
 	}
-
 
 	public function store()
 	{
