@@ -31,7 +31,7 @@
 								<a href="{{ URL::action('Admin\PostController@getDelete', array($post['id'])) }}">Current</a>
 							</li>
 							<li>
-								<a href="{{ URL::action('Admin\PostController@getDelete', array($post['id'], 'translations')) }}">Other translations</a>
+								<a href="{{ URL::action('Admin\PostController@getDelete', array($post['id'], 'all')) }}">All</a>
 							</li>
 						</ul>
 					</div>

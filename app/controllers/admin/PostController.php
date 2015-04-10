@@ -55,7 +55,7 @@ class PostController extends \BaseController {
 		return Redirect::to('/admin');
 	}
 
-	public function getDelete($id, $type = FALSE)
+	public function getDelete($id, $all = FALSE)
 	{
 		$post = TranslatedPost::find($id);
 		
@@ -64,7 +64,7 @@ class PostController extends \BaseController {
 		
 		$title = $post->title;
 		
-		if ($type == 'translations') {
+		if ($all) {
 			$post->parent()->delete();
 			$message = 'The post "%s" and its translations successfully deleted';
 		} else {
