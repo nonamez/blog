@@ -7,6 +7,7 @@
 	<div class="container">
 		@include('includes.admin.header')
 		<section class="row" id="content">
+			@include('includes.notifications')
 			@yield('content')
 		</section>
 		@include('includes.admin.footer')
