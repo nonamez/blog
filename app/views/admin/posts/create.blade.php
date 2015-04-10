@@ -9,9 +9,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label">Text</label>
+			<label class="col-md-2 control-label">content</label>
 			<div class="col-md-8">
-				{{ Form::textarea('text', NULL, ['class' => 'form-control', 'placeholder' => 'Enter text', 'size' => '5x5'])}}
+				{{ Form::textarea('content', NULL, ['class' => 'form-control', 'placeholder' => 'Enter text', 'size' => '5x5'])}}
 			</div>
 		</div>
 	</div>
@@ -21,19 +21,19 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label">Slug</label>
 				<div class="col-md-8">
-					{{ Form::text('title', NULL, ['class' => 'form-control', 'placeholder' => 'Enter Title']) }}
+					{{ Form::text('slug', NULL, ['class' => 'form-control', 'placeholder' => 'Enter Slug']) }}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-4 control-label">Description</label>
 				<div class="col-md-8">
-					{{ Form::text('title', NULL, ['class' => 'form-control', 'placeholder' => 'Enter Title']) }}
+					{{ Form::text('meta_description', NULL, ['class' => 'form-control', 'placeholder' => 'Enter Description']) }}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-4 control-label">Keywords</label>
 				<div class="col-md-8">
-					{{ Form::text('title', NULL, ['class' => 'form-control', 'placeholder' => 'Enter Title']) }}
+					{{ Form::text('meta_keywords', NULL, ['class' => 'form-control', 'placeholder' => 'Enter Keywords']) }}
 				</div>
 			</div>
 		</div>
@@ -73,26 +73,35 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-offset-4 col-md-4">
-			<div class="dropdown btn-block">
-				<button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-					Create <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">EN</a>
-					</li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">RU</a>
-					</li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">LT</a>
-					</li>
-				</ul>
+		<div class="col-md-6 with-title" data-block-title="Options">
+			<div class="form-group">
+				<label class="col-md-6 control-label">Language</label>
+				<div class="col-md-6">
+					{{ Form::select('locale', $locales, NULL, array('class' => 'form-control'))}}
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-6 control-label">Status</label>
+				<div class="col-md-6">
+					<select class="form-control" name="status">
+						<option value="draft">Draft</option>
+						<option value="published">Published</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 with-title with-title-right" data-block-title="Actions">
+			<div class="form-group">
+				<div class="col-md-5 col-md-offset-3">
+					<button class="btn btn-default btn-block" type="submit">Create</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-5 col-md-offset-3">
+					<button class="btn btn-default btn-block" type="button" disabled="disabled">Update</button>
+				</div>
 			</div>
 		</div>
 	</div>
-	
-	<input type="hidden" class="hidden" value="en" name="language">
 {{ Form::close() }}
 @stop
