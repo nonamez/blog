@@ -4,7 +4,9 @@ use Eloquent;
 
 class TranslatedPost extends Eloquent {
 	
-	protected $table = 'blg_translated_posts';
+	protected $table    = 'blg_translated_posts';
+	protected $guarded  = array('id');
+	protected $fillable = array('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
 
 	public $is_short = FALSE;
 	
