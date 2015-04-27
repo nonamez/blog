@@ -4,5 +4,6 @@
 
 <title>Admin Panel</title>
 
-<link rel="stylesheet" type="text/css" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('/assets/admin/app.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/admin/app.css') }}">
