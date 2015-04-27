@@ -45,9 +45,10 @@ Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize')
 */
 
 Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
-	Route::get('/', 'Admin\PostController@index');
+	Route::get('/', array('as' => 'posts', 'uses' => 'Admin\PostController@index'));
 	
 	// Posts
-	Route::get('/posts/delete/{post_id}/{all?}', 'Admin\PostController@delete');
-	Route::controller('posts', 'Admin\PostController');
+	Route::get('/posts/create', array('as' => 'post_create', 'uses' => 'Admin\PostController@create'));
+	Route::post('/posts/create', array('as' => 'post_store', 'uses' => 'Admin\PostController@store'));
+	Route::get('/posts/delete/{post_id}/{all?}', array('as' => 'post_delete', 'uses' => 'Admin\PostController@delete'));
 });

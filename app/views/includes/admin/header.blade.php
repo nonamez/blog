@@ -6,9 +6,9 @@
 					Posts <span class="caret"></span>
 				</a>
 				<ul role="menu" class="dropdown-menu">
-					<li><a href="{{ URL::action('Admin\PostController@index') }}">All</a></li>
+					<li><a href="{{ URL::route('posts') }}">All</a></li>
 					<li class="divider"></li>
-					<li><a href="{{ URL::action('Admin\PostController@getCreate') }}">Create</a></li>
+					<li><a href="{{ URL::route('post_create') }}">Create</a></li>
 				</ul>
 			</li>
 		</ul>

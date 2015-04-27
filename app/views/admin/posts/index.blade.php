@@ -28,10 +28,10 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								<a href="{{ URL::action('Admin\PostController@delete', array($post['id'])) }}">Current</a>
+								<a href="{{ URL::route('post_delete', array($post['id'])) }}">Current</a>
 							</li>
 							<li>
-								<a href="{{ URL::action('Admin\PostController@delete', array($post['id'], 'all')) }}">All</a>
+								<a href="{{ URL::route('post_delete', array($post['id'], 'all')) }}">All</a>
 							</li>
 						</ul>
 					</div>
@@ -41,7 +41,7 @@
 		@empty
 		<tr>
 			<td colspan="5" class="bg-info text-center">
-				Posts not found. Want to <a href="{{ URL::action('Admin\PostController@getCreate')}}">create</a> ?
+				Posts not found. Want to <a href="{{ URL::route('post_create')}}">create</a> ?
 			</td>
 		</tr>
 		@endforelse

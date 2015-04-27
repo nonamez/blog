@@ -20,14 +20,14 @@ class PostController extends \BaseController {
 		return View::make('admin.posts.index')->with('posts', $paginated);
 	}
 
-	public function getCreate()
+	public function create()
 	{
 		$locales = Config::get('app.locales');
 		
 		return View::make('admin.posts.create')->with('locales', array_combine($locales, $locales));
 	}
 
-	public function postCreate()
+	public function store()
 	{
 		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
 		
