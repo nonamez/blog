@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-{{ Form::open(['action' => 'Admin\PostController@postCreate', 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
+{{ Form::open(['route' => 'post_store', 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
 	<div class="row with-title" data-block-title="General">
 		<div class="form-group">
 			<label class="col-md-2 control-label">Title</label>
@@ -37,15 +37,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 with-title with-title-right" data-block-title="Files">
+		<div class="col-md-6 with-title with-title-right" data-block-title="Files" id="files-div-container">
 			<div class="form-group">
-				<div class="col-md-9 col-md-offset-1">
+				<div class="col-md-9 col-md-offset-1"> 
 					<div class="input-group">
 						<span class="input-group-btn">
-							<button id="fake-file-button-browse" type="button" class="btn btn-default">Browse</button>
+							<button id="fake-file-button-browse" type="button" class="btn btn-default"><i class="fa fa-file-o"></i></button>
 						</span>
-						<input type="file" id="file-upload" style="display:none" name="image">
+						<input type="file" id="file-upload" style="display:none">
 						<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload"><i class="fa fa-upload"></i></button>
+						</span>
 					</div>
 				</div>
 			</div>

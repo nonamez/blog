@@ -25,6 +25,11 @@ Route::group(['prefix' => $locale], function() {
 	}));
 });
 
+// Files
+Route::get('/file/{name}', array('as' => 'file_get', function() {
+	return 'In Progress...';
+}));
+
 /*
 |--------------------------------------------------------------------------
 | Auth Routes
@@ -48,7 +53,10 @@ Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
 	Route::get('/', array('as' => 'posts', 'uses' => 'Admin\PostController@index'));
 	
 	// Posts
-	Route::get('/posts/create', array('as' => 'post_create', 'uses' => 'Admin\PostController@create'));
-	Route::post('/posts/create', array('as' => 'post_store', 'uses' => 'Admin\PostController@store'));
-	Route::get('/posts/delete/{post_id}/{all?}', array('as' => 'post_delete', 'uses' => 'Admin\PostController@delete'));
+	Route::get('/post/create', array('as' => 'post_create', 'uses' => 'Admin\PostController@create'));
+	Route::post('/post/create', array('as' => 'post_store', 'uses' => 'Admin\PostController@store'));
+	Route::get('/post/delete/{post_id}/{all?}', array('as' => 'post_delete', 'uses' => 'Admin\PostController@delete'));
+	
+	// Files
+	Route::post('/file/upload', array('as' => 'file_store', 'uses' => 'Admin\FileController@store'));
 });

@@ -11,7 +11,7 @@ class CreateBlgFilesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('path');
+			$table->string('local_name');
 			$table->integer('post_id')->unsigned()->nullable()->index();
 			$table->timestamps();
 			
@@ -23,5 +23,4 @@ class CreateBlgFilesTable extends Migration {
 	{
 		Schema::drop('blg_files');
 	}
-
 }

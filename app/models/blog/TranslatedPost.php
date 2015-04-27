@@ -20,6 +20,11 @@ class TranslatedPost extends Eloquent {
 		return $this->belongsToMany('Blog\Models\Tag', 'blg_posts_tags', 'post_id', 'tag_id');
 	}
 	
+	public function files()
+    {
+        return $this->hasMany('Blog\Models\File', 'post_id', 'id');
+    }
+	
 	public function short()
 	{
 		$exploded = explode('<!--break-->', $this->content);
