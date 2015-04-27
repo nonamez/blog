@@ -57,19 +57,21 @@
 			<div class="col-md-7 col-md-offset-2">
 				<div class="input-group">
 					<span class="input-group-addon">#</span>
-					<input type="text" placeholder="Enter slug" class="form-control">
+					<input type="text" class="form-control" placeholder="Enter slug" id="tags-input-slug">
 					<span class="input-group-addon" style="border-width:1px 0px">@</span>
-					<input type="text" placeholder="Enter title" class="form-control">
+					<input type="text" class="form-control" placeholder="Enter title" id="tags-input-title">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default">Create</button>
+						<button type="button" class="btn btn-default" id="tags-button-create">Create</button>
 					</span>
 				</div>
 			</div>
 		</div>
-		<span class="label label-default tag">
-			Default 
-			<span data-role="remove"></span>
-		</span>
+		<div id="tags-div-container">
+			<span class="label label-default tag">
+				Default 
+				<span data-role="remove"></span>
+			</span>
+		</div>
 	</div>
 	<hr>
 	<div class="row">
@@ -104,4 +106,7 @@
 		</div>
 	</div>
 {{ Form::close() }}
+@stop
+@section('scripts')
+<script src="{{ asset('/assets/admin/app.js') }}"></script>
 @stop
