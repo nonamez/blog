@@ -52,7 +52,7 @@ class BlogController extends \BaseController {
 	{
 		$tag = Tag::where('slug', '=', $tag)->firstOrFail();
 		
-		$posts = $tag->translated_posts()->where('locale', '=', app()->getLocale())->where('status', '=', 'published');
+		$posts = $tag->translated_posts()->where('locale', '=', app()->getLocale())->where('status', '=', 'published')->orderBy('id', 'DEC');
 		
 		$paginated = $posts->paginate(Config::get('blog.posts_per_page'));
 		
