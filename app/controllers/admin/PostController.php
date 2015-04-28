@@ -56,7 +56,21 @@ class PostController extends \BaseController {
 		$post->translated()->save($translated_post);
 		
 		// Attach files to current post
-		File::whereIn('id', $data['files'])->update(array('post_id' => $translated_post->id));
+		if (is_array($data['files']))
+			File::whereIn('id', $data['files'])->update(array('post_id' => $translated_post->id));
+		
+		// Attach tags to current post
+		if (is_array($data['tags'])) {
+			$tags = array();
+			
+			for ($i = 0, $len = count($data['tags']['slugs']); $i < $len; $i++) {
+				$tag = Tag::firstOrCreate(['slug' => $data['tags']['slugs'][$i], 'name' => $data['tags']['titles'][$i]]);
+				
+				array_push($tags, $tag->id);
+			}
+			
+			$translated_post->tags()->attach($tags);
+		}
 		
 		return Redirect::to('/admin');
 	}
