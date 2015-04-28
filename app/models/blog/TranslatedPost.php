@@ -21,9 +21,9 @@ class TranslatedPost extends Eloquent {
 	}
 	
 	public function files()
-    {
-        return $this->hasMany('Blog\Models\File', 'post_id', 'id');
-    }
+	{
+		return $this->hasMany('Blog\Models\File', 'post_id', 'id');
+	}
 	
 	public function short()
 	{
