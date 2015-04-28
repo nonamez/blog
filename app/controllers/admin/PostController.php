@@ -7,6 +7,7 @@ use Config;
 use Redirect;
 use Validator;
 
+use Blog\Models\File;
 use Blog\Models\Post;
 use Blog\Models\Tag;
 use Blog\Models\TranslatedPost;
@@ -29,7 +30,7 @@ class PostController extends \BaseController {
 
 	public function store()
 	{
-		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
+		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'files', 'tags');
 		
 		$rules = array(
 			'slug'    => array('required', 'unique:blg_translated_posts'),
@@ -37,6 +38,8 @@ class PostController extends \BaseController {
 			'locale'  => array('required', 'in:' . implode(',', Config::get('app.locales'))),
 			'status'  => array('required', 'in:draft,published'),
 			'content' => array('required', 'min:10'),
+			'tags'  => array('array','min:1'),
+			'files' => array('array','min:1'),
 		);
 		
 		$validator = Validator::make(Input::all('text', 'title', 'image'), $rules);
@@ -45,12 +48,15 @@ class PostController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		
 		$translated_post = new TranslatedPost($data);
-		
+				
 		$post = new Post;
 		
 		$post->save();
 		
 		$post->translated()->save($translated_post);
+		
+		// Attach files to current post
+		File::whereIn('id', $data['files'])->update(array('post_id' => $translated_post->id));
 		
 		return Redirect::to('/admin');
 	}
