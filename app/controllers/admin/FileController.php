@@ -2,13 +2,14 @@
 namespace Admin;
 
 use URL;
+use File;
 use View;
 use Input;
 use Config;
 use Redirect;
 use Validator;
 
-use Blog\Models\File;
+use Blog\Models\File as FileModel;
 use Blog\Models\TranslatedPost;
 
 class FileController extends \BaseController {
@@ -42,13 +43,32 @@ class FileController extends \BaseController {
 		
 		$file->move($this->_upload_path, $name);
 		
-		File::create(array(
+		$file = FileModel::create(array(
 			'name'       => $file->getClientOriginalName(),
 			'local_name' => $name
 		));
 		
-		$url = URL::route('file_get', array('name' => $file->getClientOriginalName()));
+		$data = array(
+			'id'  => $file->id,
+			'url' => URL::route('file_get', array('name' => $file->name))
+		);
 		
-		return $this->simpleAjaxResponse(array('error' => FALSE, 'data' => $url));
+		return $this->simpleAjaxResponse(array('error' => FALSE, 'data' => $data));
+	}
+	
+	public function delete($id)
+	{
+		$file = FileModel::find($id);
+		
+		if (is_null($file))
+			return $this->simpleAjaxResponse(array('error' => TRUE, 'message' => 'File not found'));
+		
+		$filename = $this->_upload_path . '/' . $file->local_name;
+		
+		File::delete($filename);
+		
+		$file->delete();
+		
+		return $this->simpleAjaxResponse(array('error' => FALSE));
 	}
 }

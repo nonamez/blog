@@ -44,7 +44,7 @@
 						<span class="input-group-btn">
 							<button id="fake-file-button-browse" type="button" class="btn btn-default"><i class="fa fa-file-o"></i></button>
 						</span>
-						<input type="file" id="file-upload" style="display:none">
+						<input type="file" id="files-input-upload" style="display:none">
 						<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload"><i class="fa fa-upload"></i></button>
@@ -52,6 +52,7 @@
 					</div>
 				</div>
 			</div>
+			<hr>
 		</div>
 	</div>
 	<hr>

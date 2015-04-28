@@ -59,4 +59,5 @@ Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
 	
 	// Files
 	Route::post('/file/upload', array('as' => 'file_store', 'uses' => 'Admin\FileController@store'));
+	Route::get('/file/delete/{file_id}', array('as' => 'file_delete', 'uses' => 'Admin\FileController@delete'));
 });
