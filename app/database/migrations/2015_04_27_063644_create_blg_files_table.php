@@ -10,9 +10,12 @@ class CreateBlgFilesTable extends Migration {
 		Schema::create('blg_files', function(Blueprint $table)
 		{
 			$table->increments('id');
+			
 			$table->string('name');
-			$table->string('local_name');
+			$table->string('original_name');
+			
 			$table->integer('post_id')->unsigned()->nullable()->index();
+			
 			$table->timestamps();
 			
 			$table->foreign('post_id')->references('id')->on('blg_translated_posts');

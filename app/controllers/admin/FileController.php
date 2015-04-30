@@ -6,6 +6,7 @@ use File;
 use View;
 use Input;
 use Config;
+use Response;
 use Redirect;
 use Validator;
 
@@ -14,16 +15,14 @@ use Blog\Models\TranslatedPost;
 
 class FileController extends \BaseController {
 	
-	private $_upload_path;
-	
-	function __construct()
+	public function get($date, $name)
 	{
-		$path = storage_path(Config::get('blog.upload_path'));
+		$file_path = str_replace('-', '/', $date) . '/' . $name;
+		$file_path = storage_path(Config::get('blog.upload_path') . '/' . $file_path);
 		
-		if (is_dir($path) == FALSE)
-			mkdir($path);
-		
-		$this->_upload_path = $path;
+		$file_type = File::type($file_path);
+	
+		return Response::make(File::get($file_path), 200)->header('Content-Type', $file_type);
 	}
 
 	public function store()
@@ -31,26 +30,32 @@ class FileController extends \BaseController {
 		$file = Input::file('file');
 		
 		$rule = array(
-			'file' => 'required|mimes:jpeg,bmp,png,zip|max:250',
+			'file' => array('required', 'mimes:jpeg,bmp,png,zip,pdf'),
 		);
 		
 		$validator = Validator::make(compact('file'), $rule);
 
 		if ($validator->fails())
 			return $this->simpleAjaxResponse(array('error' => TRUE, 'message' => $validator->messages()->first()));
-
-		$name = str_random(5) . $file->getClientOriginalName();
 		
-		$file->move($this->_upload_path, $name);
+		$path = storage_path(Config::get('blog.upload_path') . date('/Y/m/d'));
+		
+		if (is_dir($path) == FALSE)
+			mkdir($path, 0777, TRUE);
+		
+		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension()) . '_' . str_random(5) . '.' . $file->guessExtension();
+		$name = strtolower($name);
+		
+		$file->move($path, $name);
 		
 		$file = FileModel::create(array(
-			'name'       => $file->getClientOriginalName(),
-			'local_name' => $name
+			'name' => $name,
+			'original_name' => $file->getClientOriginalName(),
 		));
 		
 		$data = array(
 			'id'  => $file->id,
-			'url' => URL::route('file_get', array('name' => $file->name))
+			'url' => URL::route('file_get', array(date('Y-m-d'), $file->name))
 		);
 		
 		return $this->simpleAjaxResponse(array('error' => FALSE, 'data' => $data));
@@ -63,9 +68,11 @@ class FileController extends \BaseController {
 		if (is_null($file))
 			return $this->simpleAjaxResponse(array('error' => TRUE, 'message' => 'File not found'));
 		
-		$filename = $this->_upload_path . '/' . $file->local_name;
+		$path = storage_path(Config::get('blog.upload_path') . date('/Y/m/d', strtodate($file->created_at)));
 		
-		File::delete($filename);
+		$file_path = $path . '/' . $file->name;
+		
+		File::delete($file_path);
 		
 		$file->delete();
 		

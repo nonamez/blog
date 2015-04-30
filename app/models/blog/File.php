@@ -5,7 +5,7 @@ use Eloquent;
 class File extends Eloquent {
 
 	protected $table = 'blg_files';
-	protected $fillable = array('name', 'local_name');
+	protected $fillable = array('name', 'original_name');
 
 	public function post()
 	{
