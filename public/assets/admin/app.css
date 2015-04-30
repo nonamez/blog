@@ -2,50 +2,57 @@ body {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+
 .container {
 	max-width: 730px;
 }
+
 header,
 section#content,
 footer {
 	padding-right: 0;
 	padding-left: 0;
 }
+
 header {
 	padding-bottom: 20px;
 	border-bottom: 1px solid #e5e5e5;
 }
+
 header h3 {
 	margin-top: 0;
 	margin-bottom: 0;
 	line-height: 40px;
 }
+
 footer {
 	padding-top: 19px;
 	color: #777;
 	border-top: 1px solid #e5e5e5;
 }
+
 section#content {
 	margin: 20px 0 0;
 }
+
 section#content p + h4 {
 	margin-top: 28px;
 }
 
 .with-title {
-    position: relative;
+	position: relative;
 }
 
 .with-title:after {
-    color: #BBBBBB;
-    content: attr(data-block-title);
-    font-size: 12px;
-    font-weight: bold;
-    left: 25px;
-    letter-spacing: 1px;
-    position: absolute;
-    text-transform: uppercase;
-    top: -15px;
+	color: #BBBBBB;
+	content: attr(data-block-title);
+	font-size: 12px;
+	font-weight: bold;
+	left: 25px;
+	letter-spacing: 1px;
+	position: absolute;
+	text-transform: uppercase;
+	top: -15px;
 }
 
 .with-title-right:after {
