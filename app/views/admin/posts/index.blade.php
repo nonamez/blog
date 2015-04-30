@@ -5,6 +5,7 @@
 		<tr>
 			<th>Title</th>
 			<th>Slug</th>
+			<th>Parent ID</th>
 			<th>Locale</th>
 			<th>Status</th>
 			<th>Actions</th>
@@ -15,6 +16,7 @@
 		<tr>
 			<td>{{ $post['title'] }}</td>
 			<td>{{ $post['slug'] }}</td>
+			<td>{{ $post->parent->id }}</td>
 			<td>{{ $post['locale'] }}</td>
 			<td>{{ ucfirst($post['status']) }}</td>
 			<td>
