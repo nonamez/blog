@@ -70,12 +70,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="tags-div-container">
-			<span class="label label-default tag">
-				Default 
-				<span data-role="remove"></span>
-			</span>
-		</div>
+		<div id="tags-div-container"></div>
 	</div>
 	<hr>
 	<div class="row">
