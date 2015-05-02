@@ -14,7 +14,7 @@
 App::before(function($request)
 {
 	// Routes on which do not do locale detection
-	$without_locale = array('auth', 'admin');
+	$without_locale = array('auth', 'admin', 'file');
 
 	// Determinate which locale is used in app for current request
 	if (in_array($request->segment(1), $without_locale) == FALSE) {
