@@ -19,6 +19,9 @@ class FileController extends \BaseController {
 	{
 		$file_path = str_replace('-', '/', $date) . '/' . $name;
 		$file_path = storage_path(Config::get('blog.upload_path') . '/' . $file_path);
+
+		if (File::exists($file_path) == FALSE)
+			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 		
 		$file_type = File::type($file_path);
 	
