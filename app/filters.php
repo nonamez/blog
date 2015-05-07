@@ -1,22 +1,6 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------------
-| Application Locale
-|--------------------------------------------------------------------------------
-|
-| The following code determinates which locale is used in app for current request
-| except the admin panel
-|
-*/
-
-if (Request::segment(1) !== 'admin') {
-	if (in_array(Request::segment(1), Config::get('app.locales')))
-		App::setLocale(Request::segment(1));
-	else
-		return Redirect::to('/' . Config::get('app.fallback_locale'));
-}
-/*
 |--------------------------------------------------------------------------
 | Application & Route Filters
 |--------------------------------------------------------------------------
@@ -29,6 +13,19 @@ if (Request::segment(1) !== 'admin') {
 
 App::before(function($request)
 {
+	// Routes on which do not do locale detection
+	$without_locale = array('auth', 'admin');
+
+	// Determinate which locale is used in app for current request
+	if (in_array($request->segment(1), $without_locale) == FALSE) {
+		if (in_array($request->segment(1), Config::get('app.locales')))
+			App::setLocale($request->segment(1));
+		elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
+			return Redirect::to('/' . substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+		else
+			return Redirect::to('/' . Config::get('app.fallback_locale'));
+	}
+
 	// Share the locale key in to the view
 	View::share('locale', App::getLocale());
 });

@@ -1,11 +1,4 @@
 <?php
-Route::get('/', function() {
-	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
-		return Redirect::to('/' . substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-	else
-		return Redirect::to('/' . Config::get('app.fallback_locale'));
-});
-
 $locale = App::getLocale();
 
 /*
