@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/plugins/syntax-highlight/styles.css') }}">
 
 <link rel="stylesheet" href="{{ asset('/assets/blog/app.css') }}">
 
