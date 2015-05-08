@@ -27,6 +27,9 @@ document.getElementById('tags-button-create').addEventListener('click', function
 		
 		var span_remove = document.createElement('span');
 			span_remove.setAttribute('data-role', 'remove');
+			span_remove.addEventListener('click', function() {
+				this.parentNode.parentNode.removeChild(this.parentNode);
+			});
 		
 		container.appendChild(span_remove);
 		container.appendChild(input_slug);
@@ -56,6 +59,28 @@ document.getElementById('files-input-upload').addEventListener('change', functio
 	
 	document.getElementById('fake-file-button-upload').removeAttribute('disabled');
 });
+
+function deleteFile() {
+	var group = this.closest('.form-group');
+	
+	var request = new XMLHttpRequest();
+
+	var id = this.getAttribute('data-file-id');
+
+	request.open('GET', root_url + '/admin/file/delete/' + id, true);
+	
+	request.onload = function() {
+		group.parentNode.removeChild(group);
+	}
+	
+	request.send();
+}
+
+var files = document.getElementById('files-div-container').querySelectorAll('.files-button-delete');
+
+for (var i = 0, file; file = files[i]; ++i) {
+	file.addEventListener('click', deleteFile);
+}
 
 // Upload file and create input with result link
 document.getElementById('fake-file-button-upload').addEventListener('click', function() {
@@ -108,21 +133,7 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 					button.setAttribute('data-file-id', response.data.id);
 					
 					// Delete uploaded file
-					button.addEventListener('click', function () {
-						var group = this.closest('.form-group');
-						
-						var request = new XMLHttpRequest();
-
-						var id = this.getAttribute('data-file-id');
-
-						request.open('GET', root_url + '/admin/file/delete/' + id, true);
-						
-						request.onload = function() {
-							group.parentNode.removeChild(group);
-						}
-						
-						request.send();
-					});
+					button.addEventListener('click', deleteFile);
 				
 				var i = document.createElement('i');
 					i.className = 'fa fa-trash-o';
@@ -148,6 +159,7 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 	
 	request.send(form_data);
 });
+
 
 // Load more posts to assign
 document.getElementById('post-to-assign-href-mode-posts').addEventListener('click', function(event) {

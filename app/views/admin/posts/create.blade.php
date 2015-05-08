@@ -54,6 +54,21 @@
 				</div>
 			</div>
 			<hr>
+			@foreach ($files as $file_id => $file)
+			<div class="form-group">
+				<div class="col-md-9 col-md-offset-1">
+					<div class="input-group">
+						<input type="text" class="form-control" readonly="readonly" value="{{ $file }}">
+						<input type="hidden" name="files[]" value="{{ $file_id }}" class="hide hidden">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default files-button-delete" data-file-id="{{ $file_id }}">
+								<i class="fa fa-trash-o"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			@endforeach
 		</div>
 	</div>
 	<hr>
@@ -71,7 +86,18 @@
 				</div>
 			</div>
 		</div>
-		<div id="tags-div-container"></div>
+		<div id="tags-div-container">
+			@if (isset($tags['titles']))
+			@for($i = 0; $i < count($tags['titles']); $i++)
+			<span class="label label-default tag">
+				{{ $tags['titles'][$i] }}
+				<span data-role="remove"></span>
+				<input type="hidden" name="tags[slugs][]" value="{{ $tags['slugs'][$i] or '' }}">
+				<input type="hidden" name="tags[titles][]" value="{{ $tags['titles'][$i] }}">
+			</span>
+			@endfor
+			@endif
+		</div>
 	</div>
 	<hr>
 	<div class="row">

@@ -1,6 +1,8 @@
 <?php
 namespace Admin;
 
+use DB;
+use URL;
 use View;
 use Input;
 use Config;
@@ -26,10 +28,20 @@ class PostController extends \BaseController {
 		$posts   = Post::orderBy('id', 'DESC')->take(5)->lists('id');
 		$locales = Config::get('app.locales');
 		
+		$today = date('Y-m-d');
+		
 		$data = array(
+			'tags'    => Input::old('tags'),
+			// Selecting files that was uploaded today, but not yet assignet to the post
+			'files'   => File::where('post_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', $today)->lists('name', 'id'),
 			'posts'   => array_combine($posts, $posts),
 			'locales' => array_combine($locales, $locales)
 		);
+		
+		// dd(Input::get('title'));
+		
+		foreach ($data['files'] as & $file)
+			$file = URL::route('file_get', array($today, $file));
 		
 		return View::make('admin.posts.create', $data);
 	}
@@ -84,8 +96,16 @@ class PostController extends \BaseController {
 		if (is_array($data['tags'])) {
 			$tags = array();
 			
-			for ($i = 0, $len = count($data['tags']['slugs']); $i < $len; $i++) {
-				$tag = Tag::firstOrCreate(['slug' => $data['tags']['slugs'][$i], 'name' => $data['tags']['titles'][$i]]);
+			for ($i = 0, $len = count($data['tags']['titles']); $i < $len; $i++) {
+				if (isset($data['tags']['slugs'][$i], $data['tags']['titles'][$i])) {
+					$slug = $data['tags']['slugs'][$i];
+					$name = $data['tags']['titles'][$i];
+				} else if (isset($data['tags']['titles'][$i]))
+					$slug = $data['tags']['titles'][$i] = $name;
+				else
+					continue;
+				
+				$tag = Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
 				
 				array_push($tags, $tag->id);
 			}
