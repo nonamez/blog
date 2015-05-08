@@ -42,7 +42,7 @@
 		</tr>
 		@empty
 		<tr>
-			<td colspan="5" class="bg-info text-center">
+			<td colspan="6" class="bg-info text-center">
 				Posts not found. Want to <a href="{{ URL::route('post_create')}}">create</a> ?
 			</td>
 		</tr>
