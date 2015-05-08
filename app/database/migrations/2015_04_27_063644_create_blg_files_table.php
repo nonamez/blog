@@ -18,7 +18,7 @@ class CreateBlgFilesTable extends Migration {
 			
 			$table->timestamps();
 			
-			$table->foreign('post_id')->references('id')->on('blg_translated_posts');
+			$table->foreign('post_id')->references('id')->on('blg_translated_posts')->onDelete('cascade');
 		});
 	}
 
