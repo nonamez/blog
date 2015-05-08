@@ -74,3 +74,10 @@ section#content p + h4 {
 	content: "x";
 	padding: 0 2px;
 }
+
+ul.scroll-menu {
+    overflow-x: auto;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+}

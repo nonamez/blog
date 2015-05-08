@@ -23,14 +23,20 @@ class PostController extends \BaseController {
 
 	public function create()
 	{
+		$posts   = Post::orderBy('id', 'DESC')->take(5)->lists('id');
 		$locales = Config::get('app.locales');
 		
-		return View::make('admin.posts.create')->with('locales', array_combine($locales, $locales));
+		$data = array(
+			'posts'   => array_combine($posts, $posts),
+			'locales' => array_combine($locales, $locales)
+		);
+		
+		return View::make('admin.posts.create', $data);
 	}
 
 	public function store()
 	{
-		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'files', 'tags');
+		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'files', 'tags', 'parent_post');
 		
 		$rules = array(
 			'slug'    => array('required', 'unique:blg_translated_posts'),
@@ -38,8 +44,9 @@ class PostController extends \BaseController {
 			'locale'  => array('required', 'in:' . implode(',', Config::get('app.locales'))),
 			'status'  => array('required', 'in:draft,published'),
 			'content' => array('required', 'min:10'),
-			'tags'  => array('array','min:1'),
-			'files' => array('array','min:1'),
+			'tags'    => array('array','min:1'),
+			'files'   => array('array','min:1'),
+			'parent_post' => array('exists:blg_posts,id', 'integer')
 		);
 		
 		$validator = Validator::make(Input::all('text', 'title', 'image'), $rules);
@@ -48,12 +55,26 @@ class PostController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		
 		$translated_post = new TranslatedPost($data);
-				
-		$post = new Post;
 		
-		$post->save();
+		// Select parent or create new
+		if (is_numeric($data['parent_post'])) {
+			$post = Post::find($data['parent_post']);
+		} else {
+			$post = new Post;
+			
+			$post->save();
+		}
 		
-		$post->translated()->save($translated_post);
+		try {
+			$post->translated()->save($translated_post);
+		} catch(\Illuminate\Database\QueryException $e) {
+			// If post with selected locale already exists
+			if (strpos($e->getMessage(), 'blg_translated_posts_post_id_locale_unique'))
+				return Redirect::back()->withInput()->withErrors(sprintf('Post with language <strong>"%s"</strong> and id <strong>%s</strong> exists', $data['locale'], $data['parent_post']));
+			
+			// If the error is not recognized
+			throw $e;
+		}
 		
 		// Attach files to current post
 		if (is_array($data['files']))

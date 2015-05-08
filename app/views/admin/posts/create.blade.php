@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 {{ Form::open(['route' => 'post_store', 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
+	<input type="hidden" class="hide hidden" name="parent_post" id="parent-post">
 	<div class="row with-title" data-block-title="General">
 		<div class="form-group">
 			<label class="col-md-2 control-label">Title</label>
@@ -93,13 +94,33 @@
 		</div>
 		<div class="col-md-6 with-title with-title-right" data-block-title="Actions">
 			<div class="form-group">
-				<div class="col-md-5 col-md-offset-3">
-					<button class="btn btn-default btn-block" type="submit">Create</button>
+				<div class="col-md-7 col-md-offset-1">
+					<div aria-label="Button group with nested dropdown" role="group" class="btn-group">
+						<div role="group" class="btn-group">
+							<button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" id="post-to-assign-button-selected">
+								Assign to post
+							</button>
+							<ul class="dropdown-menu scroll-menu" role="menu" id="post-to-assign-ul-posts">
+								@foreach ($posts as $post)
+								<li role="presentation">
+									<a class="post-href-assign-to" role="menuitem" tabindex="-1" href="#" data-post-id="{{ $post }}">{{ $post }}</a>
+								</li>
+								@endforeach
+								<li role="presentation" class="divider"></li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="#" id="post-to-assign-href-mode-posts">More</a>
+								</li>
+							</ul>
+						</div>
+						<button class="btn btn-default" type="button" disabled="disabled" id="post-to-assign-button-unassign">
+							<i class="fa fa-chain-broken"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-md-5 col-md-offset-3">
-					<button class="btn btn-default btn-block" type="button" disabled="disabled">Update</button>
+				<div class="col-md-7 col-md-offset-1">
+					<button class="btn btn-success btn-block" type="submit">Create</button>
 				</div>
 			</div>
 		</div>

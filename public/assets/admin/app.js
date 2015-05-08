@@ -1,6 +1,7 @@
 // To do:
 //  	* Optimize AJAX requests
 //  	* Add loading state of file
+//  	* Load more posts for assign
 
 var tags_container = document.getElementById('tags-div-container');
 
@@ -146,4 +147,37 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 	};
 	
 	request.send(form_data);
+});
+
+// Load more posts to assign
+document.getElementById('post-to-assign-href-mode-posts').addEventListener('click', function(event) {
+	event.preventDefault();
+	
+	alert('To be done...');
+});
+
+// Select posts to assign. Remove last two elements
+var posts = document.getElementById('post-to-assign-ul-posts').querySelectorAll('li:not(:last-child) a');
+
+for (var i = 0, post; post = posts[i]; ++i) {
+	post.addEventListener('click', function(event) {
+		event.preventDefault();
+		
+		var post_id = this.getAttribute('data-post-id');
+		
+		document.getElementById('parent-post').value = post_id;
+		
+		document.getElementById('post-to-assign-button-selected').textContent = 'Assigned to ' + post_id;
+		
+		document.getElementById('post-to-assign-button-unassign').removeAttribute('disabled');
+	});
+}
+
+// Remove assigned post
+document.getElementById('post-to-assign-button-unassign').addEventListener('click', function(event) {
+	document.getElementById('parent-post').value = null;
+	
+	document.getElementById('post-to-assign-button-selected').textContent = 'Assign to post';
+	
+	document.getElementById('post-to-assign-button-unassign').setAttribute('disabled', 'disabled');
 });
