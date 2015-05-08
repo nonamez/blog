@@ -71,12 +71,6 @@ class FileController extends \BaseController {
 		if (is_null($file))
 			return $this->simpleAjaxResponse(array('error' => TRUE, 'message' => 'File not found'));
 		
-		$path = storage_path(Config::get('blog.upload_path') . date('/Y/m/d', strtotime($file->created_at)));
-		
-		$file_path = $path . '/' . $file->name;
-		
-		File::delete($file_path);
-		
 		$file->delete();
 		
 		return $this->simpleAjaxResponse(array('error' => FALSE));
