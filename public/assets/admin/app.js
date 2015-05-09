@@ -175,11 +175,7 @@ for (var i = 0, post; post = posts[i]; ++i) {
 	post.addEventListener('click', function(event) {
 		event.preventDefault();
 		
-		var post_id = this.getAttribute('data-post-id');
-		
-		document.getElementById('parent-post').value = post_id;
-		
-		document.getElementById('post-to-assign-button-selected').textContent = 'Assigned to ' + post_id;
+		document.getElementById('post-to-assign-button-selected').value = this.getAttribute('data-post-id');
 		
 		document.getElementById('post-to-assign-button-unassign').removeAttribute('disabled');
 	});
@@ -187,9 +183,7 @@ for (var i = 0, post; post = posts[i]; ++i) {
 
 // Remove assigned post
 document.getElementById('post-to-assign-button-unassign').addEventListener('click', function(event) {
-	document.getElementById('parent-post').value = null;
-	
-	document.getElementById('post-to-assign-button-selected').textContent = 'Assign to post';
+	document.getElementById('post-to-assign-button-selected').value = null;
 	
 	document.getElementById('post-to-assign-button-unassign').setAttribute('disabled', 'disabled');
 });
