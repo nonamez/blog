@@ -1,5 +1,29 @@
 <?php
-$locale = App::getLocale();
+/*
+|--------------------------------------------------------------------------
+| Locale Detection
+|--------------------------------------------------------------------------
+*/
+
+// Redirect from / to lang
+Route::get('/', function() {
+	if (in_array(Request::segment(1), Config::get('app.locales')))
+		return Redirect::to('/' . Request::segment(1));
+	elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
+		return Redirect::to('/' . substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+	else
+		return Redirect::to('/' . Config::get('app.fallback_locale'));
+});
+
+// Set app lang
+if (App::runningInConsole() == FALSE) {
+	if (in_array(Request::segment(1), Config::get('app.locales')))
+		App::setLocale(Request::segment(1));
+	elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
+		App::setLocale(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+	else
+		App::setLocale(Config::get('app.fallback_locale'));
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +41,7 @@ Route::get('/file/{date}/{name}', array('as' => 'file_get', 'uses' => 'Admin\Fil
 
 Route::get('/{locale}', 'Site\BlogController@posts')->where('locale', implode('|', Config::get('app.locales')));
 
-Route::group(['prefix' => $locale], function() {
+Route::group(['prefix' => App::getLocale()], function() {
 	Route::get('/post/{slug}', array('as' => 'post', 'uses' => 'Site\BlogController@post'));
 	Route::get('/tag/{slug}', array('as' => 'tag', 'uses' => 'Site\BlogController@postsByTag'));
 	
