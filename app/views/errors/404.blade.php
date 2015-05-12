@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/blog/css/app.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/blog/app.css') }}">
 </head>
 <body>
 	<div class="container" style="padding-top:5%">

@@ -49,8 +49,11 @@ Log::useDailyFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
-
+	
 	if ($exception instanceof Illuminate\Database\Eloquent\ModelNotFoundException)
+		return Response::view('errors.404', array(), 404);
+
+	if ($exception instanceof  Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
 		return Response::view('errors.404', array(), 404);
 });
 
