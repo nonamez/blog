@@ -13,14 +13,17 @@ class File extends Eloquent {
 		return $this->belongsTo('Blog\Models\TranslatedPost', 'post_id');
 	}
 	
-	public function delete()
+	public static function boot()
 	{
-		$path = storage_path(Config::get('blog.upload_path') . date('/Y/m/d', strtotime($this->created_at)));
-		
-		$file_path = $path . '/' . $this->name;
-		
-		\Illuminate\Support\Facades\File::delete($file_path);
-		
-		parent::delete();
+		parent::boot();
+
+		static::deleting(function($file)
+		{
+			$path = storage_path(Config::get('blog.upload_path') . date('/Y/m/d', strtotime($file->created_at)));
+			
+			$file_path = $path . '/' . $file->name;
+			
+			\Illuminate\Support\Facades\File::delete($file_path);
+		});
 	}
 }

@@ -38,8 +38,6 @@ class PostController extends \BaseController {
 			'locales' => array_combine($locales, $locales)
 		);
 		
-		// dd(Input::get('title'));
-		
 		foreach ($data['files'] as & $file)
 			$file = URL::route('file_get', array($today, $file));
 		
@@ -126,12 +124,20 @@ class PostController extends \BaseController {
 		$title = $post->title;
 		
 		if ($all) {
-			$post->parent()->delete();
+			foreach ($post->parent->translated as $translated_post) {
+				foreach ($translated_post->files as $file)
+					$file->delete();
+			}
+			
 			$message = 'The post "%s" and its translations successfully deleted';
 		} else {
-			$post->delete();
+			foreach ($post->files as & $file)
+				$file->delete();
+			
 			$message = 'The post "%s" successfully deleted';
 		}
+		
+		$post->delete();
 		
 		return Redirect::back()->with('notice', sprintf($message, $title));
 	}
