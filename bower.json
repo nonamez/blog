@@ -1,0 +1,23 @@
+{
+	"name": "Front-End Stuff",
+	"version": "0.0.1",
+	"authors": [
+		"NoNameZ <hello@nonamez.name>"
+	],
+	"description": "Some default stuff which is included in most of the projects",
+	"license": "Beerware",
+	"homepage": "http://nonamez.name",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"jquery": "~2.1.4",
+		"bootstrap": "~3.3.0",
+		"fontawesome": "~4.3.0"
+	},
+	"private": true
+}
