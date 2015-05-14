@@ -23,7 +23,7 @@
 	<a href="https://github.com/nonamez/blog">
 		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('/images/fork_me.png')}}" alt="Fork me on GitHub">
 	</a>
-	<script src="{{ asset('/assets/plugins/jquery/jquery-2.1.3.min.js') }}"></script>
+	<script src="{{ asset('/assets/plugins/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/assets/blog/app.js')}}"></script>
 	@yield('custom_scripts')
