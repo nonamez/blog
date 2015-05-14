@@ -8,11 +8,6 @@ use Lang;
 use View;
 use Config;
 
-/*
-	ToDo:
-		* Rewrite tags ordering
-*/
-
 class BlogController extends \BaseController {
 
 	function __construct() 

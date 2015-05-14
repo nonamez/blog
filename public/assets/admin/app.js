@@ -1,8 +1,3 @@
-// To do:
-//  	* Optimize AJAX requests
-//  	* Add loading state of file
-//  	* Load more posts for assign
-
 var tags_container = document.getElementById('tags-div-container');
 
 // Create new tag
