@@ -41,7 +41,7 @@ Route::get('/file/{date}/{name}', array('as' => 'file_get', 'uses' => 'Admin\Fil
 
 Route::get('/{locale}', 'Site\BlogController@posts')->where('locale', implode('|', Config::get('app.locales')));
 
-Route::group(['prefix' => App::getLocale()], function() {
+Route::group(array('prefix' => App::getLocale()), function() {
 	Route::get('/post/{slug}', array('as' => 'post', 'uses' => 'Site\BlogController@post'));
 	Route::get('/tag/{slug}', array('as' => 'tag', 'uses' => 'Site\BlogController@postsByTag'));
 	
