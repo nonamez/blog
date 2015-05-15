@@ -111,6 +111,23 @@ class PostController extends \BaseController {
 		return Redirect::to('/admin');
 	}
 	
+	public function edit($post_id)
+	{
+		$post = TranslatedPost::find($post_id);
+		
+		if (is_null($post))
+			return Redirect::back()->withErrors('Post not found');
+		
+		$locales = Config::get('app.locales');
+		
+		$data = array(
+			'post'    => $post,
+			'locales' => array_combine($locales, $locales)
+		);
+		
+		return View::make('admin.post.edit', $data);
+	}
+
 	public function delete($id, $all = FALSE)
 	{
 		$post = TranslatedPost::find($id);
