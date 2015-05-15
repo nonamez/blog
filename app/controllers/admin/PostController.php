@@ -15,12 +15,12 @@ use Blog\Models\Tag;
 use Blog\Models\TranslatedPost;
 
 class PostController extends \BaseController {
-
+	
 	public function index()
 	{
 		$paginated = TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
 		
-		return View::make('admin.posts.index')->with('posts', $paginated);
+		return View::make('admin.post.index')->with('posts', $paginated);
 	}
 
 	public function create()
@@ -41,7 +41,7 @@ class PostController extends \BaseController {
 		foreach ($data['files'] as & $file)
 			$file = URL::route('file_get', array($today, $file));
 		
-		return View::make('admin.posts.create', $data);
+		return View::make('admin.post.create', $data);
 	}
 
 	public function store()
@@ -113,7 +113,7 @@ class PostController extends \BaseController {
 		
 		return Redirect::to('/admin');
 	}
-
+	
 	public function delete($id, $all = FALSE)
 	{
 		$post = TranslatedPost::find($id);
