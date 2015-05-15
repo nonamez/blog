@@ -33,13 +33,10 @@ class PostController extends \BaseController {
 		$data = array(
 			'tags'    => Input::old('tags'),
 			// Selecting files that was uploaded today, but not yet assignet to the post
-			'files'   => File::where('post_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', $today)->lists('name', 'id'),
+			'files'   => File::where('post_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', $today)->get(),
 			'posts'   => array_combine($posts, $posts),
 			'locales' => array_combine($locales, $locales)
 		);
-		
-		foreach ($data['files'] as & $file)
-			$file = URL::route('file_get', array($today, $file));
 		
 		return View::make('admin.post.create', $data);
 	}

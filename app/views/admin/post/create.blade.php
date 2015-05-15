@@ -53,14 +53,14 @@
 				</div>
 			</div>
 			<hr>
-			@foreach ($files as $file_id => $file)
+			@foreach ($files as $file)
 			<div class="form-group">
 				<div class="col-md-9 col-md-offset-1">
 					<div class="input-group">
-						<input type="text" class="form-control" readonly="readonly" value="{{ $file }}">
-						<input type="hidden" name="files[]" value="{{ $file_id }}" class="hide hidden">
+						<input type="text" class="form-control" readonly="readonly" value="{{ URL::route('file_get', array( $file['created_at']->format('Y-m-d'), $file['name'])) }}">
+						<input type="hidden" name="files[]" value="{{ $file['id'] }}" class="hide hidden">
 						<span class="input-group-btn">
-							<button type="button" class="btn btn-default files-button-delete" data-file-id="{{ $file_id }}">
+							<button type="button" class="btn btn-default files-button-delete" data-file-id="{{ $file['id'] }}">
 								<i class="fa fa-trash-o"></i>
 							</button>
 						</span>
