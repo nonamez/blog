@@ -75,6 +75,8 @@ Route::group(array('before' => 'auth', 'prefix' => 'admin'), function() {
 	// Posts
 	Route::get('/post/create', array('as' => 'post_create', 'uses' => 'Admin\PostController@create'));
 	Route::post('/post/create', array('as' => 'post_store', 'uses' => 'Admin\PostController@store'));
+	Route::get('/post/edit/{post_id}', array('as' => 'post_edit', 'uses' => 'Admin\PostController@edit'));
+	Route::post('/post/edit/{post_id}', array('as' => 'post_update', 'uses' => 'Admin\PostController@update'));
 	Route::get('/post/delete/{post_id}/{all?}', array('as' => 'post_delete', 'uses' => 'Admin\PostController@delete'));
 	
 	// Files
