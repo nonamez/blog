@@ -12,7 +12,7 @@
 		</section>
 		@include('includes.admin.footer')
 	</div>
-	<script src="{{ asset('/assets/plugins/jquery/jquery-2.1.3.min.js') }}"></script>
+	<script src="{{ asset('/assets/plugins/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 	@yield('scripts')
 </body>

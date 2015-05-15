@@ -5,7 +5,7 @@
 <title>Admin Panel</title>
 
 <link rel="stylesheet" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/admin/app.css') }}">
 
 <script>var root_url = '{{ URL::to('/') }}'</script>
