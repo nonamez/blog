@@ -21,13 +21,12 @@
 			<td>{{ ucfirst($post['status']) }}</td>
 			<td>
 				<div class="btn-group" role="group" aria-label="...">
-					<button type="button" class="btn btn-default">Edit</button>
+					<a href="{{ URL::route('post_update', $post['id']) }}"  class="btn btn-default">Edit</a>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 							Delete
 							<span class="caret"></span>
 						</button>
-						
 						<ul class="dropdown-menu" role="menu">
 							<li>
 								<a href="{{ URL::route('post_delete', array($post['id'])) }}">Current</a>
