@@ -2,3 +2,4 @@ Add caching
 Optimize AJAX requests
 Add loading state of file
 Load more posts for assign
+Check if post exists in admin section globally
