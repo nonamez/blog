@@ -56,7 +56,7 @@ class PostController extends \BaseController {
 			'parent_post' => array('exists:blg_posts,id', 'integer')
 		);
 		
-		$validator = Validator::make(Input::all('text', 'title', 'image'), $rules);
+		$validator = Validator::make($data, $rules);
 
 		if ($validator->fails())
 			return Redirect::back()->withInput()->withErrors($validator);
