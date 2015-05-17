@@ -110,10 +110,7 @@
 			<div class="form-group">
 				<label class="col-md-6 control-label">Status</label>
 				<div class="col-md-6">
-					<select class="form-control" name="status">
-						<option value="draft">Draft</option>
-						<option value="published">Published</option>
-					</select>
+					{{ Form::select('status', array('draft' => 'Draft', 'published' => 'Published'), NULL, array('class' => 'form-control')) }}
 				</div>
 			</div>
 		</div>
