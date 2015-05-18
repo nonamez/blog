@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-{{ Form::open(['route' => 'post_update', 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
+{{ Form::open(['route' => array('post_update', $post['id']), 'class' => 'form-horizontal', 'style' => 'margin-bottom:15px']) }}
 	<div class="row with-title" data-block-title="General">
 		<div class="form-group">
 			<label class="col-md-2 control-label">Title</label>
@@ -124,7 +124,7 @@
 								</li>
 							</ul>
 						</div>
-						<input type="text" class="form-control" value="{{ $post['id'] }}" disabled="disabled" readonly="readonly" id="post-to-assign-button-selected" name="parent_post">
+						<input type="text" class="form-control" value="{{ $post->parent->id }}" readonly="readonly" id="post-to-assign-button-selected" name="parent_post">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" id="post-to-assign-button-unassign">
 								<i class="fa fa-chain-broken"></i>

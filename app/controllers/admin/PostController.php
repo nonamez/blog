@@ -15,7 +15,23 @@ use Blog\Models\Tag;
 use Blog\Models\TranslatedPost;
 
 class PostController extends \BaseController {
-	
+
+	private $_rules;
+
+	function __construct()
+	{
+		$this->_rules = array(
+			'slug'    => array('required', 'unique:blg_translated_posts'),
+			'title'   => array('required', 'min:5'),
+			'locale'  => array('required', 'in:' . implode(',', Config::get('app.locales'))),
+			'status'  => array('required', 'in:draft,published'),
+			'content' => array('required', 'min:10'),
+			'tags'    => array('array','min:1'),
+			'files'   => array('array','min:1'),
+			'parent_post' => array('exists:blg_posts,id', 'integer')
+		);
+	}
+
 	public function index()
 	{
 		$paginated = TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
@@ -45,18 +61,7 @@ class PostController extends \BaseController {
 	{
 		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'files', 'tags', 'parent_post');
 		
-		$rules = array(
-			'slug'    => array('required', 'unique:blg_translated_posts'),
-			'title'   => array('required', 'min:5'),
-			'locale'  => array('required', 'in:' . implode(',', Config::get('app.locales'))),
-			'status'  => array('required', 'in:draft,published'),
-			'content' => array('required', 'min:10'),
-			'tags'    => array('array','min:1'),
-			'files'   => array('array','min:1'),
-			'parent_post' => array('exists:blg_posts,id', 'integer')
-		);
-		
-		$validator = Validator::make($data, $rules);
+		$validator = Validator::make($data, $this->_rules);
 
 		if ($validator->fails())
 			return Redirect::back()->withInput()->withErrors($validator);
@@ -71,42 +76,11 @@ class PostController extends \BaseController {
 			
 			$post->save();
 		}
+
+		$post->translated()->save($translated_post);
 		
-		try {
-			$post->translated()->save($translated_post);
-		} catch(\Illuminate\Database\QueryException $e) {
-			// If post with selected locale already exists
-			if (strpos($e->getMessage(), 'blg_translated_posts_post_id_locale_unique'))
-				return Redirect::back()->withInput()->withErrors(sprintf('Post with language <strong>"%s"</strong> and id <strong>%s</strong> exists', $data['locale'], $data['parent_post']));
-			
-			// If the error is not recognized
-			throw $e;
-		}
-		
-		// Attach files to current post
-		if (is_array($data['files']))
-			File::whereIn('id', $data['files'])->update(array('post_id' => $translated_post->id));
-		
-		// Attach tags to current post
-		if (is_array($data['tags'])) {
-			$tags = array();
-			
-			for ($i = 0, $len = count($data['tags']['titles']); $i < $len; $i++) {
-				if (isset($data['tags']['slugs'][$i], $data['tags']['titles'][$i])) {
-					$slug = $data['tags']['slugs'][$i];
-					$name = $data['tags']['titles'][$i];
-				} else if (isset($data['tags']['titles'][$i]))
-					$slug = $data['tags']['titles'][$i] = $name;
-				else
-					continue;
-				
-				$tag = Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
-				
-				array_push($tags, $tag->id);
-			}
-			
-			$translated_post->tags()->attach($tags);
-		}
+		$this->_tags($data['tags'], $translated_post);
+		$this->_files($data['files'], $translated_post->id);
 		
 		return Redirect::to('/admin');
 	}
@@ -126,6 +100,40 @@ class PostController extends \BaseController {
 		);
 		
 		return View::make('admin.post.edit', $data);
+	}
+
+	public function update($post_id)
+	{
+		$post = TranslatedPost::find($post_id);
+		
+		if (is_null($post))
+			return Redirect::back()->withErrors('Post not found');
+
+		$data = Input::only('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'files', 'tags', 'parent_post');
+
+		$this->_rules['slug'] = 'required';
+		
+		$validator = Validator::make($data, $this->_rules);
+
+		if ($validator->fails())
+			return Redirect::back()->withInput()->withErrors($validator);
+
+		$post->update($data);
+
+		$this->_tags($data['tags'], $post);
+		$this->_files($data['files'], $post->id);
+
+		// Parent post update if exists
+		if ($data['parent_post'] != $post->post_id) {
+			if (is_null(Post::find($data['parent_post'])))
+				return Redirect::back()->withInput()->withErrors('Parent post not found');
+
+			$post->post_id = $data['parent_post'];
+
+			$post->save();
+		}
+
+		return Redirect::back()->with('success', 'Post updated seccessfully');
 	}
 
 	public function delete($id, $all = FALSE)
@@ -154,5 +162,39 @@ class PostController extends \BaseController {
 		$post->delete();
 		
 		return Redirect::back()->with('notice', sprintf($message, $title));
+	}
+
+	// Attach tags to the post
+	private function _tags($data, & $post)
+	{
+		$new_tags = array();
+
+		if (isset($data['titles'])) {			
+			for ($i = 0, $len = count($data['titles']); $i < $len; $i++) {
+				if (isset($data['slugs'][$i], $data['titles'][$i])) {
+					$slug = $data['slugs'][$i];
+					$name = $data['titles'][$i];
+				} else if (isset($data['titles'][$i]))
+					$slug = $data['titles'][$i] = $name;
+				else
+					continue;
+				
+				$tag = Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
+				
+				array_push($new_tags, $tag->id);
+			}
+		}
+
+		if (isset($data['ids']))
+			$new_tags = array_merge($new_tags, $data['ids']);
+			
+		$post->tags()->sync($new_tags);
+	}
+
+	// Attach files to current post
+	private function _files($files, $post_id)
+	{
+		if ($files)
+			File::whereIn('id', $files)->update(array('post_id' => $post_id));
 	}
 }

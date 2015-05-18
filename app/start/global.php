@@ -53,8 +53,17 @@ App::error(function(Exception $exception, $code)
 	if ($exception instanceof Illuminate\Database\Eloquent\ModelNotFoundException)
 		return Response::view('errors.404', array(), 404);
 
-	if ($exception instanceof  Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+	if ($exception instanceof Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
 		return Response::view('errors.404', array(), 404);
+
+	// Post create / edit exceptions
+	if ($exception instanceof \Illuminate\Database\QueryException) {
+		if (strpos($exception->getMessage(), 'blg_translated_posts_post_id_locale_unique'))
+			return Redirect::back()->withInput()->withErrors(sprintf('Post with language <strong>"%s"</strong> and id <strong>%s</strong> exists', Input::get('locale'), Input::get('parent_post')));
+		
+		if (strpos($exception->getMessage(), 'blg_translated_posts_slug_unique'))
+			return Redirect::back()->withInput()->withErrors(sprintf('Post with slug <strong>"%s"</strong> exists', Input::get('slug')));
+	}
 });
 
 /*
