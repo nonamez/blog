@@ -16,7 +16,7 @@
 		<tr>
 			<td>{{ $post['title'] }}</td>
 			<td>{{ $post['slug'] }}</td>
-			<td>{{ $post->parent->id }}</td>
+			<td>{{ $post['post_id'] }}</td>
 			<td>{{ $post['locale'] }}</td>
 			<td>{{ ucfirst($post['status']) }}</td>
 			<td>
