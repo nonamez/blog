@@ -132,7 +132,7 @@
 								</li>
 							</ul>
 						</div>
-						<input type="text" class="form-control" disabled="disabled" readonly="readonly" id="post-to-assign-button-selected" name="parent_post">
+						<input type="text" class="form-control" readonly="readonly" id="post-to-assign-button-selected" name="parent_post">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" disabled="disabled" id="post-to-assign-button-unassign">
 								<i class="fa fa-chain-broken"></i>
