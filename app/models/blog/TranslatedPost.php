@@ -4,7 +4,9 @@ use Eloquent;
 
 class TranslatedPost extends Eloquent {
 	
-	protected $table = 'blg_translated_posts';
+	protected $table    = 'blg_translated_posts';
+	protected $guarded  = array('id');
+	protected $fillable = array('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
 
 	public $is_short = FALSE;
 	
@@ -16,6 +18,11 @@ class TranslatedPost extends Eloquent {
 	public function tags()
 	{
 		return $this->belongsToMany('Blog\Models\Tag', 'blg_posts_tags', 'post_id', 'tag_id');
+	}
+	
+	public function files()
+	{
+		return $this->hasMany('Blog\Models\File', 'post_id', 'id');
 	}
 	
 	public function short()

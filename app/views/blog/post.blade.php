@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.blog')
 @section('content')
 <main class="content" role="main">
 	<article class="post post-standalone" id="post-{{ $post['id'] }}" style="border-top: 1px solid #efefef">
@@ -20,7 +20,7 @@
 		</section>
 		<footer class="post-footer">
 			<section class="share">
-				<a class="fa fa-twitter-square twitter" href="https://twitter.com/share?text=({{ $post['title'] }}&amp;url={{ URL::current() }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" rel="tooltip" title="Отметить в Twitter">
+				<a class="fa fa-twitter-square twitter" href="https://twitter.com/share?text={{ $post['title'] }}&amp;url={{ URL::current() }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" rel="tooltip" title="Отметить в Twitter">
 					<span class="hidden">Twitter</span>
 				</a>
 				<a class="fa fa-facebook-square facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ URL::current() }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" rel="tooltip" title="Отметить в Facebook">
@@ -39,7 +39,6 @@
 </main>
 @stop
 @section('custom_scripts')
-<script src="{{asset('assets/blog/js/app.js')}}"></script>
 <script type="text/javascript">	
 	jQuery('#show-disqus').on('click', function() {
 		jQuery(this).next().show();

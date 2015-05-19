@@ -1,20 +1,6 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------------
-| Application Locale
-|--------------------------------------------------------------------------------
-|
-| The following code determinates which locale is used in app for current request
-|
-*/
-
-if (in_array(Request::segment(1), Config::get('app.locales')))
-	App::setLocale(Request::segment(1));
-else
-	return Redirect::to('/' . Config::get('app.fallback_locale'));
-
-/*
 |--------------------------------------------------------------------------
 | Application & Route Filters
 |--------------------------------------------------------------------------
@@ -50,16 +36,11 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest())
-	{
+	if (Auth::guest()) {
 		if (Request::ajax())
-		{
 			return Response::make('Unauthorized', 401);
-		}
 		else
-		{
-			return Redirect::guest('login');
-		}
+			return Redirect::route('auth');
 	}
 });
 
@@ -67,22 +48,6 @@ Route::filter('auth', function()
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
-});
-
-/*
-|--------------------------------------------------------------------------
-| Guest Filter
-|--------------------------------------------------------------------------
-|
-| The "guest" filter is the counterpart of the authentication filters as
-| it simply checks that the current user is not logged in. A redirect
-| response will be issued if they are, which you may freely change.
-|
-*/
-
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
 });
 
 /*
