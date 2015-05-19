@@ -4,19 +4,24 @@ This is the source code of my [personal blog](http://nonamez.name). I published 
 
 ## Installation
 
-The dependencies are resolved using [composer](http://getcomposer.org/).
+The dependencies are resolved using [Composer](http://getcomposer.org/). You also will need [Bower](http://bower.io) and [Gulp](http://gulpjs.com)
 
-To install just follow this steps:
+
+
+Just follow this steps:
 
 ```
 git clone git://github.com/nonamez/blog.git
 cd blog
 composer install
-php artisan key:generate
+bower install
+gulp
 ```
-Now you need to add connection to database in `app/config/database.php`
+* Open `app/database/seeds/UserSeeder.php` and set your email and password.
+* Add connection to database in `app/config/database.php`
 
 ```
+php artisan key:generate
 php artisan migrate
 php artisan db:seed
 cd public
@@ -24,9 +29,8 @@ php -S 127.0.0.1:8081
 ```
 Thats it. Open a browser at http://127.0.0.1:8081/ and you should see the blog.
 
-### What about a ...
-Currently there is no UI so just look at `app/database/seeds/FirstPostAndTagSeeder.php` for current functionality
-
+### How about a...
+Just read the code and figure it out.
 
 ## Author
 
