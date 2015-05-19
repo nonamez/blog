@@ -3,3 +3,10 @@ Optimize AJAX requests
 Add loading state of file
 Load more posts for assign
 Check if post exists in admin section globally
+IP check on auth
+Clear tag input after create
+Slug max-width / scroll in post list
+Installation option without terminal
+Better post editor
+Post icon in create/update
+Try to add «Bower» and «Gulp» tasks to «Composer»
