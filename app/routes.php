@@ -57,6 +57,7 @@ Route::group(array('prefix' => App::getLocale()), function() {
 */
 
 Route::get('/auth', 'AuthController@index');
+Route::get('/logout', array('as' => 'logout', 'uses' => 'AuthController@logOut'));
 Route::post('/auth', array('as' => 'auth', 'uses' => 'AuthController@authorize'));
 
 

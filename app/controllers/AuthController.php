@@ -23,5 +23,12 @@ class AuthController extends Controller {
 		
 		return Redirect::back()->withInput()->with(array('notice' => Lang::get('errors.incorrect_login')));
 	}
+	
+	public function logOut()
+	{
+		Auth::logout();
+		
+		return Redirect::to('/');
+	}
 }
 ?>
