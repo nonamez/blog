@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Changelog
 - Permitted ip check on authorization
 - Logout button
+
 ### Changed
 - "UserController" to "AuthController"
 
