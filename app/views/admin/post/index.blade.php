@@ -14,8 +14,12 @@
 	<tbody>
 		@forelse($posts as $post)
 		<tr>
-			<td>{{ $post['title'] }}</td>
-			<td>{{ $post['slug'] }}</td>
+			<td>
+				<div class="scrollable">{{ $post['title'] }}</div>
+			</td>
+			<td>
+				<div class="scrollable">{{ $post['slug'] }}</div>
+			</td>
 			<td>{{ $post['post_id'] }}</td>
 			<td>{{ $post['locale'] }}</td>
 			<td>{{ ucfirst($post['status']) }}</td>
