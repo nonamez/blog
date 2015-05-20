@@ -56,10 +56,7 @@ Route::group(array('prefix' => App::getLocale()), function() {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/auth', function() {
-	return View::make('auth');
-});
-
+Route::get('/auth', 'AuthController@index');
 Route::post('/auth', array('as' => 'auth', 'uses' => 'AuthController@authorize'));
 
 

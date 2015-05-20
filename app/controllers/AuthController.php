@@ -1,5 +1,11 @@
 <?php 
 class AuthController extends Controller {
+	
+	public function index()
+	{
+		return View::make('auth');
+	}
+	
 	public function authorize()
 	{
 		$allowed_ip = Config::get('blog.allowed_ip');
