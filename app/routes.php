@@ -60,7 +60,7 @@ Route::get('/auth', function() {
 	return View::make('auth');
 });
 
-Route::post('/auth', array('as' => 'auth', 'uses' => 'UserController@authorize'));
+Route::post('/auth', array('as' => 'auth', 'uses' => 'AuthController@authorize'));
 
 
 /*

@@ -1,5 +1,5 @@
 <?php 
-class UserController extends Controller {
+class AuthController extends Controller {
 	public function authorize()
 	{
 		$allowed_ip = Config::get('blog.allowed_ip');
