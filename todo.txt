@@ -6,3 +6,4 @@ Check if post exists in admin section globally
 Installation option without terminal
 Better post editor
 Post icon in create/update
+Fix syntax highlighter in Safari
