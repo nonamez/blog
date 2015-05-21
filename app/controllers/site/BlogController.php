@@ -34,8 +34,13 @@ class BlogController extends \BaseController {
 
 	public function post($slug)
 	{
-		$post = TranslatedPost::with(array('parent', 'tags'))->where('slug', '=', $slug)->firstOrFail();
+		$post = TranslatedPost::with(array('parent', 'tags'));
 		
+		$post->where('slug', '=', $slug);
+		$post->where('status', '=', 'published');
+		
+		$post = $post->firstOrFail();
+
 		return View::make('blog/post', array(
 			'post'             => $post,
 			'meta_keywords'    => $post->meta_keywords,
