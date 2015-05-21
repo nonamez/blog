@@ -158,18 +158,6 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 	request.send(form_data);
 });
 
-
-// Select posts to assign. Remove last two elements
-var posts = document.getElementById('post-to-assign-ul-posts').querySelectorAll('a');
-
-for (var i = 0, post; post = posts[i]; ++i) {
-	post.addEventListener('click', function(event) {
-		event.preventDefault();
-		
-		document.getElementById('post-to-assign-button-selected').value = this.getAttribute('data-post-id');
-	});
-}
-
 // Remove assigned post
 document.getElementById('post-to-assign-button-unassign').addEventListener('click', function(event) {
 	document.getElementById('post-to-assign-button-selected').value = null;
