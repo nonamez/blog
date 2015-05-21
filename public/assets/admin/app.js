@@ -33,6 +33,10 @@ document.getElementById('tags-button-create').addEventListener('click', function
 		tags_container.appendChild(container)
 		tags_container.appendChild(document.createTextNode(' '));
 	}
+	
+	// Reset
+	document.getElementById('tags-input-slug').value = '';
+	document.getElementById('tags-input-title').value = '';
 });
 
 // Remove tag
@@ -95,7 +99,6 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 			var response = JSON.parse(this.response);
 			
 			if (response.status) {
-				
 				var group = document.createElement('div');
 					group.className = 'form-group';
 				
@@ -156,29 +159,18 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 });
 
 
-// Load more posts to assign
-document.getElementById('post-to-assign-href-mode-posts').addEventListener('click', function(event) {
-	event.preventDefault();
-	
-	alert('To be done...');
-});
-
 // Select posts to assign. Remove last two elements
-var posts = document.getElementById('post-to-assign-ul-posts').querySelectorAll('li:not(:last-child) a');
+var posts = document.getElementById('post-to-assign-ul-posts').querySelectorAll('a');
 
 for (var i = 0, post; post = posts[i]; ++i) {
 	post.addEventListener('click', function(event) {
 		event.preventDefault();
 		
 		document.getElementById('post-to-assign-button-selected').value = this.getAttribute('data-post-id');
-		
-		document.getElementById('post-to-assign-button-unassign').removeAttribute('disabled');
 	});
 }
 
 // Remove assigned post
 document.getElementById('post-to-assign-button-unassign').addEventListener('click', function(event) {
 	document.getElementById('post-to-assign-button-selected').value = null;
-	
-	document.getElementById('post-to-assign-button-unassign').setAttribute('disabled', 'disabled');
 });

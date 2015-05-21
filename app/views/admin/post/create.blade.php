@@ -126,15 +126,11 @@
 									<a class="post-href-assign-to" role="menuitem" tabindex="-1" href="#" data-post-id="{{ $post }}">{{ $post }}</a>
 								</li>
 								@endforeach
-								<li role="presentation" class="divider"></li>
-								<li role="presentation">
-									<a role="menuitem" tabindex="-1" href="#" id="post-to-assign-href-mode-posts">More</a>
-								</li>
 							</ul>
 						</div>
-						<input type="text" class="form-control" readonly="readonly" id="post-to-assign-button-selected" name="parent_post">
+						<input type="text" class="form-control" id="post-to-assign-button-selected" name="parent_post">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" disabled="disabled" id="post-to-assign-button-unassign">
+							<button class="btn btn-default" type="button" id="post-to-assign-button-unassign">
 								<i class="fa fa-chain-broken"></i>
 							</button>
 						</span>
