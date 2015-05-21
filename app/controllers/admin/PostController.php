@@ -66,6 +66,8 @@ class PostController extends \BaseController {
 		if ($validator->fails())
 			return Redirect::back()->withInput()->withErrors($validator);
 		
+		$data['title'] = htmlspecialchars($data['title']);
+		
 		$translated_post = new TranslatedPost($data);
 		
 		// Select parent or create new
@@ -117,6 +119,8 @@ class PostController extends \BaseController {
 
 		if ($validator->fails())
 			return Redirect::back()->withInput()->withErrors($validator);
+		
+		$data['title'] = htmlspecialchars($data['title']);
 
 		$post->update($data);
 
@@ -169,7 +173,7 @@ class PostController extends \BaseController {
 	{
 		$new_tags = array();
 
-		if (isset($data['titles'])) {			
+		if (isset($data['titles'])) {
 			for ($i = 0, $len = count($data['titles']); $i < $len; $i++) {
 				if (isset($data['slugs'][$i], $data['titles'][$i])) {
 					$slug = $data['slugs'][$i];

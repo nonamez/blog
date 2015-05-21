@@ -20,7 +20,7 @@
 		</section>
 		<footer class="post-footer">
 			<section class="share">
-				<a class="fa fa-twitter-square twitter" href="https://twitter.com/share?text={{{ $post['title'] }}}&amp;url={{ URL::current() }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+				<a class="fa fa-twitter-square twitter" href="https://twitter.com/share?text={{ $post['title'] }}&amp;url={{ URL::current() }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
 					<span class="hidden">Twitter</span>
 				</a>
 				<a class="fa fa-facebook-square facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ URL::current() }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
