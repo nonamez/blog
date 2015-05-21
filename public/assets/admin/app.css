@@ -83,7 +83,7 @@ ul.scroll-menu {
 }
 
 div.scrollable {
-    height: 50px;
+    height: 30px;
     margin: 0;
     max-width: 200px;
     overflow-x: auto;
