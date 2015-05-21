@@ -25,6 +25,9 @@
 			<td>{{ ucfirst($post['status']) }}</td>
 			<td>
 				<div class="btn-group" role="group" aria-label="...">
+					<a href="{{ URL::to(sprintf('/%s/post/%s', $post['locale'], $post['slug'])) }}" target="blank" class="btn btn-default">
+						<i class="fa fa-external-link"></i>
+					</a>
 					<a href="{{ URL::route('post_update', $post['id']) }}"  class="btn btn-default">
 						<i class="fa fa-pencil"></i>
 					</a>
