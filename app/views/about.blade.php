@@ -11,7 +11,7 @@
 				<li>@lang('about.skills.li_4')</li>
 			</ul>
 		</p>
-		<p>@lang('about.contact', ['url' => URL::to('/' . $locale . '/contacts')])
+		<p>@lang('about.contact', ['img' => asset('/images/email.png')])
 		</p>
 		<p>
 			<em>P.S. @lang('about.ps')</em>
