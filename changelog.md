@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - Aditional parent posts loading
+- jQuery in Front-End
+- Bootstrap JS in Front-End
 
 ## 0.1.0 - 2015-05-19
 ### Added
