@@ -2,18 +2,16 @@
 return array(
 	'title'  => 'Kiril Chalkin',
 	'meta' => array(
-		'description' => 'This is personal site of professional web developer Kril Chalkin',
+		'description' => 'This is personal site of the self-taught code monkey from Lithuania',
 		'keywords' => 'Website Development, Programming, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
 	),
 	'header' => array(
-		'home'     => 'Home',
-		'about_me' => 'About Me',
-		'title' => array(
-			'before' => 'Hey! I\'m',
-			'name'   => 'Kiril'
+		'menu' => array(
+			'home'     => 'Home',
+			'about_me' => 'About Me'
 		),
-		'title_tooltip' => 'Oh, me? I\'m self-taught code monkey',
-		'description'   => 'Thoughts, stories and ideas about programming.'
+		'title'       => 'Hey! I\'m Kiril.',
+		'description' => 'Thoughts, stories and ideas about programming.'
 	),
 	'post' => array(
 		'no_posts'      => 'No posts found',

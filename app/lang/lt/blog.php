@@ -3,17 +3,15 @@ return array(
 	'title'  => 'Kiril Čalkin',
 	'meta' => array(
 		'description' => 'This is personal site of professional web developer Kril Chalkin',
-		'keywords' => 'Website Development, Programming, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
+		'keywords' => 'Svetainių kūrimas, Programavimas, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
 	),
 	'header' => array(
-		'home'     => 'Pagrintinis',
-		'about_me' => 'Apie mane',
-		'title' => array(
-			'before' => 'Sveiki! Esu',
-			'name'   => 'Kirilas'
+		'menu' => array(
+			'home'     => 'Pagrintinis',
+			'about_me' => 'Apie mane'
 		),
-		'title_tooltip' => 'Savamokslė koduojanti bezdžionėle',
-		'description'   => 'Mintys, istorijos ir idėjos apie programavimą.'
+		'title'       => 'Sveiki! Aš Kirilas.',
+		'description' => 'Mintys, istorijos ir idėjos apie programavimą.'
 	),
 	'post' => array(
 		'no_posts'      => 'Įrašų nerasta',
