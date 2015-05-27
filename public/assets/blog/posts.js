@@ -27,7 +27,7 @@ var articles = document.querySelectorAll('article');
 
 for (var i = 0, article; article = articles[i]; ++i) {
 	var post_content = article.querySelector('section.post-content');
-		post_content.setAttribute('data-real-heigt', getHeight(post_content));
+		post_content.setAttribute('data-real-heigt', getHeight(post_content) + 30); // Sometimes with a bigger text there comes some bug with height so we add some extra as a fix...
 
 	article.querySelector('header.post-header').addEventListener('click', function() {
 		var article = this.parentNode;

@@ -3,22 +3,11 @@
 var dropdowns = document.querySelectorAll('[data-toggle=dropdown]');
 
 for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i) {
-	dropdown.setAttribute('tabindex', '0'); // Fix to make onblur work in Chrome
-	
 	dropdown.addEventListener('click', function(event) {
+		for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i)
+			dropdown.parentElement.classList.remove('open');
+		
 		this.parentElement.classList.toggle('open');
-		
-		return false;
-	});
-	
-	dropdown.addEventListener('blur', function(event) {
-		this.parentElement.classList.toggle('open');
-		
-		var target = event.explicitOriginalTarget;
-			target = target.nodeType == 3 ? target.parentElement : target; // If returned TextNode
-		
-		if (target.getAttribute('data-toggle') !== 'dropdown')
-			target.click();
 		
 		return false;
 	});
