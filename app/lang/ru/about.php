@@ -8,6 +8,6 @@ return [
 		'li_3'  => 'Иногда мне кажется, что я знаю Python.',
 		'li_4'  => 'Что-то читал о NodeJS.'
 	],
-	'contact' => 'Всегда на связи <a href="mailto:hello@nonamez.name">hello@nonamez.name</a>',
+	'contact' => 'Всегда на связи <img style="vertical-align:baseline" src=":img" alt="Email address">',
 	'ps' => 'Мне нравятся простые вещи. И кошки. И программирование. И музыка. И спорт.'
 ];

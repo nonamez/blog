@@ -2,18 +2,16 @@
 return array(
 	'title'  => 'Кирилл Чалкин',
 	'meta' => array(
-		'description' => 'This is personal site of professional web developer Kril Chalkin',
-		'keywords' => 'Website Development, Programming, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
+		'description' => 'Это персональный сайт программиста-самоучки из Литвы',
+		'keywords' => 'Разработка сайта, создание, программирование, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
 	),
 	'header' => array(
-		'home'     => 'Главная',
-		'about_me' => 'Обо мне',
-		'title' => array(
-			'before' => 'Привет! Я -',
-			'name'   => 'Кирилл'
+		'menu' => array(
+			'home'     => 'Главная',
+			'about_me' => 'Обо мне'
 		),
-		'title_tooltip' => 'Ммм, кто я? Я программист-самоучка',
-		'description'   => 'Мысли, истории и идеи о программировании.'
+		'title'       => 'Привет! Я - Кирилл.',
+		'description' => 'Мысли, истории и идеи о программировании.'
 	),
 	'post' => array(
 		'no_posts'      => 'Записей не найдено',

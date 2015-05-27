@@ -6,10 +6,17 @@
 					Posts <span class="caret"></span>
 				</a>
 				<ul role="menu" class="dropdown-menu">
-					<li><a href="{{ URL::route('posts') }}">All</a></li>
+					<li>
+						<a href="{{ URL::route('posts') }}">All</a>
+					</li>
 					<li class="divider"></li>
-					<li><a href="{{ URL::route('post_create') }}">Create</a></li>
+					<li>
+						<a href="{{ URL::route('post_create') }}">Create</a>
+					</li>
 				</ul>
+			</li>
+			<li role="presentation">
+				<a href="{{ URL::to('/logout') }}">Log Out</a>
 			</li>
 		</ul>
 	</nav>

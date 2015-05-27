@@ -5,8 +5,8 @@
 				<i class="fa fa-bars"></i>
 			</button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="{{ URL::to('/' . app()->getLocale()) }}">@lang('blog.header.home')</a></li>
-				<li><a href="{{ URL::route('about') }}">@lang('blog.header.about_me')</a></li>
+				<li><a href="{{ URL::to('/' . app()->getLocale()) }}">@lang('blog.header.menu.home')</a></li>
+				<li><a href="{{ URL::route('about') }}">@lang('blog.header.menu.about_me')</a></li>
 			</ul>
 		</div>
 		<div class="menu btn-group text-left" style="left: 30px">
@@ -28,7 +28,7 @@
 			</ul>
 		</div>
 		<div class="site-head-content inner">
-			<h1 class="blog-title">@lang('blog.header.title.before') <a href="#" class="use-tooltip" data-toggle="tooltip" data-placement="right" title="@lang('blog.header.title_tooltip')">@lang('blog.header.title.name')</a>!</h1> 
+			<h1 class="blog-title">@lang('blog.header.title')</h1> 
 			<h2 class="blog-description">@lang('blog.header.description')</h2>
 			@if (isset($tags))
 			<h6>

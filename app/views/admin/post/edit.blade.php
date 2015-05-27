@@ -115,16 +115,8 @@
 			<div class="form-group">
 				<div class="col-md-7 col-md-offset-1">
 					<div class="input-group">
-						<div class="input-group-btn">
-							<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Parent</button>
-							<ul class="dropdown-menu scroll-menu" role="menu" id="post-to-assign-ul-posts">
-								<li role="presentation" class="divider"></li>
-								<li role="presentation">
-									<a role="menuitem" tabindex="-1" href="#" id="post-to-assign-href-mode-posts">More</a>
-								</li>
-							</ul>
-						</div>
-						<input type="text" class="form-control" value="{{ $post->parent->id }}" readonly="readonly" id="post-to-assign-button-selected" name="parent_post">
+						<span class="input-group-addon" id="basic-addon1">Parent</span>
+						<input type="text" class="form-control" value="{{ $post->parent->id }}" id="post-to-assign-button-selected" name="parent_post">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" id="post-to-assign-button-unassign">
 								<i class="fa fa-chain-broken"></i>
