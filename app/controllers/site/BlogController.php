@@ -4,6 +4,7 @@ use Blog\Models\Post;
 use Blog\Models\Tag;
 use Blog\Models\TranslatedPost;
 
+use Cache;
 use Lang;
 use View;
 use Config;
@@ -12,10 +13,16 @@ class BlogController extends \BaseController {
 
 	function __construct() 
 	{
-		$tags = Tag::whereHas('translated_posts', function($query) {
-			$query->where('locale', '=', app()->getLocale());
-			$query->where('status', '=', 'published');
-		})->ordered()->take(Config::get('blog.tags_in_header'))->get();
+		$name = 'tags_in_header_' . app()->getLocale();
+
+		$tags = Cache::rememberForever($name, function() {
+			$tags = Tag::whereHas('translated_posts', function($query) {
+				$query->where('locale', '=', app()->getLocale());
+				$query->where('status', '=', 'published');
+			})->ordered()->take(Config::get('blog.tags_in_header'))->get();
+
+			return $tags;
+		});
 		
 		View::share('tags', $tags);
 	}

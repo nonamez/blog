@@ -1,5 +1,7 @@
 <?php namespace Blog\Models;
 
+use Cache;
+use Input;
 use Eloquent;
 
 class TranslatedPost extends Eloquent {
@@ -9,6 +11,21 @@ class TranslatedPost extends Eloquent {
 	protected $fillable = array('slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description');
 
 	public $is_short = FALSE;
+
+	public static function boot()
+	{
+		parent::boot();
+
+		$name = 'tags_in_header_' . Input::get('locale');
+
+		static::saved(function($post) use($name) {
+			Cache::forget($name);
+		});
+
+		static::deleted(function($post) use($name) {
+			Cache::forget($name);
+		});
+	}
 	
 	public function parent()
 	{

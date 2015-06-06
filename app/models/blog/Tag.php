@@ -1,6 +1,7 @@
 <?php namespace Blog\Models;
 
 use DB;
+use Cache;
 use Eloquent;
 
 class Tag extends Eloquent {
@@ -9,7 +10,7 @@ class Tag extends Eloquent {
 	protected $guarded = array('id');
 	
 	public $timestamps = FALSE;
-	
+
 	public function translated_posts()
 	{
 		return $this->belongsToMany('Blog\Models\TranslatedPost', 'blg_posts_tags', 'tag_id', 'post_id');
