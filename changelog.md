@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Header tags cache
 
+### Fixed
+- The ability to display drafts
+- Syntax highlighter in Safari
+
 ## 0.1.0 - 2015-05-27
 ### Added
 - Changelog
