@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Header tags cache
 
+### Changed
+- Blog container width
+- "pre" element style
+
 ### Fixed
 - The ability to display drafts
 - Syntax highlighter in Safari
