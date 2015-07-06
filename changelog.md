@@ -1,9 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - [Unreleased]
+## [0.1.1] - [2015-07-06]
 ### Added
 - Header tags cache
+- Google Analytics
 
 ### Changed
 - Blog container width
