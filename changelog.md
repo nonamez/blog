@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.1.1] - [2015-07-06]
+## [0.2.1] - [2015-07-06]
 ### Added
 - Header tags cache
 - Google Analytics
@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 - The ability to display drafts
 - Syntax highlighter in Safari
 
-## 0.1.0 - 2015-05-27
+## 0.2.0 - 2015-05-27
 ### Added
 - Changelog
 - Permitted ip check on authorization
