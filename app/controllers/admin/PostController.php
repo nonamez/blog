@@ -9,9 +9,9 @@ use Config;
 use Redirect;
 use Validator;
 
+use Blog\Models\Tag;
 use Blog\Models\File;
 use Blog\Models\Post;
-use Blog\Models\Tag;
 use Blog\Models\TranslatedPost;
 
 class PostController extends \BaseController {
