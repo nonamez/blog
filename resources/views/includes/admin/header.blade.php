@@ -1,7 +1,7 @@
 <header class="clearfix">
 	<nav>
 		<ul class="nav nav-pills pull-right">
-			<li class="dropdown active" role="presentation">
+			<li class="dropdown{{ $menu == 'posts' ? ' active' : ''}}" role="presentation">
 				<a aria-expanded="false" role="button" href="#" data-toggle="dropdown" class="dropdown-toggle">
 					Posts <span class="caret"></span>
 				</a>
@@ -15,7 +15,7 @@
 					</li>
 				</ul>
 			</li>
-			<li role="presentation">
+			<li role="presentation"{!! $menu == 'files' ? ' class="active"' : '' !!}>
 				<a href="{{ route('admin_files') }}">Files</a>
 			</li>
 			<li role="presentation">

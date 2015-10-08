@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['menu' => 'posts'])
 @section('content')
 <table class="table table-hover">
 	<thead>
