@@ -16,6 +16,9 @@
 				</ul>
 			</li>
 			<li role="presentation">
+				<a href="{{ route('admin_files') }}">Files</a>
+			</li>
+			<li role="presentation">
 				<a href="{{ route('logout') }}">Log Out</a>
 			</li>
 		</ul>
