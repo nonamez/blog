@@ -1,9 +1,6 @@
-Add caching
 Optimize AJAX requests
 Add loading state of file
-Check if post exists in admin section globally
 Installation option without terminal
-Better post editor
 Post icon in create/update
 Remove unused bootstrap styles
 Scroll to the post when open it in front-end

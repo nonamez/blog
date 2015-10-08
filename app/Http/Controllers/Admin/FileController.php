@@ -10,6 +10,7 @@ use URL;
 use File;
 use View;
 use Config;
+use Storage;
 use Response;
 
 class FileController extends Controller {
@@ -36,8 +37,8 @@ class FileController extends Controller {
 		
 		$path = storage_path(self::BLOG_UPLOAD_PATH . date('/Y/m/d', $time));
 		
-		if (is_dir($path) == FALSE)
-			mkdir($path, 0777, TRUE);
+		if (File::isDirectory($path) == FALSE)
+			File::makeDirectory($path, 0755, TRUE);
 		
 		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension()) . '_' . str_random(5) . '.' . $file->guessExtension();
 		$name = strtolower($name);

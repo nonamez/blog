@@ -43,18 +43,18 @@ class BlogController extends Controller
 
 	public function post($slug)
 	{
-		$post = Blog\TranslatedPost::with(array('parent', 'tags'));
+		$post = Blog\TranslatedPost::with(['parent', 'tags']);
 		
 		$post->where('slug', '=', $slug);
 		$post->where('status', '=', 'published');
 		
 		$post = $post->firstOrFail();
 
-		return View::make('blog/post', array(
+		return View::make('blog/post', [
 			'post'             => $post,
 			'meta_keywords'    => $post->meta_keywords,
 			'meta_description' => $post->meta_description,
-		));
+		]);
 	}
 	
 	public function postsByTag($tag)

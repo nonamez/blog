@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - [Unreleased]
+## [0.3.1] - [2015-10-8]
+### Changed
+- Some fixes
+
+## [0.3.0] - [2015-10-5]
 ### Changed
 - Updated to Laravel 5.1
 
