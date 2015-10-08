@@ -85,6 +85,7 @@ for (var i = 0, file; file = files[i]; ++i) {
 document.getElementById('fake-file-button-upload').addEventListener('click', function() {
 	var form_data = new FormData();
 		form_data.append('file', document.getElementById('files-input-upload').files[0]);
+		form_data.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 	
 	var request = new XMLHttpRequest();
 	
@@ -156,9 +157,4 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 	};
 	
 	request.send(form_data);
-});
-
-// Remove assigned post
-document.getElementById('post-to-assign-button-unassign').addEventListener('click', function(event) {
-	document.getElementById('post-to-assign-button-selected').value = null;
 });

@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - [2015-10-8]
+### Changed
+- Some fixes
+
+## [0.3.0] - [2015-10-5]
+### Changed
+- Updated to Laravel 5.1
+
 ## [0.2.1] - [2015-07-06]
 ### Added
 - Header tags cache
