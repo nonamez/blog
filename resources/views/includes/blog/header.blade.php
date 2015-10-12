@@ -28,7 +28,7 @@
 			</ul>
 		</div>
 		<div class="site-head-content inner">
-			<h1 class="blog-title">@lang('blog.header.title')</h1> 
+			<h1 class="blog-title">/home/NoNameZ</h1> 
 			<h2 class="blog-description">@lang('blog.header.description')</h2>
 			@if (isset($tags))
 			<h6>
