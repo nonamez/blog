@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'iam' => 'Sveiki! Mano vardas Kirilas. Aš esu savamokslis web programuotojas iš Klaipėdos.',
 	'skills' => [
 		'title' => 'Trumpai apie save:',
 		'li_1'  => 'Manau, kad visai neblogai žinau PHP, MySQL, JS/jQuery.',
@@ -8,6 +9,6 @@ return [
 		'li_3'  => 'Kartais atrodo, kad žinau Python.',
 		'li_4'  => 'Esu skaitęs apie NodeJS.'
 	],
-	'contact' => 'Jūs galite susisiekti su manimi el. paštu <img style="vertical-align:baseline" src=":img" alt="Email address">',
+	'contact' => 'Jūs galite susisiekti su manimi el. paštu :img',
 	'ps' => 'Man patinka paprasti dalykai. Ir katės. Ir programavimas. Ir muzika. Ir sportas.'
 ];
