@@ -9,11 +9,13 @@ function isDescendant(parent, child) {
 
 		node = node.parentNode;
 	}
+
 	return false;
 }
 
 var dropdowns = document.querySelectorAll('[data-toggle=dropdown]');
 
+// Show menu
 for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i) {
 	dropdown.addEventListener('click', function(event) {
 		for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i)
@@ -25,16 +27,14 @@ for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i) {
 	});
 }
 
+// Hide menu
 document.addEventListener('click', function(event) {
 	var open_menu = document.querySelector('.menu.open');
 
 	if (open_menu != null) {
 		var target = event.target || event.srcElement;
 
-		console.log(target);
-		console.log(open_menu);
-
-		if (isDescendant(open_menu, target) == false) 
+		if (isDescendant(open_menu, target) == false)
 			open_menu.classList.remove('open');
 	}
 });
