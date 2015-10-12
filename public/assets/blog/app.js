@@ -1,5 +1,17 @@
 "use strict";
 
+function isDescendant(parent, child) {
+	var node = child.parentNode;
+
+	while (node != null) {
+		if (node == parent)
+			return true;
+
+		node = node.parentNode;
+	}
+	return false;
+}
+
 var dropdowns = document.querySelectorAll('[data-toggle=dropdown]');
 
 for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i) {
@@ -12,6 +24,20 @@ for (var i = 0, dropdown; dropdown = dropdowns[i]; ++i) {
 		return false;
 	});
 }
+
+document.addEventListener('click', function(event) {
+	var open_menu = document.querySelector('.menu.open');
+
+	if (open_menu != null) {
+		var target = event.target || event.srcElement;
+
+		console.log(target);
+		console.log(open_menu);
+
+		if (isDescendant(open_menu, target) == false) 
+			open_menu.classList.remove('open');
+	}
+});
 
 var top_element  = document.getElementById('back-to-top');
 
