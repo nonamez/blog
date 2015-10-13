@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['menu' => 'posts'])
 @section('content')
 <form action="{{ route('admin_post_update', $post->id) }}" method="POST" class="form-horizontal" style="margin-bottom:15px">
 	{{ csrf_field() }}

@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="HandheldFriendly" content="True">
 
-<title>@section('title') @lang('blog.title') @show</title>
+<title>@section('title') /home/NoNameZ @show</title>
 
 <meta name="csrf-token" content="<?php echo csrf_token();?>">
 

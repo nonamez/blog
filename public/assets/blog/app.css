@@ -1,4 +1,5 @@
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700&subset=latin,cyrillic,latin-ext");
+@import url("//fonts.googleapis.com/css?family=Patua+One");
 
 html {
 	font-size: 10px;
@@ -141,8 +142,10 @@ header.site-head .menu .btn-menu:active {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
+
 header.site-head .blog-title {
 	margin-top: 0px;
+	font-family: 'Patua One', cursive;
 }
 header.site-head .blog-title a {
 	color: #222222;
@@ -152,6 +155,7 @@ header.site-head .blog-title a:hover {
 }
 header.site-head .blog-description {
 	font-size: 1.4em;
+	font-weight: 400;
 	margin-top: 10px;
 }
 header.site-head .blog-logo {

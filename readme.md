@@ -17,7 +17,7 @@ gulp
 ```
 * Open `database/seeds/UserSeeder.php` and set your email and password.
 * Open `config/auth.php` and set allowed ip's for admin.
-* Open `config/database.php` and set connection to database.
+* Open `.env` and set connection to database.
 
 ```
 php artisan key:generate

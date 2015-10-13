@@ -17,6 +17,13 @@ class FileController extends Controller {
 	
 	const BLOG_UPLOAD_PATH = 'app/blog/uploads';
 	
+	public function index()
+	{
+		$files = Blog\File::with('post')->orderBy('post_id', 'ASC')->paginate(20);
+		
+		return View::make('admin.files.index', compact('files'));
+	}
+	
 	public function get($date, $name)
 	{
 		$file_path = str_replace('-', '/', $date) . '/' . $name;

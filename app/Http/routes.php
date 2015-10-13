@@ -67,6 +67,7 @@ Route::group(['middleware' => ['check_ip', 'auth', 'check_id'], 'prefix' => 'adm
 	Route::get('/post/delete/{post_id}/{all?}', ['as' => 'admin_post_delete', 'uses' => 'Admin\PostController@delete']);
 	
 	// Files
+	Route::get('/files', ['as' => 'admin_files', 'uses' => 'Admin\FileController@index']);
 	Route::post('/file/upload', ['as' => 'admin_file_store', 'uses' => 'Admin\FileController@store']);
 	Route::get('/file/delete/{file_id}', ['as' => 'admin_file_delete', 'uses' => 'Admin\FileController@delete']);
 });
