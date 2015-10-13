@@ -1,9 +1,24 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.3.3] - [2015-10-13]
+### Added
+- Files section
+
+### Changed
+- Some improvements
+- Personal data
+
+### Fixed
+- Top menu
+
+## [0.3.2] - [2015-10-8]
+### Changed
+- Readme
+
 ## [0.3.1] - [2015-10-8]
 ### Changed
-- Some fixes
+- Some improvements
 
 ## [0.3.0] - [2015-10-5]
 ### Changed

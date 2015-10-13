@@ -1,12 +1,10 @@
 # Yet Another Laravel Blog (http://nonamez.name)
 
-This is the source code of my [personal blog](http://nonamez.name). I published it just in case it would help You. It's developed using the [Laravel 4 Framework](http://http://laravel.com/docs/4.2).
+This is the source code of my [personal blog](http://nonamez.name). I published it just in case it would help You. It's developed using the [Laravel 5 Framework](http://laravel.com/docs/5.1).
 
 ## Installation
 
 The dependencies are resolved using [Composer](http://getcomposer.org/). You also will need [Bower](http://bower.io) and [Gulp](http://gulpjs.com)
-
-
 
 Just follow this steps:
 
@@ -17,8 +15,9 @@ composer install
 bower install
 gulp
 ```
-* Open `app/database/seeds/UserSeeder.php` and set your email and password.
-* Add connection to database in `app/config/database.php`
+* Open `database/seeds/UserSeeder.php` and set your email and password.
+* Open `config/auth.php` and set allowed ip's for admin.
+* Open `.env` and set connection to database.
 
 ```
 php artisan key:generate
@@ -33,5 +32,4 @@ Thats it. Open a browser at http://127.0.0.1:8081/ and you should see the blog.
 Just read the code and figure it out.
 
 ## Author
-
 Kiril Chalkin - <hello@nonamez.name>
