@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Ip restrictions
 
+### Removed
+- ToDo List
+
 ## [0.3.3] - [2015-10-13]
 ### Added
 - Files section
