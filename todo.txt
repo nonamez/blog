@@ -1,6 +1,0 @@
-Optimize AJAX requests
-Add loading state of file
-Installation option without terminal
-Post icon in create/update
-Remove unused bootstrap styles
-Scroll to the post when open it in front-end

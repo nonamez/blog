@@ -46,8 +46,8 @@ Route::group(['prefix' => App::getLocale()], function() {
 |--------------------------------------------------------------------------
 */
 
-Route::get('auth/login', 'AuthController@getLogin');
-Route::post('auth/login', ['as' => 'auth', 'uses' => 'AuthController@postLogin']);
+Route::get('auth/login', ['as' => 'auth_get', 'uses' => 'AuthController@getLogin']);
+Route::post('auth/login', ['as' => 'auth_post', 'uses' => 'AuthController@postLogin']);
 Route::get('auth/logout', ['as' => 'logout', 'uses' => 'AuthController@getLogout']);
 
 /*

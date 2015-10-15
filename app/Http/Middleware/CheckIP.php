@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Auth;
 use Lang;
 use Closure;
 
@@ -11,8 +12,11 @@ class CheckIP
 	{
 		$allowed_ip = config()->get('auth.allowed_ip');
 		
-		if (is_array($allowed_ip) && in_array($request->getClientIp(TRUE), $allowed_ip) == FALSE)
-			return redirect()->route('auth')->withErrors(Lang::get('errors.incorrect_login_ip'));
+		if (count($allowed_ip) > 0 && in_array($request->getClientIp(TRUE), $allowed_ip) == FALSE) {
+			Auth::logout();
+			
+			return redirect()->route('auth_get')->withErrors(Lang::get('errors.incorrect_login_ip'));
+		}
 			
 		return $next($request);
 	}

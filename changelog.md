@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.3.4] - [2015-10-15]
+### Changed
+- Custom configs moved to env
+
+### Fixed
+- Ip restrictions
+
+### Removed
+- ToDo List
+
 ## [0.3.3] - [2015-10-13]
 ### Added
 - Files section
