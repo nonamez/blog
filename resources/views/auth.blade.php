@@ -23,7 +23,7 @@
 							<h3 class="panel-title">Sign In</h3>
 						</div>
 						<div class="panel-body">
-							<form action="{{ route('auth') }}" class="form-horizontal" method="POST">
+							<form action="{{ route('auth_post') }}" class="form-horizontal" method="POST">
 								{{ csrf_field() }}
 								<div class="form-group">
 									<label class="col-sm-4 control-label">Email</label>
