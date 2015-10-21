@@ -142,9 +142,9 @@ class PostController extends Controller
 		if (array_key_exists('titles', $data) && array_key_exists('slugs', $data)) {
 			foreach ($data['titles'] as $key => $name) {
 				if (array_key_exists($key, $data['slugs']))
-					$slug = strtolower($data['slugs'][$i]);
+					$slug = strtolower($data['slugs'][$key]);
 				else
-					continue;
+					$slug = strtolower($name);
 				
 				$tag = Blog\Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
 				
