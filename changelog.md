@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - [Unreleased]
+### Change
+- Default env file
+
+### Fixed
+- Redirect after file delete
+- Tag creation
+
 ## [0.3.4] - [2015-10-15]
 ### Changed
 - Custom configs moved to env
