@@ -11,7 +11,9 @@ use File;
 use View;
 use Config;
 use Storage;
+use Request;
 use Response;
+use Redirect;
 
 class FileController extends Controller {
 	
@@ -71,6 +73,9 @@ class FileController extends Controller {
 		
 		$file->delete();
 		
-		return $this->ajaxResponse(['error' => FALSE]);
+		if (Request::ajas())
+			return $this->ajaxResponse(['error' => FALSE]);
+		else
+			return Redirect::back();
 	}
 }

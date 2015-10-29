@@ -89,6 +89,9 @@ class PostController extends Controller
 		} catch (\Exception $exception) {
 			if (strpos($exception->getMessage(), 'blg_translated_posts_post_id_locale_unique') !== FALSE)
 				return Redirect::back()->withErrors('Locale already exists');
+				
+			if (strpos($exception->getMessage(), 'blg_translated_posts_slug_unique') !== FALSE)
+				return Redirect::back()->withErrors('Slug already exists');
 		}
 
 		$this->_tags($request->get('tags', []), $translated_post);
@@ -142,9 +145,9 @@ class PostController extends Controller
 		if (array_key_exists('titles', $data) && array_key_exists('slugs', $data)) {
 			foreach ($data['titles'] as $key => $name) {
 				if (array_key_exists($key, $data['slugs']))
-					$slug = strtolower($data['slugs'][$i]);
+					$slug = strtolower($data['slugs'][$key]);
 				else
-					continue;
+					$slug = strtolower($name);
 				
 				$tag = Blog\Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
 				
