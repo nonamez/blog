@@ -89,6 +89,9 @@ class PostController extends Controller
 		} catch (\Exception $exception) {
 			if (strpos($exception->getMessage(), 'blg_translated_posts_post_id_locale_unique') !== FALSE)
 				return Redirect::back()->withErrors('Locale already exists');
+				
+			if (strpos($exception->getMessage(), 'blg_translated_posts_slug_unique') !== FALSE)
+				return Redirect::back()->withErrors('Slug already exists');
 		}
 
 		$this->_tags($request->get('tags', []), $translated_post);
