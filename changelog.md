@@ -2,12 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - [Unreleased]
+### Added
+- Draft post preview for admin
+
 ### Change
 - Default env file
 
 ### Fixed
 - Redirect after file delete
 - Tag creation
+- Google Analytics id loaded from .env
 
 ## [0.3.4] - [2015-10-15]
 ### Changed

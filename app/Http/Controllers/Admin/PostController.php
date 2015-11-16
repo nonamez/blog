@@ -18,7 +18,7 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		$paginated = Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
+		$paginated = Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(20);
 		
 		return View::make('admin.post.index')->with('posts', $paginated);
 	}
