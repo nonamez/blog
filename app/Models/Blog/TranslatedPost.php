@@ -24,6 +24,13 @@ class TranslatedPost extends Model {
 		static::deleted(function($post) use($name) {
 			\Cache::forget($name);
 		});
+
+		static::saving(function($post)
+		{
+			$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
+				return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
+			}, $post->content);
+		});
 	}
 	
 	public function parent()

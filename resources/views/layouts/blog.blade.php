@@ -26,6 +26,8 @@
 		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('/images/fork_me.png')}}" alt="Fork me on GitHub">
 	</a>
 	<script src="{{ asset('/assets/blog/app.js')}}"></script>
+	<script src="{{ asset('/assets/plugins/highlightjs/highlight.pack.min.js')}}"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 	@yield('custom_scripts')
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)
 	<script>

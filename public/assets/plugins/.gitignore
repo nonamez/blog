@@ -1,4 +1,2 @@
-# Stuff provided by Gupl
-/bootstrap
-/jquery
-/fontawesome
+*
+!.gitignore
