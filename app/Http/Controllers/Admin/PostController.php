@@ -41,8 +41,6 @@ class PostController extends Controller
 	{
 		$data = $request->all();
 		
-		$data['title'] = htmlspecialchars($data['title']);
-		
 		$translated_post = new Blog\TranslatedPost($data);
 		
 		// Select parent or create new
@@ -82,8 +80,6 @@ class PostController extends Controller
 		
 		$data = $request->all();
 
-		$data['title'] = htmlspecialchars($data['title']);
-		
 		try {
 			$translated_post->update($data);
 		} catch (\Exception $exception) {

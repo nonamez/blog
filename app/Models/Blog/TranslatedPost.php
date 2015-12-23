@@ -27,6 +27,8 @@ class TranslatedPost extends Model {
 
 		static::saving(function($post)
 		{
+			$post->title   = htmlspecialchars($post->title);
+
 			$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
 				return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
 			}, $post->content);
