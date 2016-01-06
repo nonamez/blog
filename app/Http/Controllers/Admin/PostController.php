@@ -80,15 +80,7 @@ class PostController extends Controller
 		
 		$data = $request->all();
 
-		try {
-			$translated_post->update($data);
-		} catch (\Exception $exception) {
-			if (strpos($exception->getMessage(), 'blg_translated_posts_post_id_locale_unique') !== FALSE)
-				return Redirect::back()->withErrors('Locale already exists');
-				
-			if (strpos($exception->getMessage(), 'blg_translated_posts_slug_unique') !== FALSE)
-				return Redirect::back()->withErrors('Slug already exists');
-		}
+		$translated_post->update($data);
 
 		$this->_tags($request->get('tags', []), $translated_post);
 		$this->_files($request->get('files', []), $translated_post->id);
