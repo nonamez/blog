@@ -14,7 +14,7 @@ class PostRequest extends Request
 	public function rules()
 	{
 		return [
-			'slug'    => ['required', 'unique:blg_translated_posts,id' . $this->get('post_id')],
+			'slug'    => ['unique:blg_translated_posts,id' . $this->get('post_id'), 'min:3'],
 			'title'   => ['required', 'min:5'],
 			'locale'  => ['required', 'in:' . implode(',', config()->get('app.locales'))],
 			'status'  => ['required', 'in:draft,published'],
