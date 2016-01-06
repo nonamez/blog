@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+/public/cv.pdf
 /bower_components
 composer.phar
 composer.lock

@@ -1,9 +1,10 @@
 # Change Log
-All notable changes to this project will be documented in this file.
+All notable changes made to this project will be documented in this file.
 
 ## [Unreleased] - [Unreleased]
 ### Added
 - Draft post preview for admin
+- Ability to generate slugs from title
 
 ### Change
 - Default env file
@@ -59,7 +60,7 @@ All notable changes to this project will be documented in this file.
 - The ability to display drafts
 - Syntax highlighter in Safari
 
-## 0.2.0 - 2015-05-27
+## [0.2.0] - [2015-05-27]
 ### Added
 - Changelog
 - Permitted ip check on authorization
@@ -79,7 +80,7 @@ All notable changes to this project will be documented in this file.
 - jQuery in Front-End
 - Bootstrap JS in Front-End
 
-## 0.1.0 - 2015-05-19
+## [0.1.0] - [2015-05-19]
 ### Added
 - Authorization
 - "CRUD" actions to the post
