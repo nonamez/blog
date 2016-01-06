@@ -27,7 +27,7 @@ class TranslatedPost extends Model {
 
 		static::saving(function($post)
 		{
-			// If post slug empty using title
+			// If post slug empty use title
 			if (strlen($post->slug) == 0)
 				$post->slug = preg_replace('/[^ \w]+/', '', $post->title); // Replace all non-space and non-word characters with nothing
 
