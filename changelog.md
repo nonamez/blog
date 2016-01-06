@@ -5,9 +5,12 @@ All notable changes made to this project will be documented in this file.
 ### Added
 - Draft post preview for admin
 - Ability to generate slugs from title
+- Global exception handling
+- Helpers created
 
 ### Change
 - Default env file
+- Some methods to helpers
 
 ### Fixed
 - Redirect after file delete
