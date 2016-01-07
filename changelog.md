@@ -1,7 +1,7 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-## [Unreleased] - [Unreleased]
+## [0.3.5] - [2016-01-07]
 ### Added
 - Draft post preview for admin
 - Ability to generate slugs from title
