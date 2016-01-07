@@ -34,9 +34,10 @@ class BlogController extends Controller
 	{
 		$posts = Blog\Post::whereHas('translated', function($query) {
 			$query->where('locale', '=', App::getLocale());
-			// Show draft posts for admins
+			
 			if (Auth::guest())
 				$query->where('status', '=', 'published');
+
 		})->orderBy('id', 'DEC');
 		
 		$paginated = $posts->paginate(Config::get('blog.posts_per_page'));
@@ -50,9 +51,9 @@ class BlogController extends Controller
 		
 		$post->where('slug', '=', $slug);
 		
-		// Show draft posts for admins
+		// Hide draft posts for users
 		if (Auth::guest())
-			$post->where('status', '=', 'published');
+			$post->where('status', '<>', 'draft');
 		
 		$post = $post->firstOrFail();
 

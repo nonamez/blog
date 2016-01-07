@@ -115,6 +115,7 @@
 					<select name="status" class="form-control">
 						<option value="draft"{{ $post->status == 'draft' ? ' selected="selected"' : ''}}>Draft</option>
 						<option value="published"{{ $post->status == 'published' ? ' selected="selected"' : ''}}>Published</option>
+						<option value="hidden"{{ $post->status == 'hidden' ? ' selected="selected"' : ''}}>Hidden</option>
 					</select>
 				</div>
 			</div>
