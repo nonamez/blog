@@ -122,6 +122,7 @@
 					<select name="status" class="form-control">
 						<option value="draft"{{ old('status') == 'draft' ? ' selected="selected"' : ''}}>Draft</option>
 						<option value="published"{{ old('status') == 'published' ? ' selected="selected"' : ''}}>Published</option>
+						<option value="hidden"{{ old('status') == 'hidden' ? ' selected="selected"' : ''}}>Hidden</option>
 					</select>
 				</div>
 			</div>

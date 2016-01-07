@@ -12,7 +12,7 @@
 		<div class="form-group">
 			<label class="col-md-2 control-label">content</label>
 			<div class="col-md-8">
-				<textarea name="content" class="form-control" placeholder="Enter text" rows="5" cols="5">{{ $post->content }}</textarea>
+				<textarea name="content" class="form-control" placeholder="Enter text" rows="5" cols="5">{!! $post->content !!}</textarea>
 			</div>
 		</div>
 	</div>
@@ -115,6 +115,7 @@
 					<select name="status" class="form-control">
 						<option value="draft"{{ $post->status == 'draft' ? ' selected="selected"' : ''}}>Draft</option>
 						<option value="published"{{ $post->status == 'published' ? ' selected="selected"' : ''}}>Published</option>
+						<option value="hidden"{{ $post->status == 'hidden' ? ' selected="selected"' : ''}}>Hidden</option>
 					</select>
 				</div>
 			</div>

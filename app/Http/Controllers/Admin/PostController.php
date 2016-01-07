@@ -6,6 +6,8 @@ use App\Models\Blog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostRequest;
 
+use App\Helpers\Admin as Helpers;
+
 use DB;
 use URL;
 use View;
@@ -18,7 +20,7 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		$paginated = Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(5);
+		$paginated = Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(20);
 		
 		return View::make('admin.post.index')->with('posts', $paginated);
 	}
@@ -41,8 +43,6 @@ class PostController extends Controller
 	{
 		$data = $request->all();
 		
-		$data['title'] = htmlspecialchars($data['title']);
-		
 		$translated_post = new Blog\TranslatedPost($data);
 		
 		// Select parent or create new
@@ -56,8 +56,8 @@ class PostController extends Controller
 
 		$post->translated()->save($translated_post);
 		
-		$this->_tags($request->get('tags', []), $translated_post);
-		$this->_files($request->get('files', []), $translated_post->id);
+		Helpers\Post::tags($request->get('tags', []), $translated_post);
+		Helpers\Post::files($request->get('files', []), $translated_post->id);
 		
 		return Redirect::route('admin_posts');
 	}
@@ -82,20 +82,10 @@ class PostController extends Controller
 		
 		$data = $request->all();
 
-		$data['title'] = htmlspecialchars($data['title']);
-		
-		try {
-			$translated_post->update($data);
-		} catch (\Exception $exception) {
-			if (strpos($exception->getMessage(), 'blg_translated_posts_post_id_locale_unique') !== FALSE)
-				return Redirect::back()->withErrors('Locale already exists');
-				
-			if (strpos($exception->getMessage(), 'blg_translated_posts_slug_unique') !== FALSE)
-				return Redirect::back()->withErrors('Slug already exists');
-		}
+		$translated_post->update($data);
 
-		$this->_tags($request->get('tags', []), $translated_post);
-		$this->_files($request->get('files', []), $translated_post->id);
+		Helpers\Post::tags($request->get('tags', []), $translated_post);
+		Helpers\Post::files($request->get('files', []), $translated_post->id);
 
 		// Parent post update if exists
 		if ($data['parent_post'] != $translated_post->post_id) {
@@ -135,36 +125,5 @@ class PostController extends Controller
 		}
 		
 		return Redirect::back()->with('notice', sprintf($message, $title));
-	}
-
-	// Attach tags to the post
-	private function _tags(array $data, & $post)
-	{
-		$new_tags = [];
-
-		if (array_key_exists('titles', $data) && array_key_exists('slugs', $data)) {
-			foreach ($data['titles'] as $key => $name) {
-				if (array_key_exists($key, $data['slugs']))
-					$slug = strtolower($data['slugs'][$key]);
-				else
-					$slug = strtolower($name);
-				
-				$tag = Blog\Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
-				
-				array_push($new_tags, $tag->id);
-			}
-		}
-
-		if (isset($data['ids']))
-			$new_tags = array_merge($new_tags, $data['ids']);
-		
-		$post->tags()->sync($new_tags);
-	}
-
-	// Attach files to current post
-	private function _files(array $files, $post_id)
-	{
-		if (count($files) > 0)
-			Blog\File::whereIn('id', $files)->update(['post_id' => $post_id]);
 	}
 }

@@ -43,6 +43,23 @@ h1 small,h2 small,h3 small,h4 small,h5 small,h6 small {
 	padding-right: 15px;
 	text-transform: uppercase;
 }
+pre {
+    background: #fff none repeat scroll 0 0;
+    border: medium none;
+    line-height: 27.6px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    padding: 0;
+    white-space: pre;
+    word-break: inherit;
+    word-wrap: inherit;
+}
+pre.inline {
+	display: inline;
+}
+pre.inline > code {
+	display: inline;
+}
 
 /* ----------- Main ----------- */
 

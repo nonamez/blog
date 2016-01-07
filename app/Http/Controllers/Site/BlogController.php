@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Http\Controllers\Controller;
 
 use App;
+use Auth;
 use Lang;
 use View;
 use Cache;
@@ -33,7 +34,10 @@ class BlogController extends Controller
 	{
 		$posts = Blog\Post::whereHas('translated', function($query) {
 			$query->where('locale', '=', App::getLocale());
-			$query->where('status', '=', 'published');
+			
+			if (Auth::guest())
+				$query->where('status', '=', 'published');
+
 		})->orderBy('id', 'DEC');
 		
 		$paginated = $posts->paginate(Config::get('blog.posts_per_page'));
@@ -46,7 +50,10 @@ class BlogController extends Controller
 		$post = Blog\TranslatedPost::with(['parent', 'tags']);
 		
 		$post->where('slug', '=', $slug);
-		$post->where('status', '=', 'published');
+		
+		// Hide draft posts for users
+		if (Auth::guest())
+			$post->where('status', '<>', 'draft');
 		
 		$post = $post->firstOrFail();
 
