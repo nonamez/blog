@@ -16,7 +16,7 @@ class Post
 				if (array_key_exists($key, $data['slugs']))
 					$slug = strtolower($data['slugs'][$key]);
 				else
-					$slug = strtolower($name);
+					$slug = strtolower(str_replace(' ', '_', $name));
 				
 				$tag = Blog\Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
 				
