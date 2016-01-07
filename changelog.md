@@ -1,22 +1,9 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-## [0.3.6] - [2016-01-07]
-### Added
-- Draft post preview for admin
-- Ability to generate slugs from title
-- Global exception handling
-- Helpers
-- Hidden post type
-
+## [Unreleased] - [Unreleased]
 ### Change
-- Default env file
-- Some methods to helpers
-
-### Fixed
-- Redirect after file delete
-- Tag creation
-- Google Analytics id loaded from .env
+- User auth info moved to .env
 
 ## [0.3.5] - [2015-10-29]
 ### Added

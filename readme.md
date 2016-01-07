@@ -15,9 +15,7 @@ composer install
 bower install
 gulp
 ```
-* Open `database/seeds/UserSeeder.php` and set your email and password.
-* Open `config/auth.php` and set allowed ip's for admin.
-* Open `.env` and set connection to database.
+* Configure `.env` file.
 
 ```
 php artisan key:generate
