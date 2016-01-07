@@ -383,6 +383,10 @@ article.post footer.post-footer section.comments {
 	padding-top: 30px;
 }
 
+footer .poweredby a {
+	vertical-align: middle;
+}
+
 /**
  * Pagination
  */
