@@ -3,7 +3,7 @@
 <main class="content" role="main">
 	@forelse ($posts as $post)
 	<?php if ($post instanceof App\Models\Blog\Post) $post = $post->locale(app()->getLocale()); ?>
-	<article class="post{{ $post->status == 'draft' ? ' alert-warning' : ''}}" id="post-{{ $post->id }}" data-url="{{ route('post', $post->slug) }}">
+	<article class="post{{ App\Helpers\Site\Blog::postColor($post->status) }}" id="post-{{ $post->id }}" data-url="{{ route('post', $post->slug) }}">
 		<header class="post-header">
 			<div class="icon">
 				<i class="{{ $post->icon }}"></i>
