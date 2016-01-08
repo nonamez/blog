@@ -23,5 +23,5 @@
 			</li>
 		</ul>
 	</nav>
-	<h3 class="text-muted">Admin Panel</h3>
+	<h3><a href="{{ route('admin_posts') }}" class="text-muted">Admin Panel</a></h3>
 </header>
