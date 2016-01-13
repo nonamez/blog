@@ -29,11 +29,11 @@ Route::get('/file/{date}/{name}', ['as' => 'file_get', 'uses' => 'Admin\FileCont
 |--------------------------------------------------------------------------
 */
 
-Route::get('/{locale}', 'Site\BlogController@posts')->where('locale', implode('|', Config::get('app.locales')));
+Route::get('/{locale}', 'Blog\PostController@posts')->where('locale', implode('|', Config::get('app.locales')));
 
 Route::group(['prefix' => App::getLocale()], function() {
-	Route::get('/post/{slug}', ['as' => 'post', 'uses' => 'Site\BlogController@post']);
-	Route::get('/tag/{slug}', ['as' => 'tag', 'uses' => 'Site\BlogController@postsByTag']);
+	Route::get('/post/{slug}', ['as' => 'post', 'uses' => 'Blog\PostController@post']);
+	Route::get('/tag/{slug}', ['as' => 'tag', 'uses' => 'Blog\PostController@postsByTag']);
 	
 	Route::get('/about', ['as' => 'about', function() {
 		return View::make('about');

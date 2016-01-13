@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\Blog;
 
 use App\Models\Blog;
 use App\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ use View;
 use Cache;
 use Config;
 
-class BlogController extends Controller 
+class PostController extends Controller 
 {
 	function __construct() 
 	{
