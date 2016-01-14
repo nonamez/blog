@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/blog/app.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/blog/styles.css') }}">
 </head>
 <body>
 	<div class="container" style="padding-top:5%">
@@ -20,7 +20,7 @@
 						<h4>The page you are looking for does not exist.</h4>
 						<p>
 							<a href="javascript: history.back()">Go back to the previous page</a> /
-							<a href="{{ URL::to('/' . app()->getLocale() )}}">Go to the index</a>
+							<a href="{{ url('/' . app()->getLocale()) }}">Go to the index</a>
 						</p>
 					</div>
 				</main>
