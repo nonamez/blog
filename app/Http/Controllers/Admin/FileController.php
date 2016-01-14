@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Blog;
+use App\Models\File as FileModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FileRequest;
 
@@ -17,11 +17,11 @@ use Redirect;
 
 class FileController extends Controller {
 	
-	const BLOG_UPLOAD_PATH = 'app/blog/uploads';
+	const UPLOAD_PATH = 'app/uploads';
 	
 	public function index()
 	{
-		$files = Blog\File::with('post')->orderBy('post_id', 'ASC')->paginate(20);
+		$files = FileModel::with('post')->orderBy('post_id', 'ASC')->paginate(20);
 		
 		return View::make('admin.files.index', compact('files'));
 	}
@@ -29,7 +29,7 @@ class FileController extends Controller {
 	public function get($date, $name)
 	{
 		$file_path = str_replace('-', '/', $date) . '/' . $name;
-		$file_path = storage_path(self::BLOG_UPLOAD_PATH . '/' . $file_path);
+		$file_path = storage_path(self::UPLOAD_PATH . '/' . $file_path);
 
 		if (File::exists($file_path) == FALSE)
 			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -44,7 +44,7 @@ class FileController extends Controller {
 		$file = $request->file('file');
 		$time = time();
 		
-		$path = storage_path(self::BLOG_UPLOAD_PATH . date('/Y/m/d', $time));
+		$path = storage_path(self::UPLOAD_PATH . date('/Y/m/d', $time));
 		
 		if (File::isDirectory($path) == FALSE)
 			File::makeDirectory($path, 0755, TRUE);
@@ -54,9 +54,10 @@ class FileController extends Controller {
 		
 		$file->move($path, $name);
 		
-		$file = Blog\File::create([
+		$file = FileModel::create([
 			'name' => $name,
 			'original_name' => $file->getClientOriginalName(),
+			'type' => $request->get('type', 'none')
 		]);
 		
 		$data = [
@@ -69,11 +70,11 @@ class FileController extends Controller {
 	
 	public function delete($file_id)
 	{
-		$file = Blog\File::find($file_id);
+		$file = FileModel::find($file_id);
 		
 		$file->delete();
 		
-		if (Request::ajas())
+		if (Request::ajax())
 			return $this->ajaxResponse(['error' => FALSE]);
 		else
 			return Redirect::back();

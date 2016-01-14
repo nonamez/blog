@@ -17,7 +17,7 @@ class CheckID
 		
 		$parameters = [
 			'file_id' => [
-				'model'   => Models\Blog\File::class,
+				'model'   => Models\File::class,
 				'message' => 'File not found'
 			],
 			'post_id' => [

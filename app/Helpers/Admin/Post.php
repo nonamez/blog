@@ -3,6 +3,7 @@
 namespace App\Helpers\Admin;
 
 use App\Models\Blog;
+use App\Models\File as FileModel;
 
 class Post
 {
@@ -34,6 +35,6 @@ class Post
 	public static function files(array $files, $post_id)
 	{
 		if (count($files) > 0)
-			Blog\File::whereIn('id', $files)->update(['post_id' => $post_id]);
+			FileModel::whereType('post')->whereIn('id', $files)->update(['parent_id' => $post_id]);
 	}
 }

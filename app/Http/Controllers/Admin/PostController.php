@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
+use App\Models\File as FileModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostRequest;
 
@@ -32,7 +33,7 @@ class PostController extends Controller
 		$data = [
 			'tags'    => Request::old('tags'),
 			// Select files that was uploaded today, but not yet assigned to the post
-			'files'   => Blog\File::where('post_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', date('Y-m-d'))->get(),
+			'files'   => FileModel::whereType('post')->where('parent_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', date('Y-m-d'))->get(),
 			'locales' => array_combine($locales, $locales)
 		];
 		
