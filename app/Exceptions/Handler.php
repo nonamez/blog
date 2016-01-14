@@ -53,8 +53,9 @@ class Handler extends ExceptionHandler
 				
 			if (strpos($e->getMessage(), 'blg_translated_posts_slug_unique') !== FALSE)
 				$message = 'Slug already exists';
-				
-			return Redirect::back()->withInput()->withErrors($message);
+			
+			if (isset($message))
+				return Redirect::back()->withInput()->withErrors($message);
 		}
 
 		return parent::render($request, $e);
