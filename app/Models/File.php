@@ -11,7 +11,7 @@ class File extends Model {
 
 	public function post()
 	{
-		return $this->belongsTo('App\Models\Blog\TranslatedPost', 'parent_id')->where('type', '=', 'post');
+		return $this->belongsTo('App\Models\Blog\TranslatedPost', 'parent_id');
 	}
 	
 	public static function boot()

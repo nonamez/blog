@@ -21,7 +21,7 @@ class FileController extends Controller {
 	
 	public function index()
 	{
-		$files = FileModel::with('post')->orderBy('post_id', 'ASC')->paginate(20);
+		$files = FileModel::paginate(20);
 		
 		return View::make('admin.files.index', compact('files'));
 	}
