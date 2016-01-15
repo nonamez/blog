@@ -55,9 +55,10 @@ class FileController extends Controller {
 		$file->move($path, $name);
 		
 		$file = FileModel::create([
-			'name' => $name,
-			'original_name' => $file->getClientOriginalName(),
-			'type' => $request->get('type', 'none')
+			'name'          => $name,
+			'type'          => $request->get('type', 'none'),
+			'description'   => $request->get('description', NULL),
+			'original_name' => $file->getClientOriginalName()
 		]);
 		
 		$data = [

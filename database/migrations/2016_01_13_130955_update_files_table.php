@@ -10,6 +10,7 @@ class UpdateFilesTable extends Migration
 		Schema::rename('blg_files', 'files');
 
 		Schema::table('files', function($table) {
+			$table->text('description')->default(NULL)->after('original_name');
 			$table->enum('type', ['post', 'portfolio'])->default(NULL)->after('post_id');
 		});
 
@@ -28,5 +29,6 @@ class UpdateFilesTable extends Migration
 
 		DB::statement("ALTER TABLE `{$prefix}blg_files` CHANGE COLUMN `parent_id` `post_id` INT(10) UNSIGNED NULL DEFAULT NULL AFTER `original_name`;");
 		DB::statement("ALTER TABLE `{$prefix}blg_files` DROP COLUMN `type`;");	
+		DB::statement("ALTER TABLE `{$prefix}blg_files` DROP COLUMN `description`;");	
 	}
 }
