@@ -86,6 +86,7 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 	var form_data = new FormData();
 		form_data.append('file', document.getElementById('files-input-upload').files[0]);
 		form_data.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+		form_data.append('type','post');
 	
 	var request = new XMLHttpRequest();
 	
