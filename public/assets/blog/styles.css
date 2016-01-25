@@ -60,10 +60,6 @@ pre.inline > code {
 	display: inline;
 }
 
-pre > .hljs {
-  background: #f8f8f8 none repeat scroll 0 0 !important;
-}
-
 /* ----------- Main ----------- */
 
 .container {
