@@ -4,11 +4,7 @@
 	<article class="post post-standalone" id="post-{{ $post['id'] }}">
 		<section class="post-content">
 			<div class="title">
-				<h2>{{ $post->title }} @foreach ($post->parent->localesExcept(app()->getLocale())->where('status', 'published') as $tmp_post)
-					<span class="label label-default label-lang">
-						<a href="{{ url($tmp_post->locale . '/post/' . $tmp_post->slug) }}">@lang('locales.' . $tmp_post->locale)</a>
-					</span>
-					@endforeach</h2>
+				<h2>{{ $post->title }}</h2>
 			</div>
 			<ul class="post-tags list-inline">
 				@include('blog._line')

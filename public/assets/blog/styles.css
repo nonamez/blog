@@ -257,12 +257,13 @@ article.post section.post-content {
 	overflow: hidden;
 }
 article.post section.post-content span.label-lang {
-	font-size: 30% !important;
-	font-weight: 500;
+	/*font-size: 30% !important;*/
+	/*font-weight: 500;*/
 	vertical-align: middle;
 	margin-right: 5px;
 	background-color: #e7e7e7;
 	color: #333333;
+	padding: 5px;
 }
 article.post:not(.post-standalone) section.post-content {
 	max-height: 0;
