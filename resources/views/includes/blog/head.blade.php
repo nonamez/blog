@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome/css/font-awesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/plugins/highlightjs/styles/github.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/plugins/highlightjs/styles/grayscale.css') }}">
 
 <link rel="stylesheet" href="{{ asset('/assets/blog/styles.css') }}">
 
