@@ -84,9 +84,11 @@ for (var i = 0, file; file = files[i]; ++i) {
 // Upload file and create input with result link
 document.getElementById('fake-file-button-upload').addEventListener('click', function() {
 	var form_data = new FormData();
+	
 		form_data.append('file', document.getElementById('files-input-upload').files[0]);
 		form_data.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 		form_data.append('type','post');
+		form_data.append('description', document.getElementsByName('title')[0].value); 
 	
 	var request = new XMLHttpRequest();
 	
