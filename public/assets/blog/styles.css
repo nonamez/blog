@@ -59,6 +59,9 @@ pre.inline {
 pre.inline > code {
 	display: inline;
 }
+pre > code {
+	background-color: #eee !important;
+}
 
 /* ----------- Main ----------- */
 
