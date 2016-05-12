@@ -41,8 +41,11 @@ class FileController extends Controller {
 		
 		if (File::isDirectory($path) == FALSE)
 			File::makeDirectory($path, 0755, TRUE);
-		
-		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension()) . '_' . str_random(5) . '.' . $file->guessExtension();
+
+		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());
+		$name = str_replace(' ', '_', $name);
+		$name = preg_replace("/[^\w]+/", '', $name);
+		$name = sprintf('%s_%s.%s', $name, str_random(5), $file->guessExtension());
 		$name = strtolower($name);
 		
 		$file->move($path, $name);
@@ -56,7 +59,7 @@ class FileController extends Controller {
 		
 		$data = [
 			'id'  => $file->id,
-			'url' => route('file_get', [date('Y-m-d', $time), $file->name]),
+			'url' => $file->getURL(),
 			'description' => $file->description
 		];
 		
