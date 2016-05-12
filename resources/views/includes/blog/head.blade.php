@@ -12,9 +12,9 @@
 
 <link rel="stylesheet" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome/css/font-awesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/plugins/highlightjs/styles/github.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/plugins/highlightjs/styles/ascetic.css') }}">
 
-<link rel="stylesheet" href="{{ asset('/assets/blog/app.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/blog/styles.css') }}">
 
 @yield('custom_styles')
 

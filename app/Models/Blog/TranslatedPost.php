@@ -58,7 +58,7 @@ class TranslatedPost extends Model {
 	
 	public function files()
 	{
-		return $this->hasMany('App\Models\Blog\File', 'post_id');
+		return $this->hasMany('App\Models\File', 'parent_id')->where('type', '=', 'post');
 	}
 	
 	public function short()

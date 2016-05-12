@@ -3,18 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
+use App\Models\File as FileModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostRequest;
 
 use App\Helpers\Admin as Helpers;
 
 use DB;
-use URL;
-use View;
-use Config;
-use Request;
-use Redirect;
-use Validator;
 
 class PostController extends Controller
 {
@@ -22,21 +17,21 @@ class PostController extends Controller
 	{
 		$paginated = Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(20);
 		
-		return View::make('admin.post.index')->with('posts', $paginated);
+		return view('admin.post.index')->with('posts', $paginated);
 	}
 
 	public function create()
 	{
-		$locales = Config::get('app.locales');
+		$locales = config('app.locales');
 
 		$data = [
-			'tags'    => Request::old('tags'),
+			'tags'    => request()->old('tags'),
 			// Select files that was uploaded today, but not yet assigned to the post
-			'files'   => Blog\File::where('post_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', date('Y-m-d'))->get(),
+			'files'   => FileModel::whereType('post')->where('parent_id', '=', NULL)->where(DB::raw('DATE(`created_at`)'), '=', date('Y-m-d'))->get(),
 			'locales' => array_combine($locales, $locales)
 		];
 		
-		return View::make('admin.post.create', $data);
+		return view('admin.post.create', $data);
 	}
 
 	public function store(PostRequest $request)
@@ -57,23 +52,23 @@ class PostController extends Controller
 		$post->translated()->save($translated_post);
 		
 		Helpers\Post::tags($request->get('tags', []), $translated_post);
-		Helpers\Post::files($request->get('files', []), $translated_post->id);
+		Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
 		
-		return Redirect::route('admin_posts');
+		return redirect()->route('admin_posts');
 	}
 	
 	public function edit($post_id)
 	{
 		$post = Blog\TranslatedPost::find($post_id);
 		
-		$locales = Config::get('app.locales');
+		$locales = config('app.locales');
 		
 		$data = [
 			'post'    => $post,
 			'locales' => array_combine($locales, $locales)
 		];
 		
-		return View::make('admin.post.edit', $data);
+		return view('admin.post.edit', $data);
 	}
 
 	public function update(PostRequest $request, $post_id)
@@ -85,19 +80,19 @@ class PostController extends Controller
 		$translated_post->update($data);
 
 		Helpers\Post::tags($request->get('tags', []), $translated_post);
-		Helpers\Post::files($request->get('files', []), $translated_post->id);
+		Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
 
 		// Parent post update if exists
 		if ($data['parent_post'] != $translated_post->post_id) {
 			if (is_null(Blog\Post::find($data['parent_post'])))
-				return Redirect::back()->withInput()->withErrors('Parent post not found');
+				return redirect()->back()->withInput()->withErrors('Parent post not found');
 
 			$translated_post->post_id = $data['parent_post'];
 
 			$translated_post->save();
 		}
 
-		return Redirect::back()->with('success', 'Post updated seccessfully');
+		return redirect()->back()->with('success', 'Post updated seccessfully');
 	}
 
 	public function delete($post_id, $all = FALSE)
@@ -124,6 +119,6 @@ class PostController extends Controller
 			$message = 'The post "%s" successfully deleted';
 		}
 		
-		return Redirect::back()->with('notice', sprintf($message, $title));
+		return redirect()->back()->with('notice', sprintf($message, $title));
 	}
 }

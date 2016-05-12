@@ -3,6 +3,7 @@
 namespace App\Helpers\Admin;
 
 use App\Models\Blog;
+use App\Models\File as FileModel;
 
 class Post
 {
@@ -28,12 +29,5 @@ class Post
 			$new_tags = array_merge($new_tags, $data['ids']);
 		
 		$post->tags()->sync($new_tags);
-	}
-
-	// Attach files to current post
-	public static function files(array $files, $post_id)
-	{
-		if (count($files) > 0)
-			Blog\File::whereIn('id', $files)->update(['post_id' => $post_id]);
 	}
 }

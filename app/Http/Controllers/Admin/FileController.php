@@ -2,41 +2,34 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Blog;
+use Illuminate\Http\Request;
+
+use App\Models\File as FileModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FileRequest;
 
-use URL;
 use File;
-use View;
-use Config;
-use Storage;
-use Request;
-use Response;
-use Redirect;
 
 class FileController extends Controller {
 	
-	const BLOG_UPLOAD_PATH = 'app/blog/uploads';
-	
 	public function index()
 	{
-		$files = Blog\File::with('post')->orderBy('post_id', 'ASC')->paginate(20);
+		$files = FileModel::paginate(20);
 		
-		return View::make('admin.files.index', compact('files'));
+		return view('admin.files.index', compact('files'));
 	}
 	
 	public function get($date, $name)
 	{
 		$file_path = str_replace('-', '/', $date) . '/' . $name;
-		$file_path = storage_path(self::BLOG_UPLOAD_PATH . '/' . $file_path);
+		$file_path = storage_path(FileModel::getUploadPath() . '/' . $file_path);
 
 		if (File::exists($file_path) == FALSE)
 			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 		
 		$file_type = File::type($file_path);
 	
-		return Response::make(File::get($file_path), 200)->header('Content-Type', $file_type);
+		return response(File::get($file_path), 200)->header('Content-Type', $file_type);
 	}
 
 	public function store(FileRequest $request)
@@ -44,38 +37,57 @@ class FileController extends Controller {
 		$file = $request->file('file');
 		$time = time();
 		
-		$path = storage_path(self::BLOG_UPLOAD_PATH . date('/Y/m/d', $time));
+		$path = storage_path(FileModel::getUploadPath() . date('/Y/m/d', $time));
 		
 		if (File::isDirectory($path) == FALSE)
 			File::makeDirectory($path, 0755, TRUE);
-		
-		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension()) . '_' . str_random(5) . '.' . $file->guessExtension();
+
+		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());
+		$name = str_replace(' ', '_', $name);
+		$name = preg_replace("/[^\w]+/", '', $name);
+		$name = sprintf('%s_%s.%s', $name, str_random(5), $file->guessExtension());
 		$name = strtolower($name);
 		
 		$file->move($path, $name);
 		
-		$file = Blog\File::create([
-			'name' => $name,
-			'original_name' => $file->getClientOriginalName(),
+		$file = FileModel::create([
+			'name'          => $name,
+			'type'          => $request->get('type', 'none'),
+			'description'   => $request->get('description', NULL),
+			'original_name' => $file->getClientOriginalName()
 		]);
 		
 		$data = [
 			'id'  => $file->id,
-			'url' => URL::route('file_get', [date('Y-m-d', $time), $file->name])
+			'url' => $file->getURL(),
+			'description' => $file->description
 		];
 		
 		return $this->ajaxResponse(['error' => FALSE, 'data' => $data]);
 	}
 	
-	public function delete($file_id)
+	public function update($file_id, Request $request)
 	{
-		$file = Blog\File::find($file_id);
+		$file = FileModel::find($file_id);
+
+		if (is_null($request->description) == FALSE)
+			$file->update(['description' => $request->description]);
+		
+		if ($request->ajax())
+			return $this->ajaxResponse(['error' => FALSE]);
+		else
+			return redirect()->back();
+	}
+
+	public function delete($file_id, Request $request)
+	{
+		$file = FileModel::find($file_id);
 		
 		$file->delete();
 		
-		if (Request::ajas())
+		if ($request->ajax())
 			return $this->ajaxResponse(['error' => FALSE]);
 		else
-			return Redirect::back();
+			return redirect()->back();
 	}
 }

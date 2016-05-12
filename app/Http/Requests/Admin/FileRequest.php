@@ -14,7 +14,8 @@ class FileRequest extends Request
 	public function rules()
 	{
 		return [
-			'file' => ['required', 'mimes:' . implode(',', config()->get('blog.allowed_files'))]
+			'file' => ['required', 'mimes:' . implode(',', config()->get('blog.allowed_files'))],
+			'type' => ['in:post,portfolio']
 		];
 	}
 }

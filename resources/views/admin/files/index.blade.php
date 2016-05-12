@@ -5,6 +5,7 @@
 		<tr>
 			<th>Name</th>
 			<th>Original name</th>
+			<th>Type</th>
 			<th>Created</th>
 			<th>Actions</th>
 		</tr>
@@ -18,6 +19,19 @@
 			<td>
 				<div class="scrollable">{{ $file->original_name }}</div>
 			</td>
+			<td>
+				@if($file->type =='post')
+				<a href="{{ route('admin_post_edit', $file->post->id) }}" class="btn btn-default btn-sm">
+					<i class="fa fa-external-link"></i>
+				</a>
+				@elseif($file->type =='portfolio')
+				<a href="#" class="btn btn-default btn-sm">
+					Portfolio <i class="fa fa-external-link"></i>
+				</a>
+				@else
+				{{ ucfirst($file->type) }}
+				@endif
+			</td>
 			<td>{{ $file['created_at'] }}</td>
 			<td>
 				<div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -27,11 +41,6 @@
 					<a href="{{ route('admin_file_delete', $file->id) }}" class="btn btn-default">
 						<i class="fa fa-trash-o"></i>
 					</a>
-					@if($file->post)
-					<a href="{{ route('admin_post_edit', $file->post->id) }}" class="btn btn-default">
-						<i class="fa fa-external-link"></i>
-					</a>
-					@endif
 				</div>
 			</td>
 		</tr>

@@ -4,10 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models;
 
-use Request;
 use Closure;
-use Redirect;
-use Response;
 
 class CheckID
 {
@@ -17,7 +14,7 @@ class CheckID
 		
 		$parameters = [
 			'file_id' => [
-				'model'   => Models\Blog\File::class,
+				'model'   => Models\File::class,
 				'message' => 'File not found'
 			],
 			'post_id' => [
@@ -31,10 +28,10 @@ class CheckID
 				$object = $data['model']::find($parameter);
 
 				if (is_null($object)) {
-					if (Request::ajax())
-						return Response::json(['status' => FALSE, 'message' => $data['message']]);
+					if ($request->ajax())
+						return response()->json(['status' => FALSE, 'message' => $data['message']]);
 					else
-						return Redirect::back()->withErrors($data['message']);
+						return redirect()->back()->withErrors($data['message']);
 				}
 			}
 		}

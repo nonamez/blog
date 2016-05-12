@@ -14,3 +14,10 @@
 	<a href="{{ URL::route('tag', array('slug' => $tag->slug)) }}">#{{ $tag->name }}</a>
 </li>
 @endforeach
+<li class="pull-right">
+@foreach ($post->parent->localesExcept(app()->getLocale())->where('status', 'published') as $tmp_post)
+<span class="label label-default label-lang">
+	<a href="{{ url($tmp_post->locale . '/post/' . $tmp_post->slug) }}">@lang('locales.' . $tmp_post->locale)</a>
+</span>
+@endforeach
+</li>
