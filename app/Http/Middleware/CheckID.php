@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App\Models;
 
 use Closure;
-use Response;
 
 class CheckID
 {
@@ -30,7 +29,7 @@ class CheckID
 
 				if (is_null($object)) {
 					if ($request->ajax())
-						return Response::json(['status' => FALSE, 'message' => $data['message']]);
+						return response()->json(['status' => FALSE, 'message' => $data['message']]);
 					else
 						return redirect()->back()->withErrors($data['message']);
 				}

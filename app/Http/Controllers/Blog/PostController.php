@@ -5,44 +5,40 @@ namespace App\Http\Controllers\Blog;
 use App\Models\Blog;
 use App\Http\Controllers\Controller;
 
-use App;
 use Auth;
-use Lang;
-use View;
 use Cache;
-use Config;
 
 class PostController extends Controller 
 {
 	function __construct() 
 	{
-		$name = 'tags_in_header_' . App::getLocale();
+		$name = 'tags_in_header_' . app()->getLocale();
 
 		$tags = Cache::rememberForever($name, function() {
 			$tags = Blog\Tag::whereHas('translated_posts', function($query) {
-				$query->where('locale', '=', App::getLocale());
+				$query->where('locale', '=', app()->getLocale());
 				$query->where('status', '=', 'published');
-			})->ordered()->take(Config::get('blog.tags_in_header'))->get();
+			})->ordered()->take(config('blog.tags_in_header'))->get();
 
 			return $tags;
 		});
 		
-		View::share('tags', $tags);
+		view()->share('tags', $tags);
 	}
 
 	public function posts()
 	{
 		$posts = Blog\Post::whereHas('translated', function($query) {
-			$query->where('locale', '=', App::getLocale());
+			$query->where('locale', '=', app()->getLocale());
 			
 			if (Auth::guest())
 				$query->where('status', '=', 'published');
 
 		})->orderBy('id', 'DEC');
 		
-		$paginated = $posts->paginate(Config::get('blog.posts_per_page'));
+		$paginated = $posts->paginate(config('blog.posts_per_page'));
 
-		return View::make('blog.posts')->with('posts', $paginated);
+		return view('blog.posts')->with('posts', $paginated);
 	}
 
 	public function post($slug)
@@ -57,7 +53,7 @@ class PostController extends Controller
 		
 		$post = $post->firstOrFail();
 
-		return View::make('blog/post', [
+		return view('blog/post', [
 			'post'             => $post,
 			'meta_keywords'    => $post->meta_keywords,
 			'meta_description' => $post->meta_description,
@@ -68,10 +64,10 @@ class PostController extends Controller
 	{
 		$tag = Blog\Tag::where('slug', '=', $tag)->firstOrFail();
 		
-		$posts = $tag->translated_posts()->where('locale', '=', App::getLocale())->where('status', '=', 'published')->orderBy('id', 'DEC');
+		$posts = $tag->translated_posts()->where('locale', '=', app()->getLocale())->where('status', '=', 'published')->orderBy('id', 'DEC');
 		
-		$paginated = $posts->paginate(Config::get('blog.posts_per_page'));
+		$paginated = $posts->paginate(config('blog.posts_per_page'));
 		
-		return View::make('blog/posts')->with('posts', $paginated);
+		return view('blog/posts')->with('posts', $paginated);
 	}
 }

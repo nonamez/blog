@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Portfolio;
 
 use Illuminate\Http\Request;
 
-use View;
-use Redirect;
-
 use App\Models\Portfolio;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +11,7 @@ class AuthorizeController extends Controller
 {
 	public function index()
 	{
-		return View::make('portfolio.authorize');
+		return view('portfolio.authorize');
 	}
 
 	public function authorizePortfolio(Request $request)
@@ -28,8 +25,8 @@ class AuthorizeController extends Controller
 
 			$request->session()->put('portfolio', time());
 
-			return Redirect::route('portfolio');
+			return redirect()->route('portfolio');
 		} else
-			return Redirect::back();
+			return redirect()->back();
 	}
 }

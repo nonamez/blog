@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
+
 class PortfolioCheck
 {
 	public function handle($request, Closure $next)
