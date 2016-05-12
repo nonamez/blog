@@ -68,6 +68,8 @@ function deleteFile() {
 
 	request.open('GET', root_url + '/admin/file/delete/' + id, true);
 	
+	request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
 	request.onload = function() {
 		group.parentNode.removeChild(group);
 	}
@@ -93,7 +95,9 @@ document.getElementById('fake-file-button-upload').addEventListener('click', fun
 	var request = new XMLHttpRequest();
 	
 	request.open('POST', root_url + '/admin/file/upload', true);
-
+	
+	request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	
 	request.upload.onprogress = function(event) {
 		console.log(event.loaded + ' / ' + event.total);
 	}

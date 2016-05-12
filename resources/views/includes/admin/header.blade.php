@@ -18,6 +18,20 @@
 			<li role="presentation"{!! $menu == 'files' ? ' class="active"' : '' !!}>
 				<a href="{{ route('admin_files') }}">Files</a>
 			</li>
+			<li class="dropdown{{ $menu == 'portfolio' ? ' active' : ''}}" role="presentation">
+				<a aria-expanded="false" role="button" href="#" data-toggle="dropdown" class="dropdown-toggle">
+					Portfolio <span class="caret"></span>
+				</a>
+				<ul role="menu" class="dropdown-menu">
+					<li>
+						<a href="{{ route('admin_portfolio_works') }}">Works</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="{{ route('admin_portfolio_codes') }}">Codes</a>
+					</li>
+				</ul>
+			</li>
 			<li role="presentation">
 				<a href="{{ route('logout') }}">Log Out</a>
 			</li>

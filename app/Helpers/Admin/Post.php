@@ -30,11 +30,4 @@ class Post
 		
 		$post->tags()->sync($new_tags);
 	}
-
-	// Attach files to current post
-	public static function files(array $files, $post_id)
-	{
-		if (count($files) > 0)
-			FileModel::whereType('post')->whereIn('id', $files)->update(['parent_id' => $post_id]);
-	}
 }

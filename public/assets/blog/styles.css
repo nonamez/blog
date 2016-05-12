@@ -46,7 +46,7 @@ h1 small,h2 small,h3 small,h4 small,h5 small,h6 small {
 pre {
     background: #fff none repeat scroll 0 0;
     border: medium none;
-    line-height: 27.6px;
+    line-height: 17.6px;
     overflow-x: auto;
     padding: 0;
     white-space: pre;
@@ -258,6 +258,9 @@ article.post section.post-content {
 	font-size: 1.1em;
 	max-width: 100%;
 	overflow: hidden;
+}
+article.post section.post-content p.text-indent {
+	text-indent: 20px;
 }
 article.post section.post-content span.label-lang {
 	/*font-size: 30% !important;*/

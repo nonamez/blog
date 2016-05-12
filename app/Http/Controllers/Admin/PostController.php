@@ -58,7 +58,7 @@ class PostController extends Controller
 		$post->translated()->save($translated_post);
 		
 		Helpers\Post::tags($request->get('tags', []), $translated_post);
-		Helpers\Post::files($request->get('files', []), $translated_post->id);
+		Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
 		
 		return Redirect::route('admin_posts');
 	}
@@ -86,7 +86,7 @@ class PostController extends Controller
 		$translated_post->update($data);
 
 		Helpers\Post::tags($request->get('tags', []), $translated_post);
-		Helpers\Post::files($request->get('files', []), $translated_post->id);
+		Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
 
 		// Parent post update if exists
 		if ($data['parent_post'] != $translated_post->post_id) {

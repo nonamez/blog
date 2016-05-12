@@ -1,9 +1,15 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-## [Unreleased] - [Unreleased]
+ToDo: Refactor all JS code in order to minimize it
+
+## [0.4.0] - [2016-05-12]
+### Added
+- Portfolio in admin side
+
 ### Change
 - User auth info moved to .env
+- File usage
 
 ## [0.3.5] - [2015-10-29]
 ### Added

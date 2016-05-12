@@ -20,6 +20,7 @@ class Kernel extends HttpKernel
 		'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
 		'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 		'check_id' => \App\Http\Middleware\CheckID::class,
-		'check_ip' => \App\Http\Middleware\CheckIP::class
+		'check_ip' => \App\Http\Middleware\CheckIP::class,
+		'check_portfolio' => \App\Http\Middleware\PortfolioCheck::class
 	];
 }

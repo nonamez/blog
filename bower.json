@@ -1,6 +1,5 @@
 {
   "name": "Front-End Stuff",
-  "version": "0.0.1",
   "authors": [
     "NoNameZ <hello@nonamez.name>"
   ],
@@ -15,9 +14,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
-    "bootstrap": "~3.3.0",
-    "fontawesome": "~4.3.0",
+    "jquery": ">=2.*",
+    "bootstrap": ">=3.*",
+    "fontawesome": ">=4.*",
     "highlightjs": "~9.0.0"
   },
   "private": true

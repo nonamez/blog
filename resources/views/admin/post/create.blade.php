@@ -146,5 +146,5 @@
 </form>
 @stop
 @section('scripts')
-<script src="{{ asset('/assets/admin/app.js') }}"></script>
+<script src="{{ asset('/assets/admin/posts.js') }}"></script>
 @stop

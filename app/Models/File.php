@@ -6,26 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model {
 
+	const UPLOAD_PATH = 'app/uploads';
+
 	protected $table = 'files';
 	protected $fillable = ['name', 'original_name', 'description', 'type'];
 
-	public function post()
-	{
-		return $this->belongsTo('App\Models\Blog\TranslatedPost', 'parent_id');
-	}
-	
 	public static function boot()
 	{
 		parent::boot();
 
-		static::deleting(function($file)
-		{
-			$path = \App\Http\Controllers\Admin\FileController::UPLOAD_PATH;
-			$path = storage_path($path. date('/Y/m/d', strtotime($file->created_at)));
-			
-			$file_path = $path . '/' . $file->name;
-			
-			\Illuminate\Support\Facades\File::delete($file_path);
+		static::deleting(function($file) {
+			\Illuminate\Support\Facades\File::Delete($file->getPath());
 		});
+	}
+
+	public function getPath()
+	{
+		$path = sprintf('%s/%s/%s', self::getUploadPath(), $this->created_at->format('Y/m/d'), $this->name);
+		
+		return storage_path($path);
+	}
+
+	public function getURL()
+	{
+		return route('file_get', [$this->created_at->format('Y-m-d'), $this->name]);
+	}
+
+	public static function getUploadPath()
+	{
+		return self::UPLOAD_PATH;
 	}
 }
