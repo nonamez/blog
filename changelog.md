@@ -10,6 +10,7 @@ ToDo: Refactor all JS code in order to minimize it
 ### Change
 - User auth info moved to .env
 - File usage
+- Frawmework updated to 5.2.*
 
 ## [0.3.5] - [2015-10-29]
 ### Added

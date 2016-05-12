@@ -7,12 +7,12 @@
 
 // Redirect from / to lang
 Route::get('', function() {
-	if (in_array(Request::segment(1), Config::get('app.locales')))
-		return Redirect::to('' . Request::segment(1));
+	if (in_array(Request::segment(1), config('app.locales')))
+		return redirect()->to(Request::segment(1));
 	elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
-		return Redirect::to('' . substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+		return redirect()->to(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
 	else
-		return Redirect::to('' . Config::get('app.fallback_locale'));
+		return redirect()->to(config('app.fallback_locale'));
 });
 
 /*
@@ -32,12 +32,12 @@ Route::get('file/{date}/{name}', ['as' => 'file_get', 'uses' => 'Admin\FileContr
 Route::get('/{locale}', 'Blog\PostController@posts')->where('locale', implode('|', Config::get('app.locales')));
 
 // Blog
-Route::group(['prefix' => App::getLocale()], function() {
+Route::group(['prefix' => app()->getLocale()], function() {
 	Route::get('post/{slug}', ['as' => 'post', 'uses' => 'Blog\PostController@post']);
 	Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'Blog\PostController@postsByTag']);
 	
 	Route::get('about', ['as' => 'about', function() {
-		return View::make('about');
+		return view()->make('about');
 	}]);
 });
 
@@ -46,7 +46,7 @@ Route::group(['prefix' => 'portfolio'], function() {
 	Route::get('', ['as' => 'portfolio', 'middleware' => 'check_portfolio', 'uses' => 'Portfolio\WorkController@index']);
 
 	Route::get('authorize', ['as' => 'portfolio_show_authorize', 'uses' => 'Portfolio\AuthorizeController@index']);
-	Route::POST('authorize', ['as' => 'portfolio_authorize', 'uses' => 'Portfolio\AuthorizeController@authorizePortfolio']);
+	Route::post('authorize', ['as' => 'portfolio_authorize', 'uses' => 'Portfolio\AuthorizeController@authorizePortfolio']);
 });
 
 // Helpers for posts examples
