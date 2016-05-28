@@ -21,13 +21,11 @@
 			</td>
 			<td>
 				@if($file->type =='post' && $file->post)
-				<a href="{{ route('admin_post_edit', $file->post->id) }}" class="btn btn-default btn-sm">
-					<i class="fa fa-external-link"></i>
+				<a href="{{ route('admin_post_edit', $file->post->id) }}">
+					Post
 				</a>
 				@elseif($file->type =='portfolio' && $file->portfolio)
-				<a href="#" class="btn btn-default btn-sm">
-					Portfolio <i class="fa fa-external-link"></i>
-				</a>
+				<a href="#">Portfolio</a>
 				@else
 				{{ ucfirst($file->type) }}
 				@endif
