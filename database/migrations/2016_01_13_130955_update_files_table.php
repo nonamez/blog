@@ -12,6 +12,8 @@ class UpdateFilesTable extends Migration
 		Schema::table('files', function($table) {
 			$table->text('description')->default(NULL)->after('original_name');
 			$table->enum('type', ['post', 'portfolio'])->default(NULL)->after('post_id');
+
+			$table->dropForeign('blg_files_post_id_foreign');
 		});
 
 		DB::table('files')->update(['type' => 'post']);
@@ -24,11 +26,15 @@ class UpdateFilesTable extends Migration
 	public function down()
 	{
 		Schema::rename('files', 'blg_files');
-		
+
 		$prefix = DB::getTablePrefix();
 
 		DB::statement("ALTER TABLE `{$prefix}blg_files` CHANGE COLUMN `parent_id` `post_id` INT(10) UNSIGNED NULL DEFAULT NULL AFTER `original_name`;");
 		DB::statement("ALTER TABLE `{$prefix}blg_files` DROP COLUMN `type`;");	
 		DB::statement("ALTER TABLE `{$prefix}blg_files` DROP COLUMN `description`;");	
+
+		Schema::table('blg_files', function($table) {
+			$table->foreign('post_id')->references('id')->on('blg_translated_posts')->onDelete('cascade');
+		});
 	}
 }
