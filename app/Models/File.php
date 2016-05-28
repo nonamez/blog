@@ -39,7 +39,7 @@ class File extends Model {
 
 	public function post()
 	{
-		return $this->belongsTo(Blog\Post::class, 'parent_id');
+		return $this->belongsTo(Blog\TranslatedPost::class, 'parent_id');
 	}
 
 	public function portfolio()
