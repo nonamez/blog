@@ -36,4 +36,14 @@ class File extends Model {
 	{
 		return self::UPLOAD_PATH;
 	}
+
+	public function post()
+	{
+		return $this->belongsTo(Blog\Post::class, 'parent_id');
+	}
+
+	public function portfolio()
+	{
+		return $this->belongsTo(Portfolio\Work::class, 'parent_id');
+	}
 }

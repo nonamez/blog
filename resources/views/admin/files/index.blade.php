@@ -20,11 +20,11 @@
 				<div class="scrollable">{{ $file->original_name }}</div>
 			</td>
 			<td>
-				@if($file->type =='post')
+				@if($file->type =='post' && $file->post)
 				<a href="{{ route('admin_post_edit', $file->post->id) }}" class="btn btn-default btn-sm">
 					<i class="fa fa-external-link"></i>
 				</a>
-				@elseif($file->type =='portfolio')
+				@elseif($file->type =='portfolio' && $file->portfolio)
 				<a href="#" class="btn btn-default btn-sm">
 					Portfolio <i class="fa fa-external-link"></i>
 				</a>
