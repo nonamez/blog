@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
                 $message = 'Slug already exists';
             
             if (isset($message))
-                return Redirect::back()->withInput()->withErrors($message);
+                return redirect()->back()->withInput()->withErrors($message);
         }
         
         return parent::render($request, $e);
