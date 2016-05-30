@@ -9,4 +9,4 @@
 <link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/admin/app.css') }}">
 
-<script>var root_url = '{{ URL::to('/') }}'</script>
+<script>var root_url = '{{ url('/') }}'</script>
