@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Portfolio;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 use App\Models\Portfolio;
 use App\Http\Controllers\Controller;
 
