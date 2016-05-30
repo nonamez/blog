@@ -1,6 +1,9 @@
 @extends('layouts.admin', ['menu' => 'posts'])
 @section('content')
 <table class="table table-hover">
+	<caption>
+		<a class="btn btn-sm btn-default pull-right" href="{{ route('admin_post_create') }}">Create New Post</a>
+	</caption>
 	<thead>
 		<tr>
 			<th>Title</th>
