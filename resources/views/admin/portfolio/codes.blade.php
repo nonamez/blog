@@ -33,9 +33,9 @@
 					<td>{{ $code['code'] }}</td>
 					<td>{{ $code['used'] }}</td>
 					<td>{{ $code['created_at'] }}</td>
-					<td>{{ $code['cupdated_at'] }}</td>
+					<td>{{ $code['updated_at'] }}</td>
 					<td>
-						<a href="{{ route('admin_portfolio_delete_code', $code['id']) }}">Delete</a>
+						<a href="{{ route('admin_portfolio_delete_code', $code['id']) }}" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></a>
 					</td>
 				</tr>
 				@endforeach
@@ -43,7 +43,4 @@
 		</table>
 	</div>
 </div>
-@stop
-@section('scripts')
-<script src="{{ asset('/assets/admin/portfolio.js') }}"></script>
 @stop
