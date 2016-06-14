@@ -25,7 +25,7 @@
 					Post
 				</a>
 				@elseif($file->type =='portfolio' && $file->portfolio)
-				<a href="#">Portfolio</a>
+				<a href="{{ route('admin_portfolio_edit_work', $file->portfolio->id) }}">Portfolio</a>
 				@else
 				{{ ucfirst($file->type) }}
 				@endif
