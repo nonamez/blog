@@ -36,7 +36,13 @@ class WorkController extends Controller
 
 	public function update(WorkRequest $request, $work_id)
 	{
-		$work = Portfolio\Work::find($work_id)->update($request->except('_token'));
+		$work = Portfolio\Work::find($work_id);
+
+		if ($work) {
+			$work->update($request->except('_token'));
+
+			Helpers\Admin\File::attach($request->get('images', []), $work->id, 'portfolio');
+		}
 
 		return redirect()->back();
 	}
