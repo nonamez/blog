@@ -27,7 +27,7 @@
 					</button>
 				</div>
 				<div class="etc-authorize-form">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, obcaecati.
+					To get a code please contact me personaly.
 				</div>
 			</form>
 		</div>
