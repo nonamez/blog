@@ -27,14 +27,14 @@ class TranslatedPost extends Model {
 
 		static::saving(function($post)
 		{
-			// If post slug empty use title
+			// If post slug is empty use title
 			if (strlen($post->slug) == 0)
-				$post->slug = preg_replace('/[^ \w]+/', '', $post->title); // Replace all non-space and non-word characters with nothing
+				$post->slug = $post->title;
 
 			// Escape title
 			$post->title = htmlspecialchars($post->title);
 
-			// We aslo need to excape content but as I'm am the obly user of the system we will skip this...
+			// We also need to escape content but as I am the only user of the system we will skip this...
 
 			// Prepare all code examples for browser in case of some HTML tags...
 			$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
@@ -42,7 +42,8 @@ class TranslatedPost extends Model {
 			}, $post->content);
 
 			// Doublecheck the slug
-			$post->slug = strtolower(str_replace(' ', '_', $post->slug));
+			$post->slug = strtolower(str_replace(' ', '_', $post->slug)); // Replace all spaces to _
+			$post->slug = preg_replace('/[^a-zA-Z0-9_]/', '', $post->slug); // Replace everything except numbers, word chars and _ with nothing
 		});
 	}
 	
