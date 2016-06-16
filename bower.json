@@ -1,5 +1,5 @@
 {
-  "name": "Front-End Stuff",
+  "name": "front-end-stuff",
   "authors": [
     "NoNameZ <hello@nonamez.name>"
   ],
@@ -14,10 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": ">=2.*",
+    "jquery": "~2.*",
     "bootstrap": ">=3.*",
     "fontawesome": ">=4.*",
-    "highlightjs": "~9.0.0"
+    "highlightjs": ">=9.*"
   },
   "private": true
 }
