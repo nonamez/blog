@@ -45,10 +45,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof ModelNotFoundException) {
-            $e = new NotFoundHttpException($e->getMessage(), $e);
-        }
-
         if ($e instanceof \Illuminate\Database\QueryException) {
             if (strpos($e->getMessage(), 'blg_translated_posts_post_id_locale_unique') !== FALSE)
                 $message = 'Locale already exists';
