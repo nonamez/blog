@@ -11,7 +11,7 @@ return array(
 			'about_me' => 'About Me'
 		),
 		'title'       => 'Hey! I\'m Kiril.',
-		'description' => 'Thoughts, stories and ideas about programming.'
+		'description' => 'Thoughts, stories and ideas aloud'
 	),
 	'post' => array(
 		'no_posts'      => 'No posts found',
