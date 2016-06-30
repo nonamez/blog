@@ -1,5 +1,6 @@
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700&subset=latin,cyrillic,latin-ext");
 @import url("//fonts.googleapis.com/css?family=Patua+One");
+/*@import url(https://fonts.googleapis.com/css?family=Bitter);*/
 
 html {
 	font-size: 10px;
@@ -165,6 +166,8 @@ header.site-head .menu .btn-menu:active {
 header.site-head .blog-title {
 	margin-top: 0px;
 	font-family: 'Patua One', cursive;
+	/*font-family: Bitter,Georgia,serif;*/
+	font-weight: 700;
 }
 header.site-head .blog-title a {
 	color: #222222;
