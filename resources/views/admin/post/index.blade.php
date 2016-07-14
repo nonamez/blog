@@ -18,20 +18,20 @@
 		@forelse($posts as $post)
 		<tr>
 			<td>
-				<div class="scrollable">{{ $post['title'] }}</div>
+				<div class="scrollable">{{ $post->title }}</div>
 			</td>
 			<td>
-				<div class="scrollable">{{ $post['slug'] }}</div>
+				<div class="scrollable">{{ $post->slug }}</div>
 			</td>
-			<td>{{ $post['post_id'] }}</td>
-			<td>{{ $post['locale'] }}</td>
-			<td>{{ ucfirst($post['status']) }}</td>
+			<td>{{ $post->post_id }}</td>
+			<td>{{ $post->locale }}</td>
+			<td>{{ ucfirst($post->status) }}</td>
 			<td>
 				<div class="btn-group btn-group-sm" role="group" aria-label="...">
-					<a href="{{ url(sprintf('/%s/post/%s', $post['locale'], $post['slug'])) }}" target="blank" class="btn btn-default">
+					<a href="{{ url(sprintf('/%s/post/%s', $post->locale, $post->slug)) }}" target="blank" class="btn btn-default">
 						<i class="fa fa-external-link"></i>
 					</a>
-					<a href="{{ route('admin_post_update', $post['id']) }}"  class="btn btn-default">
+					<a href="{{ route('admin_post_update', $post->id) }}"  class="btn btn-default">
 						<i class="fa fa-pencil"></i>
 					</a>
 					<div class="btn-group btn-group-sm" role="group">
@@ -41,10 +41,10 @@
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								<a href="{{ route('admin_post_delete', array($post['id'])) }}">Current</a>
+								<a href="{{ route('admin_post_delete', $post->id) }}">Current</a>
 							</li>
 							<li>
-								<a href="{{ route('admin_post_delete', array($post['id'], 'all')) }}">All</a>
+								<a href="{{ route('admin_post_delete', [$post->id, 'all']) }}">All</a>
 							</li>
 						</ul>
 					</div>
