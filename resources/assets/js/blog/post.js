@@ -28,11 +28,11 @@ for (var i = 0, article; article = articles[i]; ++i) {
 		post_content.setAttribute('data-real-heigt', getHeight(post_content) + 30); // Sometimes with a bigger text there comes some bug with height so we add some extra as a fix...
 
 	article.querySelector('header.post-header').addEventListener('click', function() {
-		var article = this.parentNode;
-		var post_content = article.querySelector('section.post-content');
-		
-		if (article.classList.contains('open')) {
-			article.classList.remove('open');
+		var current_article = this.parentNode
+		var post_content = article.querySelector('section.post-content')
+
+		if (current_article.classList.contains('open')) {
+			current_article.classList.remove('open');
 			
 			post_content.style.maxHeight = 0;
 		} else {
@@ -46,7 +46,7 @@ for (var i = 0, article; article = articles[i]; ++i) {
 				}
 			}
 		
-			article.classList.add('open');
+			current_article.classList.add('open');
 			
 			post_content.style.maxHeight = post_content.getAttribute('data-real-heigt') + 'px';
 		}
