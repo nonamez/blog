@@ -1,13 +1,25 @@
-const BOWER_DIR  = 'bower_components';
-const PLUGIN_DIR = 'public/assets/plugins';
+'use strict'
 
-var gulp = require('gulp');
+var elixir = require('laravel-elixir')
 
-gulp.task('copy', function() {
-	gulp.src([BOWER_DIR + '/jquery/dist/**/*']).pipe(gulp.dest(PLUGIN_DIR + '/jquery/'));
-	gulp.src([BOWER_DIR + '/bootstrap/dist/**/*']).pipe(gulp.dest(PLUGIN_DIR + '/bootstrap/'));
-	gulp.src(['css/**/*', 'fonts/**/*'], {'cwd': BOWER_DIR + '/fontawesome', 'base': BOWER_DIR + '/fontawesome'}).pipe(gulp.dest(PLUGIN_DIR + '/fontawesome/'));
-	gulp.src(['highlight.pack.min.js', 'styles/ascetic.css'], {'cwd': BOWER_DIR + '/highlightjs', 'base': BOWER_DIR + '/highlightjs'}).pipe(gulp.dest(PLUGIN_DIR + '/highlightjs/'));
-});
+const BOWER_DIR = '../../../bower_components'
 
-gulp.task('default', ['copy']);
+elixir(function(mix) {
+	mix.copy(
+		'bower_components/fontawesome/fonts',
+		'public/assets/fonts'
+	)
+
+	mix.styles([
+		BOWER_DIR + '/fontawesome/css/font-awesome.css',
+		BOWER_DIR + '/bootstrap/dist/css/bootstrap.css',
+		BOWER_DIR + '/highlightjs/styles/ascetic.css',
+		'resources/assets/css/blog.css'
+	], 'public/assets/css/blog.css')
+
+	mix.scripts([
+		BOWER_DIR + '/highlightjs/highlight.pack.js',
+		'resources/assets/js/blog/site.js',
+		'resources/assets/js/blog/post.js',
+	], 'public/assets/js/blog.js')
+})
