@@ -37,6 +37,3 @@
 	</nav>
 </main>
 @stop
-@section('custom_scripts')
-<script src="{{ asset('/assets/blog/posts.js')}}"></script>
-@stop

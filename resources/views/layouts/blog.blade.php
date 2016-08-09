@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html lang="{{ Config::get('app.locale') }}">
+<html lang="{{ app()->getLocale() }}">
 <head>
-	@include('includes.blog.head')
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="HandheldFriendly" content="True">
+
+	<title>@section('title') /home/NoNameZ @show</title>
+
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+	<meta name="description" content="{{ $meta_description or trans('blog.meta.description') }}"> 
+	<meta name="keywords" content="{{ $meta_keywords or trans('blog.meta.keywords') }}"> 
+
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
+
+	@yield('custom_styles')
+
+	<script>var root_url = '{{ url('/') }}'</script>
+
+	<link rel="canonical" href="{{ url()->current() }}">
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				@include('includes.blog.header')
+				@include('blog.partials.header')
 			</div>
 			<div class="col-md-12">
 				@yield('content')
@@ -15,7 +35,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				@include('includes.blog.footer')
+				@include('blog.partials.footer')
 			</div>
 		</div>
 		<a href="#" id="back-to-top" class="back-to-top hidden-xs">
@@ -23,17 +43,16 @@
 		</a>
 	</div>
 	<a href="https://github.com/nonamez/blog">
-		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('/images/fork_me.png')}}" alt="Fork me on GitHub">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('/images/fork_me.png') }}" alt="Fork me on GitHub">
 	</a>
-	<script src="{{ asset('/assets/blog/app.js')}}"></script>
-	<script src="{{ asset('/assets/plugins/highlightjs/highlight.pack.min.js')}}"></script>
+	<script src="{{ asset('assets/js/blog.js') }}"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	@yield('custom_scripts')
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)
 	<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	ga('create', '{{ env('GOOGLE_ANALYTICS') }}', 'auto');
-	ga('send', 'pageview');
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', '{{ env('GOOGLE_ANALYTICS') }}', 'auto');
+		ga('send', 'pageview');
 	</script>
 	@endif
 </body>
