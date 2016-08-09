@@ -13,7 +13,7 @@ git clone git://github.com/nonamez/blog.git
 cd blog
 composer install
 bower install
-gulp
+gulp --production
 ```
 * Configure `.env` file.
 
