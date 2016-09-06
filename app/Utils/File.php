@@ -9,12 +9,17 @@ class File
 		$mime_type = $file->getMimeType();
 		$real_path = $file->getRealPath();
 
+		$image = FALSE;
+
 		if ($mime_type == 'image/jpeg')
 			$image = imagecreatefromjpeg($real_path);
 		elseif ($mime_type == 'image/gif')
 			$image = imagecreatefromgif($real_path);
 		elseif ($mime_type == 'image/png')
 			$image = imagecreatefrompng($real_path);
+
+		if ($image == FALSE)
+			return NULL;
 
 		$watermark = imagecreatefrompng(storage_path('app/watermark.png'));
 
