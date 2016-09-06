@@ -61,6 +61,7 @@ document.getElementById('portfolio-button-upload-image').addEventListener('click
 	form_data.append('description', document.getElementById('portfolio-textarea-image-description').value);
 	form_data.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 	form_data.append('type', 'portfolio');
+	form_data.append('watermark', 1);
 	
 	var request = new XMLHttpRequest();
 	

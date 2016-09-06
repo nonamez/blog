@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
+use App\Utils;
 use App\Models\File as FileModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FileRequest;
@@ -41,6 +42,9 @@ class FileController extends Controller {
 		
 		if (File::isDirectory($path) == FALSE)
 			File::makeDirectory($path, 0755, TRUE);
+
+		if ($request->get('watermark', FALSE))
+			Utils\File::addWatermarkRepeatedly($file);
 
 		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());
 		$name = str_replace(' ', '_', $name);
