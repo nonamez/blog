@@ -1,6 +1,5 @@
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700&subset=latin,cyrillic,latin-ext");
 @import url("//fonts.googleapis.com/css?family=Patua+One");
-/*@import url(https://fonts.googleapis.com/css?family=Bitter);*/
 
 html {
 	font-size: 10px;
@@ -97,15 +96,8 @@ mark {
 /* ----------- Site header ----------- */
 
 header.site-head {
-/*
-	padding: 20px 0;
-*/
 	padding-top: 20px;
-/*
-	margin-bottom: 20px;
-*/
 	text-align: center;
-
 	-webkit-background-size: cover !important;
 	background-size: cover !important;
 	background-position: center center !important;
@@ -166,7 +158,6 @@ header.site-head .menu .btn-menu:active {
 header.site-head .blog-title {
 	margin-top: 0px;
 	font-family: 'Patua One', cursive;
-	/*font-family: Bitter,Georgia,serif;*/
 	font-weight: 700;
 }
 header.site-head .blog-title a {
@@ -266,8 +257,6 @@ article.post section.post-content p.text-indent {
 	text-indent: 20px;
 }
 article.post section.post-content span.label-lang {
-	/*font-size: 30% !important;*/
-	/*font-weight: 500;*/
 	vertical-align: middle;
 	margin-right: 5px;
 	background-color: #e7e7e7;
@@ -316,7 +305,6 @@ article.post section.post-content .post-tags a:hover {
 article.post section.post-content .image {
 	margin: 10px 0px;
 	text-align: center;
-	/*background: #F7F7F7;*/
 }
 article.post section.post-content .image:hover {
 	opacity: 0.9;

@@ -13,8 +13,6 @@
 	<meta name="description" content="{{ $meta_description or trans('blog.meta.description') }}"> 
 	<meta name="keywords" content="{{ $meta_keywords or trans('blog.meta.keywords') }}"> 
 
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
 	<link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
 
 	@yield('custom_styles')
@@ -45,8 +43,8 @@
 	<a href="https://github.com/nonamez/blog">
 		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('/images/fork_me.png') }}" alt="Fork me on GitHub">
 	</a>
-	<script src="{{ asset('assets/js/blog.js') }}"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+	<script src="https://code.jquery.com/jquery-3.1.0.slim.min.js" integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
+	<script src="{{ elixir('assets/js/blog.js') }}"></script>
 	@yield('custom_scripts')
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)
 	<script>
