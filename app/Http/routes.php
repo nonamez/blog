@@ -53,7 +53,7 @@ Route::group(['prefix' => 'portfolio'], function() {
 Route::get('sleep/{time}', function($time) {
 	sleep(intval($time));
 
-	return response()->json(['quote' => Inspiring::quote()]);
+	return response()->json(['quote' => Illuminate\Foundation\Inspiring::quote()]);
 });
 
 /*

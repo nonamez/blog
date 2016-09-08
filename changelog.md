@@ -6,6 +6,7 @@ ToDo: Refactor all JS code in order to minimize it
 ## [0.4.1] - [Unreleased]
 ### Changed
 - Improved slug check
+- Assets refactored
 
 ### Fixed
 - 404 error
