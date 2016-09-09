@@ -86,3 +86,11 @@ div.scrollable {
     white-space: pre;
     width: 100%;
 }
+
+@media (max-width: 767px) {
+	.btn-xs-block { width: 100%; display:block; }
+}
+
+.m-b-10 {
+	margin-bottom: 10px !important;
+}

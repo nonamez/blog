@@ -70,4 +70,9 @@ class TranslatedPost extends Model {
 
 		return current($exploded);
 	}
+
+	public function getURL()
+	{
+		return url(sprintf('/%s/post/%s', $this->locale, $this->slug));
+	}
 }

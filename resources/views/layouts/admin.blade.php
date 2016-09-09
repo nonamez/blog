@@ -32,7 +32,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="url('/')">Site</a>
+						<a href="{{ url('/') }}">Site</a>
 					</li>
 					<li>
 						<a href="{{ route('portfolio') }}">Portfolio</a>

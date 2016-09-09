@@ -17,7 +17,7 @@ class PostController extends Controller
 	{
 		$paginated = Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(20);
 		
-		return view('admin.post.index')->with('posts', $paginated);
+		return view('admin.posts.index')->with('posts', $paginated);
 	}
 
 	public function create()
@@ -31,7 +31,7 @@ class PostController extends Controller
 			'locales' => array_combine($locales, $locales)
 		];
 		
-		return view('admin.post.create', $data);
+		return view('admin.posts.create', $data);
 	}
 
 	public function store(PostRequest $request)
@@ -68,7 +68,7 @@ class PostController extends Controller
 			'locales' => array_combine($locales, $locales)
 		];
 		
-		return view('admin.post.edit', $data);
+		return view('admin.posts.edit', $data);
 	}
 
 	public function update(PostRequest $request, $post_id)
