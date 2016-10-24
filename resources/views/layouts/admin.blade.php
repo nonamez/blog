@@ -27,7 +27,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ route('admin_posts') }}">Admin Panel</a>
+				<a class="navbar-brand" href="{{ url('admin') }}">Dashboard</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -39,8 +39,13 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li role="presentation"{!! $menu == 'posts' ? ' class="active"' : '' !!}>
-						<a href="{{ route('admin_posts') }}">Posts</a>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="{{ route('admin.posts.index') }}">Posts</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="{{ route('admin.posts.create') }}">Add new</a></li>
+						</ul>
 					</li>
 					<li role="presentation"{!! $menu == 'files' ? ' class="active"' : '' !!}>
 						<a href="{{ route('admin_files') }}">Files</a>

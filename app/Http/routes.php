@@ -72,15 +72,20 @@ Route::get('auth/logout', ['as' => 'logout', 'uses' => 'AuthController@getLogout
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['check_ip', 'auth', 'check_id'], 'prefix' => 'admin'], function() {
-	Route::get('', ['as' => 'admin_posts', 'uses' => 'Admin\PostController@index']);
-	
-	// Posts
-	Route::get('post/create', ['as' => 'admin_post_create', 'uses' => 'Admin\PostController@create']);
-	Route::post('post/create', ['as' => 'admin_post_store', 'uses' => 'Admin\PostController@store']);
-	Route::get('post/edit/{post_id}', ['as' => 'admin_post_edit', 'uses' => 'Admin\PostController@edit']);
-	Route::post('post/edit/{post_id}',['as' => 'admin_post_update', 'uses' => 'Admin\PostController@update']);
-	Route::get('post/delete/{post_id}/{all?}', ['as' => 'admin_post_delete', 'uses' => 'Admin\PostController@delete']);
+Route::group(['middleware' => ['check_ip', 'auth', 'check_id'], 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
+
+	Route::get('/', function() {
+		return redirect()->route('admin.posts.index');
+	});
+
+	Route::group(['prefix' => 'posts', 'namespace' => 'Posts'], function() {
+		Route::get('/', ['as' => 'admin.posts.index', 'uses' => 'PostController@index']);
+		Route::get('posts/create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
+		Route::post('posts/store', ['as' => 'admin.posts.store', 'uses' => 'PostController@store']);
+		Route::get('posts/{post_id}/edit', ['as' => 'admin.posts.edit', 'uses' => 'PostController@edit']);
+		Route::post('posts/{post_id}/edit',['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
+		Route::get('posts/{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
+	});
 	
 	// Files
 	Route::get('files', ['as' => 'admin_files', 'uses' => 'Admin\FileController@index']);
