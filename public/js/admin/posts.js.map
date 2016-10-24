@@ -1,0 +1,1 @@
+{"version":3,"sources":["posts.js"],"names":[],"mappings":"AAAA;AACA;AACA","file":"posts.js","sourcesContent":["jQuery(document).ready(function() {\n\tconsole.log('lol');\n})"],"sourceRoot":"/source/"}

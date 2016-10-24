@@ -27,9 +27,9 @@
 					Create
 				</button>
 			</div>
-			@if(isset($product))
+			@if(isset($post))
 			<div class="col-xs-6">
-				<a href="{{ $product->getURL() }}" class="btn btn-default btn-block" target="_blank">Просмотр</a>
+				<a href="{{ $post->getURL() }}" class="btn btn-default btn-block" target="_blank">Preview</a>
 			</div>
 			@endif
 		</div>

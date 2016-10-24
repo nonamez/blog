@@ -2,7 +2,7 @@
 	<div class="panel-heading">General</div>
 	<div class="panel-body">
 		<div class="form-group">
-			<label>Email address</label>
+			<label>Title</label>
 			<input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ old('title') }}">
 		</div>
 

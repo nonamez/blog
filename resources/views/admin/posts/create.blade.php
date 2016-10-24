@@ -1,11 +1,11 @@
 @extends('layouts.admin', ['menu' => 'posts'])
 @section('content')
 <div class="container">
-	<div class="page-header">
-		<h3>
+	{{-- <div class="page-header"> --}}
+		<h3 class="m-t-0">
 			Add New Post
 		</h3>
-	</div>
+	{{-- </div> --}}
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-md-8">
@@ -17,6 +17,6 @@
 	</div>
 </div>
 @stop
-@section('scripts')
-<script src="{{ asset('/assets/admin/posts.js') }}"></script>
-@stop
+@push('scripts')
+<script src="{{ elixir('js/admin/posts.js') }}"></script>
+@endpush
