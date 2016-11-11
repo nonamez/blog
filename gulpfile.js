@@ -1,6 +1,4 @@
-'use strict'
-
-var elixir = require('laravel-elixir')
+const elixir = require('laravel-elixir');
 
 const BOWER_DIR = '../../../bower_components'
 

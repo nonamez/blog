@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Admin\Portfolio;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class WorkRequest extends Request
+class WorkRequest extends FormRequest
 {
 	public function authorize()
 	{

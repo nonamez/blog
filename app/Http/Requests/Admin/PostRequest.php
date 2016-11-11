@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends Request
+class PostRequest extends FormRequest
 {
 	public function authorize()
 	{

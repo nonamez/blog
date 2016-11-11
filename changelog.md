@@ -8,6 +8,7 @@ ToDo: Refactor all JS code in order to minimize it
 - Improved slug check
 - Assets refactored
 - Completely rewritten the file mechanism
+- Frawmework upgraded to 5.3.*
 
 ### Fixed
 - 404 error
