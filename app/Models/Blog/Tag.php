@@ -12,10 +12,7 @@ class Tag extends Model {
 	
 	public $timestamps = FALSE;
 
-	public function translated_posts()
-	{
-		return $this->belongsToMany('App\Models\Blog\TranslatedPost', 'blg_posts_tags', 'tag_id', 'post_id');
-	}
+	// ========================= Scopes ========================= //
 
 	public function scopeOrdered($query)
 	{
@@ -24,8 +21,15 @@ class Tag extends Model {
 		$query->join('blg_posts_tags', 'blg_posts_tags.tag_id', '=', 'blg_tags.id');
 
 		$query->groupBy('blg_posts_tags.tag_id');
-		$query->orderBy(DB::raw("count(`$raw_table`.`tag_id`)"), 'desc');
+		$query->orderBy(DB::raw(sprintf('count(`%s`.`tag_id`)', $raw_table)), 'desc');
 
 		return $query;
+	}
+
+	// ========================= Relations ========================= //
+
+	public function translated_posts()
+	{
+		return $this->belongsToMany(TranslatedPost::class, 'blg_posts_tags', 'tag_id', 'post_id');
 	}
 }

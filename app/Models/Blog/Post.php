@@ -7,12 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model {
 
 	protected $table = 'blg_posts';
+
+	// ========================= Custom Methods ========================= //
 		
-	public function translated()
-	{
-		return $this->hasMany('App\Models\Blog\TranslatedPost', 'post_id');
-	}
-	
 	public function locale($locale)
 	{
 		return $this->translated->filter(function($item) use($locale) {
@@ -27,5 +24,12 @@ class Post extends Model {
 			if ($item->locale != $locale)
 				return True;
 		});
+	}
+
+	// ========================= Relations ========================= //
+		
+	public function translated()
+	{
+		return $this->hasMany(TranslatedPost::class, 'post_id');
 	}
 }

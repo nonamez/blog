@@ -28,8 +28,9 @@ class TranslatedPost extends Model {
 		static::saving(function($post)
 		{
 			// If post slug is empty use title
-			if (strlen($post->slug) == 0)
+			if (strlen($post->slug) == 0) {
 				$post->slug = $post->title;
+			}
 
 			// Escape title
 			$post->title = htmlspecialchars($post->title);
@@ -46,21 +47,8 @@ class TranslatedPost extends Model {
 			$post->slug = preg_replace('/[^a-zA-Z0-9_]/', '', $post->slug); // Replace everything except numbers, word chars and _ with nothing
 		});
 	}
-	
-	public function parent()
-	{
-		return $this->belongsTo('App\Models\Blog\Post', 'post_id');
-	}
-	
-	public function tags()
-	{
-		return $this->belongsToMany('App\Models\Blog\Tag', 'blg_posts_tags', 'post_id', 'tag_id');
-	}
-	
-	public function files()
-	{
-		return $this->hasMany('App\Models\File', 'parent_id')->where('type', '=', 'post');
-	}
+
+	// ========================= Custom Methods ========================= //
 	
 	public function short()
 	{
@@ -74,5 +62,22 @@ class TranslatedPost extends Model {
 	public function getURL()
 	{
 		return url(sprintf('/%s/post/%s', $this->locale, $this->slug));
+	}
+
+	// ========================= Relations ========================= //
+
+	public function parent()
+	{
+		return $this->belongsTo(Post::class);
+	}
+	
+	public function tags()
+	{
+		return $this->belongsToMany(Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
+	}
+	
+	public function files()
+	{
+		return $this->morphMany(\App\Models\File::class, 'fileable');
 	}
 }
