@@ -42,7 +42,7 @@ Route::get('/{locale}', 'Blog\PostController@index')->where('locale', implode('|
 
 // Blog
 Route::group(['prefix' => app()->getLocale()], function() {
-	Route::get('post/{slug}', ['as' => 'post', 'uses' => 'Blog\PostController@post']);
+	Route::get('post/{slug}', ['as' => 'posts.show', 'uses' => 'Blog\PostController@show']);
 	Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'Blog\PostController@postsByTag']);
 	
 	Route::get('about', ['as' => 'about', function() {

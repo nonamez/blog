@@ -28,28 +28,27 @@ class PostController extends Controller
 
 	public function index()
 	{
-		$posts = Blog\Post::whereHas('translated', function($query) {
-			$query->where('locale', '=', app()->getLocale());
-			
-			if (Auth::guest())
-				$query->where('status', '=', 'published');
+		$posts = Blog\TranslatedPost::where('locale', '=', app()->getLocale())->orderBy('id', 'DEC'); 
 
-		})->orderBy('id', 'DEC');
+		if (auth()->guest()) {
+			$posts->where('status', '=', 'published');
+		}
 		
-		$paginated = $posts->paginate(config('blog.posts_per_page'));
+		$posts = $posts->paginate(config('blog.posts_per_page'));
 
-		return view('blog.posts')->with('posts', $paginated);
+		return view('blog.posts', compact('posts'));
 	}
 
-	public function post($slug)
+	public function show($slug)
 	{
 		$post = Blog\TranslatedPost::with(['parent', 'tags']);
 		
 		$post->where('slug', '=', $slug);
 		
 		// Hide draft posts for users
-		if (Auth::guest())
+		if (auth()->guest()) {
 			$post->where('status', '<>', 'draft');
+		}
 		
 		$post = $post->firstOrFail();
 

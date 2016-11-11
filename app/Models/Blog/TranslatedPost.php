@@ -64,11 +64,30 @@ class TranslatedPost extends Model {
 		return url(sprintf('/%s/post/%s', $this->locale, $this->slug));
 	}
 
+	public function getPostClass()
+	{
+		switch ($this->status) {
+			case 'draft':
+				$class = ' alert-warning';
+				break;
+
+			case 'hidden':
+				$class = ' alert-danger';
+				break;
+			
+			default:
+				$class = '';
+				break;
+		}
+
+		return $class;
+	}
+
 	// ========================= Relations ========================= //
 
 	public function parent()
 	{
-		return $this->belongsTo(Post::class);
+		return $this->belongsTo(Post::class, 'post_id');
 	}
 	
 	public function tags()
