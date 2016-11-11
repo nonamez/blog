@@ -13,7 +13,7 @@ use File;
 
 class FileController extends Controller {
 
-	private files_path;
+	private $files_path;
 
 	function __construct()
 	{

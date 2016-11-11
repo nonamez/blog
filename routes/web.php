@@ -1,14 +1,6 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Auth Routes
-|--------------------------------------------------------------------------
-*/
-
-Auth::routes();
-
-/*
-|--------------------------------------------------------------------------
 | Locale Detection
 |--------------------------------------------------------------------------
 */
@@ -25,6 +17,15 @@ Route::get('/', function() {
 
 /*
 |--------------------------------------------------------------------------
+| Auth Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::post('logout', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout');
+
+/*
+|--------------------------------------------------------------------------
 | Files
 |--------------------------------------------------------------------------
 */
@@ -37,7 +38,7 @@ Route::get('file/{date}/{name}', ['as' => 'file_get', 'uses' => 'Admin\FileContr
 |--------------------------------------------------------------------------
 */
 
-Route::get('/{locale}', 'Blog\PostController@posts')->where('locale', implode('|', Config::get('app.locales')));
+Route::get('/{locale}', 'Blog\PostController@index')->where('locale', implode('|', Config::get('app.locales')));
 
 // Blog
 Route::group(['prefix' => app()->getLocale()], function() {
@@ -71,7 +72,6 @@ Route::get('sleep/{time}', function($time) {
 */
 
 Route::group(['middleware' => ['user_id', 'auth'], 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
-
 	Route::get('/', function() {
 		return redirect()->route('admin.posts.index');
 	});

@@ -64,7 +64,7 @@
 						</ul>
 					</li>
 					<li role="presentation">
-						<a href="{{ route('logout') }}">Log Out</a>
+						<a href="{{ url('/logout') }}">Log Out</a>
 					</li>
 				</ul>
 			</div><!--/.nav-collapse -->
