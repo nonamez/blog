@@ -47,7 +47,7 @@
 		</div>
 		<div id="tags-div-container">
 			@if (isset($tags['titles']))
-			@for($i = 0; $i < count($tags['titles']); $i++)
+			@for ($i = 0; $i < count($tags['titles']); $i++)
 			<span class="label label-default tag">
 				{{ $tags['titles'][$i] }}
 				<span data-role="remove"></span>
@@ -81,14 +81,15 @@
 			</div>
 		</div>
 		<hr>
+		@if (isset($files))
 		@foreach ($files as $file)
 		<div class="form-group">
 			<div class="col-md-9 col-md-offset-1">
 				<div class="input-group">
-					<input type="text" class="form-control" readonly="readonly" value="{{ route('file_get', [$file['created_at']->format('Y-m-d'), $file['name']]) }}">
-					<input type="hidden" name="files[]" value="{{ $file['id'] }}" class="hide hidden">
+					<input type="text" class="form-control" readonly="readonly" value="{{ $file->getURL() }}">
+					<input type="hidden" name="files[]" value="{{ $file->id }}" class="hide hidden">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default files-button-delete" data-file-id="{{ $file['id'] }}">
+						<button type="button" class="btn btn-default files-button-delete" data-file-id="{{ $file->id }}">
 							<i class="fa fa-trash-o"></i>
 						</button>
 					</span>
@@ -96,5 +97,6 @@
 			</div>
 		</div>
 		@endforeach
+		@endif
 	</div>
 </div>

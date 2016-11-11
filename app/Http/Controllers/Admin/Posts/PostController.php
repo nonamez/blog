@@ -20,15 +20,9 @@ class PostController extends Controller
 	public function create()
 	{
 		$locales = config('app.locales');
+		$locales = array_combine($locales, $locales);
 
-		$data = [
-			'tags'    => request()->old('tags'),
-			// Select files that was uploaded today, but not yet assigned to the post
-			'files'   => Models\File::whereType('post')->where('parent_id', '=', NULL)->whereDate('created_at', '=', date('Y-m-d'))->get(),
-			'locales' => array_combine($locales, $locales)
-		];
-		
-		return view('admin.posts.create', $data);
+		return view('admin.posts.create', compact('locales'));
 	}
 
 	public function store(PostRequest $request)

@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model {
 
-	const UPLOAD_PATH = 'app/uploads';
-
 	protected $table = 'files';
-	protected $fillable = ['name', 'original_name', 'description', 'type'];
+	protected $fillable = ['name', 'original_name', 'description'];
 
 	public static function boot()
 	{
@@ -20,9 +18,27 @@ class File extends Model {
 		});
 	}
 
+	// ========================= Scopes ========================= //
+
+	public function scopeOfType($query, $type)
+	{
+		$types = [
+			'post'      => 'App\Models\Blog\TranslatedPost',
+			'portfolio' => 'App\Models\Portfolio\Work'
+		];
+
+		if (array_key_exists($type, $types)) {
+			$query->where('fileable_type', '=', $types[$type]);
+		}
+
+		return $query;
+	}
+
+	// ========================= Custom Methods ========================= //
+
 	public function getPath()
 	{
-		$path = sprintf('%s/%s/%s', self::getUploadPath(), $this->created_at->format('Y/m/d'), $this->name);
+		$path = sprintf('%s/%s/%s', config('files.path'), $this->created_at->format('Y/m/d'), $this->name);
 		
 		return storage_path($path);
 	}
@@ -32,18 +48,10 @@ class File extends Model {
 		return route('file_get', [$this->created_at->format('Y-m-d'), $this->name]);
 	}
 
-	public static function getUploadPath()
-	{
-		return self::UPLOAD_PATH;
-	}
+	// ========================= Relations ========================= //
 
-	public function post()
+	public function fileable()
 	{
-		return $this->belongsTo(Blog\TranslatedPost::class, 'parent_id');
-	}
-
-	public function portfolio()
-	{
-		return $this->belongsTo(Portfolio\Work::class, 'parent_id');
+		return $this->morphTo();
 	}
 }

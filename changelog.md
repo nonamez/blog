@@ -3,10 +3,11 @@ All notable changes made to this project will be documented in this file.
 
 ToDo: Refactor all JS code in order to minimize it
 
-## [0.4.1] - [Unreleased]
+## [0.5.0] - [Unreleased]
 ### Changed
 - Improved slug check
 - Assets refactored
+- Completely rewritten the file mechanism
 
 ### Fixed
 - 404 error

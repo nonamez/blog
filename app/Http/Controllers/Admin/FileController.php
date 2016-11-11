@@ -5,13 +5,20 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Utils;
-use App\Models\File as FileModel;
+use App\Models;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FileRequest;
 
 use File;
 
 class FileController extends Controller {
+
+	private files_path;
+
+	function __construct()
+	{
+		$this->files_path = config('files.path');
+	}
 	
 	public function index()
 	{
@@ -23,10 +30,11 @@ class FileController extends Controller {
 	public function get($date, $name)
 	{
 		$file_path = str_replace('-', '/', $date) . '/' . $name;
-		$file_path = storage_path(FileModel::getUploadPath() . '/' . $file_path);
+		$file_path = storage_path($this->files_path . '/' . $file_path);
 
-		if (File::exists($file_path) == FALSE)
+		if (File::exists($file_path) == FALSE) {
 			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+		}
 		
 		$file_type = File::type($file_path);
 	
@@ -38,13 +46,15 @@ class FileController extends Controller {
 		$file = $request->file('file');
 		$time = time();
 		
-		$path = storage_path(FileModel::getUploadPath() . date('/Y/m/d', $time));
+		$path = storage_path($this->files_path . date('/Y/m/d', $time));
 		
-		if (File::isDirectory($path) == FALSE)
+		if (File::isDirectory($path) == FALSE) {
 			File::makeDirectory($path, 0755, TRUE);
+		}
 
-		if ($request->get('watermark', FALSE))
+		if ($request->get('watermark', FALSE) && exif_imagetype($file->getRealPath())) {
 			Utils\File::addWatermarkRepeatedly($file);
+		}
 
 		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());
 		$name = str_replace(' ', '_', $name);
@@ -54,9 +64,8 @@ class FileController extends Controller {
 		
 		$file->move($path, $name);
 		
-		$file = FileModel::create([
+		$file = Models\File::create([
 			'name'          => $name,
-			'type'          => $request->get('type', 'none'),
 			'description'   => $request->get('description', NULL),
 			'original_name' => $file->getClientOriginalName()
 		]);
@@ -67,31 +76,34 @@ class FileController extends Controller {
 			'description' => $file->description
 		];
 		
-		return $this->ajaxResponse(['error' => FALSE, 'data' => $data]);
+		return response()->json($data);
 	}
 	
 	public function update($file_id, Request $request)
 	{
-		$file = FileModel::find($file_id);
+		$file = Models\File::firstOrFail($file_id);
 
-		if (is_null($request->description) == FALSE)
+		if ($request->description) {
 			$file->update(['description' => $request->description]);
+		}
 		
-		if ($request->ajax())
-			return $this->ajaxResponse(['error' => FALSE]);
-		else
+		if ($request->ajax()) {
+			return response()->json();
+		} else {
 			return redirect()->back();
+		}
 	}
 
 	public function delete($file_id, Request $request)
 	{
-		$file = FileModel::find($file_id);
+		$file = Models\File::firstOrFail($file_id);
 		
 		$file->delete();
 		
-		if ($request->ajax())
-			return $this->ajaxResponse(['error' => FALSE]);
-		else
+		if ($request->ajax()) {
+			return response()->json();
+		} else {
 			return redirect()->back();
+		}
 	}
 }
