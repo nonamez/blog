@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['menu' => 'posts'])
+@extends('layouts.app', ['menu' => 'posts'])
 @section('content')
 <div class="container">
 	<div class="row">

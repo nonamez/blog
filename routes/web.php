@@ -21,7 +21,7 @@ Route::get('/', function() {
 |--------------------------------------------------------------------------
 */
 Route::get('login', 'Auth\LoginController@showLoginForm');
-Route::post('logout', 'Auth\LoginController@login');
+Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
 
 /*
@@ -78,11 +78,11 @@ Route::group(['middleware' => ['user_id', 'auth'], 'prefix' => 'admin', 'namespa
 
 	Route::group(['prefix' => 'posts'], function() {
 		Route::get('/', ['as' => 'admin.posts.index', 'uses' => 'PostController@index']);
-		Route::get('posts/create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
-		Route::post('posts/store', ['as' => 'admin.posts.store', 'uses' => 'PostController@store']);
-		Route::get('posts/{post_id}/edit', ['as' => 'admin.posts.edit', 'uses' => 'PostController@edit']);
-		Route::post('posts/{post_id}/edit',['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
-		Route::get('posts/{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
+		Route::get('create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
+		Route::post('store', ['as' => 'admin.posts.store', 'uses' => 'PostController@store']);
+		Route::get('{post_id}/edit', ['as' => 'admin.posts.edit', 'uses' => 'PostController@edit']);
+		Route::post('{post_id}/edit',['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
+		Route::get('{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
 	});
 
 	Route::group(['prefix' => 'files'], function() {

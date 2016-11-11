@@ -26,7 +26,7 @@ class PostController extends Controller
 		view()->share('tags', $tags);
 	}
 
-	public function posts()
+	public function index()
 	{
 		$posts = Blog\Post::whereHas('translated', function($query) {
 			$query->where('locale', '=', app()->getLocale());
