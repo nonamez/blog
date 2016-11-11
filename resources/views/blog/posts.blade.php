@@ -2,7 +2,7 @@
 @section('content')
 <main class="content" role="main">
 	@forelse ($posts as $post)
-	<article class="post{{ $post->getPostClass() }}" id="post-{{ $post->id }}" data-url="{{ route('post', $post->slug) }}">
+	<article class="post{{ $post->getPostClass() }}" id="post-{{ $post->id }}" data-url="{{ $post->getURL() }}">
 		<header class="post-header">
 			<div class="icon">
 				<i class="{{ $post->icon }}"></i>
@@ -14,16 +14,16 @@
 		</header>
 		<section class="post-content">
 			<ul class="post-tags list-inline">
-				@include('blog._line')
+				@include('blog.partials.line')
 			</ul>
 			<div>
 				{!! $post->short() !!}
 			</div>
 			<p class="text-center">
 				@if ($post->is_short)
-				<a href="{{ route('post', $post->slug) }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
+				<a href="{{ $post->getURL() }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
 				@else
-				<a href="{{ route('post', $post->slug) }}#comments" class="btn btn-default btn-sm">@lang('blog.post.comments_link')</a>
+				<a href="{{ $post->getURL() }}#comments" class="btn btn-default btn-sm">@lang('blog.post.comments_link')</a>
 				@endif
 			</p>
 		</section>

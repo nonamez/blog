@@ -7,7 +7,7 @@
 				<h2>{{ $post->title }}</h2>
 			</div>
 			<ul class="post-tags list-inline">
-				@include('blog._line')
+				@include('blog.partials.line')
 			</ul>
 			<div>
 				{!! $post->content !!}
