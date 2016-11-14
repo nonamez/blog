@@ -1,0 +1,14 @@
+.tag {
+	display:inline-block;
+	font-size:80%;
+	position:relative
+}
+
+.tag [data-role="remove"] {
+	cursor: pointer;
+}
+
+.tag [data-role="remove"]::after {
+	content: "x";
+	padding: 0 2px;
+}

@@ -7,7 +7,7 @@ elixir(function(mix) {
 	mix.copy('bower_components/bootstrap/dist', 'public/plugins/bootstrap')
 	mix.copy('bower_components/jquery/dist', 'public/plugins/jquery')
 
-	mix.copy('node_modules/font-awesome/fonts','public/build/fonts')
+	mix.copy('bower_components/fontawesome/fonts','public/build/fonts')
 
 	mix.styles([
 		BOWER_DIR + '/bootstrap/dist/css/bootstrap.min.css',
@@ -21,8 +21,6 @@ elixir(function(mix) {
 		BOWER_DIR + '/highlightjs/highlight.pack.js',
 		'blog.js',
 	], 'public/js/blog.js')
-
-	mix.scripts('global.js')
 
 	mix.scripts('admin/posts.js', 'public/js/admin/posts.js')
 
