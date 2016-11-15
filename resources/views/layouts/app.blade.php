@@ -12,7 +12,7 @@
 
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}">
-	<link href="/css/app.css" rel="stylesheet">
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 	<div id="app">

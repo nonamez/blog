@@ -27,4 +27,4 @@ jQuery(document).ready(function() {
 		}
 	})
 })
-//# sourceMappingURL=posts.js.map
+//# sourceMappingURL=admin.js.map

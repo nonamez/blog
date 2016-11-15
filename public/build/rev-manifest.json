@@ -1,6 +1,6 @@
 {
+  "css/app.css": "css/app-c24f565c1d.css",
   "css/blog.css": "css/blog-4d5f6f32fa.css",
-  "js/admin/posts.js": "js/admin/posts-df2cfe691a.js",
-  "js/blog.js": "js/blog-45484a5170.js",
-  "js/global.js": "js/global-ea9de6475c.js"
+  "js/admin.js": "js/admin-335fe5ccbc.js",
+  "js/blog.js": "js/blog-45484a5170.js"
 }
