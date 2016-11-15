@@ -55,7 +55,7 @@
 							<a href="{{ url('/login') }}">Login</a>
 						</li>
 						@else
-						<li class="dropdown">
+						<li class="dropdown{{ $menu == 'posts' ? ' active' : '' }}">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="{{ route('admin.posts.index') }}">Posts</a></li>
