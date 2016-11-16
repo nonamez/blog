@@ -1,8 +1,8 @@
 {
+  "name": "plugins",
   "authors": [
     "NoNameZ <hello@nonamez.name>"
   ],
-  "description": "Some default stuff which is included in most of the projects",
   "license": "Beerware",
   "homepage": "http://nonamez.name",
   "ignore": [
@@ -17,7 +17,7 @@
     "bootstrap": "~3.*",
     "fontawesome": "~4.*",
     "highlightjs": "~9.*",
-    "bootstrap-sass": "~3.*"
+    "bootstrap-sass": "^3.3.7"
   },
   "private": true
 }
