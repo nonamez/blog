@@ -79,7 +79,7 @@
 					<input type="file" id="files-input-upload" style="display:none">
 					<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload">
+						<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload" data-route="{{ route() }}">
 							<i class="fa fa-upload"></i>
 						</button>
 					</span>

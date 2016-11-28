@@ -71,7 +71,7 @@ Route::get('sleep/{time}', function($time) {
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['user_id', 'auth'], 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('/', function() {
 		return redirect()->route('admin.posts.index');
 	});
