@@ -30,7 +30,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 |--------------------------------------------------------------------------
 */
 
-Route::get('file/{date}/{name}', ['as' => 'file_get', 'uses' => 'Admin\FileController@get']);
+Route::get('file/{date}/{name}', ['as' => 'file.get', 'uses' => 'Admin\FileController@get']);
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		return redirect()->route('admin.posts.index');
 	});
 
-	Route::group(['prefix' => 'posts'], function() {
+	Route::group(['prefix' => 'posts', 'namespace' => 'Posts'], function() {
 		Route::get('/', ['as' => 'admin.posts.index', 'uses' => 'PostController@index']);
 		Route::get('create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
 		Route::post('store', ['as' => 'admin.posts.store', 'uses' => 'PostController@store']);
@@ -85,11 +85,11 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		Route::get('{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
 	});
 
-	Route::group(['prefix' => 'files'], function() {
+	Route::group(['prefix' => 'files', 'namespace' => 'Files'], function() {
 		Route::get('/', ['as' => 'admin_files', 'uses' => 'FileController@index']);
-		Route::post('upload', ['as' => 'admin_file_store', 'uses' => 'FileController@store']);
-		Route::post('{file_id}/update', ['as' => 'admin_file_update', 'uses' => 'FileController@update']);
-		Route::get('{file_id}/delete', ['as' => 'admin_file_delete', 'uses' => 'FileController@delete']);
+		Route::post('upload', ['as' => 'admin.files.store', 'uses' => 'FileController@store']);
+		Route::post('{file_id}/update', ['as' => 'admin.files.update', 'uses' => 'FileController@update']);
+		Route::get('{file_id}/delete', ['as' => 'admin.files.delete', 'uses' => 'FileController@delete']);
 	});
 
 	// Portfolio

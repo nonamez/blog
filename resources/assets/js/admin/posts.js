@@ -12,10 +12,13 @@
 const _ELEMENTS = {
 	input_tag_slug: jQuery('#tags-input-slug'),
 
+	button_save_post: jQuery('#post-button-save'),
+	button_create_tag: jQuery('#tags-button-create'),
+
 	button_fake_file_browse: jQuery('#fake-file-button-browse'),
 	input_fake_file_upload:  jQuery('#files-input-upload'),
 	input_fake_file_name:    jQuery('#fake-file-input-name'),
-	button_fake_file_upload: jQuery('fake-file-button-upload')
+	button_fake_file_upload: jQuery('#fake-file-button-upload')
 }
 
 
@@ -31,16 +34,23 @@ jQuery(document).ready(function() {
 		_ELEMENTS.input_fake_file_upload.trigger('click')
 	})
 
+	// File upload
 	_ELEMENTS.button_fake_file_upload.click(function() {
-		var data = new FormData(_ELEMENTS.input_fake_file_upload[0])
+		var form_data = new FormData()
+			form_data.append('file', _ELEMENTS.input_fake_file_upload[0].files[0])
 
 		jQuery.ajax({
-			
+			url   : this.getAttribute('data-route'),
+			data  : form_data,
+			type  : 'POST',
+			cache : false,
+			contentType : false,
+			processData : false,
 		})
 	})
 
 	// Tags
-	jQuery('#tags-button-create').click(function() {
+	_ELEMENTS.button_create_tag.click(function() {
 		var slug  = document.getElementById('tags-input-slug').value
 		var title = document.getElementById('tags-input-title').value
 
@@ -53,8 +63,18 @@ jQuery(document).ready(function() {
 		}
 	})
 
-	// Files
-	// jQuery('#fake-file-button-upload').click(function() {
+	// Save post
+	_ELEMENTS.button_save_post.click(function() {
+		var data = {
+			title:   jQuery('input[name="title"]').val(),
+			content: jQuery('textarea[name="content"]').val(),
+			locale:  jQuery('select[name="locale"]').val(),
+			status:  jQuery('select[name="status"]').val(),
+			parent_post: jQuery('input[name="parent_post"]').val(),
+		}
 
-	// })
+		jQuery.post(this.getAttribute('data-route'), data, function(response) {
+			console.log(response)
+		})
+	})
 })

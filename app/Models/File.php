@@ -45,7 +45,12 @@ class File extends Model {
 
 	public function getURL()
 	{
-		return route('file_get', [$this->created_at->format('Y-m-d'), $this->name]);
+		return route('file.get', [$this->created_at->format('Y-m-d'), $this->name]);
+	}
+
+	public function getDeleteURL()
+	{
+		return route('admin.files.delete', $this->id);
 	}
 
 	// ========================= Relations ========================= //

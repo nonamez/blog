@@ -6,6 +6,7 @@ elixir(function(mix) {
 	mix.copy('bower_components/fontawesome', 'public/plugins/fontawesome')
 	mix.copy('bower_components/bootstrap/dist', 'public/plugins/bootstrap')
 	mix.copy('bower_components/jquery/dist', 'public/plugins/jquery')
+	mix.copy('bower_components/toastr', 'public/plugins/toastr')
 
 	mix.copy('bower_components/fontawesome/fonts','public/build/fonts')
 
