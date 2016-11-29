@@ -40,7 +40,7 @@
 					<span class="input-group-addon">#</span>
 					<input type="text" class="form-control" placeholder="Enter slug" id="tags-input-slug">
 					<span class="input-group-addon" style="border-width:1px 0px">@</span>
-					<input type="text" class="form-control" placeholder="Enter title" id="tags-input-title">
+					<input type="text" class="form-control" placeholder="Enter name" id="tags-input-name">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" id="tags-button-create">Create</button>
 					</span>

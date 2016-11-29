@@ -30,6 +30,6 @@ class Post extends Model {
 		
 	public function translated()
 	{
-		return $this->hasMany(TranslatedPost::class, 'post_id');
+		return $this->hasMany(Translated::class);
 	}
 }

@@ -87,12 +87,12 @@ class TranslatedPost extends Model {
 
 	public function parent()
 	{
-		return $this->belongsTo(Post::class, 'post_id');
+		return $this->belongsTo(\App\Models\Blog\Post\Post::class, 'post_id');
 	}
 	
 	public function tags()
 	{
-		return $this->belongsToMany(Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
+		return $this->belongsToMany(\App\Models\Blog\Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
 	}
 	
 	public function files()

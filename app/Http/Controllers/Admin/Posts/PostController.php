@@ -27,20 +27,7 @@ class PostController extends Controller
 
 	public function store(PostRequest $request)
 	{
-		$data = $request->all();
-		
-		$translated_post = new Models\Blog\TranslatedPost($data);
-		
-		// Select parent or create new
-		if (is_numeric($data['parent_post'])){
-			$post = Models\Blog\Post::find($data['parent_post']);
-		} else {
-			$post = new Models\Blog\Post;
-			
-			$post->save();
-		}
-
-		$post->translated()->save($translated_post);
+		$post = $this->_save($request);
 		
 		// Helpers\Post::tags($request->get('tags', []), $translated_post);
 		// Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
@@ -122,7 +109,11 @@ class PostController extends Controller
 		$translated_post->fill($request->all());
 
 		// Select parent or create new
-		$parent_post = Models\Blog\Post\Post::findOrCreate($request->parent_post);
+		$parent_post = Models\Blog\Post\Post::findOrNew($request->parent_post);
+
+		if (is_null($parent_post->id)) {
+			$parent_post->save();
+		}
 		
 		$parent_post->translated()->save($translated_post);
 
@@ -130,25 +121,19 @@ class PostController extends Controller
 
 		$tags = [];
 
-		if (array_key_exists('titles', $data) && array_key_exists('slugs', $data)) {
-			foreach ($data['titles'] as $key => $name) {
-				if (array_key_exists($key, $data['slugs'])) {
-					$slug = strtolower($data['slugs'][$key]);
-				} else {
-					$slug = strtolower(str_replace(' ', '_', $name));
-				}
-				
-				$tag = Models\Blog\Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
-				
-				array_push($new_tags, $tag->id);
+		foreach ($request->get('tags', []) as $tag) {
+			if (strlen($tag['slug']) == 0) {
+				$tag['slug'] = strtolower(str_replace(' ', '_', $tag['name']));
 			}
+
+			$tag = Models\Blog\Tag::firstOrCreate($tag);
+
+			array_push($tags, $tag->id);
 		}
-		
-		if (isset($data['ids'])) {
-			$new_tags = array_merge($new_tags, $data['ids']);
-		}
-		
-		$translated_post->tags()->sync($new_tags);
+
+		$translated_post->tags()->sync($tags);
+
+		return $translated_post;
 		
 		// Helpers\Post::tags($request->get('tags', []), $translated_post);
 		// Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');

@@ -10,7 +10,8 @@
 // });
 
 const _ELEMENTS = {
-	input_tag_slug: jQuery('#tags-input-slug'),
+
+	div_tags_container: jQuery('#tags-div-container'),
 
 	button_save_post: jQuery('#post-button-save'),
 	button_create_tag: jQuery('#tags-button-create'),
@@ -51,11 +52,15 @@ jQuery(document).ready(function() {
 
 	// Tags
 	_ELEMENTS.button_create_tag.click(function() {
-		var slug  = document.getElementById('tags-input-slug').value
-		var title = document.getElementById('tags-input-title').value
+		var slug = document.getElementById('tags-input-slug').value
+		var name = document.getElementById('tags-input-name').value
 
-		if (title.length) {
-			var container = jQuery('<span/>').addClass('label label-default tag').text(title).appendTo('#tags-div-container').after(' ')
+		if (name.length) {
+			var container = jQuery('<span/>').attr({
+				class: 'label label-default tag',
+				'data-name': name,
+				'data-slug': slug
+			}).text(name).appendTo(_ELEMENTS.div_tags_container).after(' ')
 
 			jQuery('<span/>').attr('data-role', 'remove').appendTo(container).on('click', function() {
 				this.parentNode.parentNode.removeChild(this.parentNode)
@@ -71,6 +76,13 @@ jQuery(document).ready(function() {
 			locale:  jQuery('select[name="locale"]').val(),
 			status:  jQuery('select[name="status"]').val(),
 			parent_post: jQuery('input[name="parent_post"]').val(),
+
+			tags: _ELEMENTS.div_tags_container.find('span.tag').map(function() {
+				return {
+					name: this.getAttribute('data-name'),
+					slug: this.getAttribute('data-slug')
+				}
+			}).get()
 		}
 
 		jQuery.post(this.getAttribute('data-route'), data, function(response) {

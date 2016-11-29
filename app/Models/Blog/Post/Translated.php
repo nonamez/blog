@@ -4,7 +4,7 @@ namespace App\Models\Blog\Post;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TranslatedPost extends Model {
+class Translated extends Model {
 	
 	protected $table    = 'blg_translated_posts';
 	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description'];
@@ -87,12 +87,12 @@ class TranslatedPost extends Model {
 
 	public function parent()
 	{
-		return $this->belongsTo(Post::class, 'post_id');
+		return $this->belongsTo(Post::class);
 	}
 	
 	public function tags()
 	{
-		return $this->belongsToMany(Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
+		return $this->belongsToMany(\App\Models\Blog\Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
 	}
 	
 	public function files()

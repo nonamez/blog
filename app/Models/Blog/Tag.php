@@ -30,6 +30,6 @@ class Tag extends Model {
 
 	public function translated_posts()
 	{
-		return $this->belongsToMany(TranslatedPost::class, 'blg_posts_tags', 'tag_id', 'post_id');
+		return $this->belongsToMany(Post\Translated::class, 'blg_posts_tags', 'tag_id', 'post_id');
 	}
 }
