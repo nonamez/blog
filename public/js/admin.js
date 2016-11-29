@@ -11,10 +11,11 @@
 
 const _ELEMENTS = {
 
-	div_tags_container: jQuery('#tags-div-container'),
+	div_tags_container: jQuery('#posts-div-tags-container'),
+	div_files_container: jQuery('#posts-div-files-container'),
 
-	button_save_post: jQuery('#post-button-save'),
-	button_create_tag: jQuery('#tags-button-create'),
+	button_save_post: jQuery('#posts-button-save'),
+	button_create_tag: jQuery('#posts-button-tags-create'),
 
 	button_fake_file_browse: jQuery('#fake-file-button-browse'),
 	input_fake_file_upload:  jQuery('#files-input-upload'),
@@ -47,6 +48,32 @@ jQuery(document).ready(function() {
 			cache : false,
 			contentType : false,
 			processData : false,
+			success: function(response) {
+				var li_container = jQuery('<li/>').addClass('list-group-item').appendTo(_ELEMENTS.div_files_container)
+
+				var div_row = jQuery('<div/>').addClass('row').appendTo(li_container)
+
+				jQuery('<div/>').addClass('col-xs-12 col-sm-8').text(response.name).appendTo(div_row)
+
+				var div_col = jQuery('<div/>').addClass('col-xs-12 col-sm-4 text-right').appendTo(div_row)
+
+				var div_btn_group = jQuery('<div/>').addClass('btn-group btn-group-sm').appendTo(div_col)
+
+				jQuery('<a/>').attr({
+					href: response.get_url,
+					class: 'btn btn-default',
+					target: '_blank',
+				}).append(jQuery('<i/>').addClass('fa fa-download')).appendTo(div_btn_group)
+
+				jQuery('<button/>').attr({
+					class: 'btn btn-default',
+					'data-role': 'remove-file',
+					'data-route': response.del_url
+				}).on('click', function() {
+					
+				}).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(div_btn_group)
+
+			}
 		})
 	})
 
@@ -90,4 +117,23 @@ jQuery(document).ready(function() {
 		})
 	})
 })
+
+function addFile() {
+	var container = jQuery('<li/>').addClass('list-group-item')
+		
+	var input_file = jQuery('<input/>').attr({
+		type: 'file',
+		class: 'hidden'
+	}).appendTo(container).on('change', function() {
+		jQuery('<button/>').attr({
+			type: 'button', 
+			class: 'btn btn-default btn-sm pull-right',
+			'data-role': 'remove-file'
+		}).append(jQuery('<i/>').addClass('fa fa-trash')).insertAfter(this)
+
+		jQuery(this).after(this.files[0].name)
+
+		_ELEMENTS.div_files_container.append(container)
+	}).trigger('click')
+}
 //# sourceMappingURL=admin.js.map

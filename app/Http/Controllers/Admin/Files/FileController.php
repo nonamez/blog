@@ -72,10 +72,12 @@ class FileController extends Controller {
 		]);
 		
 		$data = [
-			'id'  => $file->id,
-			'url' => $file->getURL(),
+			'id'   => $file->id,
+			'name' => $file->name,
+			'description' => $file->description,
+
+			'get_url' => $file->getURL(),
 			'del_url' => $file->getDeleteURL(),
-			'description' => $file->description
 		];
 		
 		return response()->json($data);

@@ -3,12 +3,12 @@
 	<div class="panel-body">
 		<div class="form-group">
 			<label>Title</label>
-			<input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ old('title') }}">
+			<input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ $post->title or '' }}">
 		</div>
 
 		<div class="form-group">
 			<label>Content</label>
-			<textarea name="content" cols="5" rows="5" class="form-control" placeholder="Enter text">{{ old('content') }}</textarea>
+			<textarea name="content" cols="5" rows="5" class="form-control" placeholder="Enter text">{{ $post->content or '' }}</textarea>
 		</div>
 	</div>
 </div>
@@ -17,17 +17,22 @@
 	<div class="panel-body">
 		<div class="form-group">
 			<label>Slug</label>
-			<input type="text" class="form-control" placeholder="Enter Slug" name="slug" value="{{ old('slug') }}">
+			<input type="text" class="form-control" placeholder="Enter Slug" name="slug" value="{{ $post->slug or '' }}">
+		</div>
+
+		<div class="form-group">
+			<label>Title</label>
+			<input type="text" class="form-control" placeholder="Enter Title" name="meta_title" value="{{ $post->meta_title or '' }}">
 		</div>
 
 		<div class="form-group">
 			<label>Description</label>
-			<input type="text" class="form-control" placeholder="Enter Description" name="meta_description" value="{{ old('meta_description') }}">
+			<input type="text" class="form-control" placeholder="Enter Description" name="meta_description" value="{{ $post->meta_description or '' }}">
 		</div>
 
 		<div class="form-group">
 			<label>Keywords</label>
-			<input type="text" class="form-control" placeholder="Enter Keywords" name="meta_keywords" value="{{ old('meta_keywords') }}">
+			<input type="text" class="form-control" placeholder="Enter Keywords" name="meta_keywords" value="{{ $post->meta_keywords or '' }}">
 		</div>
 	</div>
 </div>
@@ -49,16 +54,14 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div id="tags-div-container">
-					@if (isset($tags['titles']))
-					@for ($i = 0; $i < count($tags['titles']); $i++)
-					<span class="label label-default tag">
-						{{ $tags['titles'][$i] }}
+				<div id="posts-div-tags-container">
+					@if (isset($post))
+					@foreach ($post->tags as $tag)
+					<span class="label label-default tag" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">
+						{{ $tag->name }}
 						<span data-role="remove"></span>
-						<input type="hidden" name="tags[slugs][]" value="{{ $tags['slugs'][$i] or '' }}">
-						<input type="hidden" name="tags[titles][]" value="{{ $tags['titles'][$i] }}">
 					</span>
-					@endfor
+					@endforeach
 					@endif
 				</div>
 			</div>
@@ -86,22 +89,27 @@
 				</div>
 			</div>
 		</div>
-		@if (isset($files))
-		@foreach ($files as $file)
+
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2">
-				<div class="input-group">
-					<input type="text" class="form-control" readonly="readonly" value="{{ $file->getURL() }}">
-					<input type="hidden" name="files[]" value="{{ $file->id }}" class="hide hidden">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default files-button-delete" data-file-id="{{ $file->id }}">
-							<i class="fa fa-trash-o"></i>
-						</button>
-					</span>
-				</div>
+			<div class="col-xs-8 col-xs-offset-2 p-t-15">
+				<ul class="list-group" id="posts-div-files-container">
+					@if (isset($post))
+					@foreach ($post->files as $file)
+					<li class="list-group-item" data-file-id="{{ $file->id }}">
+						<div class="row">
+							<div class="col-xs-12 col-sm-8">{{ $file->name }}</div>
+							<div class="col-xs-12 col-sm-4 text-right">
+								<div class="btn-group btn-group-sm" role="group" aria-label="...">
+									<button type="button" class="btn btn-default"><i class="fa fa-download" aria-hidden="true"></i></button>
+									<button type="button" class="btn btn-default" data-role="remove-file" data-file-id="{{ $file->id }}"><i class="fa fa-trash"></i></button>
+								</div>
+							</div>
+						</div>
+					</li>
+					@endforeach
+					@endif
+				</ul>
 			</div>
 		</div>
-		@endforeach
-		@endif
 	</div>
 </div>
