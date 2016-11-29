@@ -98,10 +98,10 @@ class FileController extends Controller {
 		}
 	}
 
-	public function delete($file_id, Request $request)
+	public function delete(Request $request, $file_id)
 	{
-		$file = Models\File::firstOrFail($file_id);
-		
+		$file = Models\File::findOrFail($file_id);
+
 		$file->delete();
 		
 		if ($request->ajax()) {

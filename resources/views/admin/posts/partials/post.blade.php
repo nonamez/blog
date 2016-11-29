@@ -43,11 +43,11 @@
 			<div class="col-xs-10 col-xs-offset-1">
 				<div class="input-group">
 					<span class="input-group-addon">#</span>
-					<input type="text" class="form-control" placeholder="Enter slug" id="tags-input-slug">
+					<input type="text" class="form-control" placeholder="Enter slug" id="posts-input-tag-slug">
 					<span class="input-group-addon" style="border-width:1px 0px">@</span>
-					<input type="text" class="form-control" placeholder="Enter name" id="tags-input-name">
+					<input type="text" class="form-control" placeholder="Enter name" id="posts-input-tag-name">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" id="tags-button-create">Create</button>
+						<button type="button" class="btn btn-default" id="posts-button-tags-create">Create</button>
 					</span>
 				</div>
 			</div>

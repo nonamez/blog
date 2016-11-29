@@ -1,22 +1,15 @@
-@extends('layouts.admin', ['menu' => 'posts'])
-@section('content')
-<div class="container">
-	<div class="page-header">
-		<h3>
-			Edit Post
-		</h3>
-	</div>
+@extends('admin.index', ['menu' => 'posts'])
+@section('admin.content')
+<h3 class="m-t-0">
+	Edit Post
+</h3>
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-md-8">
-			@include('admin.posts.partials.data')
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4">
-			@include('admin.posts.partials.sidebar')
-		</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-md-8">
+		@include('admin.posts.partials.post')
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-4">
+		@include('admin.posts.partials.sidebar', ['save_route' => route('admin.posts.edit', $post->id)])
 	</div>
 </div>
-@stop
-@section('scripts')
-<script src="{{ asset('/assets/admin/posts.js') }}"></script>
 @stop

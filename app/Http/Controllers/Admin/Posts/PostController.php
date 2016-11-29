@@ -12,7 +12,7 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		$posts = Models\Blog\TranslatedPost::orderBy('created_at', 'DESC')->paginate(20);
+		$posts = Models\Blog\Post\Translated::orderBy('created_at', 'DESC')->paginate(20);
 		
 		return view('admin.posts.index', compact('posts'));
 	}
@@ -28,69 +28,49 @@ class PostController extends Controller
 	public function store(PostRequest $request)
 	{
 		$post = $this->_save($request);
-		
-		// Helpers\Post::tags($request->get('tags', []), $translated_post);
-		// Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
-		
+				
 		return response()->json(['redirect_to' => route('admin.posts.edit', $post->id)]);
 	}
 	
 	public function edit($post_id)
 	{
-		$post = Blog\TranslatedPost::find($post_id);
+		$post = Models\Blog\Post\Translated::findOrFail($post_id);
 		
 		$locales = config('app.locales');
+		$locales = array_combine($locales, $locales);
 		
-		$data = [
-			'post'    => $post,
-			'locales' => array_combine($locales, $locales)
-		];
-		
-		return view('admin.posts.edit', $data);
+		return view('admin.posts.edit', compact('locales', 'post'));
 	}
 
 	public function update(PostRequest $request, $post_id)
 	{
-		$translated_post = Blog\TranslatedPost::find($post_id);
+		$post = Models\Blog\Post\Translated::findOrFail($post_id);
+
+		$this->_save($request, $post);
 		
-		$data = $request->all();
-
-		$translated_post->update($data);
-
-		Helpers\Post::tags($request->get('tags', []), $translated_post);
-		Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
-
-		// Parent post update if exists
-		if ($data['parent_post'] != $translated_post->post_id) {
-			if (is_null(Blog\Post::find($data['parent_post'])))
-				return redirect()->back()->withInput()->withErrors('Parent post not found');
-
-			$translated_post->post_id = $data['parent_post'];
-
-			$translated_post->save();
-		}
-
-		return redirect()->back()->with('success', 'Post updated seccessfully');
+		return response()->json();
 	}
 
 	public function delete($post_id, $all = FALSE)
 	{
-		$post = Models\Blog\TranslatedPost::find($post_id);
+		$post = Models\Blog\Post\Translated::findOrFail($post_id);
 		
 		$title = $post->title;
-		
+
 		if ($all) {
 			foreach ($post->parent->translated as $translated_post) {
-				foreach ($translated_post->files as $file)
+				foreach ($translated_post->files as $file) {
 					$file->delete();
+				}
 				
 				$post->parent->delete();
 			}
 			
 			$message = 'The post "%s" and its translations successfully deleted';
 		} else {
-			foreach ($post->files as $file)
+			foreach ($post->files as $file) {
 				$file->delete();
+			}
 			
 			$post->delete();
 			
@@ -133,11 +113,13 @@ class PostController extends Controller
 
 		$translated_post->tags()->sync($tags);
 
+		// Here we also could do "UPDATE" by ids for faster performance
+		foreach ($request->get('files', []) as $file_id) {
+			$file = Models\File::findOrFail($file_id);
+
+			$translated_post->files()->save($file);
+		}
+
 		return $translated_post;
-		
-		// Helpers\Post::tags($request->get('tags', []), $translated_post);
-		// Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
-		
-		return response()->json(['redirect_to' => route('admin.posts.edit', $post->id)]);
 	}
 }

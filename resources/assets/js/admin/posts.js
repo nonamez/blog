@@ -1,20 +1,11 @@
-// // Fake file upload
-// document.getElementById('fake-file-button-browse').addEventListener('click', function() {
-// 	document.getElementById('fake-file-input-upload').click()
-// });
-
-// document.getElementById('fake-file-input-upload').addEventListener('change', function() {
-// 	document.getElementById('fake-file-input-name').value = this.value;
-	
-// 	document.getElementById('fake-file-button-upload').removeAttribute('disabled');
-// });
-
 const _ELEMENTS = {
+	input_tags_slug: jQuery('#posts-input-tag-slug'),
+	input_tags_name: jQuery('#posts-input-tag-name'),
 
-	div_tags_container: jQuery('#posts-div-tags-container'),
+	div_tags_container:  jQuery('#posts-div-tags-container'),
 	div_files_container: jQuery('#posts-div-files-container'),
 
-	button_save_post: jQuery('#posts-button-save'),
+	button_save_post:  jQuery('#posts-button-save'),
 	button_create_tag: jQuery('#posts-button-tags-create'),
 
 	button_fake_file_browse: jQuery('#fake-file-button-browse'),
@@ -23,9 +14,11 @@ const _ELEMENTS = {
 	button_fake_file_upload: jQuery('#fake-file-button-upload')
 }
 
-
-
 jQuery(document).ready(function() {
+	_ELEMENTS.div_tags_container.find('[data-role="remove"]').click(function() {
+		this.parentNode.parentNode.removeChild(this.parentNode)
+	})
+	
 	_ELEMENTS.input_fake_file_upload.change(function() {
 		_ELEMENTS.input_fake_file_name.val(this.value)
 
@@ -49,7 +42,10 @@ jQuery(document).ready(function() {
 			contentType : false,
 			processData : false,
 			success: function(response) {
-				var li_container = jQuery('<li/>').addClass('list-group-item').appendTo(_ELEMENTS.div_files_container)
+				var li_container = jQuery('<li/>').attr({
+					class: 'list-group-item',
+					'data-file-id': response.id
+				}).appendTo(_ELEMENTS.div_files_container)
 
 				var div_row = jQuery('<div/>').addClass('row').appendTo(li_container)
 
@@ -69,9 +65,7 @@ jQuery(document).ready(function() {
 					class: 'btn btn-default',
 					'data-role': 'remove-file',
 					'data-route': response.del_url
-				}).on('click', function() {
-					
-				}).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(div_btn_group)
+				}).on('click', removeTag).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(div_btn_group)
 
 			}
 		})
@@ -79,8 +73,8 @@ jQuery(document).ready(function() {
 
 	// Tags
 	_ELEMENTS.button_create_tag.click(function() {
-		var slug = document.getElementById('tags-input-slug').value
-		var name = document.getElementById('tags-input-name').value
+		var slug = _ELEMENTS.input_tags_slug.val()
+		var name = _ELEMENTS.input_tags_name.val()
 
 		if (name.length) {
 			var container = jQuery('<span/>').attr({
@@ -97,42 +91,27 @@ jQuery(document).ready(function() {
 
 	// Save post
 	_ELEMENTS.button_save_post.click(function() {
-		var data = {
-			title:   jQuery('input[name="title"]').val(),
-			content: jQuery('textarea[name="content"]').val(),
-			locale:  jQuery('select[name="locale"]').val(),
-			status:  jQuery('select[name="status"]').val(),
-			parent_post: jQuery('input[name="parent_post"]').val(),
+		var data = {}
 
-			tags: _ELEMENTS.div_tags_container.find('span.tag').map(function() {
-				return {
-					name: this.getAttribute('data-name'),
-					slug: this.getAttribute('data-slug')
-				}
-			}).get()
-		}
+		jQuery('.container').find('[name]').each(function() {
+			data[this.name] = this.value
+		})
+
+		data['tags'] = _ELEMENTS.div_tags_container.find('span.tag').map(function() {
+			return {
+				name: this.getAttribute('data-name'),
+				slug: this.getAttribute('data-slug')
+			}
+		}).get()
+
+		data['files'] = _ELEMENTS.div_files_container.find('li[data-file-id]').map(function() {
+			return this.getAttribute('data-file-id')
+		}).get()
 
 		jQuery.post(this.getAttribute('data-route'), data, function(response) {
-			console.log(response)
+			if (response.redirect_to) {
+				window.location = response.redirect_to
+			}
 		})
 	})
 })
-
-function addFile() {
-	var container = jQuery('<li/>').addClass('list-group-item')
-		
-	var input_file = jQuery('<input/>').attr({
-		type: 'file',
-		class: 'hidden'
-	}).appendTo(container).on('change', function() {
-		jQuery('<button/>').attr({
-			type: 'button', 
-			class: 'btn btn-default btn-sm pull-right',
-			'data-role': 'remove-file'
-		}).append(jQuery('<i/>').addClass('fa fa-trash')).insertAfter(this)
-
-		jQuery(this).after(this.files[0].name)
-
-		_ELEMENTS.div_files_container.append(container)
-	}).trigger('click')
-}

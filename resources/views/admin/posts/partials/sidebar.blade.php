@@ -19,12 +19,12 @@
 		</div>
 		<div class="form-group">
 			<label>Parent post</label>
-			<input type="text" class="form-control" placeholder="Enter post id" name="parent_post">
+			<input type="text" class="form-control" placeholder="Enter post id" name="parent_post" value="{{ $post->parent_post or '' }}">
 		</div>
 		<div class="row">
 			<div class="col-xs-6">
 				<button type="button" class="btn btn-primary btn-block" data-loading-text="Saving..." id="posts-button-save" data-route="{{ $save_route }}">
-					Create
+					Save
 				</button>
 			</div>
 			@if(isset($post))
