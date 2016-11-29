@@ -44,6 +44,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ModelNotFoundException) {
+            $exception = new NotFoundHttpException($exception->getMessage(), $exception);
+        }
+        
+        if ($exception instanceof \Illuminate\Database\QueryException) {
+            if (strpos($exception->getMessage(), 'blg_translated_posts_post_id_locale_unique') !== FALSE) {
+                $message = 'Locale already exists';
+            }
+                
+            if (strpos($exception->getMessage(), 'blg_translated_posts_slug_unique') !== FALSE) {
+                $message = 'Slug already exists';
+            }
+            
+            if (isset($message)) {
+                return response()->json(['message' => $message], 500);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 

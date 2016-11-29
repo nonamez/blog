@@ -113,21 +113,46 @@ class PostController extends Controller
 		return redirect()->back()->with('notice', sprintf($message, $title));
 	}
 
-	private function _save(& $request, & $document = FALSE)
+	private function _save(& $request, & $translated_post = FALSE)
 	{
-		if ($document == FALSE) {
-			$document = new Models\Document\Document;
-
-			$document->service_id = $request->service_id;
-			$document->user_id    = auth()->id();
+		if ($translated_post == FALSE) {
+			$translated_post = new Models\Blog\Post\Translated;
 		}
 
-		$data = $request->only('title', 'description', 'category_id');
-		$data = array_map(function($value) {
-			return strlen($value) == 0 ? NULL : $value;
-		}, $data);
+		$translated_post->fill($request->all());
 
-		$document->fill($data);
+		// Select parent or create new
+		$parent_post = Models\Blog\Post\Post::findOrCreate($request->parent_post);
+		
+		$parent_post->translated()->save($translated_post);
 
-		$document->save();
+		// ========================= Tags ========================= //
+
+		$tags = [];
+
+		if (array_key_exists('titles', $data) && array_key_exists('slugs', $data)) {
+			foreach ($data['titles'] as $key => $name) {
+				if (array_key_exists($key, $data['slugs'])) {
+					$slug = strtolower($data['slugs'][$key]);
+				} else {
+					$slug = strtolower(str_replace(' ', '_', $name));
+				}
+				
+				$tag = Models\Blog\Tag::firstOrCreate(['slug' => $slug, 'name' => $name]);
+				
+				array_push($new_tags, $tag->id);
+			}
+		}
+		
+		if (isset($data['ids'])) {
+			$new_tags = array_merge($new_tags, $data['ids']);
+		}
+		
+		$translated_post->tags()->sync($new_tags);
+		
+		// Helpers\Post::tags($request->get('tags', []), $translated_post);
+		// Helpers\File::attach($request->get('files', []), $translated_post->id, 'post');
+		
+		return response()->json(['redirect_to' => route('admin.posts.edit', $post->id)]);
+	}
 }
