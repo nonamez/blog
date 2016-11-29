@@ -1,5 +1,5 @@
-@extends('admin.index', ['menu' => 'posts'])
-@section('admin.content')
+@extends('layouts.admin', ['menu' => 'posts'])
+@section('content')
 <div class="row">
 	<div class="col-md-12">
 		<div class="table-responsive">

@@ -1,5 +1,5 @@
-@extends('admin.index', ['menu' => 'posts'])
-@section('admin.content')
+@extends('layouts.admin', ['menu' => 'posts'])
+@section('content')
 <h3 class="m-t-0">
 	Add New Post
 </h3>

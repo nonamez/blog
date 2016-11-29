@@ -78,7 +78,7 @@ class PostController extends Controller
 			$message = 'The post "%s" successfully deleted';
 		}
 		
-		return redirect()->back()->with('notice', sprintf($message, $title));
+		return redirect()->back()->with('message', 'success|' . sprintf($message, $title));
 	}
 
 	private function _save(& $request, & $translated_post = FALSE)

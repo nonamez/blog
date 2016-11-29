@@ -22,7 +22,7 @@ class FileController extends Controller {
 	
 	public function index()
 	{
-		$files = FileModel::orderBy('created_at', 'DESC')->paginate(20);
+		$files = Models\File::orderBy('created_at', 'DESC')->paginate(20);
 
 		return view('admin.files.index', compact('files'));
 	}

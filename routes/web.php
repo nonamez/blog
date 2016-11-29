@@ -86,7 +86,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 	});
 
 	Route::group(['prefix' => 'files', 'namespace' => 'Files'], function() {
-		Route::get('/', ['as' => 'admin_files', 'uses' => 'FileController@index']);
+		Route::get('/', ['as' => 'admin.files.index', 'uses' => 'FileController@index']);
 		Route::post('upload', ['as' => 'admin.files.store', 'uses' => 'FileController@store']);
 		Route::post('{file_id}/update', ['as' => 'admin.files.update', 'uses' => 'FileController@update']);
 		Route::get('{file_id}/delete', ['as' => 'admin.files.delete', 'uses' => 'FileController@delete']);
