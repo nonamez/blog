@@ -40,7 +40,7 @@
 				<ul class="nav navbar-nav">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="{{ url('/') }}">Site</a>
+							<a href="{{ url('/') }}">Blog</a>
 						</li>
 						<li>
 							<a href="{{ route('portfolio') }}">Portfolio</a>
