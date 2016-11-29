@@ -12,12 +12,7 @@ elixir(function(mix) {
 
 	mix.sass('app.scss')
 
-	mix.styles([
-		BOWER_DIR + '/bootstrap/dist/css/bootstrap.min.css',
-		BOWER_DIR + '/fontawesome/css/font-awesome.css',
-		BOWER_DIR + '/highlightjs/styles/ascetic.css',
-		'blog/styles.css'
-	], 'public/css/blog.css')
+	mix.sass('blog.scss', 'public/css/blog.css')
 
 	mix.scripts([
 		BOWER_DIR + '/bootstrap/dist/js/bootstrap.min.js',

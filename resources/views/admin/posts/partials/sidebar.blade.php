@@ -5,21 +5,21 @@
 			<label>Language</label>
 			<select name="locale" class="form-control">
 				@foreach($locales as $locale)
-				<option value="{{ $locale }}"{{ old('locale') == $locale ? ' selected="selected"' : ''}}>{{ $locale }}</option>
+				<option value="{{ $locale }}">{{ $locale }}</option>
 				@endforeach
 			</select>
 		</div>
 		<div class="form-group">
 			<label>Status</label>
 			<select name="status" class="form-control">
-				<option value="draft"{{ old('status') == 'draft' ? ' selected="selected"' : ''}}>Draft</option>
-				<option value="published"{{ old('status') == 'published' ? ' selected="selected"' : ''}}>Published</option>
-				<option value="hidden"{{ old('status') == 'hidden' ? ' selected="selected"' : ''}}>Hidden</option>
+				<option value="draft">Draft</option>
+				<option value="published">Published</option>
+				<option value="hidden">Hidden</option>
 			</select>
 		</div>
 		<div class="form-group">
 			<label>Parent post</label>
-			<input type="text" class="form-control" placeholder="Enter post id" name="parent_post" value="{{ $post->parent_post or '' }}">
+			<input type="text" class="form-control" placeholder="Enter post id" name="parent_post_id" value="{{ $post->parent_post_id or '' }}">
 		</div>
 		<div class="row">
 			<div class="col-xs-6">
@@ -35,3 +35,11 @@
 		</div>
 	</div>
 </div>
+@if(isset($post))
+@push('scripts')
+<script>
+	jQuery('select[name="locale"]').val('{{ $post->locale }}')
+	jQuery('select[name="status"]').val('{{ $post->status }}')
+</script>
+@endpush
+@endif

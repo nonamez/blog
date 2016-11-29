@@ -25,6 +25,6 @@ class CreateFilesTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('blg_files');
+		Schema::drop('files');
 	}
 }

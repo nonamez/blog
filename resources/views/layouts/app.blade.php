@@ -122,7 +122,6 @@
 					element = jQuery('[name="' + key + '[]"]')
 				}
 
-
 				if (element.length == 0) {
 					toastr.error(text)
 

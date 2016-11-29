@@ -27,6 +27,7 @@ class PostController extends Controller
 
 	public function store(PostRequest $request)
 	{
+
 		$post = $this->_save($request);
 				
 		return response()->json(['redirect_to' => route('admin.posts.edit', $post->id)]);
@@ -89,7 +90,7 @@ class PostController extends Controller
 		$translated_post->fill($request->all());
 
 		// Select parent or create new
-		$parent_post = Models\Blog\Post\Post::findOrNew($request->parent_post);
+		$parent_post = Models\Blog\Post\Post::findOrNew($request->parent_post_id);
 
 		if (is_null($parent_post->id)) {
 			$parent_post->save();

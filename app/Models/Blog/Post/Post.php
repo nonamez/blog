@@ -13,16 +13,18 @@ class Post extends Model {
 	public function locale($locale)
 	{
 		return $this->translated->filter(function($item) use($locale) {
-			if ($item->locale == $locale)
+			if ($item->locale == $locale) {
 				return True;
+			}
 		})->first();
 	}
 	
 	public function localesExcept($locale)
 	{
 		return $this->translated->filter(function($item) use($locale) {
-			if ($item->locale != $locale)
+			if ($item->locale != $locale) {
 				return True;
+			}
 		});
 	}
 
@@ -30,6 +32,6 @@ class Post extends Model {
 		
 	public function translated()
 	{
-		return $this->hasMany(Translated::class, 'post_id');
+		return $this->hasMany(Translated::class, 'parent_post_id');
 	}
 }

@@ -13,8 +13,10 @@ class CreateBlgPostsTagsTable extends Migration {
 			$table->engine = 'InnoDB';
 
 			$table->increments('id');
+
 			$table->integer('post_id')->unsigned()->index();
 			$table->foreign('post_id')->references('id')->on('blg_translated_posts')->onDelete('cascade');
+			
 			$table->integer('tag_id')->unsigned()->index();
 			$table->foreign('tag_id')->references('id')->on('blg_tags')->onDelete('cascade');
 

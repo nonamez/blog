@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Models\Blog;
+use App\Models;
 use App\Http\Controllers\Controller;
 
 use Auth;
@@ -15,7 +15,7 @@ class PostController extends Controller
 		$name = 'tags_in_header_' . app()->getLocale();
 
 		$tags = Cache::rememberForever($name, function() {
-			$tags = Blog\Tag::whereHas('translated_posts', function($query) {
+			$tags = Models\Blog\Tag::whereHas('translated_posts', function($query) {
 				$query->where('locale', '=', app()->getLocale());
 				$query->where('status', '=', 'published');
 			})->ordered()->take(config('blog.tags_in_header'))->get();
@@ -28,7 +28,7 @@ class PostController extends Controller
 
 	public function index()
 	{
-		$posts = Blog\TranslatedPost::where('locale', '=', app()->getLocale())->orderBy('id', 'DEC'); 
+		$posts = Models\Blog\Post\Translated::where('locale', '=', app()->getLocale())->orderBy('id', 'DEC'); 
 
 		if (auth()->guest()) {
 			$posts->where('status', '=', 'published');
@@ -41,7 +41,7 @@ class PostController extends Controller
 
 	public function show($slug)
 	{
-		$post = Blog\TranslatedPost::with(['parent', 'tags']);
+		$post = Models\Blog\Post\Translated::with(['parent', 'tags']);
 		
 		$post->where('slug', '=', $slug);
 		
@@ -61,7 +61,7 @@ class PostController extends Controller
 	
 	public function postsByTag($tag)
 	{
-		$tag = Blog\Tag::where('slug', '=', $tag)->firstOrFail();
+		$tag = Models\Blog\Tag::where('slug', '=', $tag)->firstOrFail();
 		
 		$posts = $tag->translated_posts()->where('locale', '=', app()->getLocale())->where('status', '=', 'published')->orderBy('id', 'DEC');
 		
