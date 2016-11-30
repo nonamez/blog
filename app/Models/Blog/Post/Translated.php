@@ -52,7 +52,7 @@ class Translated extends Model {
 	
 	public function getShort()
 	{
-		$content = convertMarkdownToHTML(current(explode('<!--break-->', $this->content)));
+		$content = current(explode('<!--break-->', $this->content));
 
 		return $content;
 	}

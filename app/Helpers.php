@@ -56,11 +56,39 @@ if (function_exists('getMimeType') == FALSE) {
  * Get file mime type
  */
 
-if (function_exists('convertMarkdownToHTML') == FALSE) {
-	function convertMarkdownToHTML($content) {
+if (function_exists('prepareContent') == FALSE) {
+	function prepareContent($markdown) {
+		$environment = League\CommonMark\Environment::createCommonMarkEnvironment();
+		$parser = new League\CommonMark\DocParser($environment);
+		$htmlRenderer = new League\CommonMark\HtmlRenderer($environment);
+
+		$document = $parser->parse($markdown);
+
+		$walker = $document->walker();
+
+		while ($event = $walker->next()) {
+			if ($event->isEntering() && get_class($event->getNode()) == 'League\CommonMark\Block\Element\FencedCode') {
+				$node = $event->getNode();
+
+				dd($node->data);
+
+				$code = $node->getStringContent();
+				$code = App\Utils\SyntaxHighlight::process($code);
+
+				dd(get_class_methods($node));
+			}
+		}
+
+
+		$html =  $htmlRenderer->renderBlock($document);
+
+		return $html;
+
 		$converter = new League\CommonMark\CommonMarkConverter();
 
 		$content = $converter->convertToHtml($content);
+
+		return App\Utils\SyntaxHighlight::process($code);
 
 		return $content;
 	}

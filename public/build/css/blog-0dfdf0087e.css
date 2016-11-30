@@ -10735,51 +10735,7 @@ button.close {
   clip: auto;
 }
 
-/*
-
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
-
-*/
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: white;
-  color: black;
-}
-
-.hljs-string,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-section,
-.hljs-addition,
-.hljs-attribute,
-.hljs-link {
-  color: #888;
-}
-
-.hljs-comment,
-.hljs-quote,
-.hljs-meta,
-.hljs-deletion {
-  color: #ccc;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-section,
-.hljs-name,
-.hljs-type,
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
+/*@import "bower_components/highlightjs/styles/ascetic";*/
 html {
   font-size: 10px;
   -webkit-tap-highlight-color: transparent;
@@ -10833,28 +10789,54 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 
 pre {
-  background: #fff none repeat scroll 0 0;
+  font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace;
+  font-size: 12px;
+  color: #000;
+  background: #fafafa none repeat scroll 0 0;
   border: medium none;
   line-height: 17.6px;
   overflow-x: auto;
-  padding: 0;
+  padding: 1em 0 1em 1em;
   white-space: pre;
   word-break: inherit;
   word-wrap: inherit;
 }
 
-pre.inline {
-  display: inline;
+pre span.N {
+  color: #888;
 }
 
-pre.inline > code {
-  display: inline;
+/* Numbers */
+pre span.S {
+  color: #888;
 }
 
-pre > code {
-  background-color: #eee !important;
+/* Strings */
+pre span.C {
+  color: #ccc;
 }
 
+/* Comments */
+pre span.K {
+  font-weight: bold;
+}
+
+/* Keywords */
+pre span.V {
+  color: #888;
+}
+
+/* Vars */
+pre span.D {
+  color: #a00;
+}
+
+/* Defines */
+pre span.P {
+  color: #9F9D65;
+}
+
+/* Punctuations */
 /* ----------- Main ----------- */
 .container {
   max-width: 810px;

@@ -49,8 +49,6 @@ class PostController extends Controller
 		
 		$post = $post->firstOrFail();
 
-		$post->content = convertMarkdownToHTML($post->content);
-
 		return view('blog.post', compact('post'));
 	}
 	

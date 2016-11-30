@@ -17,7 +17,7 @@
 				@include('blog.partials.line')
 			</ul>
 			<div>
-				{!! $post->getShort() !!}
+				{!! prepareContent($post->getShort()) !!}
 			</div>
 			<p class="text-center">
 				<a href="{{ $post->getURL() }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
