@@ -16,7 +16,6 @@ elixir(function(mix) {
 
 	mix.scripts([
 		BOWER_DIR + '/bootstrap/dist/js/bootstrap.min.js',
-		BOWER_DIR + '/highlightjs/highlight.pack.js',
 		'blog.js',
 	], 'public/js/blog.js')
 

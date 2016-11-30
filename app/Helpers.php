@@ -28,7 +28,8 @@ if (function_exists('displayAlert') == FALSE) {
  */
 
 if (function_exists('getMimeType') == FALSE) {
-	function getMimeType($file) {
+	function getMimeType($file)
+	{
 		if (function_exists('finfo_file')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
@@ -57,38 +58,11 @@ if (function_exists('getMimeType') == FALSE) {
  */
 
 if (function_exists('prepareContent') == FALSE) {
-	function prepareContent($markdown) {
-		$environment = League\CommonMark\Environment::createCommonMarkEnvironment();
-		$parser = new League\CommonMark\DocParser($environment);
-		$htmlRenderer = new League\CommonMark\HtmlRenderer($environment);
+	function prepareContent($markdown)
+	{
+		$markdown_parser = new App\Misc\Post\MarkdownParser();
 
-		$document = $parser->parse($markdown);
-
-		$walker = $document->walker();
-
-		while ($event = $walker->next()) {
-			if ($event->isEntering() && get_class($event->getNode()) == 'League\CommonMark\Block\Element\FencedCode') {
-				$node = $event->getNode();
-
-				dd($node->data);
-
-				$code = $node->getStringContent();
-				$code = App\Utils\SyntaxHighlight::process($code);
-
-				dd(get_class_methods($node));
-			}
-		}
-
-
-		$html =  $htmlRenderer->renderBlock($document);
-
-		return $html;
-
-		$converter = new League\CommonMark\CommonMarkConverter();
-
-		$content = $converter->convertToHtml($content);
-
-		return App\Utils\SyntaxHighlight::process($code);
+		$content = $markdown_parser->text($markdown);
 
 		return $content;
 	}

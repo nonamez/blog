@@ -3,7 +3,6 @@
 
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "bower_components/fontawesome/css/font-awesome";
-/*@import "bower_components/highlightjs/styles/ascetic";*/
 
 html {
 	font-size: 10px;
@@ -13,8 +12,8 @@ body {
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 15px;
 	line-height: 145%;
-	color: #222222;
-	background-color: #ffffff;
+	color: #222;
+	background-color: #fff;
 }
 a {
 	color: #00526e;
@@ -33,41 +32,27 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
 h1 small,h2 small,h3 small,h4 small,h5 small,h6 small {
 	color: #999999;
 }
-.dropdown-menu {
-	font-size: 12px;
-	margin-top: 0;
-	padding: 0;
-}
-.dropdown-menu > li > a {
-	padding: 12px 15px;
-}
-.dropdown-header {
-	font-size: 9px;
-	padding-left: 15px;
-	padding-right: 15px;
-	text-transform: uppercase;
-}
-
 pre {
-	font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace;
+	font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace; 
 	font-size: 12px;
 	color: #000;
-    background: #fafafa none repeat scroll 0 0;
-    border: medium none;
     line-height: 17.6px;
     overflow-x: auto;
-    padding: 1em 0 1em 1em;
     white-space: pre;
     word-break: inherit;
     word-wrap: inherit;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #F0F0F0;
+    border-radius: 0;
 }
 
-pre span.N{ color:#888; } /* Numbers */
-pre span.S{ color:#888; } /* Strings */
-pre span.C{ color:#ccc; } /* Comments */
-pre span.K{ font-weight: bold; } /* Keywords */
-pre span.V{ color:#888; } /* Vars */
-
+pre span.N{ color:#ea0; } /* Numbers */
+pre span.S{ color:#080; } /* Strings */
+pre span.C{ color:#a60; } /* Comments */
+pre span.K{ color:#008; } /* Keywords */
+pre span.V{ color:#808; } /* Vars */
 pre span.D{ color:#a00; } /* Defines */
 pre span.P {color:#9F9D65} /* Punctuations */
 
@@ -188,6 +173,21 @@ header.site-head .blog-logo {
 	background-position: center center !important;
 	background-color: #ffffff;
 	display: inline-block;
+}
+
+.dropdown-menu {
+	font-size: 12px;
+	margin-top: 0;
+	padding: 0;
+}
+.dropdown-menu > li > a {
+	padding: 12px 15px;
+}
+.dropdown-header {
+	font-size: 9px;
+	padding-left: 15px;
+	padding-right: 15px;
+	text-transform: uppercase;
 }
 
 /* ----------- Posts list ----------- */
