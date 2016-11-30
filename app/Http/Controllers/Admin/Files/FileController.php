@@ -36,8 +36,8 @@ class FileController extends Controller {
 			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 		}
 		
-		$file_type = File::type($file_path);
-	
+		$file_type = getMimeType($file_path);
+
 		return response(File::get($file_path), 200)->header('Content-Type', $file_type);
 	}
 
@@ -85,7 +85,7 @@ class FileController extends Controller {
 	
 	public function update($file_id, Request $request)
 	{
-		$file = Models\File::firstOrFail($file_id);
+		$file = Models\File::findOrFail($file_id);
 
 		if ($request->description) {
 			$file->update(['description' => $request->description]);

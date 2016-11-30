@@ -30,7 +30,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 |--------------------------------------------------------------------------
 */
 
-Route::get('file/{date}/{name}', ['as' => 'file.get', 'uses' => 'Admin\FileController@get']);
+Route::get('file/{date}/{name}', ['as' => 'file.get', 'uses' => 'Admin\Files\FileController@get']);
 
 /*
 |--------------------------------------------------------------------------

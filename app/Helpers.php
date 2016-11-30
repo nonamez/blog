@@ -22,3 +22,32 @@ if (function_exists('displayAlert') == FALSE) {
 		return '';
 	}
 }
+
+/**
+ * Get file mime type
+ */
+
+if (function_exists('getMimeType') == FALSE) {
+	function getMimeType($file) {
+		if (function_exists('finfo_file')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+			$mime = finfo_file($finfo, $file);
+
+			finfo_close($finfo);
+
+			return $mime;
+		} else if (function_exists('mime_content_type')) {
+			return mime_content_type($file);
+		} else if (strpost(ini_get('disable_functions'), 'shell_exec') !== FALSE) {
+			$file = escapeshellarg($file);
+
+			$mime = shell_exec('file -bi ' . $file);
+			$mime = trim($mime);
+
+			return $mime;
+		} else {
+			return FALSE;
+		}
+	}
+}
