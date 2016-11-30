@@ -15,8 +15,7 @@ return array(
 	),
 	'post' => array(
 		'no_posts'      => 'No posts found',
-		'more_link'     => 'More',
-		'comments_link' => 'Comments',
+		'more_link'     => 'Read More / Comment',
 		'no_comments'   => 'No comments',
 		'show_comments' => 'Show comments'
 	),

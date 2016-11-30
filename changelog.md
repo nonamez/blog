@@ -1,7 +1,7 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-ToDo: Refactor all JS code in order to minimize it
+In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 so there may be a compatibility problem with previous version...
 
 ## [0.5.0] - [Unreleased]
 ### Changed
@@ -9,6 +9,7 @@ ToDo: Refactor all JS code in order to minimize it
 - Assets refactored
 - Completely rewritten the file mechanism
 - Frawmework upgraded to 5.3.*
+- Markdown added for the posts
 
 ### Fixed
 - 404 error

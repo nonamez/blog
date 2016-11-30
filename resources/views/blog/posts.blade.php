@@ -17,14 +17,10 @@
 				@include('blog.partials.line')
 			</ul>
 			<div>
-				{!! $post->short() !!}
+				{!! $post->getShort() !!}
 			</div>
 			<p class="text-center">
-				@if ($post->is_short)
 				<a href="{{ $post->getURL() }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
-				@else
-				<a href="{{ $post->getURL() }}#comments" class="btn btn-default btn-sm">@lang('blog.post.comments_link')</a>
-				@endif
 			</p>
 		</section>
 	</article>

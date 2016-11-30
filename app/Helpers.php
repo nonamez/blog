@@ -51,3 +51,17 @@ if (function_exists('getMimeType') == FALSE) {
 		}
 	}
 }
+
+/**
+ * Get file mime type
+ */
+
+if (function_exists('convertMarkdownToHTML') == FALSE) {
+	function convertMarkdownToHTML($content) {
+		$converter = new League\CommonMark\CommonMarkConverter();
+
+		$content = $converter->convertToHtml($content);
+
+		return $content;
+	}
+}

@@ -5,16 +5,13 @@ namespace App\Http\Controllers\Blog;
 use App\Models;
 use App\Http\Controllers\Controller;
 
-use Auth;
-use Cache;
-
 class PostController extends Controller 
 {
 	function __construct() 
 	{
 		$name = 'tags_in_header_' . app()->getLocale();
 
-		$tags = Cache::rememberForever($name, function() {
+		$tags = cache()->rememberForever($name, function() {
 			$tags = Models\Blog\Tag::whereHas('translated_posts', function($query) {
 				$query->where('locale', '=', app()->getLocale());
 				$query->where('status', '=', 'published');
@@ -52,11 +49,9 @@ class PostController extends Controller
 		
 		$post = $post->firstOrFail();
 
-		return view('blog/post', [
-			'post'             => $post,
-			'meta_keywords'    => $post->meta_keywords,
-			'meta_description' => $post->meta_description,
-		]);
+		$post->content = convertMarkdownToHTML($post->content);
+
+		return view('blog.post', compact('post'));
 	}
 	
 	public function postsByTag($tag)
@@ -65,9 +60,9 @@ class PostController extends Controller
 		
 		$posts = $tag->translated_posts()->where('locale', '=', app()->getLocale())->where('status', '=', 'published')->orderBy('id', 'DEC');
 		
-		$paginated = $posts->paginate(config('blog.posts_per_page'));
+		$posts = $posts->paginate(config('blog.posts_per_page'));
 		
-		return view('blog/posts')->with('posts', $paginated);
+		return view('blog.posts', compact('posts'));
 	}
 }
 
