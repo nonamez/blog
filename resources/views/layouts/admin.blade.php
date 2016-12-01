@@ -8,13 +8,13 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>{{ config('app.name', 'Laravel') }}</title>
+	<title>{{ config('app.name') }}</title>
 
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}">
 	<link href="{{ asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
-	<link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+	<link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top">
@@ -30,8 +30,8 @@
 				</button>
 
 				<!-- Branding Image -->
-				<a class="navbar-brand" href="{{ url('/') }}">
-					{{ config('app.name', 'Laravel') }}
+				<a class="navbar-brand" href="{{ url('/admin') }}">
+					Dashboard
 				</a>
 			</div>
 
@@ -43,7 +43,7 @@
 							<a href="{{ url('/') }}">Blog</a>
 						</li>
 						<li>
-							<a href="{{ route('portfolio') }}">Portfolio</a>
+							<a href="{{ route('portfolio.index') }}">Portfolio</a>
 						</li>
 					</ul>
 				</ul>
@@ -73,14 +73,11 @@
 						</a>
 						<ul role="menu" class="dropdown-menu">
 							<li>
-								<a href="{{ route('admin_portfolio_works') }}">Works</a>
-							</li>
-							<li>
-								<a href="{{ route('admin_portfolio_works') }}">Works</a>
+								<a href="{{ route('admin.portfolio.works.index') }}">Works</a>
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="{{ route('admin_portfolio_codes') }}">Codes</a>
+								<a href="{{ route('admin.portfolio.codes.index') }}">Codes</a>
 							</li>
 						</ul>
 					</li>

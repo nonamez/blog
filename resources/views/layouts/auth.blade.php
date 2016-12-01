@@ -8,11 +8,11 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>{{ config('app.name', 'Laravel') }}</title>
+	<title>{{ config('app.name') }}</title>
 
 	<!-- Styles -->
 
-	<link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+	<link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
 		<nav class="navbar navbar-default navbar-static-top">
@@ -28,8 +28,8 @@
 				</button>
 
 				<!-- Branding Image -->
-				<a class="navbar-brand" href="{{ url('/') }}">
-					{{ config('app.name', 'Laravel') }}
+				<a class="navbar-brand" href="{{ url('/admin') }}">
+					Dashboard
 				</a>
 			</div>
 
@@ -41,7 +41,7 @@
 							<a href="{{ url('/') }}">Blog</a>
 						</li>
 						<li>
-							<a href="{{ route('portfolio') }}">Portfolio</a>
+							<a href="{{ route('portfolio.index') }}">Portfolio</a>
 						</li>
 					</ul>
 				</ul>

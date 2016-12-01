@@ -4,21 +4,21 @@ namespace App\Http\Controllers\Admin\Portfolio;
 
 use Illuminate\Http\Request;
 
-use App\Models\Portfolio\Code;
+use App\Models;
 use App\Http\Controllers\Controller;
 
 class CodeController extends Controller
 {
-	public function codes()
+	public function index()
 	{
-		$codes = Code::all();
+		$codes = Models\Portfolio\Code::get();
 
-		return view('admin.portfolio.codes', compact('codes'));
+		return view('admin.portfolio.codes.index', compact('codes'));
 	}
 
-	public function createCode(Request $request)
+	public function store(Request $request)
 	{
-		$code = new Code;
+		$code = new Models\Portfolio\Code;
 
 		$code->title = $request->get('title', NULL);
 		$code->code  = str_random(12);
@@ -28,9 +28,9 @@ class CodeController extends Controller
 		return redirect()->back();
 	}
 
-	public function deleteCode($code_id)
+	public function delete($code_id)
 	{
-		Code::destroy($code_id);
+		Models\Portfolio\Code::destroy($code_id);
 
 		return redirect()->back();
 	}

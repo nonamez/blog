@@ -10,9 +10,8 @@ elixir(function(mix) {
 
 	mix.copy('bower_components/fontawesome/fonts','public/build/fonts')
 
-	mix.sass('app.scss')
-
-	mix.sass('blog.scss', 'public/css/blog.css')
+	mix.sass('admin.scss')
+	mix.sass('blog.scss')
 
 	mix.scripts([
 		BOWER_DIR + '/bootstrap/dist/js/bootstrap.min.js',
@@ -22,9 +21,10 @@ elixir(function(mix) {
 	mix.scriptsIn('resources/assets/js/admin', 'public/js/admin.js')
 
 	mix.version([
-		'public/css/app.css',
+		'public/css/admin.css',
+		'public/js/admin.js',
+
 		'public/css/blog.css',
 		'public/js/blog.js',
-		'public/js/admin.js',
 	])
 })

@@ -106,7 +106,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		});
 
 		Route::group(['prefix' => 'codes'], function() {
-			Route::get('/', ['as' => 'admin.portfolio.codes.index', 'uses' => 'CodeController@codes']);
+			Route::get('/', ['as' => 'admin.portfolio.codes.index', 'uses' => 'CodeController@index']);
 			Route::post('store', ['as' => 'admin.portfolio.codes.store', 'uses' => 'CodeController@store']);
 			Route::get('{code_id}/delete', ['as' => 'admin.portfolio.codes.delete', 'uses' => 'CodeController@delete']);
 		});

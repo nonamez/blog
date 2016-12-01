@@ -14,7 +14,7 @@ class WorkController extends Controller
 	{
 		$works = Portfolio\Work::with('images')->get();
 
-		return view('admin.portfolio.works', compact('works'));
+		return view('admin.portfolio.works.index', compact('works'));
 	}
 
 	public function work($work_id = FALSE)
