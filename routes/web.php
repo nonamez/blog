@@ -51,11 +51,11 @@ Route::group(['prefix' => app()->getLocale()], function() {
 });
 
 // Portfolio
-Route::group(['prefix' => 'portfolio'], function() {
-	Route::get('', ['as' => 'portfolio', 'middleware' => 'check_portfolio', 'uses' => 'Portfolio\WorkController@index']);
+Route::group(['prefix' => 'portfolio', 'namespace' => 'Portfolio'], function() {
+	Route::get('/', ['as' => 'portfolio.index', 'middleware' => 'portfolio.', 'uses' => 'WorkController@index']);
 
-	Route::get('authenticate', ['as' => 'portfolio.authenticate.get', 'uses' => 'Portfolio\LoginController@index']);
-	Route::post('authenticate', ['as' => 'portfolio.authenticate.post', 'uses' => 'Portfolio\LoginController@authorizePortfolio']);
+	Route::get('authenticate', ['as' => 'portfolio.authenticate.get', 'uses' => 'LoginController@index']);
+	Route::post('authenticate', ['as' => 'portfolio.authenticate.post', 'uses' => 'LoginController@authorizePortfolio']);
 });
 
 // Helpers for posts examples
@@ -76,6 +76,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		return redirect()->route('admin.posts.index');
 	});
 
+	// Posts
 	Route::group(['prefix' => 'posts', 'namespace' => 'Posts'], function() {
 		Route::get('/', ['as' => 'admin.posts.index', 'uses' => 'PostController@index']);
 		Route::get('create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		Route::get('{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
 	});
 
+	// Files
 	Route::group(['prefix' => 'files', 'namespace' => 'Files'], function() {
 		Route::get('/', ['as' => 'admin.files.index', 'uses' => 'FileController@index']);
 		Route::post('upload', ['as' => 'admin.files.store', 'uses' => 'FileController@store']);
@@ -94,21 +96,19 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 
 	// Portfolio
 	Route::group(['prefix' => 'portfolio', 'namespace' => 'Portfolio'], function() {
-		Route::get('', function() {
-			return redirect()->route('admin_portfolio_works');
+		Route::group(['prefix' => 'works'], function() {
+		    Route::get('/', ['as' => 'admin.portfolio.works.index', 'uses' => 'WorkController@index']);
+			Route::get('create', ['as' => 'admin.portfolio.works.create', 'uses' => 'WorkController@work']);
+			Route::post('store', ['as' => 'admin.portfolio.works.store', 'uses' => 'WorkController@store']);
+			Route::get('{work_id}/edit', ['as' => 'admin.portfolio.works.edit', 'uses' => 'WorkController@work']);
+			Route::post('{work_id}/update', ['as' => 'admin.portfolio.works.update', 'uses' => 'WorkController@update']);
+			Route::get('{work_id}/delete', ['as' => 'admin.portfolio.works.delete(oid)', 'uses' => 'WorkController@delete']);
 		});
 
-		Route::get('works', ['as' => 'admin_portfolio_works', 'uses' => 'WorkController@index']);
-		
-		Route::get('work/create', ['as' => 'admin_portfolio_create_work', 'uses' => 'WorkController@work']);
-		Route::get('work/edit/{work_id}', ['as' => 'admin_portfolio_edit_work', 'uses' => 'WorkController@work']);
-
-		Route::post('work/store', ['as' => 'admin_portfolio_store_work', 'uses' => 'WorkController@store']);
-		Route::post('work/update/{work_id}', ['as' => 'admin_portfolio_update_work', 'uses' => 'WorkController@update']);
-		Route::get('work/delete/{work_id}', ['as' => 'admin_portfolio_delete_work', 'uses' => 'WorkController@delete']);
-
-		Route::get('codes', ['as' => 'admin_portfolio_codes', 'uses' => 'CodeController@codes']);
-		Route::post('codes/create', ['as' => 'admin_portfolio_create_code', 'uses' => 'CodeController@createCode']);
-		Route::get('codes/delete/{id}', ['as' => 'admin_portfolio_delete_code', 'uses' => 'CodeController@deleteCode']);
+		Route::group(['prefix' => 'codes'], function() {
+			Route::get('/', ['as' => 'admin.portfolio.codes.index', 'uses' => 'CodeController@codes']);
+			Route::post('store', ['as' => 'admin.portfolio.codes.store', 'uses' => 'CodeController@store']);
+			Route::get('{code_id}/delete', ['as' => 'admin.portfolio.codes.delete', 'uses' => 'CodeController@delete']);
+		});
 	});
 });

@@ -61,7 +61,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="{{ route('admin.posts.index') }}">Posts</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="{{ route('admin.posts.create') }}">Add new</a></li>
+							<li><a href="{{ route('admin.posts.create') }}">Create Post</a></li>
 						</ul>
 					</li>
 					<li role="presentation"{!! $menu == 'files' ? ' class="active"' : '' !!}>
@@ -72,6 +72,9 @@
 							Portfolio <span class="caret"></span>
 						</a>
 						<ul role="menu" class="dropdown-menu">
+							<li>
+								<a href="{{ route('admin_portfolio_works') }}">Works</a>
+							</li>
 							<li>
 								<a href="{{ route('admin_portfolio_works') }}">Works</a>
 							</li>
