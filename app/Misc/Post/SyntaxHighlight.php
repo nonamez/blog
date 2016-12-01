@@ -63,7 +63,7 @@ class SyntaxHighlight
 			'/(?<!\w|\$|\%|\@|>)(
 				and|or|xor|for|do|while|foreach|as|return|die|exit|if|then|else|
 				elseif|new|delete|try|throw|catch|finally|class|function|string|
-				array|object|resource|var|bool|boolean|int|integer|float|double|
+				array|object|resource|var|let|bool|boolean|int|integer|float|double|
 				real|string|array|global|const|static|public|private|protected|
 				published|extends|switch|true|false|null|void|this|self|struct|
 				char|signed|unsigned|short|long
