@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,7 +25,22 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Detect locale before routes
+        if (app()->runningInConsole() == FALSE) {
+            $locales = config('app.locales');
+
+            if (in_array(request()->segment(1), $locales)) {
+                $locale = request()->segment(1);
+            } elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), $locales)) {
+                $locale = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            } else {
+                $locale = config('app.fallback_locale');
+            }
+            
+            app()->setLocale($locale);
+            
+            Carbon::setLocale($locale);
+        }
 
         parent::boot();
     }

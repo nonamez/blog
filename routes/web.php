@@ -7,12 +7,11 @@
 
 // Redirect from / to lang
 Route::get('/', function() {
-	if (in_array(Request::segment(1), config('app.locales')))
-		return redirect()->to(Request::segment(1));
-	elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), Config::get('app.locales')))
+	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), config('app.locales'))) {
 		return redirect()->to(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-	else
+	} else {
 		return redirect()->to(config('app.fallback_locale'));
+	}
 });
 
 /*
@@ -38,7 +37,7 @@ Route::get('file/{date}/{name}', ['as' => 'file.get', 'uses' => 'Admin\Files\Fil
 |--------------------------------------------------------------------------
 */
 
-Route::get('/{locale}', 'Blog\PostController@index')->where('locale', implode('|', Config::get('app.locales')));
+Route::get('/{locale}', 'Blog\PostController@index')->where('locale', implode('|', config('app.locales')));
 
 // Blog
 Route::group(['prefix' => app()->getLocale()], function() {
@@ -46,7 +45,7 @@ Route::group(['prefix' => app()->getLocale()], function() {
 	Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'Blog\PostController@postsByTag']);
 	
 	Route::get('about', ['as' => 'about', function() {
-		return view()->make('about');
+		return view('about');
 	}]);
 });
 
