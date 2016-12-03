@@ -101,7 +101,7 @@
 							<div class="col-xs-12 col-sm-4 text-right">
 								<div class="btn-group btn-group-sm" role="group" aria-label="...">
 									<button type="button" class="btn btn-default"><i class="fa fa-download" aria-hidden="true"></i></button>
-									<button type="button" class="btn btn-default" data-role="remove-file" data-file-id="{{ $file->id }}"><i class="fa fa-trash"></i></button>
+									<button type="button" class="btn btn-default" data-role="delete-file" data-route="{{ route('admin.files.delete', $file->id) }}"><i class="fa fa-trash"></i></button>
 								</div>
 							</div>
 						</div>

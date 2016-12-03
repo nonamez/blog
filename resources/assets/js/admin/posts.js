@@ -15,10 +15,6 @@ const _ELEMENTS = {
 }
 
 jQuery(document).ready(function() {
-	_ELEMENTS.div_tags_container.find('[data-role="remove"]').click(function() {
-		this.parentNode.parentNode.removeChild(this.parentNode)
-	})
-	
 	_ELEMENTS.input_fake_file_upload.change(function() {
 		_ELEMENTS.input_fake_file_name.val(this.value)
 
@@ -63,11 +59,20 @@ jQuery(document).ready(function() {
 
 				jQuery('<button/>').attr({
 					class: 'btn btn-default',
-					'data-role': 'remove-file',
+					'data-role': 'delete-file',
 					'data-route': response.del_url
-				}).on('click', removeTag).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(div_btn_group)
+				}).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(div_btn_group)
 
 			}
+		})
+	})
+
+	// File delete
+	_ELEMENTS.div_files_container.on('click', '[data-role="delete-file"]', function() {
+		var that = this
+		
+		jQuery.getJSON(this.getAttribute('data-route'), function() {
+			jQuery(that).closest('.list-group-item').remove()
 		})
 	})
 
