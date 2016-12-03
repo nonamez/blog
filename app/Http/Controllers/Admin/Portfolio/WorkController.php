@@ -17,6 +17,11 @@ class WorkController extends Controller
 		return view('admin.portfolio.works.index', compact('works'));
 	}
 
+	public function create()
+	{
+		return view('admin.portfolio.works.create');
+	}
+
 	public function work($work_id = FALSE)
 	{
 		$work  = $work_id ? Portfolio\Work::with('images')->find($work_id) : NULL;
