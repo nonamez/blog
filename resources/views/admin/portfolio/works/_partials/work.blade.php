@@ -14,38 +14,12 @@
 </div>
 
 <div class="panel panel-default">
-	<div class="panel-heading">Works</div>
+	<div class="panel-heading">Images</div>
 	<div class="panel-body">
-		{{-- <div class="row">
-			<div class="col-sm-5 col-sm-offset-1">
-				<div class="form-group">
-					<label for="portfolio-textarea-image-description">Description</label>
-					<textarea id="portfolio-textarea-image-description" rows="2" class="form-control" placeholder="Enter Description"></textarea>
-				</div>
-			</div>
-			<div class="col-sm-4 col-sm-offset-1">
-				<div class="form-group">
-					<label for="fake-file-button-browse">Image</label>
-					<div class="input-group">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" id="fake-file-button-browse">
-								<i class="fa fa-file-o"></i>
-							</button>
-						</span>
-						<input type="file" style="display:none" id="files-input-upload">
-						<input type="text" class="form-control" placeholder="File not selected" disabled="disabled" id="fake-file-input-name">
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4 col-sm-offset-4">
-				<button class="btn btn-default btn-block" type="button" id="portfolio-button-upload-image">Add</button>
-			</div>
-		</div> --}}
 		<!-- Button trigger modal -->
-
 		<div class="row">
-			<div class="col-xs-12 col-sm-3">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+			<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+				<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#works-div-modal-image-container">
 					Add image
 				</button>
 			</div>
@@ -87,19 +61,40 @@
 	</div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="works-div-modal-image-container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				<h4 class="modal-title" id="myModalLabel">New Image</h4>
 			</div>
 			<div class="modal-body">
-				...
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Description</label>
+						<div class="col-sm-9">
+							<textarea id="portfolio-textarea-image-description" rows="2" class="form-control" placeholder="Enter Description"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-3 control-label">Image</label>
+						<div class="col-sm-9">
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" id="fake-file-button-browse">
+										<i class="fa fa-file-o"></i>
+									</button>
+								</span>
+								<input type="file" style="display:none" id="files-input-upload">
+								<input type="text" class="form-control" placeholder="File not selected" disabled="disabled" id="fake-file-input-name">
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-primary">Add</button>
 			</div>
 		</div>
 	</div>
