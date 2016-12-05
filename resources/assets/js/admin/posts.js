@@ -62,7 +62,6 @@ jQuery(document).ready(function() {
 					'data-role': 'delete-file',
 					'data-route': response.del_url
 				}).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(div_btn_group)
-
 			}
 		})
 	})

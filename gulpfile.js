@@ -18,12 +18,13 @@ elixir(function(mix) {
 		'blog.js',
 	], 'public/js/blog.js')
 
-	mix.script('resources/assets/js/admin/posts.js', 'public/js/admin/posts.js')
-	mix.script('resources/assets/js/admin/portfolio/works.js', 'public/js/admin/portfolio/works.js')
+	mix.scripts('resources/assets/js/admin/posts.js', 'public/js/admin/posts.js')
+	mix.scripts('resources/assets/js/admin/portfolio/works.js', 'public/js/admin/portfolio/works.js')
 
 	mix.version([
 		'public/css/admin.css',
-		'public/js/admin.js',
+		'public/js/admin/posts.js',
+		'public/js/admin/portfolio/works.js',
 
 		'public/css/blog.css',
 		'public/js/blog.js',

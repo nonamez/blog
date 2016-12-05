@@ -1,6 +1,7 @@
 {
-  "css/admin.css": "css/admin-2032c27452.css",
-  "css/blog.css": "css/blog-6aea578f24.css",
-  "js/admin.js": "js/admin-6fdfeae078.js",
+  "css/admin.css": "css/admin-47ac6a7e9a.css",
+  "css/blog.css": "css/blog-bba64bd8e4.css",
+  "js/admin/portfolio/works.js": "js/admin/portfolio/works-417ebefde9.js",
+  "js/admin/posts.js": "js/admin/posts-ebcab26d0e.js",
   "js/blog.js": "js/blog-b8e20f6a8d.js"
 }

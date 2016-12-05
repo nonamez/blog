@@ -156,8 +156,6 @@
 		})
 	</script>
 
-	<script src="{{ elixir('js/admin.js') }}"></script>
-
 	@stack('scripts')
 </body>
 </html>
