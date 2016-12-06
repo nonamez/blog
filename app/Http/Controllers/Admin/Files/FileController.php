@@ -65,19 +65,22 @@ class FileController extends Controller {
 		
 		$file->move($path, $name);
 		
-		$file = Models\File::create([
-			'name'          => $name,
-			'description'   => $request->get('description', NULL),
-			'original_name' => $file->getClientOriginalName()
-		]);
+		$new_file = new Models\File;
+
+		$new_file->name = $name;
+		$new_file->description   = $request->get('description', NULL);
+		$new_file->original_name = $file->getClientOriginalName();
+
+		$new_file->save();
 		
 		$data = [
-			'id'   => $file->id,
-			'name' => $file->name,
-			'description' => $file->description,
+			'id'   => $new_file->id,
+			'name' => $new_file->name,
+			'description' => $new_file->description,
 
-			'get_url' => $file->getURL(),
-			'del_url' => $file->getDeleteURL(),
+			'get_url' => $new_file->getURL(),
+			'upd_url' => $new_file->getUpdateURL(),
+			'del_url' => $new_file->getDeleteURL(),
 		];
 		
 		return response()->json($data);

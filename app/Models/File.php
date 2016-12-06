@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model {
 
 	protected $table = 'files';
-	protected $fillable = ['name', 'original_name', 'description'];
+	protected $fillable = ['name', 'description'];
 
 	public static function boot()
 	{
@@ -46,6 +46,11 @@ class File extends Model {
 	public function getURL()
 	{
 		return route('file.get', [$this->created_at->format('Y-m-d'), $this->name]);
+	}
+
+	public function getUpdateURL()
+	{
+		return route('admin.files.update', $this->id);
 	}
 
 	public function getDeleteURL()
