@@ -19,7 +19,7 @@
 		<!-- Button trigger modal -->
 		<div class="row">
 			<div class="col-xs-12 col-sm-4 col-sm-offset-4">
-				<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#works-div-modal-image-container">
+				<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#works-div-modal-add-image-container">
 					Add image
 				</button>
 			</div>
@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="table-responsive">
-					<table class="table" id="portfolio-table-images">
+					<table class="table" id="works-table-images">
 						<thead>
 							<tr>
 								<th>Image</th>
@@ -61,7 +61,7 @@
 	</div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="works-div-modal-image-container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="works-div-modal-add-image-container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
