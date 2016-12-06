@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-3 control-label">Description</label>
 						<div class="col-sm-9">
-							<textarea id="portfolio-textarea-image-description" rows="2" class="form-control" placeholder="Enter Description"></textarea>
+							<textarea id="works-textarea-image-description" rows="2" class="form-control" placeholder="Enter Description"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -85,7 +85,7 @@
 										<i class="fa fa-file-o"></i>
 									</button>
 								</span>
-								<input type="file" style="display:none" id="files-input-upload">
+								<input type="file" style="display:none" id="fake-file-input-upload">
 								<input type="text" class="form-control" placeholder="File not selected" disabled="disabled" id="fake-file-input-name">
 							</div>
 						</div>
@@ -94,7 +94,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" class="btn btn-primary" data-route="{{ route('admin.files.store') }}" id="works-button-add-new-image">Add</button>
 			</div>
 		</div>
 	</div>
