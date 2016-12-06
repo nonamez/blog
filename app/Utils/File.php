@@ -11,15 +11,17 @@ class File
 
 		$image = FALSE;
 
-		if ($mime_type == 'image/jpeg')
+		if ($mime_type == 'image/jpeg') {
 			$image = imagecreatefromjpeg($real_path);
-		elseif ($mime_type == 'image/gif')
+		} else if ($mime_type == 'image/gif') {
 			$image = imagecreatefromgif($real_path);
-		elseif ($mime_type == 'image/png')
+		} else if ($mime_type == 'image/png') {
 			$image = imagecreatefrompng($real_path);
+		}
 
-		if ($image == FALSE)
+		if ($image == FALSE) {
 			return NULL;
+		}
 
 		$watermark = imagecreatefrompng(storage_path('app/watermark.png'));
 
@@ -43,12 +45,13 @@ class File
 			$img_paste_x += $watermark_sx;
 		}
 
-		if ($mime_type == 'image/jpeg')
+		if ($mime_type == 'image/jpeg') {
 			imagejpeg($image, $real_path);
-		elseif ($mime_type == 'image/gif')
+		} elseif ($mime_type == 'image/gif') {
 			imagegif($image, $real_path);
-		elseif ($mime_type == 'image/png')
+		} elseif ($mime_type == 'image/png') {
 			imagepng($image, $real_path);
+		}
 
 		imagedestroy($image);
 		imagedestroy($watermark);
