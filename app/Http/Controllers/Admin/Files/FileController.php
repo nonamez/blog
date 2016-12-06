@@ -83,7 +83,7 @@ class FileController extends Controller {
 		return response()->json($data);
 	}
 	
-	public function update($file_id, Request $request)
+	public function update(Request $request, $file_id)
 	{
 		$file = Models\File::findOrFail($file_id);
 
