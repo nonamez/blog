@@ -23,7 +23,13 @@ class File
 			return NULL;
 		}
 
-		$watermark = imagecreatefrompng(storage_path('app/watermark.png'));
+		$lightness = self::getImageLightness($image);
+
+		if ($lightness < 0.5) {
+			$watermark = imagecreatefrompng(storage_path('app/watermark/light.png'));
+		} else {
+			$watermark = imagecreatefrompng(storage_path('app/watermark/dark.png'));
+		}
 
 		$image_sx = imagesx($image);
 		$image_sy = imagesy($image);
@@ -55,6 +61,27 @@ class File
 
 		imagedestroy($image);
 		imagedestroy($watermark);
+	}
+
+	// http://stackoverflow.com/questions/12228644/how-to-detect-light-colors-with-php
+	public static function getImageLightness(& $image)
+	{
+		$test = imagecreatetruecolor(1, 1);
+		
+		$rgb = imagecolorat($image, 0, 0);
+		
+		$r = ($rgb >> 16) & 0xFF;
+		$g = ($rgb >> 8) & 0xFF;
+		$b = $rgb & 0xFF;
+		
+		$max = min($r, $g, $b);
+		$min = max($r, $g, $b);
+		
+		$lightness = (double) (($max + $min) / 510.0); // HSL algorithm
+
+		imagedestroy($test);
+
+		return $lightness;
 	}
 
 	public static function saveRemoteImage($img_url)
