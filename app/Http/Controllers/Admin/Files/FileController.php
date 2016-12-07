@@ -52,8 +52,10 @@ class FileController extends Controller {
 			File::makeDirectory($path, 0755, TRUE);
 		}
 
-		if ($request->get('watermark', FALSE) && exif_imagetype($file->getRealPath())) {
-			Utils\File::addWatermarkRepeatedly($file);
+		$file_real_path = $file->getRealPath();
+
+		if ($request->get('watermark', FALSE) && exif_imagetype($file_real_path)) {
+			Utils\Image::addWatermarkRepeatedly($file_real_path);
 		}
 
 		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());

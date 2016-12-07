@@ -121,9 +121,7 @@ class Image
 		$ext = pathinfo($img_url, PATHINFO_EXTENSION);
 
 		if (strlen($ext) == 0) {
-			$finfo = new finfo(FILEINFO_MIME);
-
-			$mime_type = $finfo->buffer($image);
+			$mime_type = File::getMimeType($image, TRUE);
 
 			if (strpos($mime_type, 'image/jpeg') !== FALSE) {
 				$ext = 'jpeg';
