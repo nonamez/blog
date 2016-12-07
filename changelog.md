@@ -1,9 +1,10 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 so there may be a compatibility problem with previous version...
-
 ## [0.5.0] - [Unreleased]
+
+In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 and improving old stuff so there may be a compatibility problems with previous version. Bassically this version is a new start.
+
 ### Changed
 - Improved slug check
 - Assets refactored
