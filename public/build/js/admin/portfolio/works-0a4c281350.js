@@ -26,6 +26,7 @@ jQuery(document).ready(function() {
 		var form_data = new FormData()
 
 		form_data.append('file', _ELEMENTS.input_fake_file_upload[0].files[0])
+		form_data.append('watermark', true)
 		form_data.append('description', _ELEMENTS.textarea_image_description.val())
 
 		jQuery.ajax({
