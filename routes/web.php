@@ -51,7 +51,7 @@ Route::group(['prefix' => app()->getLocale()], function() {
 
 // Portfolio
 Route::group(['prefix' => 'portfolio', 'namespace' => 'Portfolio'], function() {
-	Route::get('/', ['as' => 'portfolio.index', 'middleware' => 'portfolio.', 'uses' => 'WorkController@index']);
+	Route::get('/', ['as' => 'portfolio.index', 'middleware' => 'portfolio_auth', 'uses' => 'WorkController@index']);
 
 	Route::get('authenticate', ['as' => 'portfolio.authenticate.get', 'uses' => 'LoginController@index']);
 	Route::post('authenticate', ['as' => 'portfolio.authenticate.post', 'uses' => 'LoginController@authorizePortfolio']);

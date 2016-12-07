@@ -13,7 +13,7 @@
 	<div class="text-center">
 		<h3>Personal Portfolio</h3>
 		<div class="authorize-form">
-			<form action="{{ route('portfolio_authorize') }}" method="POST" id="forgot-password-form" class="text-left">
+			<form action="{{ route('portfolio.authenticate.post') }}" method="POST" id="forgot-password-form" class="text-left">
 				{{ csrf_field() }}
 				<div class="main-authorize-form">
 					<div class="authorize-group">

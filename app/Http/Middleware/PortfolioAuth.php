@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PortfolioCheck
+class PortfolioAuth
 {
     /**
      * Handle an incoming request.
@@ -23,6 +23,6 @@ class PortfolioCheck
 
         $request->session()->forget('portfolio');
 
-        return redirect('/portfolio/authenticate');
+        return redirect()->route('portfolio.authenticate.get');
     }
 }

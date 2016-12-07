@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class WorkController extends Controller
 {
-    //
+    public function index()
+    {
+    	dd(__FUNCTION__);
+    }
 }
