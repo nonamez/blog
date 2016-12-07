@@ -114,6 +114,8 @@ class PostController extends Controller
 
 		$translated_post->tags()->sync($tags);
 
+		// ========================= Files ========================= //
+
 		// Here we also could do "UPDATE" by ids for faster performance
 		foreach ($request->get('files', []) as $file_id) {
 			$file = Models\File::findOrFail($file_id);

@@ -4,7 +4,7 @@
 		
 		<div class="row">
 			<div class="col-xs-6">
-				<button type="button" class="btn btn-primary btn-block" data-loading-text="Saving..." id="posts-button-save" data-route="{{ $save_route }}">
+				<button type="button" class="btn btn-primary btn-block" data-loading-text="Saving..." id="works-button-save" data-save-route="{{ $save_route }}">
 					Save
 				</button>
 			</div>

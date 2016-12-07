@@ -29,8 +29,8 @@
 									<a href="{{ route('admin.posts.edit', $file->fileable->id) }}">
 										Post
 									</a>
-									@elseif($file->type =='portfolio' && $file->portfolio)
-									<a href="{{ route('admin_portfolio_edit_work', $file->portfolio->id) }}">Portfolio</a>
+									@elseif($file->fileable instanceof App\Models\Portfolio\Work)
+									<a href="{{ route('admin.portfolio.works.edit', $file->fileable->id) }}">Portfolio</a>
 									@else
 									None
 									@endif

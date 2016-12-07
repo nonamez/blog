@@ -93,7 +93,7 @@ class FileController extends Controller {
 		$file = Models\File::findOrFail($file_id);
 
 		if ($request->description) {
-			$file->update(['description' => $request->description]);
+			$file->update($request->only('description'));
 		}
 		
 		if ($request->ajax()) {

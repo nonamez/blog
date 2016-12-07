@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Portfolio;
 
-use App\Helpers;
-use App\Models\Portfolio;
+use Illuminate\Http\Request;
+
+use App\Models;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Portfolio\WorkRequest;
 
@@ -12,7 +13,7 @@ class WorkController extends Controller
 {
 	public function index()
 	{
-		$works = Portfolio\Work::with('images')->get();
+		$works = Models\Portfolio\Work::with('images')->get();
 
 		return view('admin.portfolio.works.index', compact('works'));
 	}
@@ -22,46 +23,73 @@ class WorkController extends Controller
 		return view('admin.portfolio.works.create');
 	}
 
-	public function work($work_id = FALSE)
-	{
-		$work  = $work_id ? Portfolio\Work::with('images')->find($work_id) : NULL;
-		$route = $work_id ? route('admin_portfolio_update_work', $work_id) : route('admin_portfolio_store_work');
-
-		return view('admin.portfolio.work', compact('work', 'route'));
-	}
-
 	public function store(WorkRequest $request)
 	{
-		$work = Portfolio\Work::create($request->except('_token'));
+		$work = $this->_save($request);
 
-		Helpers\Admin\File::attach($request->get('images', []), $work->id, 'portfolio');
+		return response()->json(['redirect_to' => route('admin.portfolio.works.edit', $work->id)]);
+	}
 
-		return redirect()->route('admin_portfolio_edit_work', $work->id);
+	public function edit($work_id)
+	{
+		$work = Models\Portfolio\Work::findOrFail($work_id);
+
+		return view('admin.portfolio.works.edit', compact('work'));
 	}
 
 	public function update(WorkRequest $request, $work_id)
 	{
-		$work = Portfolio\Work::find($work_id);
+		$work = Models\Portfolio\Work::findOrFail($work_id);
 
-		if ($work) {
-			$work->update($request->except('_token'));
+		$this->_save($request, $work);
 
-			Helpers\Admin\File::attach($request->get('images', []), $work->id, 'portfolio');
-		}
-
-		return redirect()->back();
+		return response()->json();
 	}
 
 	public function delete($work_id)
 	{
-		$work = Portfolio\Work::with('images')->find($work_id);
+		$work = Models\Portfolio\Work::with('images')->findOrFail($work_id);
 
-		if (is_null($work) == FALSE) {
-			Helpers\Admin\File::deleteAll($work->images, 'portfolio');
-
-			$work->delete();
+		foreach ($work->images as $image) {
+			$image->delete();
 		}
 
+		$work->delete();
+
 		return redirect()->back();
+	}
+
+	public function attachImage(Request $request, $work_id)
+	{
+		$work  = Models\Portfolio\Work::find($work_id);
+		$image = Models\File::find($request->image_id);
+
+		if ($work && $image) {
+			$work->images()->save($image);
+		}
+
+		return response()->json();
+	}
+
+	private function _save(& $request, & $work = FALSE)
+	{
+		if ($work == FALSE) {
+			$work = new Models\Portfolio\Work;
+		}
+
+		$work->fill($request->all());
+
+		$work->save();
+
+		// ========================= Files ========================= //
+
+		// Here we also could do "UPDATE" by ids for faster performance
+		foreach ($request->get('images', []) as $image_id) {
+			$image = Models\File::findOrFail($image_id);
+
+			$work->images()->save($image);
+		}
+
+		return $work;
 	}
 }

@@ -8,7 +8,7 @@
 
 		<div class="form-group">
 			<label>Description</label>
-			<textarea name="content" cols="5" rows="5" class="form-control" placeholder="Enter Description">{{ $work->description or '' }}</textarea>
+			<textarea name="description" cols="5" rows="5" class="form-control" placeholder="Enter Description">{{ $work->description or '' }}</textarea>
 		</div>
 	</div>
 </div>
@@ -43,12 +43,11 @@
 									<a href="{{ $image->getURL() }}"><img width="140" height="140" src="{{ $image->getURL() }}" class="img-thumbnail"></a>
 								</td>
 								<td>
-									<textarea class="form-control" rows="1" cols="30">{{ $image->description }}</textarea>
+									<textarea class="form-control" rows="3" cols="30">{{ $image->description }}</textarea>
 								</td>
 								<td>
-									<button class="btn btn-default" type="button" data-file-id="{{ $image->id }}">Update</button>
-									<button class="btn btn-default portfolio-button-delete-image" type="button" data-file-id="{{ $image->id }}">Delete</button>
-									<input type="hidden" name="images[]" value="{{ $image->id }}">
+									<button class="btn btn-default btn-sm" type="button" data-update-route="{{ route('admin.files.update', $image->id) }}">Update</button>
+									<button class="btn btn-default btn-sm" type="button" data-delete-route="{{ route('admin.files.delete', $image->id) }}">Delete</button>
 								</td>
 							</tr>
 							@endforeach
@@ -61,7 +60,7 @@
 	</div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="works-div-modal-add-image-container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="works-div-modal-add-image-container" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">

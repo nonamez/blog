@@ -4,6 +4,7 @@ const _ELEMENTS = {
 	input_fake_file_name:    jQuery('#fake-file-input-name'),
 
 	button_add_new_image: jQuery('#works-button-add-new-image'),
+	button_save_work: jQuery('#works-button-save'),
 
 	textarea_image_description: jQuery('#works-textarea-image-description'),
 
@@ -19,6 +20,22 @@ jQuery(document).ready(function() {
 
 	_ELEMENTS.button_fake_file_browse.click(function() {
 		_ELEMENTS.input_fake_file_upload.trigger('click')
+	})
+
+	// Update image description
+	_ELEMENTS.table_images.on('click', '[data-update-route]', function() {
+		var description = jQuery(this).closest('tr').find('textarea').val()
+
+		jQuery.post(this.getAttribute('data-update-route'), {description: description})
+	})
+
+	// Delete image
+	_ELEMENTS.table_images.on('click', '[data-delete-route]', function() {
+		var that = this
+
+		jQuery.getJSON(this.getAttribute('data-delete-route'), function() {
+			jQuery(that).closest('tr').remove()
+		})
 	})
 
 	// Image upload
@@ -50,7 +67,7 @@ jQuery(document).ready(function() {
 
 				jQuery('<textarea/>').attr({
 					class: 'form-control',
-					rows: 5,
+					rows: 3,
 					cols: 30
 				}).text(response.description).appendTo(tr).wrap(jQuery('<td/>'))
 
@@ -69,7 +86,34 @@ jQuery(document).ready(function() {
 				}).text('Delete').appendTo(td)
 
 				_ELEMENTS.div_add_image_modal_container.modal('hide')
+
+				if (typeof image_attach_route !== 'undefined') {
+					var url = image_attach_route + '/' + response.id
+
+					jQuery.post(image_attach_route, {image_id: response.id})
+				}
 			}
+		})
+	})
+
+	// Work save
+	_ELEMENTS.button_save_work.click(function() {
+		_ELEMENTS.button_save_work.button('loading')
+
+		var data = {}
+
+		jQuery('.container').find('[name]').each(function() {
+			data[this.name] = this.value
+		})
+
+		data.images = _ELEMENTS.table_images.find('tr[data-image-id]').map(function() {return this.getAttribute('data-image-id')}).get()
+
+		jQuery.post(this.getAttribute('data-save-route'), data, function(response) {
+			if (response.redirect_to) {
+				window.location = response.redirect_to
+			}
+		}).complete(function() {
+			_ELEMENTS.button_save_work.button('reset')
 		})
 	})
 })

@@ -99,9 +99,10 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		    Route::get('/', ['as' => 'admin.portfolio.works.index', 'uses' => 'WorkController@index']);
 			Route::get('create', ['as' => 'admin.portfolio.works.create', 'uses' => 'WorkController@create']);
 			Route::post('store', ['as' => 'admin.portfolio.works.store', 'uses' => 'WorkController@store']);
-			Route::get('{work_id}/edit', ['as' => 'admin.portfolio.works.edit', 'uses' => 'WorkController@work']);
+			Route::get('{work_id}/edit', ['as' => 'admin.portfolio.works.edit', 'uses' => 'WorkController@edit']);
 			Route::post('{work_id}/update', ['as' => 'admin.portfolio.works.update', 'uses' => 'WorkController@update']);
-			Route::get('{work_id}/delete', ['as' => 'admin.portfolio.works.delete(oid)', 'uses' => 'WorkController@delete']);
+			Route::get('{work_id}/delete', ['as' => 'admin.portfolio.works.delete', 'uses' => 'WorkController@delete']);
+			Route::post('{work_id}/attach_image', ['as' => 'admin.portfolio.works.attach_image', 'uses' => 'WorkController@attachImage']);
 		});
 
 		Route::group(['prefix' => 'codes'], function() {
