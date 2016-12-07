@@ -4,7 +4,7 @@ namespace App\Utils;
 
 class Image
 {
-	public static function addWatermarkRepeatedly(string $image_path)
+	public static function addWatermarkRepeatedly($image_path)
 	{
 		$mime_type = exif_imagetype($image_path);
 
@@ -63,7 +63,7 @@ class Image
 	}
 
 	// http://stackoverflow.com/questions/12228644/how-to-detect-light-colors-with-php
-	public static function getImageLightness(string $image_path)
+	public static function getImageLightness($image_path)
 	{
 		$mime_type = exif_imagetype($image_path);
 
