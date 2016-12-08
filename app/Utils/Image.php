@@ -118,20 +118,16 @@ class Image
 
 		$image = file_get_contents($img_url);
 
-		$ext = pathinfo($img_url, PATHINFO_EXTENSION);
+		$mime_type = File::getMimeType($image, TRUE);
 
-		if (strlen($ext) == 0) {
-			$mime_type = File::getMimeType($image, TRUE);
-
-			if (strpos($mime_type, 'image/jpeg') !== FALSE) {
-				$ext = 'jpeg';
-			} elseif ($mime_type == 'image/gif') {
-				$ext = 'gif';
-			} elseif ($mime_type == 'image/png') {
-				$ext = 'png';
-			} else {
-				return  FALSE;
-			}
+		if (strpos($mime_type, 'image/jpeg') !== FALSE) {
+			$ext = 'jpeg';
+		} elseif (strpos($mime_type, 'image/gif') !== FALSE) {
+			$ext = 'gif';
+		} elseif (strpos($mime_type, 'image/png') !== FALSE) {
+			$ext = 'png';
+		} else {
+			return  FALSE;
 		}
 
 		$file_name = sprintf('%s.%s', str_random(12), $ext);
@@ -142,8 +138,11 @@ class Image
 
 		$new_file->name = $file_name;
 		$new_file->original_name = pathinfo($img_url, PATHINFO_FILENAME);
+		$new_file->remote_url = $img_url;
 
 		$new_file->save();
+
+		unset($image);
 
 		return $new_file;
 	}

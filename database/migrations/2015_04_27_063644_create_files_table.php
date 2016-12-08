@@ -16,6 +16,8 @@ class CreateFilesTable extends Migration {
             $table->string('original_name')->nullable()->default(NULL);
             $table->text('description')->nullable()->default(NULL);
 
+            $table->string('remote_url')->nullable()->default(NULL);
+
             $table->integer('fileable_id')->unsigned()->nullable()->default(NULL);
             $table->string('fileable_type')->nullable()->default(NULL);
             
