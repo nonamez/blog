@@ -8,6 +8,7 @@
 			<div class="main-authorize-form">
 				<div class="authorize-group">
 					<div class="form-group">
+						<input type="password" class="hidden"> <!-- FF fix -->
 						<input type="password" class="form-control" name="code" placeholder="Enter Code" autocomplete="off">
 					</div>
 				</div>
@@ -16,7 +17,7 @@
 				</button>
 			</div>
 			<div class="etc-authorize-form">
-				To get a code please <a href="http://www.google.com/recaptcha/mailhide/d?k=01VTZtgqL7czWrlPjRp-XJAA==&c=5SrSo3TJLPlPgpISyGJ48eJoPcZ4C0NAnUbH_1fhv9w=">contact me</a>.
+				To get the code please <a href="{{ route('about') }}">contact me</a>.
 			</div>
 		</form>
 	</div>
