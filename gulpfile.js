@@ -8,10 +8,9 @@ elixir(function(mix) {
 	mix.copy('bower_components/jquery/dist', 'public/plugins/jquery')
 	mix.copy('bower_components/toastr', 'public/plugins/toastr')
 
-	mix.copy('bower_components/fontawesome/fonts','public/build/fonts')
-
 	mix.sass('admin.scss')
 	mix.sass('blog.scss')
+	mix.sass('portfolio.scss')
 
 	mix.scripts([
 		BOWER_DIR + '/bootstrap/dist/js/bootstrap.min.js',
@@ -28,5 +27,7 @@ elixir(function(mix) {
 
 		'public/css/blog.css',
 		'public/js/blog.js',
+
+		'public/css/portfolio.css',
 	])
 })
