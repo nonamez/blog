@@ -19,7 +19,7 @@ class Work extends Model
 			return $image->getURL();
 		}
 
-		return getRandomCatImageURL();
+		return url('/storage/images/no_image.jpg');
 	}
 
 	// ========================= Relations ========================= //

@@ -11,8 +11,6 @@ class WorkController extends Controller
 {
 	public function index()
 	{
-
-		// dd(getRandomCatImageURL());
 		$works = Models\Portfolio\Work::get();
 
 		return view('portfolio.works', compact('works'));

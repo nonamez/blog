@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Display different messages depending on session
+ * Display different messages from session
  */
 
 if (function_exists('displayAlert') == FALSE) {
@@ -24,7 +24,7 @@ if (function_exists('displayAlert') == FALSE) {
 }
 
 /**
- * Get file mime type
+ * Prepare post content
  */
 
 if (function_exists('prepareContent') == FALSE) {
@@ -35,30 +35,5 @@ if (function_exists('prepareContent') == FALSE) {
 		$content = $markdown_parser->text($markdown);
 
 		return $content;
-	}
-}
-
-/**
- * Get file mime type
- */
-
-if (function_exists('getRandomCatImageURL') == FALSE) {
-	function getRandomCatImageURL()
-	{
-		$files = glob(storage_path('app/public/cats/*.*'));
-
-		// dd(exif_read_data('/var/www/html/NoNameZ/storage/app/public/cats/pukis_selfie.jpg'));
-
-		// dd($files);
-
-		shuffle($files);
-
-		foreach ($files as $file) {
-			if (exif_imagetype($file)) {
-				return url('/storage/cats/'. basename($file));
-			}
-		}
-
-		return FALSE;
 	}
 }
