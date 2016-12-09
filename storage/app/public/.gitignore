@@ -1,3 +1,5 @@
 *
 !.gitignore
 !cv.pdf
+!/images
+!/images/*
