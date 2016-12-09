@@ -5,12 +5,16 @@ All notable changes made to this project will be documented in this file.
 
 In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 and improving old stuff so there may be a compatibility problems with previous version. Bassically this version is a new start.
 
+### Added
+- Markdown for the posts
+- Simple syntax highlight via PHP
+
 ### Changed
 - Improved slug check
 - Assets refactored
-- Completely rewritten the file mechanism
+- Completely rewritten file upload mechanism
 - Frawmework upgraded to 5.3.*
-- Markdown added for the posts
+- Auth via username
 
 ### Fixed
 - 404 error
