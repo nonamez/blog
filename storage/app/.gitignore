@@ -1,5 +1,6 @@
 *
-!public/
 !.gitignore
+!public/
+!public/*
 !/watermark
 !/watermark/*.png

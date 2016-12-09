@@ -37,3 +37,28 @@ if (function_exists('prepareContent') == FALSE) {
 		return $content;
 	}
 }
+
+/**
+ * Get file mime type
+ */
+
+if (function_exists('getRandomCatImageURL') == FALSE) {
+	function getRandomCatImageURL()
+	{
+		$files = glob(storage_path('app/public/cats/*.*'));
+
+		// dd(exif_read_data('/var/www/html/NoNameZ/storage/app/public/cats/pukis_selfie.jpg'));
+
+		// dd($files);
+
+		shuffle($files);
+
+		foreach ($files as $file) {
+			if (exif_imagetype($file)) {
+				return url('/storage/cats/'. basename($file));
+			}
+		}
+
+		return FALSE;
+	}
+}
