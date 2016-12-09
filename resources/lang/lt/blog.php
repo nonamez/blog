@@ -7,8 +7,9 @@ return array(
 	),
 	'header' => array(
 		'menu' => array(
-			'home'     => 'Pagrintinis',
-			'about_me' => 'Apie mane'
+			'home'      => 'Pagrintinis',
+			'about_me'  => 'Apie mane',
+			'portfolio' => 'Portfolio'
 		),
 		'title'       => 'Sveiki! Aš Kirilas.',
 		'description' => 'Mintys, istorijos ir idėjos apie programavimą.'

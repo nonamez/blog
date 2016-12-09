@@ -7,8 +7,9 @@ return array(
 	),
 	'header' => array(
 		'menu' => array(
-			'home'     => 'Главная',
-			'about_me' => 'Обо мне'
+			'home'      => 'Главная',
+			'about_me'  => 'Обо мне',
+			'portfolio' => 'Портфолио'
 		),
 		'title'       => 'Привет! Я - Кирилл.',
 		'description' => 'Мысли, истории и идеи вслух'

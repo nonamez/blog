@@ -7,8 +7,9 @@ return array(
 	),
 	'header' => array(
 		'menu' => array(
-			'home'     => 'Home',
-			'about_me' => 'About Me'
+			'home'      => 'Home',
+			'about_me'  => 'About Me',
+			'portfolio' => 'Portfolio'
 		),
 		'title'       => 'Hey! I\'m Kiril.',
 		'description' => 'Thoughts, stories and ideas aloud'

@@ -52,6 +52,7 @@
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="https://github.com/nonamez">GitHub</a></li>
+								<li><a href="{{ route('portfolio.index') }}">@lang('blog.header.menu.portfolio')</a></li>
 							</ul>
 						</div>
 						<div class="site-head-content inner">
@@ -90,9 +91,8 @@
 		</a>
 	</div>
 	<a href="https://github.com/nonamez/blog">
-		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('/images/fork_me.png') }}" alt="Fork me on GitHub">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('storage/images/fork_me.png') }}" alt="Fork me on GitHub">
 	</a>
-	{{-- <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js" integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script> --}}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="{{ elixir('js/blog.js') }}"></script>
 	@yield('custom_scripts')
