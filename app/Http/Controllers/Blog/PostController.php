@@ -7,22 +7,6 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller 
 {
-	function __construct() 
-	{
-		$name = 'tags_in_header_' . app()->getLocale();
-
-		$tags = cache()->rememberForever($name, function() {
-			$tags = Models\Blog\Tag::whereHas('translated_posts', function($query) {
-				$query->where('locale', '=', app()->getLocale());
-				$query->where('status', '=', 'published');
-			})->ordered()->take(config('blog.tags_in_header'))->get();
-
-			return $tags;
-		});
-		
-		view()->share('tags', $tags);
-	}
-
 	public function index()
 	{
 		$posts = Models\Blog\Post\Translated::where('locale', '=', app()->getLocale())->orderBy('id', 'DEC'); 
