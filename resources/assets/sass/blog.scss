@@ -36,6 +36,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
 h1 small,h2 small,h3 small,h4 small,h5 small,h6 small {
 	color: #999999;
 }
+
 pre {
 	font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace; 
 	font-size: 12px;
@@ -51,6 +52,11 @@ pre {
     background: #F0F0F0;
     border-radius: 0;
 }
+
+pre > code {
+	border: none !important;
+}
+
 pre span.N{ color:#ea0; } /* Numbers */
 pre span.S{ color:#080; } /* Strings */
 pre span.C{ color:#888; } /* Comments */
@@ -61,6 +67,15 @@ pre span.P {color:#9F9D65} /* Punctuations */
 
 blockquote {
 	background-color:#f6f6f6
+}
+
+code {
+	padding: 1px 5px;
+    white-space: pre-wrap;
+    background-color: #eff0f1;
+    border-radius:0;
+    color: #242729;
+    border: 1px solid #ccc
 }
 
 /* ----------- Main ----------- */

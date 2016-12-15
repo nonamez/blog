@@ -11379,6 +11379,10 @@ pre {
   border-radius: 0;
 }
 
+pre > code {
+  border: none !important;
+}
+
 pre span.N {
   color: #ea0;
 }
@@ -11424,6 +11428,15 @@ pre span.P {
 
 blockquote {
   background-color: #f6f6f6;
+}
+
+code {
+  padding: 1px 5px;
+  white-space: pre-wrap;
+  background-color: #eff0f1;
+  border-radius: 0;
+  color: #242729;
+  border: 1px solid #ccc;
 }
 
 /* ----------- Main ----------- */
