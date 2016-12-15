@@ -15,8 +15,6 @@
 
 	<link rel="stylesheet" href="{{ elixir('css/blog.css') }}">
 
-	@yield('custom_styles')
-
 	<script>var root_url = '{{ url('/') }}'</script>
 
 	<link rel="canonical" href="{{ url()->current() }}">
@@ -95,7 +93,7 @@
 	</a>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="{{ elixir('js/blog.js') }}"></script>
-	@yield('custom_scripts')
+	@stack('scripts')
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
