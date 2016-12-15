@@ -8402,8 +8402,9 @@ button.close {
 
 .tag {
   display: inline-block;
-  font-size: 80%;
+  font-size: 90%;
   position: relative;
+  padding: 0.3em 0.6em 0.4em;
 }
 
 .tag [data-role="remove"] {
@@ -8411,6 +8412,10 @@ button.close {
 }
 
 .tag [data-role="remove"]::after {
-  content: "x";
+  content: "×";
   padding: 0 2px;
+  vertical-align: text-top;
+  font-weight: 700;
+  line-height: 1;
+  font-size: 21px;
 }

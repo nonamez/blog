@@ -42,9 +42,10 @@
 		<div class="row">
 			<div class="col-xs-10 col-xs-offset-1">
 				<div class="input-group">
-					<span class="input-group-addon">#</span>
 					<input type="text" class="form-control" placeholder="Enter slug" id="posts-input-tag-slug">
-					<span class="input-group-addon" style="border-width:1px 0px">@</span>
+					<span class="input-group-addon" style="border-width:1px 0px">
+						<i class="fa fa-exchange" aria-hidden="true"></i>
+					</span>
 					<input type="text" class="form-control" placeholder="Enter name" id="posts-input-tag-name">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" id="posts-button-tags-create">Create</button>
@@ -54,13 +55,18 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div id="posts-div-tags-container">
+				<div id="posts-div-tags-container" class="m-t-15">
 					@if (isset($post))
 					@foreach ($post->tags as $tag)
-					<span class="label label-default tag" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">
+					{{-- <span class="label label-default tag" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">
 						{{ $tag->name }}
 						<span data-role="remove"></span>
-					</span>
+					</span> --}}
+
+					<div class="btn-group btn-group-sm" role="group" aria-label="...">
+						<button type="button" class="btn btn-default" disabled="disabled" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">{{ $tag->name }}</button>
+						<button type="button" class="btn btn-default"><i class="fa fa-trash"></i></button>
+					</div>
 					@endforeach
 					@endif
 				</div>

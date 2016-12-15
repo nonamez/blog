@@ -90,11 +90,16 @@ jQuery(document).ready(function() {
 			jQuery('<span/>').attr('data-role', 'remove').appendTo(container).on('click', function() {
 				this.parentNode.parentNode.removeChild(this.parentNode)
 			})
+
+			_ELEMENTS.input_tags_slug.val(null)
+			_ELEMENTS.input_tags_name.val(null)
 		}
 	})
 
 	// Save post
 	_ELEMENTS.button_save_post.click(function() {
+		_ELEMENTS.button_save_post.button('loading')
+
 		var data = {}
 
 		jQuery('.container').find('[name]').each(function() {
@@ -116,6 +121,8 @@ jQuery(document).ready(function() {
 			if (response.redirect_to) {
 				window.location = response.redirect_to
 			}
+		}).complete(function() {
+			_ELEMENTS.button_save_post.button('reset')
 		})
 	})
 })
