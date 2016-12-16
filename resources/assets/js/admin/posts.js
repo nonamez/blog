@@ -81,15 +81,24 @@ jQuery(document).ready(function() {
 		var name = _ELEMENTS.input_tags_name.val()
 
 		if (name.length) {
-			var container = jQuery('<span/>').attr({
-				class: 'label label-default tag',
+			var container = jQuery('<div/>').attr({
+				class: 'btn-group btn-group-sm',
 				'data-name': name,
 				'data-slug': slug
-			}).text(name).appendTo(_ELEMENTS.div_tags_container).after(' ')
+			}).appendTo(_ELEMENTS.div_tags_container).after(' ')
 
-			jQuery('<span/>').attr('data-role', 'remove').appendTo(container).on('click', function() {
-				this.parentNode.parentNode.removeChild(this.parentNode)
-			})
+			jQuery('<button/>').attr({
+				type: button,
+				class: 'btn btn-default',
+				disabled: 'disabled'
+			}).text(name).appendTo(container)
+
+			jQuery('<button/>').attr({
+				type: button,
+				class: 'btn btn-default',
+			}).appent(jQuery('<i/>').addClass('fa fa-trash')).on('click', function() {
+				jQuery(this).closest('div.btn-group').remove()
+			}).appendTo(container)
 
 			_ELEMENTS.input_tags_slug.val(null)
 			_ELEMENTS.input_tags_name.val(null)
