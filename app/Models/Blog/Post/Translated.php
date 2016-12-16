@@ -13,7 +13,7 @@ class Translated extends Model {
 	{
 		parent::boot();
 		
-		$name = 'tags_in_header_' . request('locale');
+		$name = 'header_tags_' . request('locale');
 
 		static::saved(function($post) use($name) {
 			cache()->forget($name);

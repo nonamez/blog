@@ -58,8 +58,8 @@
 				<div id="posts-div-tags-container" class="m-t-15">
 					@if (isset($post))
 					@foreach ($post->tags as $tag)
-					<div class="btn-group btn-group-sm" role="group" aria-label="...">
-						<button type="button" class="btn btn-default" disabled="disabled" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">{{ $tag->name }}</button>
+					<div class="btn-group btn-group-sm" data-role="tag" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">
+						<button type="button" class="btn btn-default" disabled="disabled">{{ $tag->name }}</button>
 						<button type="button" class="btn btn-default"><i class="fa fa-trash"></i></button>
 					</div>
 					@endforeach

@@ -25,6 +25,20 @@ jQuery(document).ready(function() {
 		_ELEMENTS.input_fake_file_upload.trigger('click')
 	})
 
+	// File delete
+	_ELEMENTS.div_files_container.on('click', '[data-role="delete-file"]', function() {
+		var that = this
+		
+		jQuery.getJSON(this.getAttribute('data-route'), function() {
+			jQuery(that).closest('.list-group-item').remove()
+		})
+	})
+
+	// Tag delete
+	_ELEMENTS.div_tags_container.on('click', 'div[data-role="tag"]', function() {
+		jQuery(this).remove()
+	})
+
 	// File upload
 	_ELEMENTS.button_fake_file_upload.click(function() {
 		var form_data = new FormData()
@@ -66,30 +80,29 @@ jQuery(document).ready(function() {
 		})
 	})
 
-	// File delete
-	_ELEMENTS.div_files_container.on('click', '[data-role="delete-file"]', function() {
-		var that = this
-		
-		jQuery.getJSON(this.getAttribute('data-route'), function() {
-			jQuery(that).closest('.list-group-item').remove()
-		})
-	})
-
 	// Tags
 	_ELEMENTS.button_create_tag.click(function() {
 		var slug = _ELEMENTS.input_tags_slug.val()
 		var name = _ELEMENTS.input_tags_name.val()
 
 		if (name.length) {
-			var container = jQuery('<span/>').attr({
-				class: 'label label-default tag',
+			var container = jQuery('<div/>').attr({
+				class: 'btn-group btn-group-sm',
+				'data-role': 'tag',
 				'data-name': name,
 				'data-slug': slug
-			}).text(name).appendTo(_ELEMENTS.div_tags_container).after(' ')
+			}).appendTo(_ELEMENTS.div_tags_container).after(' ')
 
-			jQuery('<span/>').attr('data-role', 'remove').appendTo(container).on('click', function() {
-				this.parentNode.parentNode.removeChild(this.parentNode)
-			})
+			jQuery('<button/>').attr({
+				type: 'button',
+				class: 'btn btn-default',
+				disabled: 'disabled'
+			}).text(name).appendTo(container)
+
+			jQuery('<button/>').attr({
+				type: 'button',
+				class: 'btn btn-default',
+			}).append(jQuery('<i/>').addClass('fa fa-trash')).appendTo(container)
 
 			_ELEMENTS.input_tags_slug.val(null)
 			_ELEMENTS.input_tags_name.val(null)
@@ -106,12 +119,14 @@ jQuery(document).ready(function() {
 			data[this.name] = this.value
 		})
 
-		data['tags'] = _ELEMENTS.div_tags_container.find('span.tag').map(function() {
+		data['tags'] = _ELEMENTS.div_tags_container.find('div[data-role="tag"]').map(function() {
 			return {
 				name: this.getAttribute('data-name'),
 				slug: this.getAttribute('data-slug')
 			}
 		}).get()
+
+		console.log(data['tags'])
 
 		data['files'] = _ELEMENTS.div_files_container.find('li[data-file-id]').map(function() {
 			return this.getAttribute('data-file-id')
