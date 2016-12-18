@@ -91,7 +91,7 @@
 	<a href="https://github.com/nonamez/blog">
 		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('storage/images/fork_me.png') }}" alt="Fork me on GitHub">
 	</a>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
 	<script src="{{ elixir('js/blog.js') }}"></script>
 	@stack('scripts')
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)
