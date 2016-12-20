@@ -10977,7 +10977,7 @@ header.site-head .blog-logo {
   text-transform: uppercase;
 }
 
-/* ----------- Posts list ----------- */
+/* ----------- Posts ----------- */
 #no-posts {
   text-align: center;
   margin-bottom: 10px;
@@ -11072,9 +11072,7 @@ article.post section.post-content span.label-lang {
 }
 
 article.post:not(.post-standalone) section.post-content {
-  max-height: 0;
-  -webkit-transition: max-height 0.5s ease-in-out;
-  transition: max-height 0.5s ease-in-out;
+  display: none;
 }
 
 article.post.post-standalone {

@@ -68,17 +68,17 @@ for (var i = 0, article; article = articles[i]; ++i) {
 */
 jQuery(document).ready(function() {
 	jQuery('article:not(.post-standalone)').each(function(key, post) {
-		var current_post = jQuery(this),
-			post_header  = current_post.find('header.post-header'),
-			post_content = current_post.find('section.post-content')
+		var post = jQuery(this),
+			post_header  = post.find('header.post-header'),
+			post_content = post.find('section.post-content')
 
 		post_header.click(function() {
-			if (current_post.hasClass('open')) {
+			if (post.hasClass('open')) {
 				console.log('opened')
 			} else {
-				current_post.addClass('open')
-
-				post_content.slideDown('slow')
+				post_content.slideDown('slow', function() {
+					post.addClass('open')
+				})
 			}
 		})
 	})
