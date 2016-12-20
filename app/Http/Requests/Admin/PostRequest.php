@@ -23,6 +23,7 @@ class PostRequest extends FormRequest
 			'content' => ['required', 'min:10'],
 			'tags'    => ['array', 'min:1'],
 			'files'   => 'array',
+			'markdown' => ['required', 'boolean'],
 			'parent_post_id' => 'exists:blg_posts,id'
 		];
 

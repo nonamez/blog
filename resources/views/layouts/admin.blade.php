@@ -13,8 +13,9 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/abc/awesome-bootstrap-checkbox.css') }}">
 
-	<link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ elixir('css/admin.css') }}">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top">

@@ -14,5 +14,10 @@
 </div>
 @stop
 @push('scripts')
+<script>
+	jQuery('#language').val('{{ $post->locale }}')
+	jQuery('#status').val('{{ $post->status }}')
+	jQuery('#markdown').val('{{ $post->markdown }}')
+</script>
 <script src="{{ elixir('js/admin/posts.js') }}"></script>
 @endpush

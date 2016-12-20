@@ -7,6 +7,7 @@ elixir(function(mix) {
 	mix.copy('bower_components/bootstrap/dist', 'public/plugins/bootstrap')
 	mix.copy('bower_components/jquery/dist', 'public/plugins/jquery')
 	mix.copy('bower_components/toastr', 'public/plugins/toastr')
+	mix.copy('bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css', 'public/plugins/abc')
 
 	mix.sass('admin.scss')
 	mix.sass('blog.scss')

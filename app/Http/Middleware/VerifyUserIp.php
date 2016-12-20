@@ -16,11 +16,11 @@ class VerifyUserIp
     public function handle($request, Closure $next)
     {
         $allowed_ip = config('auth.allowed_ip');
-        
+
         if (count($allowed_ip) > 0 && in_array($request->getClientIp(TRUE), $allowed_ip) == FALSE) {
             auth()->logout();
             
-            return redirect('/auth/login')->withErrors(trans('errors.incorrect_login_ip'));
+            return redirect('login')->with('error|' . trans('errors.incorrect_login_ip'));
         }
             
         return $next($request);
