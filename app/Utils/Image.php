@@ -22,7 +22,7 @@ class Image
 			return NULL;
 		}
 
-		$lightness = self::getImageLightness($image_path);
+		$lightness = self::getLightness($image_path);
 
 		if ($lightness < 0.5) {
 			$watermark = imagecreatefrompng(storage_path('app/watermark/light.png'));
@@ -63,7 +63,7 @@ class Image
 	}
 
 	// http://stackoverflow.com/questions/12228644/how-to-detect-light-colors-with-php
-	public static function getImageLightness($image_path)
+	public static function getLightness($image_path)
 	{
 		$mime_type = exif_imagetype($image_path);
 
@@ -118,7 +118,7 @@ class Image
 
 		$image = file_get_contents($img_url);
 
-		$mime_type = File::getMimeType($image, TRUE);
+		$mime_type = getMimeType($image, TRUE);
 
 		if (strpos($mime_type, 'image/jpeg') !== FALSE) {
 			$ext = 'jpeg';

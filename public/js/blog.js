@@ -10,10 +10,11 @@ var top_element  = document.getElementById('back-to-top')
 window.addEventListener('scroll', function() {
 	var scrolled = window.pageYOffset || document.documentElement.scrollTop
 	
-	if (scrolled > 100)
+	if (scrolled > 100) {
 		top_element.style.display = 'block'
-	else
+	} else {
 		top_element.style.display = 'none'
+	}
 })
 
 function getHeight(el) {
@@ -39,6 +40,7 @@ function getHeight(el) {
 	return h
 }
 
+/*
 var articles = document.querySelectorAll('article:not(.post-standalone)')
 
 for (var i = 0, article; article = articles[i]; ++i) {
@@ -70,4 +72,22 @@ for (var i = 0, article; article = articles[i]; ++i) {
 		}
 	})
 }
+*/
+jQuery(document).ready(function() {
+	jQuery('article:not(.post-standalone)').each(function(key, post) {
+		var current_post = jQuery(this),
+			post_header  = current_post.find('header.post-header'),
+			post_content = current_post.find('section.post-content')
+
+		post_header.click(function() {
+			if (current_post.hasClass('open')) {
+				console.log('opened')
+			} else {
+				current_post.addClass('open')
+
+				post_content.slideDown('slow')
+			}
+		})
+	})
+})
 //# sourceMappingURL=blog.js.map

@@ -17,7 +17,7 @@ class CreateBlgTranslatedPosts extends Migration {
 			$table->integer('parent_post_id')->unsigned()->index();
 			$table->foreign('parent_post_id')->references('id')->on('blg_posts')->onDelete('cascade');
 
-			$table->enum('locale', Config::get('app.locales'))->default('en');
+			$table->enum('locale', config('app.locales'))->default('en');
 			$table->enum('status', ['published', 'draft'])->default('draft');
 
 			$table->string('slug', 255)->unique();
@@ -25,7 +25,9 @@ class CreateBlgTranslatedPosts extends Migration {
 			$table->string('icon')->default('fa fa-align-left');
 
 			$table->string('title', 255);
+			
 			$table->longText('content');
+
 			$table->string('meta_title', 255)->default(NULL);
 			$table->string('meta_description', 255)->default(NULL);
 			$table->string('meta_keywords', 255)->default(NULL);

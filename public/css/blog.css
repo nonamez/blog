@@ -10780,8 +10780,8 @@ pre {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #F0F0F0;
-  border-radius: 0;
+  background: #eee !important;
+  border-radius: 2px;
 }
 
 pre > code {

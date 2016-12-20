@@ -36,7 +36,7 @@ class FileController extends Controller {
 			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 		}
 		
-		$file_type = Utils\File::getMimeType($file_path);
+		$file_type = getMimeType($file_path);
 
 		return response(File::get($file_path), 200)->header('Content-Type', $file_type);
 	}

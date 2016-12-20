@@ -8,6 +8,7 @@ In the 0.5 version there was minor changes in DB and files while upgrading to 5.
 ### Added
 - Markdown for the posts
 - Simple syntax highlight via PHP
+- Ability to choose markdaw or raw html for the posts
 
 ### Changed
 - Improved slug check

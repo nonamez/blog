@@ -2,7 +2,9 @@
 
 namespace App\Misc\Post;
 
-class MarkdownParser extends \Parsedown
+use Parsedown;
+
+class MarkdownParser extends Parsedown
 {
 	protected function blockFencedCodeComplete($Block)
 	{

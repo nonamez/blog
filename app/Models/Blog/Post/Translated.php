@@ -2,6 +2,7 @@
 
 namespace App\Models\Blog\Post;
 
+use App\Misc;
 use Illuminate\Database\Eloquent\Model;
 
 class Translated extends Model {
@@ -23,8 +24,7 @@ class Translated extends Model {
 			cache()->forget($name);
 		});
 
-		static::saving(function($post)
-		{
+		static::saving(function($post) {
 			// If post slug is empty use title
 			if (strlen($post->slug) == 0) {
 				$post->slug = $post->title;
@@ -33,30 +33,41 @@ class Translated extends Model {
 			// Escape title
 			$post->title = htmlspecialchars($post->title);
 
-			// We also need to escape content but as I am the only user of the system we will skip this...
-
 			// Prepare all code examples for browser in case of some HTML tags...
-			/*
-			$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
-				return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
-			}, $post->content);
-			*/
-
+			if (is_null($post->markdown) or $post->markdown == FALSE) {
+				$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
+					return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
+				}, $post->content);
+			}
+			
 			// Doublecheck the slug
+			$post->slug = ru2lat($post->slug);
 			$post->slug = strtolower(str_replace(' ', '_', $post->slug)); // Replace all spaces to _
 			$post->slug = preg_replace('/[^a-zA-Z0-9_]/', '', $post->slug); // Replace everything except numbers, word chars and _ with nothing
 		});
 	}
 
 	// ========================= Custom Methods ========================= //
-	
-	public function getShort()
+
+	public function getProcessedContent($short = FALSE)
 	{
-		$content = current(explode('<!--break-->', $this->content));
+		$content = $this->content;
+
+		if ($short) {
+			$content = current(explode('<!--break-->', $content));
+		}
+
+		if ($this->markdown) {
+			$markdown_parser = new Misc\Post\MarkdownParser();
+
+			$content = $markdown_parser->text($content);
+		} else {
+			$content = Misc\Post\SyntaxHighlight::process($content);
+		}
 
 		return $content;
 	}
-
+	
 	public function getURL()
 	{
 		return url(sprintf('/%s/post/%s', $this->locale, $this->slug));

@@ -56,10 +56,10 @@
 						<div class="site-head-content inner">
 							<h1 class="blog-title">/home/NoNameZ</h1> 
 							<h2 class="blog-description">@lang('blog.header.description')</h2>
-							@if (isset($tags))
+							@if ($tags->count() > 0)
 							<h6>
 								@foreach ($tags as $tag)
-								<a href="{{ route('tag', $tag['slug']) }}">#{{ $tag['name'] }}</a>
+								<a href="{{ route('tag', $tag->slug) }}">#{{ $tag->name }}</a>
 								@endforeach
 							</h6>
 							@endif
@@ -91,7 +91,7 @@
 	<a href="https://github.com/nonamez/blog">
 		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('storage/images/fork_me.png') }}" alt="Fork me on GitHub">
 	</a>
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="{{ elixir('js/blog.js') }}"></script>
 	@stack('scripts')
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)

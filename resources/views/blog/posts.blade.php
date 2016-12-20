@@ -2,7 +2,7 @@
 @section('content')
 <main class="content" role="main">
 	@forelse ($posts as $post)
-	<article class="post{{ $post->getPostClass() }}" id="post-{{ $post->id }}" data-url="{{ $post->getURL() }}">
+	<article class="post{{ $post->getPostClass() }}" id="post-{{ $post->id }}">
 		<header class="post-header">
 			<div class="icon">
 				<i class="{{ $post->icon }}"></i>
@@ -17,7 +17,7 @@
 				@include('blog.partials.line')
 			</ul>
 			<div>
-				{!! prepareContent($post->getShort()) !!}
+				{!! $post->getProcessedContent(TRUE) !!}
 			</div>
 			<p class="text-center">
 				<a href="{{ $post->getURL() }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
@@ -27,8 +27,8 @@
 	@empty
 	<div id="no-posts">@lang('blog.post.no_posts')</div>
 	@endforelse
-	<nav class="text-center">
+	<div class="text-center">
 		{!! $posts->render() !!}
-	</nav>
+	</div>
 </main>
 @stop
