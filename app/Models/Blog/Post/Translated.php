@@ -34,11 +34,13 @@ class Translated extends Model {
 			$post->title = htmlspecialchars($post->title);
 
 			// Prepare all code examples for browser in case of some HTML tags...
+			/*
 			if (is_null($post->markdown) or $post->markdown == FALSE) {
 				$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
 					return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
 				}, $post->content);
 			}
+			*/
 			
 			// Doublecheck the slug
 			$post->slug = ru2lat($post->slug);
