@@ -8,16 +8,17 @@
 
 	<title>@section('title') /home/NoNameZ @show</title>
 
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-
-	<meta name="description" content="{{ $meta_description or trans('blog.meta.description') }}"> 
-	<meta name="keywords" content="{{ $meta_keywords or trans('blog.meta.keywords') }}"> 
+	<meta name="title" content="@yield('meta_title', '/home/NoNameZ')">
+	<meta name="keywords" content="@yield('meta_keywords', trans('blog.meta.keywords'))">
+	<meta name="description" content="@yield('meta_description', trans('blog.meta.description'))">
 
 	<link rel="stylesheet" href="{{ elixir('css/blog.css') }}">
 
 	<script>var root_url = '{{ url('/') }}'</script>
 
 	<link rel="canonical" href="{{ url()->current() }}">
+
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 	<div class="container">

@@ -1,4 +1,11 @@
+@section('title', e($post->title))
+
+@section('meta_title', strlen($post->meta_title) == 0 ? e($post->title) : e($post->meta_title))
+@section('meta_keywords', e($post->meta_keywords))
+@section('meta_description', e($post->meta_description))
+
 @extends('layouts.blog')
+
 @section('content')
 <main class="content" role="main">
 	<article class="post post-standalone" id="post-{{ $post['id'] }}">
