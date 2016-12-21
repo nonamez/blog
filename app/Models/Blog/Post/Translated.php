@@ -62,7 +62,10 @@ class Translated extends Model {
 
 			$content = $markdown_parser->text($content);
 		} else {
-			$content = Misc\Post\SyntaxHighlight::process($content);
+			$content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
+				return Misc\Post\SyntaxHighlight::process($matches[1]);
+			}, $content);
+			// $content = Misc\Post\SyntaxHighlight::process($content);
 		}
 
 		return $content;

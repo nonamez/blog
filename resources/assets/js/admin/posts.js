@@ -119,7 +119,7 @@ jQuery(document).ready(function() {
 			data[this.name] = this.value
 		})
 
-		data.markdown = data.markdown == 'on' ? 1 : 0
+		data.markdown = jQuery('#markdown').is(':checked') ? 1 : 0
 
 		data['tags'] = _ELEMENTS.div_tags_container.find('div[data-role="tag"]').map(function() {
 			return {
@@ -127,8 +127,6 @@ jQuery(document).ready(function() {
 				slug: this.getAttribute('data-slug')
 			}
 		}).get()
-
-		console.log(data['tags'])
 
 		data['files'] = _ELEMENTS.div_files_container.find('li[data-file-id]').map(function() {
 			return this.getAttribute('data-file-id')

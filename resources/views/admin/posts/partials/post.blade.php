@@ -8,7 +8,7 @@
 
 		<div class="form-group">
 			<label>Content</label>
-			<textarea name="content" cols="5" rows="5" class="form-control" placeholder="Enter text">{{ $post->content or '' }}</textarea>
+			<textarea name="content" cols="5" rows="5" class="form-control" placeholder="Enter text">{!! $post->content or '' !!}</textarea>
 		</div>
 	</div>
 </div>

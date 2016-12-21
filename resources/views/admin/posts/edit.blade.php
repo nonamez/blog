@@ -17,7 +17,7 @@
 <script>
 	jQuery('#language').val('{{ $post->locale }}')
 	jQuery('#status').val('{{ $post->status }}')
-	jQuery('#markdown').val('{{ $post->markdown }}')
+	jQuery('#markdown').prop('checked', {{ $post->markdown ? 'true' : 'false' }})
 </script>
 <script src="{{ elixir('js/admin/posts.js') }}"></script>
 @endpush

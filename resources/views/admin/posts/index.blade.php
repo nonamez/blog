@@ -21,7 +21,7 @@
 								<td>
 									<a href="{{ $post->getURL() }}">{{ str_limit($post->title, 60) }}</a>
 								</td>
-								<td>{{ $post->post_id }}</td>
+								<td>{{ $post->parent_post_id }}</td>
 								<td>{{ $post->locale }}</td>
 								<td>{{ ucfirst($post->status) }}</td>
 								<td>
