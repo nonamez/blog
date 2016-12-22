@@ -17,7 +17,7 @@ class ComposerProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		View::composer('blog.*', function($view) {
+		View::composer(['blog.*', 'about'], function($view) {
 			$name = 'header_tags_' . app()->getLocale();
 
 			$tags = cache()->rememberForever($name, function() {
