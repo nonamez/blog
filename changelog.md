@@ -1,7 +1,7 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-## [0.5.0] - [Unreleased]
+## [0.5.0] - [2016-12-22]
 
 In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 and improving old stuff so there may be a compatibility problems with previous version. Bassically this version is a new start.
 
@@ -19,6 +19,7 @@ In the 0.5 version there was minor changes in DB and files while upgrading to 5.
 
 ### Fixed
 - 404 error
+- Lot of small things
 
 ## [0.4.0] - [2016-05-12]
 ### Added
