@@ -31,7 +31,7 @@ class Translated extends Model {
 			}
 
 			// Escape title
-			$post->title = htmlspecialchars($post->title);
+			// $post->title = htmlspecialchars($post->title);
 
 			// Prepare all code examples for browser in case of some HTML tags...
 			/*
