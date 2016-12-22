@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model {
 
-	const UPLOAD_PATH = 'app/uploads';
-
 	protected $table = 'files';
-	protected $fillable = ['name', 'original_name', 'description', 'type'];
+	protected $fillable = ['name', 'description'];
 
 	public static function boot()
 	{
@@ -20,20 +18,50 @@ class File extends Model {
 		});
 	}
 
+	// ========================= Scopes ========================= //
+
+	public function scopeOfType($query, $type)
+	{
+		$types = [
+			'post'      => 'App\Models\Blog\TranslatedPost',
+			'portfolio' => 'App\Models\Portfolio\Work'
+		];
+
+		if (array_key_exists($type, $types)) {
+			$query->where('fileable_type', '=', $types[$type]);
+		}
+
+		return $query;
+	}
+
+	// ========================= Custom Methods ========================= //
+
 	public function getPath()
 	{
-		$path = sprintf('%s/%s/%s', self::getUploadPath(), $this->created_at->format('Y/m/d'), $this->name);
+		$path = sprintf('%s/%s/%s', config('files.path'), $this->created_at->format('Y/m/d'), $this->name);
 		
 		return storage_path($path);
 	}
 
 	public function getURL()
 	{
-		return route('file_get', [$this->created_at->format('Y-m-d'), $this->name]);
+		return route('file.get', [$this->created_at->format('Y-m-d'), $this->name]);
 	}
 
-	public static function getUploadPath()
+	public function getUpdateURL()
 	{
-		return self::UPLOAD_PATH;
+		return route('admin.files.update', $this->id);
+	}
+
+	public function getDeleteURL()
+	{
+		return route('admin.files.delete', $this->id);
+	}
+
+	// ========================= Relations ========================= //
+
+	public function fileable()
+	{
+		return $this->morphTo();
 	}
 }

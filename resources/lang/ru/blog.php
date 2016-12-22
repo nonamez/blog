@@ -1,17 +1,19 @@
 <?php
+
 return array(
 	'title'  => 'Кирилл Чалкин',
 	'meta' => array(
 		'description' => 'Это персональный сайт программиста-самоучки из Литвы',
-		'keywords' => 'Разработка сайта, создание, программирование, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
+		'keywords' => 'Разработка, создание, программирование, Laravel, Git, PHP, MySQL, Pyhton, JavaScript, NodeJS, Socket.IO, Ionic',
 	),
 	'header' => array(
 		'menu' => array(
-			'home'     => 'Главная',
-			'about_me' => 'Обо мне'
+			'home'      => 'Главная',
+			'about_me'  => 'Обо мне',
+			'portfolio' => 'Портфолио'
 		),
 		'title'       => 'Привет! Я - Кирилл.',
-		'description' => 'Мысли, истории и идеи о программировании.'
+		'description' => 'Мысли, истории и идеи вслух'
 	),
 	'post' => array(
 		'no_posts'      => 'Записей не найдено',

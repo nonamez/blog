@@ -1,22 +1,40 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-ToDo: Refactor all JS code in order to minimize it
+## [0.5.0] - [2016-12-22]
+
+In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 and improving old stuff so there may be a compatibility problems with previous version. Bassically this version is a new start.
+
+### Added
+- Markdown for the posts
+- Simple syntax highlight via PHP
+- Ability to choose markdaw or raw html for the posts
+
+### Changed
+- Improved slug check
+- Assets refactored
+- Completely rewritten file upload mechanism
+- Frawmework upgraded to 5.3.*
+- Auth via username
+
+### Fixed
+- 404 error
+- Lot of small things
 
 ## [0.4.0] - [2016-05-12]
 ### Added
 - Portfolio in admin side
 
-### Change
+### Changed
 - User auth info moved to .env
 - File usage
-- Frawmework updated to 5.2.*
+- Frawmework upgraded to 5.2.*
 
 ## [0.3.5] - [2015-10-29]
 ### Added
 - Slug duplication error when creating post
 
-### Change
+### Changed
 - Default env file
 
 ### Fixed
