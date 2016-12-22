@@ -1,9 +1,10 @@
 <?php
+
 return array(
 	'title'  => 'Кирилл Чалкин',
 	'meta' => array(
 		'description' => 'Это персональный сайт программиста-самоучки из Литвы',
-		'keywords' => 'Разработка сайта, создание, программирование, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
+		'keywords' => 'Разработка, создание, программирование, Laravel, Git, PHP, MySQL, Pyhton, JavaScript, NodeJS, Socket.IO, Ionic',
 	),
 	'header' => array(
 		'menu' => array(

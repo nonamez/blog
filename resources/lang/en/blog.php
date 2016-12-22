@@ -1,9 +1,10 @@
 <?php
+
 return array(
-	'title'  => 'Kiril Chalkin',
+	'title'  => 'Kiril Calkin',
 	'meta' => array(
 		'description' => 'This is personal site of the self-taught code monkey from Lithuania',
-		'keywords' => 'Website Development, Programming, Laravel, CodeIgniter, Joomla, Wordpress, GIT, PHP, MySQL, Pyhton, JavaScript',
+		'keywords' => 'Website Development, Programming, Laravel, GIT, PHP, MySQL, Pyhton, JavaScript, NodeJS, Socket.IO, Ionic',
 	),
 	'header' => array(
 		'menu' => array(
