@@ -60,7 +60,7 @@ class SyntaxHighlight
 			=> '<span class="D">$1</span>',
 
 			// Keywords
-			'/(?<!\w|\$|\%|\@|>)(
+			'/(?<!\w|\$|\%|\@|\(>)(
 				and|or|xor|for|do|while|foreach|as|return|die|exit|if|then|else|
 				elseif|new|delete|try|throw|catch|finally|class|function|string|
 				array|object|resource|var|let|bool|boolean|int|integer|float|double|
@@ -74,7 +74,9 @@ class SyntaxHighlight
 			'/(?<!\w)(
 				(\$|\%|\@)(\-&gt;|\w)+
 			)(?!\w)/ix'
-			=> '<span class="V">$1</span>'
+			=> '<span class="V">$1</span>',
+
+			'/(Error)/' => '<span class="err">$1</span>'
 		);
 
 		// Comments/Strings
