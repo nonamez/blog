@@ -57,13 +57,16 @@ pre > code {
 	border: none !important;
 }
 
-pre span.N{ color:#ea0; } /* Numbers */
-pre span.S{ color:#080; } /* Strings */
+// pre span.N{ color:#ea0; } /* Numbers */
+pre span.N{ color:#099; } /* Numbers */
+// pre span.S{ color:#080; } /* Strings */
+pre span.S{ color:#d14; } /* Strings */
 pre span.C{ color:#888; } /* Comments */
 pre span.K{ color:#000; font-weight: 700 } /* Keywords */
 pre span.V{ color:#808; } /* Vars */
 pre span.D{ color:#a00; } /* Defines */
 pre span.P {color:#9F9D65} /* Punctuations */
+pre span.err { color: #0086B3} /* Errors */
 
 blockquote {
 	background-color:#f6f6f6
