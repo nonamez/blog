@@ -34,7 +34,9 @@ class SyntaxHighlight
 {
 	public static function process($s)
 	{
-		// $s = htmlspecialchars($s);
+		$s = htmlspecialchars($s);
+
+		// die($s);
 
 		// Workaround for escaped backslashes
 		$s = str_replace('\\\\','\\\\<e>', $s); 
@@ -42,7 +44,7 @@ class SyntaxHighlight
 		$regexp = array(
 			// Punctuations
 			// '/(([\-\!\%\^\*\(\)\+\|\~\=\`\{\}\[\]\:\"\'<>\?\,\.\/]+))/'
-			'/([-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
+			'/(((&lt;|&gt;)[^a-zA-Z\/])|[-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
 			=> '<span class="P">$1</span>',
 
 			// Numbers (also look for Hex)
