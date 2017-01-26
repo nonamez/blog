@@ -10789,12 +10789,12 @@ pre > code {
 }
 
 pre span.N {
-  color: #099;
+  color: #ea0;
 }
 
 /* Numbers */
 pre span.S {
-  color: #d14;
+  color: #080;
 }
 
 /* Strings */
@@ -10825,7 +10825,7 @@ pre span.P {
 
 /* Punctuations */
 pre span.err {
-  color: #0086B3;
+  color: #7D2727;
 }
 
 /* Errors */
