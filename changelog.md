@@ -1,6 +1,17 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
+## [0.5.2] - [2017-01-26]
+### Fixed
+- Syntax Highlight
+
+### Deleted
+- Some old files
+
+## [0.5.1] - [2017-01-20]
+### Deleted
+- Some old files
+
 ## [0.5.0] - [2016-12-22]
 
 In the 0.5 version there was minor changes in DB and files while upgrading to 5.3 and improving old stuff so there may be a compatibility problems with previous version. Bassically this version is a new start.
