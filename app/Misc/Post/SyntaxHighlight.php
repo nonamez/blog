@@ -36,15 +36,20 @@ class SyntaxHighlight
 	{
 		$s = htmlspecialchars($s);
 
-		// die($s);
-
 		// Workaround for escaped backslashes
-		$s = str_replace('\\\\','\\\\<e>', $s); 
+		$s = str_replace('\\\\','\\\\<e>', $s);
+
+		$punctuations = [
+			'(&amp;)', // &
+			'(((&gt;)?&lt;)|(&gt;)[^a-zA-Z\/])', // >, <, >=, <=
+			'[-!%^*()+|~={}[\]:"\'<>?,.\/]'
+		];
+		$punctuations = implode('|', $punctuations);
 		
 		$regexp = array(
 			// Punctuations
 			// '/(([\-\!\%\^\*\(\)\+\|\~\=\`\{\}\[\]\:\"\'<>\?\,\.\/]+))/'
-			'/([?>]((&lt;|&gt;)[^a-zA-Z\/>=])|[-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
+			'/(' . $punctuations .  '+)/'
 			=> '<span class="P">$1</span>',
 
 			// Numbers (also look for Hex)
