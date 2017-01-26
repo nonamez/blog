@@ -44,7 +44,7 @@ class SyntaxHighlight
 		$regexp = array(
 			// Punctuations
 			// '/(([\-\!\%\^\*\(\)\+\|\~\=\`\{\}\[\]\:\"\'<>\?\,\.\/]+))/'
-			'/(((&lt;|&gt;)[^a-zA-Z\/])|[-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
+			'/([?>]((&lt;|&gt;)[^a-zA-Z\/>=])|[-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
 			=> '<span class="P">$1</span>',
 
 			// Numbers (also look for Hex)
