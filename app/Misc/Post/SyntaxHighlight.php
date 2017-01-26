@@ -34,14 +34,15 @@ class SyntaxHighlight
 {
 	public static function process($s)
 	{
-		$s = htmlspecialchars($s);
-		
+		// $s = htmlspecialchars($s);
+
 		// Workaround for escaped backslashes
 		$s = str_replace('\\\\','\\\\<e>', $s); 
 		
 		$regexp = array(
 			// Punctuations
-			'/([\-\!\%\^\*\(\)\+\|\~\=\`\{\}\[\]\:\"\'<>\?\,\.\/]+)/'
+			// '/(([\-\!\%\^\*\(\)\+\|\~\=\`\{\}\[\]\:\"\'<>\?\,\.\/]+))/'
+			'/([-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
 			=> '<span class="P">$1</span>',
 
 			// Numbers (also look for Hex)
@@ -54,9 +55,7 @@ class SyntaxHighlight
 
 			// Make the bold assumption that an
 			// all uppercase word has a special meaning
-			'/(?<!\w|>|\#)(
-				[A-Z_0-9]{2,}
-			)(?!\w)/x'
+			'/(?<!\w|\(>|\#)([A-Z_]{2,})(?!\w)/x'
 			=> '<span class="D">$1</span>',
 
 			// Keywords
@@ -102,7 +101,7 @@ class SyntaxHighlight
 		
 		// Delete the "Escaped Backslash Workaround Token" (TM) and replace 
 		// tabs with four spaces.
-		$s = str_replace(array( '<e>', "\t"), array('', '    '), $s);
+		$s = str_replace(['<e>', "\t"], ['', '    '], $s);
 		
 		return $s;
 	}
@@ -111,7 +110,7 @@ class SyntaxHighlight
 	// the matched text in an array
 	// This way, strings and comments will be stripped out and wont be processed 
 	// by the other expressions searching for keywords etc.
-	private static function replaceId(&$a, $match)
+	private static function replaceId(& $a, $match)
 	{
 		$id = "##r" . uniqid() . "##";
 		
