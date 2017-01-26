@@ -1,6 +1,13 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
+## [0.5.2] - [2017-01-26]
+### Fixed
+- Syntax Highlight
+
+### Deleted
+- Some old files
+
 ## [0.5.1] - [2017-01-20]
 ### Deleted
 - Some old files
