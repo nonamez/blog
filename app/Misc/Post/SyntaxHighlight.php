@@ -30,12 +30,20 @@ class SyntaxHighlight
 		$s = htmlspecialchars($s);
 
 		// Workaround for escaped backslashes
-		$s = str_replace('\\\\','\\\\<e>', $s); 
+		$s = str_replace('\\\\','\\\\<e>', $s);
+
+		$punctuation = [
+			'(&amp;)', // &
+			'(((&gt;)?&lt;)|(&gt;)[^a-zA-Z\/])', // >, <, >=, <=
+			'[-!%^*()+|~={}[\]:"\'<>?,.\/]'
+		];
+
+		$punctuation = implode('|', $punctuation);
+		$punctuation = sprintf('/(%s+)/', $punctuation);
 		
-		$regexp = array(
+		$regexp = [
 			// Punctuations
-			// &lt and &gt for those cases when it's not HTML
-			'/(((&lt;|&gt;)[^a-zA-Z\/])|[-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
+			$punctuation
 			=> '<span class="P">$1</span>',
 
 			// Numbers (also look for Hex)
@@ -70,7 +78,7 @@ class SyntaxHighlight
 
 			// Some custom errors
 			'/(Error)/' => '<span class="err">$1</span>'
-		);
+		];
 
 		// Comments/Strings
 		$regexp_callable = 
