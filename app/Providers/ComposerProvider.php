@@ -23,7 +23,7 @@ class ComposerProvider extends ServiceProvider
 			$tags = cache()->rememberForever($name, function() {
 				$tags = Models\Blog\Tag::whereHas('translated_posts', function($query) {
 					$query->where('locale', '=', app()->getLocale());
-					$query->where('status', '=', 'published');
+					$query->whereIn('status', ['published', 'hidden']);
 				})->ordered()->take(config('blog.tags_in_header'))->get();
 
 				return $tags;
