@@ -1,6 +1,11 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
+## [0.5.3] - [Unreleased]
+### Changed
+- Post permissions moved to scope
+- Tags showing from hidden posts
+
 ## [0.5.2] - [2017-01-26]
 ### Fixed
 - Syntax Highlight
