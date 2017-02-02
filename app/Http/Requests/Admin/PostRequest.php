@@ -16,6 +16,7 @@ class PostRequest extends FormRequest
 	public function rules()
 	{
 		$rules = [
+			'date'    => 'date_format:Y-m-d H:i:s',
 			'slug'    => ['min:3'],
 			'title'   => ['required', 'min:5'],
 			'locale'  => ['required', 'in:' . implode(',', config('app.locales'))],

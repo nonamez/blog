@@ -2,6 +2,19 @@
 	<div class="panel-heading">Publish</div>
 	<div class="panel-body">
 		<div class="form-horizontal">
+			@if (isset($post))
+			<div class="form-group">
+				<label for="language" class="col-sm-4 control-label">Date</label>
+				<div class="col-sm-8">
+					<div class="input-group">
+					<input type="text" class="form-control" placeholder="Enter date" value="{{ $post->date->format('Y-m-d H:i:s') }}" id="posts-input-date" name="date">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="posts-button-now">Now</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			@endif
 			<div class="form-group">
 				<label for="language" class="col-sm-4 control-label">Language</label>
 				<div class="col-sm-8">
@@ -32,9 +45,9 @@
 				<label for="markdown" class="col-sm-4 control-label">MarkDown</label>
 				<div class="col-sm-8">
 					<div class="checkbox">
-                        <input type="checkbox" name="markdown" id="markdown" checked="checked">
-                        <label></label>
-                    </div>
+						<input type="checkbox" name="markdown" id="markdown" checked="checked">
+						<label></label>
+					</div>
 				</div>
 			</div>
 		</div>

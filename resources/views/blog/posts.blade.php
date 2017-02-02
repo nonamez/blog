@@ -9,7 +9,7 @@
 			</div>
 			<div class="post-title">{{ $post->title }}</div>
 			<div class="post-meta">
-				<time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</time>
+				<time datetime="{{ $post->date }}">{{ $post->date->diffForHumans() }}</time>
 			</div>
 		</header>
 		<section class="post-content">

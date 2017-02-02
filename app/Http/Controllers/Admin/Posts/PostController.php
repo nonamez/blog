@@ -85,6 +85,8 @@ class PostController extends Controller
 	{
 		if ($translated_post == FALSE) {
 			$translated_post = new Models\Blog\Post\Translated;
+
+			$translated_post->date = date('Y-m-d H:i:s');
 		}
 
 		$translated_post->fill($request->all());

@@ -1,10 +1,28 @@
+function twoDigits(d) {
+	if (0 <= d && d < 10) {
+		return "0" + d.toString()
+	}
+
+	if (-10 < d && d < 0) {
+		return "-0" + (-1*d).toString()
+	}
+	
+	return d.toString()
+}
+
+Date.prototype.toMysqlFormat = function() {
+    return this.getFullYear() + '-' + twoDigits(1 + this.getMonth()) + '-' + twoDigits(this.getDate()) + ' ' + twoDigits(this.getHours()) + ':' + twoDigits(this.getMinutes()) + ':' + twoDigits(this.getSeconds())
+}
+
 const _ELEMENTS = {
+	input_post_date: jQuery('#posts-input-date'),
 	input_tags_slug: jQuery('#posts-input-tag-slug'),
 	input_tags_name: jQuery('#posts-input-tag-name'),
 
 	div_tags_container:  jQuery('#posts-div-tags-container'),
 	div_files_container: jQuery('#posts-div-files-container'),
 
+	button_now:        jQuery('#posts-button-now'),
 	button_save_post:  jQuery('#posts-button-save'),
 	button_create_tag: jQuery('#posts-button-tags-create'),
 
@@ -107,6 +125,10 @@ jQuery(document).ready(function() {
 			_ELEMENTS.input_tags_slug.val(null)
 			_ELEMENTS.input_tags_name.val(null)
 		}
+	})
+
+	_ELEMENTS.button_now.click(function() {
+		_ELEMENTS.input_post_date.val(new Date().toMysqlFormat())
 	})
 
 	// Save post

@@ -2,7 +2,11 @@
 All notable changes made to this project will be documented in this file.
 
 ## [0.5.3] - [Unreleased]
+### Added
+- Post date
+
 ### Changed
+- Ordering by post date
 - Post permissions moved to scope
 - Tags showing from hidden posts
 

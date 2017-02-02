@@ -9,7 +9,7 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		$posts = Models\Blog\Post\Translated::permitted()->where('locale', '=', app()->getLocale())->orderBy('id', 'DEC')->paginate(config('blog.posts_per_page')); 
+		$posts = Models\Blog\Post\Translated::permitted()->where('locale', '=', app()->getLocale())->orderBy('date', 'DEC')->paginate(config('blog.posts_per_page')); 
 
 		return view('blog.posts', compact('posts'));
 	}
@@ -25,7 +25,7 @@ class PostController extends Controller
 	{
 		$tag = Models\Blog\Tag::where('slug', '=', $tag)->firstOrFail();
 		
-		$posts = $tag->translated_posts()->permitted()->where('locale', '=', app()->getLocale())->orderBy('id', 'DEC')->paginate(config('blog.posts_per_page'));
+		$posts = $tag->translated_posts()->permitted()->where('locale', '=', app()->getLocale())->orderBy('date', 'DEC')->paginate(config('blog.posts_per_page'));
 				
 		return view('blog.posts', compact('posts'));
 	}
