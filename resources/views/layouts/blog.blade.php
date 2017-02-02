@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="HandheldFriendly" content="True">
 
-	<title>@section('title') /home/NoNameZ @show</title>
+	<title>@yield('title') /home/NoNameZ</title>
 
 	<meta name="title" content="@yield('meta_title', '/home/NoNameZ')">
 	<meta name="keywords" content="@yield('meta_keywords', trans('blog.meta.keywords'))">
