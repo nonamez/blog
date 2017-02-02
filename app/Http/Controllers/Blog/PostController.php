@@ -9,29 +9,14 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		$posts = Models\Blog\Post\Translated::where('locale', '=', app()->getLocale())->orderBy('id', 'DEC'); 
-
-		if (auth()->guest()) {
-			$posts->where('status', '=', 'published');
-		}
-		
-		$posts = $posts->paginate(config('blog.posts_per_page'));
+		$posts = Models\Blog\Post\Translated::permitted()->where('locale', '=', app()->getLocale())->orderBy('id', 'DEC')->paginate(config('blog.posts_per_page')); 
 
 		return view('blog.posts', compact('posts'));
 	}
 
 	public function show($slug)
 	{
-		$post = Models\Blog\Post\Translated::with(['parent', 'tags']);
-		
-		$post->where('slug', '=', $slug);
-		
-		// Hide draft posts for users
-		if (auth()->guest()) {
-			$post->where('status', '<>', 'draft');
-		}
-		
-		$post = $post->firstOrFail();
+		$post = Models\Blog\Post\Translated::permitted()->with(['parent', 'tags'])->where('slug', '=', $slug)->firstOrFail();
 
 		return view('blog.post', compact('post'));
 	}
@@ -40,10 +25,8 @@ class PostController extends Controller
 	{
 		$tag = Models\Blog\Tag::where('slug', '=', $tag)->firstOrFail();
 		
-		$posts = $tag->translated_posts()->where('locale', '=', app()->getLocale())->where('status', '=', 'published')->orderBy('id', 'DEC');
-		
-		$posts = $posts->paginate(config('blog.posts_per_page'));
-		
+		$posts = $tag->translated_posts()->permitted()->where('locale', '=', app()->getLocale())->orderBy('id', 'DEC')->paginate(config('blog.posts_per_page'));
+				
 		return view('blog.posts', compact('posts'));
 	}
 }

@@ -49,6 +49,17 @@ class Translated extends Model {
 		});
 	}
 
+	// ========================= Scopes ========================= //
+
+	public function scopePermitted($query)
+	{
+		if (auth()->guest()) {
+			$query->whereIn('status', ['published', 'hidden']);
+		}
+
+		return $query;
+	}
+
 	// ========================= Custom Methods ========================= //
 
 	public function getProcessedContent($short = FALSE)
