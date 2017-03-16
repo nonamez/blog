@@ -59,8 +59,8 @@ class FileController extends Controller {
 		}
 
 		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());
-		$name = str_replace(' ', '_', $name);
-		$name = preg_replace("/[^\w]+/", '', $name);
+		$name = str_replace(' ', '-', $name);
+		$name = preg_replace('/[^\w-_]+/', '', $name);
 		$name = strlen($name) > 50 ? sprintf('%s_%s', substr($name, 0, 30), str_random(10)) : $name;
 		$name = sprintf('%s_%s.%s', $name, str_random(5), $file->getClientOriginalExtension());
 		$name = strtolower($name);
