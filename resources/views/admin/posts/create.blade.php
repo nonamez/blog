@@ -13,6 +13,3 @@
 	</div>
 </div>
 @stop
-@push('scripts')
-<script src="{{ elixir('js/admin/posts.js') }}"></script>
-@endpush

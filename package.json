@@ -12,5 +12,10 @@
     "cross-env": "^4.0.0",
     "jquery": "^3.2.1",
     "laravel-mix": "^0.10.0"
+  },
+  "dependencies": {
+    "awesome-bootstrap-checkbox": "0.3.7",
+    "font-awesome": "^4.7.0",
+    "toastr": "^2.1.2"
   }
 }

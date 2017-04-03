@@ -19,5 +19,4 @@
 	jQuery('#status').val('{{ $post->status }}')
 	jQuery('#markdown').prop('checked', {{ $post->markdown ? 'true' : 'false' }})
 </script>
-<script src="{{ elixir('js/admin/posts.js') }}"></script>
 @endpush

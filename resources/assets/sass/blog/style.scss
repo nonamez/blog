@@ -1,12 +1,9 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700&subset=latin,cyrillic,latin-ext);
 @import url(//fonts.googleapis.com/css?family=Patua+One);
 
-$icon-font-path: "../../plugins/bootstrap/fonts/";
-$fa-font-path: "../../plugins/fontawesome/fonts/";
+@import "resources/assets/fonts/blog/style";
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "bower_components/fontawesome/scss/font-awesome.scss";
-
+@import "custom-bootstrap";
 
 html {
 	font-size: 10px;
@@ -41,16 +38,16 @@ pre {
 	font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace; 
 	font-size: 12px;
 	color: #000;
-    line-height: 17.6px;
-    overflow-x: auto;
-    white-space: pre;
-    word-break: inherit;
-    word-wrap: inherit;
-    display: block;
-    overflow-x: auto;
-    padding: 0.5em;
-    background: #eee !important;
-    border-radius: 2px;
+	line-height: 17.6px;
+	overflow-x: auto;
+	white-space: pre;
+	word-break: inherit;
+	word-wrap: inherit;
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	background: #eee !important;
+	border-radius: 2px;
 }
 
 pre > code {
@@ -74,11 +71,11 @@ blockquote {
 
 code {
 	padding: 1px 5px;
-    white-space: pre-wrap;
-    background-color: #eff0f1;
-    border-radius:0;
-    color: #242729;
-    border: 1px solid #ccc
+	white-space: pre-wrap;
+	background-color: #eff0f1;
+	border-radius:0;
+	color: #242729;
+	border: 1px solid #ccc
 }
 
 /* ----------- Main ----------- */
@@ -499,24 +496,24 @@ footer .poweredby a {
  * Pagination
  */
 .pagination {
-    display: block;
-    height: 20px;
+	display: block;
+	height: 20px;
 }
 .pagination .page-number {
-    display: none;
+	display: none;
 }
 .pagination a {
-    text-transform: uppercase;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1em;
-    font-weight: 900;
-    color: #939393;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	font-weight: 900;
+	color: #939393;
 }
 .pagination a.older-posts {
-    float: right;
+	float: right;
 }
 .pagination a.newer-posts {
-    float: left;
+	float: left;
 }
 
 /* ----------- Footer ----------- */

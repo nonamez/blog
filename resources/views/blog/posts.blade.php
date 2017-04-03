@@ -5,7 +5,7 @@
 	<article class="post{{ $post->getPostClass() }}" id="post-{{ $post->id }}">
 		<header class="post-header">
 			<div class="icon">
-				<i class="{{ $post->icon }}"></i>
+				<i class="icon-align-left"></i>
 			</div>
 			<div class="post-title">{{ $post->title }}</div>
 			<div class="post-meta">

@@ -13,5 +13,4 @@
 <script>
 	var image_attach_route = '{{ route('admin.portfolio.works.attach_image', $work->id) }}'
 </script>
-<script src="{{ elixir('js/admin/portfolio/works.js') }}"></script>
 @endpush

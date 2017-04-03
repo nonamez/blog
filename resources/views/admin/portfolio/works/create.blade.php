@@ -9,6 +9,3 @@
 	</div>
 </div>
 @stop
-@push('scripts')
-<script src="{{ elixir('js/admin/portfolio/works.js') }}"></script>
-@endpush

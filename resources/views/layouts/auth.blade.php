@@ -12,7 +12,7 @@
 
 	<!-- Styles -->
 
-	<link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
+	<link href="{{ mix('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
 		<nav class="navbar navbar-default navbar-static-top">
