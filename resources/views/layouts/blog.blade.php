@@ -8,12 +8,10 @@
 
 	<title>@yield('title') /home/NoNameZ</title>
 
-	<meta name="title" content="@yield('meta_title', '/home/NoNameZ')">
+	<meta name="title" content="{{ $meta_title or $title }}">
 	<meta name="keywords" content="@yield('meta_keywords', trans('blog.meta.keywords'))">
 	<meta name="description" content="@yield('meta_description', trans('blog.meta.description'))">
 
-	{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
-	
 	<link rel="stylesheet" href="{{ mix('css/blog.css') }}">
 
 	<script>var root_url = '{{ url('/') }}'</script>

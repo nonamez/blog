@@ -158,7 +158,7 @@ jQuery(document).ready(function() {
 			if (response.redirect_to) {
 				window.location = response.redirect_to
 			}
-		}).complete(function() {
+		}).always(function() {
 			_ELEMENTS.button_save_post.button('reset')
 		})
 	})
