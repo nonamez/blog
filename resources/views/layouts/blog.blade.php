@@ -53,7 +53,6 @@
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="https://github.com/nonamez">GitHub</a></li>
-								<li><a href="{{ route('portfolio.index') }}">@lang('blog.header.menu.portfolio')</a></li>
 							</ul>
 						</div>
 						<div class="site-head-content inner">
