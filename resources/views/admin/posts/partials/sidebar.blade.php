@@ -53,7 +53,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-6">
-				<button type="button" class="btn btn-primary btn-block" data-loading-text="Saving..." id="posts-button-save" data-route="{{ $save_route }}">
+				<button type="button" class="btn btn-primary btn-block" data-loading-text="Saving..." id="posts-button-save" data-route="{{ $save_route }}" v-on:click="save($event)">
 					Save
 				</button>
 			</div>

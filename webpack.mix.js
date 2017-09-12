@@ -27,4 +27,5 @@ mix.sass('resources/assets/sass/portfolio.scss', 'public/css/portfolio.css').ver
 
 mix.js('resources/assets/js/blog.js', 'public/js/blog.js').version()
 mix.js('resources/assets/js/admin/admin.js', 'public/js/admin.js').version()
+mix.copy('resources/assets/js/admin/old_components/portfolio/works.js', 'public/js/admin/portfolio/works.js').version()
 

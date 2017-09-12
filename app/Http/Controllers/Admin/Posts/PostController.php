@@ -35,8 +35,8 @@ class PostController extends Controller
 	
 	public function edit($post_id)
 	{
-		$post = Models\Blog\Post\Translated::findOrFail($post_id);
-		
+		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
+
 		$locales = config('app.locales');
 		$locales = array_combine($locales, $locales);
 		

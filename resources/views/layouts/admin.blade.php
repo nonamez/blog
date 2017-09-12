@@ -91,7 +91,7 @@
 		</div>
 	</nav>
 	
-	<div class="container">
+	<div class="container" id="app">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 ">
 				{!! displayAlert() !!}
@@ -102,8 +102,8 @@
 
 
 	<!-- Scripts -->
-	<script src="{{ mix('js/admin.js') }}"></script>
-
 	@stack('scripts')
+	
+	<script src="{{ mix('js/admin.js') }}"></script>
 </body>
 </html>

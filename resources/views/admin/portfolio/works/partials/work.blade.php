@@ -98,3 +98,6 @@
 		</div>
 	</div>
 </div>
+@push('scripts')
+<script src="{{ mix('js/admin/portfolio/works.js') }}"></script>
+@endpush

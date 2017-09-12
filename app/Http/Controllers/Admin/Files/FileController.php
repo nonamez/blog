@@ -75,17 +75,17 @@ class FileController extends Controller {
 
 		$new_file->save();
 		
-		$data = [
-			'id'   => $new_file->id,
-			'name' => $new_file->name,
-			'description' => $new_file->description,
+		// $data = [
+		// 	'id'   => $new_file->id,
+		// 	'name' => $new_file->name,
+		// 	'description' => $new_file->description,
 
-			'get_url' => $new_file->getURL(),
-			'upd_url' => $new_file->getUpdateURL(),
-			'del_url' => $new_file->getDeleteURL(),
-		];
+		// 	'get_url' => $new_file->getURL(),
+		// 	'upd_url' => $new_file->getUpdateURL(),
+		// 	'del_url' => $new_file->getDeleteURL(),
+		// ];
 		
-		return response()->json($data);
+		return response()->json($new_file);
 	}
 	
 	public function update(Request $request, $file_id)

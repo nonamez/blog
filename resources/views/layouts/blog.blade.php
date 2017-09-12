@@ -7,8 +7,10 @@
 	<meta name="HandheldFriendly" content="True">
 
 	<title>@yield('title') /home/NoNameZ</title>
-
-	<meta name="title" content="{{ $meta_title or $title }}">
+	
+	@if(isset($meta_title))
+	<meta name="title" content="{{ $meta_title }}">
+	@endif
 	<meta name="keywords" content="@yield('meta_keywords', trans('blog.meta.keywords'))">
 	<meta name="description" content="@yield('meta_description', trans('blog.meta.description'))">
 

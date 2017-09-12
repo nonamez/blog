@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model {
 
-	protected $table = 'files';
+	protected $table    = 'files';
 	protected $fillable = ['name', 'description'];
+	protected $appends  = ['links'];
 
 	public static function boot()
 	{
@@ -16,6 +17,17 @@ class File extends Model {
 		static::deleting(function($file) {
 			\Illuminate\Support\Facades\File::Delete($file->getPath());
 		});
+	}
+
+	// ========================= Attributes ========================= //
+
+	public function getLinksAttribute()
+	{
+		return [
+			'get'    => $this->getURL(),
+			'update' => $this->getUpdateURL(),
+			'delete' => $this->getDeleteURL()
+		];  
 	}
 
 	// ========================= Scopes ========================= //

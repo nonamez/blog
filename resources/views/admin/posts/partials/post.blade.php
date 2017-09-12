@@ -3,12 +3,12 @@
 	<div class="panel-body">
 		<div class="form-group">
 			<label>Title</label>
-			<input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ $post->title or '' }}">
+			<input type="text" class="form-control" placeholder="Enter Title" v-model="post.title">
 		</div>
 
 		<div class="form-group">
 			<label>Content</label>
-			<textarea name="content" cols="5" rows="5" class="form-control" placeholder="Enter text">{!! $post->content or '' !!}</textarea>
+			<textarea v-model="post.content" cols="5" rows="5" class="form-control" placeholder="Enter text"></textarea>
 		</div>
 	</div>
 </div>
@@ -17,100 +17,103 @@
 	<div class="panel-body">
 		<div class="form-group">
 			<label>Slug</label>
-			<input type="text" class="form-control" placeholder="Enter Slug" name="slug" value="{{ $post->slug or '' }}">
+			<input type="text" class="form-control" placeholder="Enter Slug" v-model="post.slug">
 		</div>
 
 		<div class="form-group">
 			<label>Title</label>
-			<input type="text" class="form-control" placeholder="Enter Title" name="meta_title" value="{{ $post->meta_title or '' }}">
+			<input type="text" class="form-control" placeholder="Enter Title" v-model="post.meta_title">
 		</div>
 
 		<div class="form-group">
 			<label>Description</label>
-			<input type="text" class="form-control" placeholder="Enter Description" name="meta_description" value="{{ $post->meta_description or '' }}">
+			<input type="text" class="form-control" placeholder="Enter Description" v-model="post.meta_description">
 		</div>
 
 		<div class="form-group">
 			<label>Keywords</label>
-			<input type="text" class="form-control" placeholder="Enter Keywords" name="meta_keywords" value="{{ $post->meta_keywords or '' }}">
+			<input type="text" class="form-control" placeholder="Enter Keywords" v-model="post.meta_keywords">
 		</div>
 	</div>
 </div>
-<div class="panel panel-default">
-	<div class="panel-heading">Tags</div>
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-xs-10 col-xs-offset-1">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Enter slug" id="posts-input-tag-slug">
-					<span class="input-group-addon" style="border-width:1px 0px">
-						<i class="fa fa-exchange" aria-hidden="true"></i>
-					</span>
-					<input type="text" class="form-control" placeholder="Enter name" id="posts-input-tag-name">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" id="posts-button-tags-create">Create</button>
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<div id="posts-div-tags-container" class="m-t-15">
-					@if (isset($post))
-					@foreach ($post->tags as $tag)
-					<div class="btn-group btn-group-sm m-b-5" data-role="tag" data-slug="{{ $tag->slug }}" data-name="{{ $tag->name }}">
-						<button type="button" class="btn btn-default" disabled="disabled">{{ $tag->name }}</button>
-						<button type="button" class="btn btn-default"><i class="fa fa-trash"></i></button>
+<admin-post-tags inline-template :tags="post.tags">
+	<div class="panel panel-default">
+		<div class="panel-heading">Tags</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter slug" v-model="tag.slug">
+						<span class="input-group-addon" style="border-width:1px 0px">
+							<i class="fa fa-exchange" aria-hidden="true"></i>
+						</span>
+						<input type="text" class="form-control" placeholder="Enter name" v-model="tag.name">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" v-on:click="create()">Create</button>
+						</span>
 					</div>
-					@endforeach
-					@endif
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="m-t-15">
+						<div v-for="(tag, index) in tags" class="btn-group btn-group-sm m-b-5">
+							<button type="button" class="btn btn-default" disabled="disabled">@{{ tag.name }}</button>
+							<button type="button" class="btn btn-default" v-on:click="tags.splice(index, 1)">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div> 
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="panel panel-default">
-	<div class="panel-heading">Files</div>
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2"> 
-				<div class="input-group">
-					<span class="input-group-btn">
-						<button id="fake-file-button-browse" type="button" class="btn btn-default">
-							<i class="fa fa-file-o"></i>
-						</button>
-					</span>
-					<input type="file" id="files-input-upload" style="display:none">
-					<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload" data-route="{{ route('admin.files.store') }}">
-							<i class="fa fa-upload"></i>
-						</button>
-					</span>
+</admin-post-tags>
+<admin-post-files inline-template :files="post.files">
+	<div class="panel panel-default">
+		<div class="panel-heading">Files</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-12 col-sm-7 col-sm-offset-2"> 
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button id="fake-file-button-browse" type="button" class="btn btn-default">
+								<i class="fa fa-file-o"></i>
+							</button>
+						</span>
+						<input type="file" id="files-input-upload" style="display:none">
+						<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload" v-on:click="upload('{{ route('admin.files.store') }}')">
+								<i class="fa fa-upload"></i>
+							</button>
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 p-t-15">
-				<ul class="list-group" id="posts-div-files-container">
-					@if (isset($post))
-					@foreach ($post->files as $file)
-					<li class="list-group-item" data-file-id="{{ $file->id }}">
-						<div class="row">
-							<div class="col-xs-12 col-sm-8">{{ $file->name }}</div>
-							<div class="col-xs-12 col-sm-4 text-right">
-								<div class="btn-group btn-group-sm" role="group" aria-label="...">
-									<button type="button" class="btn btn-default"><i class="fa fa-download" aria-hidden="true"></i></button>
-									<button type="button" class="btn btn-default" data-role="delete-file" data-route="{{ route('admin.files.delete', $file->id) }}"><i class="fa fa-trash"></i></button>
+			<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 p-t-15">
+					<ul class="list-group">
+						<li v-for="(file, index) in files" class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8">@{{ file.name }}</div>
+								<div class="col-xs-12 col-sm-4 text-right">
+									<div class="btn-group btn-group-sm" role="group" aria-label="...">
+										<a type="button" class="btn btn-default" :href="file.links.get" target="blank">
+											<i class="fa fa-download"></i>
+										</a>
+										<button type="button" class="btn btn-default" v-on:click="remove(index)">
+											<i class="fa fa-trash"></i>
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
-					</li>
-					@endforeach
-					@endif
-				</ul>
+						</li>
+					
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</admin-post-files>
