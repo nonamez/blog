@@ -8,7 +8,7 @@
 
 	<title>@yield('title') /home/NoNameZ</title>
 	
-	@if(isset($meta_title))
+	@if (isset($meta_title))
 	<meta name="title" content="{{ $meta_title }}">
 	@endif
 	<meta name="keywords" content="@yield('meta_keywords', trans('blog.meta.keywords'))">
