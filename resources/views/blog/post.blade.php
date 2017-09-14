@@ -33,27 +33,12 @@
 				</a>
 			</section>
 			<section class="comments" id="comments" style="text-align: center">
-				<button class="btn btn-default" id="show-disqus">@lang('blog.post.show_comments')</button>
-				<div id="disqus_thread" style="display:none"></div>
+				<div id="disqus_thread"></div>
 			</section>
 		</footer>
 	</article>
 </main>
 @stop
 @push('scripts')
-<script type="text/javascript">	
-	document.getElementById('show-disqus').addEventListener('click', function() {
-		var disqus = document.createElement('script');
-			disqus.setAttribute('src', 'http://{{ config('blog.disqus_shortname') }}.disqus.com/embed.js');
-
-		document.head.appendChild(disqus);
-		
-		this.nextElementSibling.style.display = 'block';
-		this.parentElement.removeChild(this);
-	});
-
-	if (window.location.href.indexOf('#comments') > -1) {
-		document.getElementById('show-disqus').click()
-	}
-</script>
+<script src="http://{{ config('blog.disqus_shortname') }}.disqus.com/embed.js"></script>
 @endpush
