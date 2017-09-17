@@ -40,9 +40,6 @@
 						<li>
 							<a href="{{ url('/') }}">Blog</a>
 						</li>
-						<li>
-							<a href="{{ route('portfolio.index') }}">Portfolio</a>
-						</li>
 					</ul>
 				</ul>
 			</div>

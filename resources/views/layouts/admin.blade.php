@@ -43,9 +43,6 @@
 						<li>
 							<a href="{{ url('/') }}">Blog</a>
 						</li>
-						<li>
-							<a href="{{ route('portfolio.index') }}">Portfolio</a>
-						</li>
 					</ul>
 				</ul>
 
@@ -68,20 +65,6 @@
 					<li role="presentation"{!! $menu == 'files' ? ' class="active"' : '' !!}>
 						<a href="{{ route('admin.files.index') }}">Files</a>
 					</li>
-					<li class="dropdown{{ $menu == 'portfolio' ? ' active' : ''}}" role="presentation">
-						<a aria-expanded="false" role="button" href="#" data-toggle="dropdown" class="dropdown-toggle">
-							Portfolio <span class="caret"></span>
-						</a>
-						<ul role="menu" class="dropdown-menu">
-							<li>
-								<a href="{{ route('admin.portfolio.works.index') }}">Works</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="{{ route('admin.portfolio.codes.index') }}">Codes</a>
-							</li>
-						</ul>
-					</li>
 					<li role="presentation">
 						<a href="{{ url('/logout') }}">Log Out</a>
 					</li>
@@ -99,7 +82,6 @@
 		</div>
 		@yield('content')
 	</div>
-
 
 	<!-- Scripts -->
 	@stack('scripts')
