@@ -73,7 +73,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespa
 		Route::get('create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
 		Route::post('store', ['as' => 'admin.posts.store', 'uses' => 'PostController@store']);
 		Route::get('{post_id}/edit', ['as' => 'admin.posts.edit', 'uses' => 'PostController@edit']);
-		Route::post('{post_id}/edit',['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
+		Route::post('{post_id}/update',['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
 		Route::get('{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
 	});
 

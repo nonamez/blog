@@ -6,6 +6,7 @@ module.exports = {
 	data: function () {
 		return {
 			loading: false,
+
 			post: {
 				title: null,
 				content: null,
@@ -38,6 +39,8 @@ module.exports = {
 	},
 	mounted: function() {
 		console.log('post mounted')
+
+		console.log(post.tags)
 
 		if (typeof post != 'undefined') {
 			this.post = post

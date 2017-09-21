@@ -8,7 +8,10 @@ class File extends Model {
 
 	protected $table    = 'files';
 	protected $fillable = ['name', 'description'];
+
 	protected $appends  = ['links'];
+
+	protected $visible = ['id', 'name', 'description', 'links'];
 
 	public static function boot()
 	{

@@ -1,5 +1,6 @@
 module.exports = {
-	props: ['tags'], 
+	props: ['tags'],
+	
 	data: function () {
 		return {
 			tag: {
