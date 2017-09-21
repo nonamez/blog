@@ -10,6 +10,8 @@ class Translated extends Model {
 	protected $table    = 'blg_translated_posts';
 	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date'];
 	protected $dates    = ['date'];
+	protected $appends  = ['url'];
+
 
 	public static function boot()
 	{
@@ -59,6 +61,13 @@ class Translated extends Model {
 		}
 
 		return $query;
+	}
+
+	// ========================= Custom Methods ========================= //
+
+	public function getURLAttribute()
+	{
+		return $this->getURL();
 	}
 
 	// ========================= Custom Methods ========================= //

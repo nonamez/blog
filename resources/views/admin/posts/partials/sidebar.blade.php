@@ -18,7 +18,7 @@
 			<div class="form-group">
 				<label for="language" class="col-sm-4 control-label">Language</label>
 				<div class="col-sm-8">
-					<select name="locale" id="language" class="form-control">
+					<select class="form-control"  v-model="post.locale">
 						<option value="en">English</option>
 						<option value="ru">Русский</option>
 						<option value="lt">Lietuviškai</option>
@@ -28,7 +28,7 @@
 			<div class="form-group">
 				<label for="status" class="col-sm-4 control-label">Status</label>
 				<div class="col-sm-8">
-					<select name="status" id="status" class="form-control">
+					<select class="form-control" v-model="post.status">
 						<option value="draft">Draft</option>
 						<option value="published">Published</option>
 						<option value="hidden">Hidden</option>
@@ -38,7 +38,7 @@
 			<div class="form-group">
 				<label for="parent-post" class="col-sm-4 control-label">Parent post</label>
 				<div class="col-sm-8">
-					<input id="parent-post" type="text" class="form-control" placeholder="Enter post id" name="parent_post_id" value="{{ $post->parent_post_id or '' }}">
+					<input type="text" class="form-control" placeholder="Enter post id" v-model="post.parent_post_id">
 				</div>
 			</div>
 			<div class="form-group">
@@ -59,7 +59,7 @@
 			</div>
 			@if(isset($post))
 			<div class="col-xs-6">
-				<a href="{{ $post->getURL() }}" class="btn btn-default btn-block" target="_blank">Preview</a>
+				<a :href="post.url" class="btn btn-default btn-block" target="_blank">Preview</a>
 			</div>
 			@endif
 		</div>

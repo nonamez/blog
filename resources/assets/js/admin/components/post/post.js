@@ -19,7 +19,7 @@ module.exports = {
 			this.loading = true
 
 			jQuery.post(event.currentTarget.getAttribute('data-route'), this.post, response => {
-				this.post = response
+				this.post = response.post
 			}).always(() => {
 				this.loading = false
 			})
@@ -40,7 +40,7 @@ module.exports = {
 	mounted: function() {
 		console.log('post mounted')
 
-		console.log(post.tags)
+		console.log(post)
 
 		if (typeof post != 'undefined') {
 			this.post = post

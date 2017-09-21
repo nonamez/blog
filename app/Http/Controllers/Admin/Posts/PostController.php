@@ -46,9 +46,9 @@ class PostController extends Controller
 	{
 		$post = Models\Blog\Post\Translated::findOrFail($post_id);
 
-		$this->_save($request, $post);
+		$post = $this->_save($request, $post);
 		
-		return response()->json();
+		return response()->json(['post' => $post]);
 	}
 
 	public function delete($post_id, $all = FALSE)
