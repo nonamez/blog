@@ -19,8 +19,8 @@ module.exports = {
 			this.loading = true
 
 			jQuery.post(event.currentTarget.getAttribute('data-route'), this.post, response => {
-				if ('url' in response) {
-					this.post.url = response.url
+				if ('post' in response) {
+					this.post = response.post
 				}
 			}).always(() => {
 				this.loading = false
