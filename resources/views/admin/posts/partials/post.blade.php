@@ -62,6 +62,7 @@
 							<button type="button" class="btn btn-default" v-on:click="tags.splice(index, 1)">
 								<i class="fa fa-trash"></i>
 							</button>
+							&nbsp;
 						</div> 
 					</div>
 				</div>

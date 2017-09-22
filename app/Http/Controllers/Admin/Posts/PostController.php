@@ -48,7 +48,7 @@ class PostController extends Controller
 
 		$post = $this->_save($request, $post);
 		
-		return response()->json(['post' => $post]);
+		return response()->json(['url' => $post->getURL()]);
 	}
 
 	public function delete($post_id, $all = FALSE)
