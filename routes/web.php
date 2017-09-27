@@ -33,11 +33,20 @@ Route::get('file/{date}/{name}', ['as' => 'file.get', 'uses' => 'Admin\Files\Fil
 
 /*
 |--------------------------------------------------------------------------
+| Site map
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/sitemap.xml', ['as' => 'sitemap.index', 'uses' => 'SiteMapController@index']);
+Route::get('/sitemap-posts-{locale}.xml', ['as' => 'sitemap.posts', 'uses' => 'SiteMapController@posts']);
+
+/*
+|--------------------------------------------------------------------------
 | Fron-end Routes
 |--------------------------------------------------------------------------
 */
 
-Route::get('/{locale}', 'Blog\PostController@index')->where('locale', implode('|', config('app.locales')));
+Route::get('/{locale}', ['as' => 'blog.locale', 'uses' => 'Blog\PostController@index'])->where('locale', implode('|', config('app.locales')));
 
 // Blog
 Route::group(['prefix' => app()->getLocale()], function() {
