@@ -7,9 +7,9 @@
 				<label for="language" class="col-sm-4 control-label">Date</label>
 				<div class="col-sm-8">
 					<div class="input-group">
-					<input type="text" class="form-control" placeholder="Enter date" value="{{ $post->date->format('Y-m-d H:i:s') }}" id="posts-input-date" name="date">
+					<input type="text" class="form-control" placeholder="Enter date" v-model="post.date">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" id="posts-button-now">Now</button>
+							<button class="btn btn-default" type="button"  v-on:click="setPostDateToNow()">Now</button>
 						</span>
 					</div>
 				</div>

@@ -20,19 +20,22 @@ module.exports = {
 
 			jQuery.post(event.currentTarget.getAttribute('data-route'), this.post, response => {
 				if ('post' in response) {
-					this.post = response.post
+					this.post = response.post;
 				}
 			}).always(() => {
-				this.loading = false
+				this.loading = false;
 			})
+		},
+		setPostDateToNow: function() {
+			this.post.date = (new Date).toMysqlFormat();
 		}
 	},
 	watch: {
 		loading: function(state) {
 			if (state) {
-				jQuery('#posts-button-save').button('loading')
+				jQuery('#posts-button-save').button('loading');
 			} else {
-				jQuery('#posts-button-save').button('reset')
+				jQuery('#posts-button-save').button('reset');
 			}
 		}
 	},
@@ -41,8 +44,6 @@ module.exports = {
 	},
 	mounted: function() {
 		console.log('post mounted')
-
-		console.log(post)
 
 		if (typeof post != 'undefined') {
 			this.post = post
