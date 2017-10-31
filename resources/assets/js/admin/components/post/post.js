@@ -10,7 +10,9 @@ module.exports = {
 			post: {
 				title: null,
 				content: null,
-				slug: null
+				slug: null,
+				status: 'draft',
+				locale: 'en'
 			}
 		}
 	},
