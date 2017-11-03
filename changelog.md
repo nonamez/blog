@@ -1,6 +1,22 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
+## [0.6.0] - [2017-11-03]
+### Added
+- Markdown
+- Syntax highlight
+
+### Changed
+- Frawmework upgraded to 5.5.*
+- Admin panel moved to Vue
+- File handling mechanism
+
+### Deleted
+- Portfolio
+
+### Various fixes
+### Various optimizations
+
 ## [0.5.3] - [Unreleased]
 ### Added
 - Post date
