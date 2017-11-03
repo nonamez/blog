@@ -12,7 +12,8 @@ module.exports = {
 				content: null,
 				slug: null,
 				status: 'draft',
-				locale: 'en'
+				locale: 'en',
+				files: []
 			}
 		}
 	},

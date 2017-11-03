@@ -3,15 +3,19 @@ module.exports = {
 	data: function () {
 		return {
 			file: null,
-			isUploading: false
+			
+			// Statuses
+			selected: false,
+			watermark: false,
 		}
 	},
 	methods: {
 		upload: function(route) {
 			console.log('uploadFile')
 
-			let form_data = new FormData()
-				form_data.append('file', this._JQ_ELEMENTS.input_file_upload[0].files[0])
+			let form_data = new FormData();
+				form_data.append('file', this._JQ_ELEMENTS.input_file_upload[0].files[0]);
+				form_data.append('watermark', this.watermark);
 
 			jQuery.ajax({
 				url  : route,
@@ -23,10 +27,12 @@ module.exports = {
 				success: response => {
 					this.files.unshift(response)
 
+					this.selected = false;
+					this.watermark = false;
+
 					this._JQ_ELEMENTS.input_file_upload.val(null)
 
 					this._JQ_ELEMENTS.input_fake_file_name.val('')
-					this._JQ_ELEMENTS.button_fake_file_upload.prop('disabled', true)
 				}
 			})
 		},
@@ -39,10 +45,11 @@ module.exports = {
 
 	created: function() {
 		console.log('files created')
-
 	},
 	mounted: function() {
 		console.log('files mounted')
+
+		$('[data-toggle="tooltip"]').tooltip(); 
 
 		const _ELEMENTS = {
 			input_file_upload:  jQuery('#files-input-upload'),
@@ -52,12 +59,12 @@ module.exports = {
 			button_fake_file_browse: jQuery('#fake-file-button-browse')
 		}
 
-		this._JQ_ELEMENTS = _ELEMENTS
+		this._JQ_ELEMENTS = _ELEMENTS;
 
-		_ELEMENTS.input_file_upload.change(function() {
-			_ELEMENTS.input_fake_file_name.val(this.value)
+		_ELEMENTS.input_file_upload.change(event => {
+			_ELEMENTS.input_fake_file_name.val(event.currentTarget.value)
 
-			_ELEMENTS.button_fake_file_upload.prop('disabled', false)
+			this.selected = true;
 		})
 
 		_ELEMENTS.button_fake_file_browse.click(function() {

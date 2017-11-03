@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Translated extends Model {
 	
 	protected $table    = 'blg_translated_posts';
-	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date'];
+	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date', 'id'];
 	protected $dates    = ['date'];
 	protected $appends  = ['url'];
 

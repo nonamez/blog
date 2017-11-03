@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Utils;
 use App\Models;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\FileRequest;
 
 use File;
 
@@ -27,27 +26,19 @@ class FileController extends Controller {
 		return view('admin.files.index', compact('files'));
 	}
 	
-	public function get($date, $name)
+	public function store(Request $request)
 	{
-		$file_path = str_replace('-', '/', $date) . '/' . $name;
-		$file_path = storage_path($this->files_path . '/' . $file_path);
+		$request->validate([
+			'file' => ['required', 'mimes:' . implode(',', config()->get('blog.allowed_files'))]
+		]);
 
-		if (File::exists($file_path) == FALSE) {
-			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-		}
-		
-		$file_type = getMimeType($file_path);
-
-		return response(File::get($file_path), 200)->header('Content-Type', $file_type);
-	}
-
-	public function store(FileRequest $request)
-	{
 		$file = $request->file('file');
 		$time = time();
-		
-		$path = storage_path($this->files_path . date('/Y/m/d', $time));
-		
+
+		$path = 'app/public';
+		$path = $path . date('/Y/m/d', $time);
+		$path = storage_path($path);
+				
 		if (File::isDirectory($path) == FALSE) {
 			File::makeDirectory($path, 0755, TRUE);
 		}
@@ -69,22 +60,12 @@ class FileController extends Controller {
 		
 		$new_file = new Models\File;
 
-		$new_file->name = $name;
+		$new_file->name          = $name;
 		$new_file->description   = $request->get('description', NULL);
 		$new_file->original_name = $file->getClientOriginalName();
 
 		$new_file->save();
-		
-		// $data = [
-		// 	'id'   => $new_file->id,
-		// 	'name' => $new_file->name,
-		// 	'description' => $new_file->description,
-
-		// 	'get_url' => $new_file->getURL(),
-		// 	'upd_url' => $new_file->getUpdateURL(),
-		// 	'del_url' => $new_file->getDeleteURL(),
-		// ];
-		
+			
 		return response()->json($new_file);
 	}
 	

@@ -91,7 +91,7 @@
 		</a>
 	</div>
 	<a href="https://github.com/nonamez/blog">
-		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('storage/images/fork_me.png') }}" alt="Fork me on GitHub">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ asset('images/fork_me.png') }}" alt="Fork me on GitHub">
 	</a>
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

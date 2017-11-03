@@ -85,7 +85,10 @@
 						<input type="file" id="files-input-upload" style="display:none">
 						<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
 						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload" v-on:click="upload('{{ route('admin.files.store') }}')">
+							<button type="button" data-trigger="hover" data-toggle="tooltip" data-placement="top" title="Watermark" :class="['btn', 'btn-default', {'active': watermark}]" :disabled="!selected" v-on:click="watermark = !watermark">
+								<i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-default" id="fake-file-button-upload" :disabled="!selected" v-on:click="upload('{{ route('admin.files.store') }}')">
 								<i class="fa fa-upload"></i>
 							</button>
 						</span>

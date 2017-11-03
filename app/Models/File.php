@@ -11,7 +11,7 @@ class File extends Model {
 
 	protected $appends  = ['links'];
 
-	protected $visible = ['id', 'name', 'description', 'links'];
+	protected $visible = ['id', 'name', 'description', 'links', 'private'];
 
 	public static function boot()
 	{
@@ -53,14 +53,14 @@ class File extends Model {
 
 	public function getPath()
 	{
-		$path = sprintf('%s/%s/%s', config('files.path'), $this->created_at->format('Y/m/d'), $this->name);
+		$path = sprintf('app/public/%s/%s', $this->created_at->format('Y/m/d'), $this->name);
 		
 		return storage_path($path);
 	}
 
 	public function getURL()
 	{
-		return route('file.get', [$this->created_at->format('Y-m-d'), $this->name]);
+		return route('storage.file', [$this->created_at->format('Y/m/d'), $this->name]);
 	}
 
 	public function getUpdateURL()

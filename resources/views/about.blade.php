@@ -14,7 +14,7 @@
 				<li>@lang('about.skills.li_4')</li>
 			</ul>
 		</p>
-		<p>@lang('about.contact', ['img' => sprintf('<img style="vertical-align:-1px" src="%s" alt="Email address">', asset('storage/images/email.png'))])
+		<p>@lang('about.contact', ['img' => sprintf('<img style="vertical-align:-1px" src="%s" alt="Email address">', asset('images/email.png'))])
 		</p>
 		<p>
 			<em>P.S. @lang('about.ps')</em>
