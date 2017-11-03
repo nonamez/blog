@@ -12,7 +12,7 @@
 
 	<!-- Styles -->
 
-	<link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
+	<link href="{{ mix('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
 		<nav class="navbar navbar-default navbar-static-top">
@@ -39,9 +39,6 @@
 					<ul class="nav navbar-nav">
 						<li>
 							<a href="{{ url('/') }}">Blog</a>
-						</li>
-						<li>
-							<a href="{{ route('portfolio.index') }}">Portfolio</a>
 						</li>
 					</ul>
 				</ul>

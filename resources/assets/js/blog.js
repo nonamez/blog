@@ -1,14 +1,18 @@
-var posts       = jQuery('article:not(.post-standalone)')
-var html_body   = jQuery('html, body')
-var back_to_top = jQuery('#back-to-top')
+window.$ = window.jQuery = require('jquery');
+
+require('bootstrap-sass');
+
+let posts       = jQuery('article:not(.post-standalone)')
+let html_body   = jQuery('html, body')
+let back_to_top = jQuery('#back-to-top')
 
 jQuery(document).ready(function() {
-	var posts = jQuery('article:not(.post-standalone)')
+	let posts = jQuery('article:not(.post-standalone)')
 
 	posts.each(function() {
-		var current_post = jQuery(this),
-		current_post_header  = current_post.find('header.post-header'),
-		current_post_content = current_post.find('section.post-content')
+		let current_post = jQuery(this),
+			current_post_header  = current_post.find('header.post-header'),
+			current_post_content = current_post.find('section.post-content')
 
 		current_post_header.click(function() {
 			if (current_post.hasClass('open')) {
@@ -17,7 +21,7 @@ jQuery(document).ready(function() {
 				})
 			} else {
 				posts.each(function() {
-					var post = jQuery(this)
+					let post = jQuery(this)
 
 					if (post.hasClass('open')) {
 						post.find('section.post-content').slideUp('slow', function() {
@@ -43,7 +47,7 @@ jQuery(document).ready(function() {
 	})
 
 	html_body.on('scroll', function() {
-		var scrollTop = jQuery(window).scrollTop()
+		let scrollTop = jQuery(window).scrollTop()
 
 		if (jQuery(window).scrollTop() > 100) {
 			back_to_top.show()

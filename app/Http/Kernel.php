@@ -53,7 +53,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'user_ip' => \App\Http\Middleware\VerifyUserIp::class,
-        'portfolio_auth' => \App\Http\Middleware\PortfolioAuth::class
+        'user_ip' => \App\Http\Middleware\VerifyUserIp::class
     ];
 }

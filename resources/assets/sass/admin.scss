@@ -3,11 +3,17 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
+// Font-Awesome
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+// Toastr
+@import "node_modules/toastr/toastr.scss";
+
 // Variables
-@import "variables";
+@import "resources/assets/sass/mixins/variables";
 
 // Bootstrap
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "resources/assets/sass/mixins/bootstrap";
 
-
-
+// Awesome Bootstrap Checkbox
+@import "node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";

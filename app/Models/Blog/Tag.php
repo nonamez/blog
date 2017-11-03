@@ -9,6 +9,8 @@ use DB;
 class Tag extends Model {
 	protected $table    = 'blg_tags';
 	protected $fillable = ['slug', 'name'];
+
+	protected $hidden = ['pivot'];
 	
 	public $timestamps = FALSE;
 

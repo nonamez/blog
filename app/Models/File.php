@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model {
 
-	protected $table = 'files';
+	protected $table    = 'files';
 	protected $fillable = ['name', 'description'];
+
+	protected $appends  = ['links'];
+
+	protected $visible = ['id', 'name', 'description', 'links', 'private'];
 
 	public static function boot()
 	{
@@ -18,13 +22,23 @@ class File extends Model {
 		});
 	}
 
+	// ========================= Attributes ========================= //
+
+	public function getLinksAttribute()
+	{
+		return [
+			'get'    => $this->getURL(),
+			'update' => $this->getUpdateURL(),
+			'delete' => $this->getDeleteURL()
+		];  
+	}
+
 	// ========================= Scopes ========================= //
 
 	public function scopeOfType($query, $type)
 	{
 		$types = [
 			'post'      => 'App\Models\Blog\TranslatedPost',
-			'portfolio' => 'App\Models\Portfolio\Work'
 		];
 
 		if (array_key_exists($type, $types)) {
@@ -38,14 +52,14 @@ class File extends Model {
 
 	public function getPath()
 	{
-		$path = sprintf('%s/%s/%s', config('files.path'), $this->created_at->format('Y/m/d'), $this->name);
+		$path = sprintf('app/public/%s/%s', $this->created_at->format('Y/m/d'), $this->name);
 		
 		return storage_path($path);
 	}
 
 	public function getURL()
 	{
-		return route('file.get', [$this->created_at->format('Y-m-d'), $this->name]);
+		return route('storage.file', [$this->created_at->format('Y/m/d'), $this->name]);
 	}
 
 	public function getUpdateURL()

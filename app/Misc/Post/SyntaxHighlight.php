@@ -14,35 +14,36 @@ namespace App\Misc\Post;
 // 	color: #000;
 // }
 
-// 	pre span.N{ color:#ea0; } /* Numbers */
-// 	pre span.S{ color:#080; } /* Strings */
-// 	pre span.C{ color:#a60; } /* Comments */
-// 	pre span.K{ color:#008; } /* Keywords */
-// 	pre span.V{ color:#808; } /* Vars */
-// 	pre span.D{ color:#a00; } /* Defines */
-
-// 	pre span.N {color:#8CD0D3} /* Numbers */
-// 	pre span.S {color:#CC9385} /* Strings */
-// 	pre span.C {color:#7F9F7F} /* Comments */
-// 	pre span.K {color:#DFC47D} /* Keywords */
-// 	pre span.V {color:#CEDF99} /* Vars */
-// 	pre span.D {color:#FFFFFF} /* Defines */
-// 	pre span.P {color:#9F9D65} /* Punctuations */
-
+// pre span.N{ color:#ea0; } /* Numbers */
+// pre span.S{ color:#080; } /* Strings */
+// pre span.C{ color:#888; } /* Comments */
+// pre span.K{ color:#000; font-weight: 700 } /* Keywords */
+// pre span.V{ color:#808; } /* Vars */
+// pre span.D{ color:#a00; } /* Defines */
+// pre span.P {color:#9F9D65} /* Punctuations */
+// pre span.err { color: #7D2727} /* Errors */
 
 class SyntaxHighlight
 {
 	public static function process($s)
 	{
-		// $s = htmlspecialchars($s);
+		$s = htmlspecialchars($s);
 
 		// Workaround for escaped backslashes
-		$s = str_replace('\\\\','\\\\<e>', $s); 
+		$s = str_replace('\\\\','\\\\<e>', $s);
+
+		$punctuation = [
+			'(&amp;)', // &
+			'(((&gt;)?&lt;)|(&gt;)[^a-zA-Z\/])', // >, <, >=, <=
+			'[-!%^*()+|~={}[\]:"\'<>?,.\/]'
+		];
+
+		$punctuation = implode('|', $punctuation);
+		$punctuation = sprintf('/(%s+)/', $punctuation);
 		
-		$regexp = array(
+		$regexp = [
 			// Punctuations
-			// '/(([\-\!\%\^\*\(\)\+\|\~\=\`\{\}\[\]\:\"\'<>\?\,\.\/]+))/'
-			'/([-!%^*()+|~={}[\]:"\'<>?,.\/]+)/'
+			$punctuation
 			=> '<span class="P">$1</span>',
 
 			// Numbers (also look for Hex)
@@ -65,7 +66,7 @@ class SyntaxHighlight
 				array|object|resource|var|let|bool|boolean|int|integer|float|double|
 				real|string|array|global|const|static|public|private|protected|
 				published|extends|switch|true|false|null|void|this|self|struct|
-				char|signed|unsigned|short|long
+				char|signed|unsigned|short|in|long
 			)(?!\w|=")/ix'
 			=> '<span class="K">$1</span>',
 
@@ -75,8 +76,9 @@ class SyntaxHighlight
 			)(?!\w)/ix'
 			=> '<span class="V">$1</span>',
 
+			// Some custom errors
 			'/(Error)/' => '<span class="err">$1</span>'
-		);
+		];
 
 		// Comments/Strings
 		$regexp_callable = 

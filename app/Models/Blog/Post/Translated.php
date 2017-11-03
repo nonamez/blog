@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Translated extends Model {
 	
 	protected $table    = 'blg_translated_posts';
-	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown'];
+	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date', 'id'];
+	protected $dates    = ['date'];
+	protected $appends  = ['url'];
+
 
 	public static function boot()
 	{
@@ -47,6 +50,24 @@ class Translated extends Model {
 			$post->slug = strtolower(str_replace(' ', '_', $post->slug)); // Replace all spaces to _
 			$post->slug = preg_replace('/[^a-zA-Z0-9_]/', '', $post->slug); // Replace everything except numbers, word chars and _ with nothing
 		});
+	}
+
+	// ========================= Scopes ========================= //
+
+	public function scopePermitted($query)
+	{
+		if (auth()->guest()) {
+			$query->whereIn('status', ['published', 'hidden']);
+		}
+
+		return $query;
+	}
+
+	// ========================= Custom Methods ========================= //
+
+	public function getURLAttribute()
+	{
+		return $this->getURL();
 	}
 
 	// ========================= Custom Methods ========================= //

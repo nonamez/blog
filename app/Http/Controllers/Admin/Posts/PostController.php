@@ -27,7 +27,6 @@ class PostController extends Controller
 
 	public function store(PostRequest $request)
 	{
-
 		$post = $this->_save($request);
 				
 		return response()->json(['redirect_to' => route('admin.posts.edit', $post->id)]);
@@ -35,8 +34,8 @@ class PostController extends Controller
 	
 	public function edit($post_id)
 	{
-		$post = Models\Blog\Post\Translated::findOrFail($post_id);
-		
+		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
+
 		$locales = config('app.locales');
 		$locales = array_combine($locales, $locales);
 		
@@ -47,9 +46,11 @@ class PostController extends Controller
 	{
 		$post = Models\Blog\Post\Translated::findOrFail($post_id);
 
-		$this->_save($request, $post);
+		$post = $this->_save($request, $post);
+
+		$post->load('files', 'tags');
 		
-		return response()->json();
+		return response()->json(['post' => $post]);
 	}
 
 	public function delete($post_id, $all = FALSE)
@@ -85,6 +86,8 @@ class PostController extends Controller
 	{
 		if ($translated_post == FALSE) {
 			$translated_post = new Models\Blog\Post\Translated;
+
+			$translated_post->date = date('Y-m-d H:i:s');
 		}
 
 		$translated_post->fill($request->all());
@@ -117,8 +120,8 @@ class PostController extends Controller
 		// ========================= Files ========================= //
 
 		// Here we also could do "UPDATE" by ids for faster performance
-		foreach ($request->get('files', []) as $file_id) {
-			$file = Models\File::findOrFail($file_id);
+		foreach ($request->get('files', []) as $file) {
+			$file = Models\File::findOrFail($file['id']);
 
 			$translated_post->files()->save($file);
 		}
