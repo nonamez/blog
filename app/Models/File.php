@@ -39,7 +39,6 @@ class File extends Model {
 	{
 		$types = [
 			'post'      => 'App\Models\Blog\TranslatedPost',
-			'portfolio' => 'App\Models\Portfolio\Work'
 		];
 
 		if (array_key_exists($type, $types)) {
