@@ -11,14 +11,21 @@
 	@if (isset($meta_title))
 	<meta name="title" content="{{ $meta_title }}">
 	@endif
+
 	<meta name="keywords" content="@yield('meta_keywords', trans('blog.meta.keywords'))">
 	<meta name="description" content="@yield('meta_description', trans('blog.meta.description'))">
+
+	<meta name="author" content="name @ nonamez.name">
+
+	<link rel="alternate" href="http://nonamez.name/lt" hreflang="lt-LT">
+	<link rel="alternate" href="http://nonamez.name/en" hreflang="en-US">
+	<link rel="alternate" href="http://nonamez.name/ru" hreflang="ru-RU">
+
+	<link rel="canonical" href="{{ url()->current() }}">
 
 	<link rel="stylesheet" href="{{ mix('css/blog.css') }}">
 
 	<script>var root_url = '{{ url('/') }}'</script>
-
-	<link rel="canonical" href="{{ url()->current() }}">
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
