@@ -9,3 +9,4 @@ Homestead.json
 Thumbs.db
 .DS_Store
 .env
+package-lock.json
