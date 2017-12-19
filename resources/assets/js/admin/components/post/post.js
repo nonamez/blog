@@ -13,7 +13,8 @@ module.exports = {
 				slug: null,
 				status: 'draft',
 				locale: 'en',
-				files: []
+				files: [],
+				tags: []
 			}
 		}
 	},
