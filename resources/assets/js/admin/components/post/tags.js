@@ -11,10 +11,14 @@ module.exports = {
 	},
 	methods: {
 		create: function() {
-			this.tags.push(Vue.util.extend({}, this.tag))
+			if (this.tag.name != null) {
+				this.tags.push(Vue.util.extend({}, this.tag))
 
-			this.tag.name = ''
-			this.tag.slug = ''
+				this.tag = {
+					slug: null,
+					name: null
+				}
+			}
 		}
 	},
 
