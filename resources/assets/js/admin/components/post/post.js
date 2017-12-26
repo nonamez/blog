@@ -11,6 +11,7 @@ module.exports = {
 				title: null,
 				content: null,
 				slug: null,
+				markdown: 1,
 				status: 'draft',
 				locale: 'en',
 				files: [],
@@ -20,7 +21,9 @@ module.exports = {
 	},
 	methods: {
 		save: function(event) {
-			this.loading = true
+			this.loading = true;
+
+			this.post.markdown = this.post.markdown ? 1 : 0;
 
 			jQuery.post(event.currentTarget.getAttribute('data-route'), this.post, response => {
 				if ('post' in response) {

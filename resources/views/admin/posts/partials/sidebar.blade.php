@@ -45,7 +45,7 @@
 				<label for="markdown" class="col-sm-4 control-label">MarkDown</label>
 				<div class="col-sm-8">
 					<div class="checkbox">
-						<input type="checkbox" name="markdown" id="markdown" checked="checked">
+						<input type="checkbox" name="markdown" id="markdown" v-model="post.markdown">
 						<label></label>
 					</div>
 				</div>
