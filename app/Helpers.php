@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Display different messages from session
  */
 
@@ -22,7 +22,7 @@ if (function_exists('displayAlert') == FALSE) {
 	}
 }
 
-/**
+/*
  * Translit russian chars
  */
 
@@ -35,7 +35,7 @@ if (function_exists('ru2lat') == FALSE) {
 	}
 }
 
-/**
+/*
  * Returs file type
  */
 if (function_exists('getMimeType') == FALSE) {
@@ -64,5 +64,19 @@ if (function_exists('getMimeType') == FALSE) {
 		} else {
 			return FALSE;
 		}
+	}
+}
+
+/*
+ * Shows raw dump
+ */
+
+if (function_exists('ddRaw') == FALSE) {
+	function ddRaw(...$args) {
+		array_map(function ($x) {
+			var_dump($x);
+		}, $args);
+		
+		die(1);
 	}
 }
