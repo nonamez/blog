@@ -18,5 +18,8 @@
     "jquery": "^3.2.1",
     "toastr": "^2.1.2",
     "vue": "^2.4.4"
+  },
+  "dependencies": {
+    "pace-progress": "^1.0.2"
   }
 }

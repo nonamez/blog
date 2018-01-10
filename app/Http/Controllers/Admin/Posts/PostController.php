@@ -19,27 +19,23 @@ class PostController extends Controller
 
 	public function create()
 	{
-		$locales = config('app.locales');
-		$locales = array_combine($locales, $locales);
-
-		return view('admin.posts.create', compact('locales'));
+		return view('admin.posts.post', ['post' => FALSE]);
 	}
 
 	public function store(PostRequest $request)
 	{
 		$post = $this->_save($request);
+
+		$post->load('files', 'tags');
 				
-		return response()->json(['redirect_to' => route('admin.posts.edit', $post->id)]);
+		return response()->json(['post' => $post]);
 	}
 	
 	public function edit($post_id)
 	{
 		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
-
-		$locales = config('app.locales');
-		$locales = array_combine($locales, $locales);
-		
-		return view('admin.posts.edit', compact('locales', 'post'));
+	
+		return view('admin.posts.post', ['post' => $post]);
 	}
 
 	public function update(PostRequest $request, $post_id)

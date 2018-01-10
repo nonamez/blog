@@ -10,8 +10,8 @@ class Translated extends Model {
 	protected $table    = 'blg_translated_posts';
 	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date', 'id'];
 	protected $dates    = ['date'];
-	protected $appends  = ['url'];
 
+	protected $appends  = ['routes'];
 
 	public static function boot()
 	{
@@ -63,11 +63,15 @@ class Translated extends Model {
 		return $query;
 	}
 
-	// ========================= Custom Methods ========================= //
+	// ========================= Attributes ========================= //
 
-	public function getURLAttribute()
+	public function getRoutesAttribute()
 	{
-		return $this->getURL();
+		return [
+			'preview' => url(sprintf('/%s/post/%s', $this->locale, $this->slug)),
+			'edit'    => route('admin.posts.edit', $this->id),
+			'update'  => route('admin.posts.update', $this->id)
+		];  
 	}
 
 	// ========================= Custom Methods ========================= //
@@ -94,11 +98,6 @@ class Translated extends Model {
 		return $content;
 	}
 	
-	public function getURL()
-	{
-		return url(sprintf('/%s/post/%s', $this->locale, $this->slug));
-	}
-
 	public function getPostClass()
 	{
 		switch ($this->status) {

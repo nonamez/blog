@@ -8,7 +8,7 @@ use App\Models;
 
 use Illuminate\Support\ServiceProvider;
 
-class ComposerProvider extends ServiceProvider
+class ViewComposerProvider extends ServiceProvider
 {
 	/**
 	 * Bootstrap the application services.
@@ -30,6 +30,13 @@ class ComposerProvider extends ServiceProvider
 			});
 
 			$view->with('tags', $tags);
+		});
+
+		View::composer('admin.posts.*', function($view) {
+			$locales = config('app.locales');
+			$locales = array_combine($locales, $locales);
+
+			$view->with('locales', $locales);
 		});
 	}
 

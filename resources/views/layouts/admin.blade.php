@@ -74,18 +74,8 @@
 		</div>
 	</nav>
 	
-	<div class="container" id="app">
-		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-sm-offset-2 ">
-				{!! displayAlert() !!}
-			</div>
-		</div>
-		@yield('content')
-	</div>
-
-	<!-- Scripts -->
-	@stack('scripts')
+	@yield('content')
 	
-	<script src="{{ mix('js/admin.js') }}"></script>
-</body>
+	@stack('js')
+	</body>
 </html>

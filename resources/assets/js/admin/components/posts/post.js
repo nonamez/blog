@@ -1,4 +1,10 @@
-module.exports = {
+require('../../bootstrap.js')
+require('../../functions.js')
+
+window.Vue = require('vue');
+
+const app = new Vue({
+	el: '#app',
 	components: {
 		'admin-post-tags': require('./tags.js'),
 		'admin-post-files': require('./files.js'),
@@ -20,14 +26,18 @@ module.exports = {
 		}
 	},
 	methods: {
-		save: function(event) {
+		save: function() {
 			this.loading = true;
 
 			this.post.markdown = this.post.markdown ? 1 : 0;
 
-			jQuery.post(event.currentTarget.getAttribute('data-route'), this.post, response => {
+			let url = this.post.routes ? this.post.routes.update : STORE_ROUTE;
+
+			jQuery.post(url, this.post, response => {
 				if ('post' in response) {
 					this.post = response.post;
+
+					window.history.pushState('', '', response.post.routes.edit);
 				}
 			}).always(() => {
 				this.loading = false;
@@ -48,12 +58,14 @@ module.exports = {
 	},
 	created: function() {
 		console.log('post created')
+
+		jQuery('#app').show()
 	},
 	mounted: function() {
 		console.log('post mounted')
 
-		if (typeof post != 'undefined') {
-			this.post = post
+		if (typeof _POST != undefined && _POST) {
+			this.post = _POST
 		}
 	}
-}
+});

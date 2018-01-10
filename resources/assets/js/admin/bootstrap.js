@@ -51,6 +51,4 @@ jQuery(document).ajaxError(function(event, jqXHR, ajaxSettings, errorThrown) {
 	}
 })
 
-window.Vue = require('vue')
-
 require('bootstrap-sass')
