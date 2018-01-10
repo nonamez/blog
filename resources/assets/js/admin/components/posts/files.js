@@ -13,6 +13,8 @@ module.exports = {
 		upload: function(route) {
 			console.log('uploadFile')
 
+			this.watermark = this.watermark ? 1 : 0;
+
 			let form_data = new FormData();
 				form_data.append('file', this._JQ_ELEMENTS.input_file_upload[0].files[0]);
 				form_data.append('watermark', this.watermark);

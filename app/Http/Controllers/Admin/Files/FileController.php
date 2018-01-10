@@ -29,7 +29,8 @@ class FileController extends Controller {
 	public function store(Request $request)
 	{
 		$request->validate([
-			'file' => ['required', 'mimes:' . implode(',', config()->get('blog.allowed_files'))]
+			'file' => ['required', 'mimes:' . implode(',', config()->get('blog.allowed_files'))],
+			'watermark' => ['required', 'boolean']
 		]);
 
 		$file = $request->file('file');
@@ -45,7 +46,7 @@ class FileController extends Controller {
 
 		$file_real_path = $file->getRealPath();
 
-		if ($request->get('watermark', FALSE) && exif_imagetype($file_real_path)) {
+		if ((boolean) $request->get('watermark', FALSE) && exif_imagetype($file_real_path)) {
 			Utils\Image::addWatermarkRepeatedly($file_real_path);
 		}
 
