@@ -439,11 +439,13 @@ footer .poweredby a {
   margin-left: 0;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+  float: left;
 }
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  float: right;
 }
 .pagination > li > a:hover,
 .pagination > li > span:hover,
@@ -490,6 +492,7 @@ footer .poweredby a {
 .pagination > li:last-child > span {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  float: right;
 }
 
 /**
