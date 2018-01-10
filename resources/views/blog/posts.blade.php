@@ -20,7 +20,7 @@
 				{!! $post->getProcessedContent(TRUE) !!}
 			</div>
 			<p class="text-center">
-				<a href="{{ $post->getURL() }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
+				<a href="{{ $post->routes['preview'] }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>
 			</p>
 		</section>
 	</article>

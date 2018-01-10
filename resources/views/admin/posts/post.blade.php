@@ -1,8 +1,8 @@
 @extends('layouts.admin', ['menu' => 'posts'])
 @section('content')
 <div class="container" id="app" style="display: none">
-	<h3 class="m-t-0" v-if="!post.id">
-		@{{post.id ? 'Edit Post' : 'Add New Post'}}
+	<h3 class="m-t-0">
+		@{{post.created_at ? 'Edit Post' : 'Add New Post'}}
 	</h3>
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-md-8">
@@ -190,7 +190,7 @@
 							</button>
 						</div>
 						<div class="col-xs-6">
-							<a :href="post.url" :disabled="!post.id" class="btn btn-default btn-block" target="_blank">Preview</a>
+							<a :href="post.url" :disabled="!post.created_at" class="btn btn-default btn-block" target="_blank">Preview</a>
 						</div>
 					</div>
 				</div>
