@@ -21,7 +21,8 @@ const app = new Vue({
 				status: 'draft',
 				locale: 'en',
 				files: [],
-				tags: []
+				tags: [],
+				routes: [],
 			}
 		}
 	},
@@ -31,7 +32,7 @@ const app = new Vue({
 
 			this.post.markdown = this.post.markdown ? 1 : 0;
 
-			let url = this.post.routes ? this.post.routes.update : _STORE_ROUTE;
+			let url = this.post.created_at ? this.post.routes.update : _STORE_ROUTE;
 
 			jQuery.post(url, this.post, response => {
 				if ('post' in response) {

@@ -190,7 +190,7 @@
 							</button>
 						</div>
 						<div class="col-xs-6">
-							<a :href="post.url" :disabled="!post.created_at" class="btn btn-default btn-block" target="_blank">Preview</a>
+							<a :href="post.routes.preview" :disabled="!post.created_at" class="btn btn-default btn-block" target="_blank">Preview</a>
 						</div>
 					</div>
 				</div>
