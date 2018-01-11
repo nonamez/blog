@@ -104,7 +104,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
 	<script src="{{ mix('js/blog.js') }}"></script>
-	
+
 	@stack('scripts')
 	
 	@if(strlen(env('GOOGLE_ANALYTICS')) > 0)

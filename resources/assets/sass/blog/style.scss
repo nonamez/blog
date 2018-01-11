@@ -4,6 +4,7 @@
 @import "resources/assets/fonts/blog/style";
 
 @import "custom-bootstrap";
+@import "~highlight.js/styles/default";
 
 html {
 	font-size: 10px;
@@ -34,49 +35,58 @@ h1 small,h2 small,h3 small,h4 small,h5 small,h6 small {
 	color: #999999;
 }
 
-pre {
-	font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace; 
+.hljs {
+	font-family: Droid Sans Mono, Courier New, Lucida Console, Bitstream Vera Sans Mono, monospace;
 	font-size: 12px;
-	color: #000;
-	line-height: 17.6px;
-	overflow-x: auto;
-	white-space: pre;
-	word-break: inherit;
-	word-wrap: inherit;
 	display: block;
 	overflow-x: auto;
 	padding: 0.5em;
-	background: #eee !important;
-	border-radius: 2px;
+	background: #eff0f1;
+	color: #000;
 }
 
-pre > code {
-	border: none !important;
-}
+// pre span.N{ color:#ea0; } /* Numbers */
+// pre span.S{ color:#080; } /* Strings */
+// pre span.C{ color:#888; } /* Comments */
+// pre span.K{ color:#000; font-weight: 700 } /* Keywords */
+// pre span.V{ color:#808; } /* Vars */
+// pre span.D{ color:#a00; } /* Defines */
+// pre span.P {color:#9F9D65} /* Punctuations */
+// pre span.err { color: #7D2727} /* Errors */
 
-pre span.N{ color:#ea0; } /* Numbers */
-// pre span.N{ color:#099; } /* Numbers */
-pre span.S{ color:#080; } /* Strings */
-// pre span.S{ color:#d14; } /* Strings */
-pre span.C{ color:#888; } /* Comments */
-pre span.K{ color:#000; font-weight: 700 } /* Keywords */
-pre span.V{ color:#808; } /* Vars */
-pre span.D{ color:#a00; } /* Defines */
-pre span.P {color:#9F9D65} /* Punctuations */
-pre span.err { color: #7D2727} /* Errors */
+
+// pre {
+//     background: #fff none repeat scroll 0 0;
+//     border: medium none;
+//     line-height: 17.6px;
+//     overflow-x: auto;
+//     padding: 0;
+//     white-space: pre;
+//     word-break: inherit;
+//     word-wrap: inherit;
+// }
+// pre.inline {
+// 	display: inline;
+// }
+// pre.inline > code {
+// 	display: inline;
+// }
+// pre > code {
+// 	background-color: #eee !important;
+// }
 
 blockquote {
 	background-color:#f6f6f6
 }
 
-code {
-	padding: 1px 5px;
-	white-space: pre-wrap;
-	background-color: #eff0f1;
-	border-radius:0;
-	color: #242729;
-	border: 1px solid #ccc
-}
+// code {
+// 	// padding: 1px 5px;
+// 	white-space: pre-wrap;
+// 	background-color: #eff0f1;
+// 	border-radius:0;
+// 	color: #242729;
+// 	border: 1px solid #ccc
+// }
 
 /* ----------- Main ----------- */
 

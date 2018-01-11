@@ -2,6 +2,23 @@ window.$ = window.jQuery = require('jquery');
 
 require('bootstrap-sass');
 
+let hljs = require('highlight.js/lib/highlight.js');
+
+hljs.registerLanguage('apache', require('highlight.js/lib/languages/apache'));
+hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
+hljs.registerLanguage('cpp', require('highlight.js/lib/languages/cpp'));
+hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
+// hljs.registerLanguage('html', require('highlight.js/lib/languages/html'));
+hljs.registerLanguage('json', require('highlight.js/lib/languages/json'));
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
+hljs.registerLanguage('nginx', require('highlight.js/lib/languages/nginx'));
+hljs.registerLanguage('php', require('highlight.js/lib/languages/php'));
+hljs.registerLanguage('python', require('highlight.js/lib/languages/python'));
+hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
+hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
+
+hljs.initHighlightingOnLoad();
+
 let posts       = jQuery('article:not(.post-standalone)')
 let html_body   = jQuery('html, body')
 let back_to_top = jQuery('#back-to-top')

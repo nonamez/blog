@@ -5,3 +5,4 @@
 /mix-manifest.json
 
 /mix.*.js
+/images/vendor/*
