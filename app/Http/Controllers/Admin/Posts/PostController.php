@@ -12,7 +12,7 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		$posts = Models\Blog\Post\Translated::orderBy('created_at', 'DESC')->paginate(20);
+		$posts = Models\Blog\Post\Translated::orderBy('date', 'DESC')->paginate(20);
 		
 		return view('admin.posts.index', compact('posts'));
 	}
