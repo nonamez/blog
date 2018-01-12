@@ -56,7 +56,7 @@ class Translated extends Model {
 	public function getRoutesAttribute()
 	{
 		return [
-			'preview' => url(sprintf('/%s/post/%s', $this->locale, $this->slug)),
+			'preview' => $this->getURL(),
 			'edit'    => route('admin.posts.edit', $this->id),
 			'update'  => route('admin.posts.update', $this->id)
 		];  
@@ -81,6 +81,11 @@ class Translated extends Model {
 		}
 
 		return $class;
+	}
+
+	public function getURL()
+	{
+		return url(sprintf('/%s/post/%s', $this->locale, $this->slug));
 	}
 
 	// ========================= Relations ========================= //

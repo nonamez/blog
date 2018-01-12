@@ -20,43 +20,43 @@ hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescri
 
 hljs.initHighlightingOnLoad();
 
-let posts       = jQuery('article:not(.post-standalone)')
+// let posts       = jQuery('article:not(.post-standalone)')
 let html_body   = jQuery('html, body')
 let back_to_top = jQuery('#back-to-top')
 
 jQuery(document).ready(function() {
-	let posts = jQuery('article:not(.post-standalone)')
+	// let posts = jQuery('article:not(.post-standalone)')
 
-	posts.each(function() {
-		let current_post = jQuery(this),
-			current_post_header  = current_post.find('header.post-header'),
-			current_post_content = current_post.find('section.post-content')
+	// posts.each(function() {
+	// 	let current_post = jQuery(this),
+	// 		current_post_header  = current_post.find('header.post-header'),
+	// 		current_post_content = current_post.find('section.post-content')
 
-		current_post_header.click(function() {
-			if (current_post.hasClass('open')) {
-				current_post_content.slideUp('slow', function() {
-					current_post.removeClass('open')
-				})
-			} else {
-				posts.each(function() {
-					let post = jQuery(this)
+	// 	current_post_header.click(function() {
+	// 		if (current_post.hasClass('open')) {
+	// 			current_post_content.slideUp('slow', function() {
+	// 				current_post.removeClass('open')
+	// 			})
+	// 		} else {
+	// 			posts.each(function() {
+	// 				let post = jQuery(this)
 
-					if (post.hasClass('open')) {
-						post.find('section.post-content').slideUp('slow', function() {
-							post.removeClass('open')
-						})
-					}
-				})
+	// 				if (post.hasClass('open')) {
+	// 					post.find('section.post-content').slideUp('slow', function() {
+	// 						post.removeClass('open')
+	// 					})
+	// 				}
+	// 			})
 
-				current_post.addClass('open')
-				current_post_content.slideDown('slow', function() {
-					html_body.animate({
-						scrollTop: current_post.offset().top
-					}, 'slow')
-				})
-			}
-		})
-	})
+	// 			current_post.addClass('open')
+	// 			current_post_content.slideDown('slow', function() {
+	// 				html_body.animate({
+	// 					scrollTop: current_post.offset().top
+	// 				}, 'slow')
+	// 			})
+	// 		}
+	// 	})
+	// })
 
 	back_to_top.click(function(event) {
 		event.preventDefault()
