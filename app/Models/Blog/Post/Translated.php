@@ -33,18 +33,6 @@ class Translated extends Model {
 				$post->slug = $post->title;
 			}
 
-			// Escape title
-			// $post->title = htmlspecialchars($post->title);
-
-			// Prepare all code examples for browser in case of some HTML tags...
-			/*
-			if (is_null($post->markdown) or $post->markdown == FALSE) {
-				$post->content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
-					return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
-				}, $post->content);
-			}
-			*/
-			
 			// Doublecheck the slug
 			$post->slug = ru2lat($post->slug);
 			$post->slug = strtolower(str_replace(' ', '_', $post->slug)); // Replace all spaces to _
@@ -76,28 +64,6 @@ class Translated extends Model {
 
 	// ========================= Custom Methods ========================= //
 
-	public function getProcessedContent($short = FALSE)
-	{
-		$content = $this->content;
-
-		if ($short) {
-			$content = current(explode('<!--break-->', $content));
-		}
-
-		if ($this->markdown) {
-			$markdown_parser = new Misc\Post\MarkdownParser();
-
-			$content = $markdown_parser->text($content);
-		} else {
-			$content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
-				return Misc\Post\SyntaxHighlight::process($matches[1]);
-			}, $content);
-			// $content = Misc\Post\SyntaxHighlight::process($content);
-		}
-
-		return $content;
-	}
-	
 	public function getPostClass()
 	{
 		switch ($this->status) {

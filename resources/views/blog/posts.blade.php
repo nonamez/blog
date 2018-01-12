@@ -17,7 +17,7 @@
 				@include('blog.partials.line')
 			</ul>
 			<div>
-				{!! $post->getProcessedContent(TRUE) !!}
+				{!! prepareContent($post, TRUE) !!}
 			</div>
 			<p class="text-center">
 				<a href="{{ $post->routes['preview'] }}" class="btn btn-default btn-sm">@lang('blog.post.more_link')</a>

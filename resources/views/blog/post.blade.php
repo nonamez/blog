@@ -17,7 +17,7 @@
 				@include('blog.partials.line')
 			</ul>
 			<div>
-				{!! $post->getProcessedContent() !!}
+				{!! prepareContent($post) !!}
 			</div>
 		</section>
 		<footer class="post-footer">

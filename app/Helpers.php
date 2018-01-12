@@ -80,3 +80,22 @@ if (function_exists('ddRaw') == FALSE) {
 		die(1);
 	}
 }
+
+if (function_exists('prepareContent') == FALSE) {
+	function prepareContent($post, $short = FALSE) {
+		// Prepare all code examples for browser in case of some HTML tags...
+		$content = preg_replace_callback('/<code.*?>(.*?)<\/code>/imsu', function ($matches) {
+			return str_replace($matches[1], htmlentities($matches[1]), $matches[0]);
+		}, $post->content);
+
+		if ($short) {
+			$content = current(explode('<!--break-->', $content));
+		}
+
+		if ($post->markdown) {
+			$content = (new Parsedown())->text($content);
+		}
+
+		return $content;
+	}
+}

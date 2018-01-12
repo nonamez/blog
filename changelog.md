@@ -1,6 +1,10 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
+## [0.6.1] - [Unreleased]
+### Changed
+- Syntax highlight
+
 ## [0.6.0] - [2017-11-03]
 ### Added
 - Markdown

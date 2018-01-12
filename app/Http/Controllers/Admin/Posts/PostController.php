@@ -34,7 +34,7 @@ class PostController extends Controller
 	public function edit($post_id)
 	{
 		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
-	
+
 		return view('admin.posts.post', ['post' => $post]);
 	}
 
