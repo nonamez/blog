@@ -35,10 +35,13 @@ const app = new Vue({
 			let url = this.post.created_at ? this.post.routes.update : _STORE_ROUTE;
 
 			jQuery.post(url, this.post, response => {
-				if ('post' in response) {
-					this.post = response.post;
 
-					window.history.pushState('', '', response.post.routes.edit);
+				if ('post' in response) {
+					if (this.post.created_at == undefined) {
+						window.history.pushState('', '', response.post.routes.edit);
+					}
+
+					this.post = response.post;
 				}
 			}).always(() => {
 				this.loading = false;
