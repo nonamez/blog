@@ -1,30 +1,35 @@
 <?php
 
-return array(
-	'title'  => 'Кирилл Чалкин',
-	'meta' => array(
+return [
+	'title'  => 'Кирилл',
+	'meta' => [
 		'description' => 'Это персональный сайт программиста-самоучки из Литвы',
 		'keywords' => 'Разработка, создание, программирование, Laravel, Git, PHP, MySQL, Pyhton, JavaScript, NodeJS, Socket.IO, Ionic',
-	),
-	'header' => array(
-		'menu' => array(
+	],
+	'header' => [
+		'menu' => [
 			'home'      => 'Главная',
 			'about_me'  => 'Обо мне',
 			'portfolio' => 'Портфолио'
-		),
+		],
 		'title'       => 'Привет! Я - Кирилл.',
 		'description' => 'Мысли, истории и идеи вслух'
-	),
-	'post' => array(
+	],
+	'post' => [
 		'no_posts'      => 'Записей не найдено',
 		'more_link'     => 'Читать дальше',
 		'comments_link' => 'Коментарии',
 		'no_comments'   => 'Нет коментариев',
 		'show_comments' => 'Показать коментарии'
-	),
-	'footer' => array(
+	],
+	'footer' => [
 		'proudly_made_with'  => 'Сделано c',
 		'design_inspired_by' => 'Слизано с'
-	)
-);
+	],
+	'about' => [
+		'iam' => 'Привет! Меня зовут Кирилл. Я веб-разработчик - самоучка родом из Клайпеды, Литва.',
+		'contact' => 'Всегда на связи :img или',
+		'ps' => 'Мне нравятся простые вещи. И кошки. И велосипеды. И бег. И плаванье.'
+	]
+];
 ?>

@@ -53,9 +53,7 @@ Route::group(['prefix' => app()->getLocale()], function() {
 	Route::get('post/{slug}', ['as' => 'posts.show', 'uses' => 'Blog\PostController@show']);
 	Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'Blog\PostController@postsByTag']);
 	
-	Route::get('about', ['as' => 'about', function() {
-		return view('about');
-	}]);
+	Route::view('about', 'blog.about')->name('about');
 });
 
 // Helpers for posts examples
