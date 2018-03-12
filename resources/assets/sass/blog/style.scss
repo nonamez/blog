@@ -296,6 +296,13 @@ article.post section.post-content {
 	max-width: 100%;
 	overflow: hidden;
 }
+article.post section.post-content p {
+	line-height: 1.8
+}
+article.post section.post-content a {
+	border-bottom: 1px dotted #00526e;
+	// padding: 0 0 2px;
+}
 article.post section.post-content p.text-indent {
 	text-indent: 20px;
 }
