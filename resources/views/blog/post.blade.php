@@ -16,7 +16,7 @@
 			<ul class="post-tags list-inline">
 				@include('blog.partials.line')
 			</ul>
-			<div>
+			<div class="content">
 				{!! prepareContent($post) !!}
 			</div>
 		</section>
