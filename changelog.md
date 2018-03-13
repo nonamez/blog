@@ -5,6 +5,7 @@ All notable changes made to this project will be documented in this file.
 ### Changed
 - Syntax highlight
 - The displaying of posts on the main page
+- Updated to Laravel 5.6
 
 ## [0.6.0] - [2017-11-03]
 ### Added
