@@ -1,7 +1,7 @@
 # Change Log
 All notable changes made to this project will be documented in this file.
 
-## [0.6.1] - [Unreleased]
+## [0.6.1] - [2018-03-12]
 ### Changed
 - Syntax highlight
 - The displaying of posts on the main page
