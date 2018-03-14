@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Posts;
 
 use App\Models;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PostRequest;
 
 use App\Helpers\Admin as Helpers;
 
@@ -22,7 +22,7 @@ class PostController extends Controller
 		return view('admin.posts.post', ['post' => FALSE]);
 	}
 
-	public function store(PostRequest $request)
+	public function store(Requests\Admin\Post $request)
 	{
 		$post = $this->_save($request);
 
@@ -38,7 +38,7 @@ class PostController extends Controller
 		return view('admin.posts.post', ['post' => $post]);
 	}
 
-	public function update(PostRequest $request, $post_id)
+	public function update(Requests\Admin\Post $request, $post_id)
 	{
 		$post = Models\Blog\Post\Translated::findOrFail($post_id);
 

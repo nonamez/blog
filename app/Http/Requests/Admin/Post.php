@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class Post extends FormRequest
 {
 	public function authorize()
 	{
@@ -17,7 +17,7 @@ class PostRequest extends FormRequest
 	{
 		$rules = [
 			'date'    => 'date_format:Y-m-d H:i:s',
-			'slug'    => ['min:3'],
+			'slug'    => ['min:3', 'nullable'],
 			'title'   => ['required', 'min:5'],
 			'locale'  => ['required', 'in:' . implode(',', config('app.locales'))],
 			'status'  => ['required', 'in:draft,published,hidden'],
