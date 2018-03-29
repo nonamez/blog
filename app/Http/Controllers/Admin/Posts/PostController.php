@@ -103,7 +103,7 @@ class PostController extends Controller
 
 		foreach ($request->get('tags', []) as $tag) {
 			if (strlen($tag['slug']) == 0) {
-				$tag['slug'] = strtolower(str_replace(' ', '_', $tag['name']));
+				$tag['slug'] = $tag['name'];
 			}
 
 			$tag = Models\Blog\Tag::firstOrCreate($tag);

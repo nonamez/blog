@@ -99,3 +99,14 @@ if (function_exists('prepareContent') == FALSE) {
 		return $content;
 	}
 }
+
+if (function_exists('saniteziSlug') == FALSE) {
+	function saniteziSlug(String $slug) {
+		$slug = ru2lat($slug);
+		$slug = strtolower($slug);
+		$slug = str_replace(' ', '-', $slug); // Replace all spaces to -
+		$slug = preg_replace('/[^a-zA-Z0-9-]/', '', $slug); // Remove everything except numbers, chars and -
+
+		return $slug;
+	}
+}
