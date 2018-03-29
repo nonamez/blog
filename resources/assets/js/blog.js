@@ -6,6 +6,7 @@ let hljs = require('highlight.js/lib/highlight.js');
 
 hljs.registerLanguage('apache', require('highlight.js/lib/languages/apache'));
 hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
+hljs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
 hljs.registerLanguage('cpp', require('highlight.js/lib/languages/cpp'));
 hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 // hljs.registerLanguage('html', require('highlight.js/lib/languages/html'));
