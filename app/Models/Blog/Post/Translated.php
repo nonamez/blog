@@ -35,8 +35,8 @@ class Translated extends Model {
 
 			// Doublecheck the slug
 			$post->slug = ru2lat($post->slug);
-			$post->slug = strtolower(str_replace(' ', '_', $post->slug)); // Replace all spaces to _
-			$post->slug = preg_replace('/[^a-zA-Z0-9_]/', '', $post->slug); // Replace everything except numbers, word chars and _ with nothing
+			$post->slug = strtolower(str_replace(' ', '-', $post->slug)); // Replace all spaces to -
+			$post->slug = preg_replace('/[^a-zA-Z0-9-]/', '', $post->slug); // Replace everything except numbers, word chars and - with nothing
 		});
 	}
 
