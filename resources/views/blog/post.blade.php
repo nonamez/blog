@@ -40,5 +40,5 @@
 </main>
 @stop
 @push('scripts')
-<script src="http://{{ config('blog.disqus_shortname') }}.disqus.com/embed.js"></script>
+<script src="https://{{ config('blog.disqus_shortname') }}.disqus.com/embed.js"></script>
 @endpush

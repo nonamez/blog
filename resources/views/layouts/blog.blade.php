@@ -17,9 +17,9 @@
 
 	<meta name="author" content="name @ nonamez.name">
 
-	<link rel="alternate" href="http://nonamez.name/lt" hreflang="lt-LT">
-	<link rel="alternate" href="http://nonamez.name/en" hreflang="en-US">
-	<link rel="alternate" href="http://nonamez.name/ru" hreflang="ru-RU">
+	<link rel="alternate" href="https://nonamez.name/lt" hreflang="lt-LT">
+	<link rel="alternate" href="https://nonamez.name/en" hreflang="en-US">
+	<link rel="alternate" href="https://nonamez.name/ru" hreflang="ru-RU">
 
 	<link rel="canonical" href="{{ url()->current() }}">
 
