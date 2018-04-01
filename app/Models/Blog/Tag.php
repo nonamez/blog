@@ -14,16 +14,6 @@ class Tag extends Model {
 	
 	public $timestamps = FALSE;
 
-	public static function boot()
-	{
-		parent::boot();
-		
-		static::saving(function($tag) {
-			// Doublecheck the slug
-			$tag->slug = saniteziSlug($tag->slug);
-		});
-	}
-
 	// ========================= Scopes ========================= //
 
 	public function scopeOrdered($query)

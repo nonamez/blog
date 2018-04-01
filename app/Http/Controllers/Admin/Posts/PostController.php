@@ -24,11 +24,7 @@ class PostController extends Controller
 
 	public function store(Requests\Admin\Post $request)
 	{
-		$post = $this->_save($request);
-
-		$post->load('files', 'tags');
-				
-		return response()->json(['post' => $post]);
+		return $this->processPostData($request);
 	}
 	
 	public function edit($post_id)
@@ -42,11 +38,7 @@ class PostController extends Controller
 	{
 		$post = Models\Blog\Post\Translated::findOrFail($post_id);
 
-		$post = $this->_save($request, $post);
-
-		$post->load('files', 'tags');
-		
-		return response()->json(['post' => $post]);
+		return $this->processPostData($request, $post);
 	}
 
 	public function delete($post_id, $all = FALSE)
@@ -78,15 +70,35 @@ class PostController extends Controller
 		return redirect()->back()->with('message', 'success|' . sprintf($message, $title));
 	}
 
-	private function _save(& $request, & $translated_post = FALSE)
+	private function processPostData($request, $translated_post = FALSE)
 	{
+		$slug = $request->get('slug');
+
+		if (is_null($slug)) {
+			$slug = $request->get('title');
+		}
+
+		$slug = saniteziSlug($slug);
+
+		// Check if new slug exists
+		$translated_post_by_slug = Models\Blog\Post\Translated::where('slug', $slug)->first();
+
+		// If slugs exists && (post is new or current slug exists in orther post)
+		if ($translated_post_by_slug && (($translated_post == FALSE) || ($translated_post_by_slug->id != $translated_post->id))) {
+			return response()->json(['errors' => ['slug' => 'The slug has already been taken.']], 422);
+		}
+
+		unset($translated_post_by_slug);
+
 		if ($translated_post == FALSE) {
 			$translated_post = new Models\Blog\Post\Translated;
 
 			$translated_post->date = date('Y-m-d H:i:s');
 		}
 
-		$translated_post->fill($request->all());
+		$translated_post->fill($request->only((new Models\Blog\Post\Translated)->getFillable()));
+
+		$translated_post->slug = $slug;
 
 		// Select parent or create new
 		$parent_post = Models\Blog\Post\Post::findOrNew($request->parent_post_id);
@@ -106,7 +118,9 @@ class PostController extends Controller
 				$tag['slug'] = $tag['name'];
 			}
 
-			$tag = Models\Blog\Tag::firstOrCreate($tag);
+			$tag['slug'] = saniteziSlug($tag['slug']);
+
+			$tag = Models\Blog\Tag::firstOrCreate(['slug' => $tag['slug']], ['name' => $tag['name']]);
 
 			array_push($tags, $tag->id);
 		}
@@ -122,6 +136,9 @@ class PostController extends Controller
 			$translated_post->files()->save($file);
 		}
 
-		return $translated_post;
+		$translated_post->load('files', 'tags');
+
+		return response()->json(['post' => $translated_post]);
+
 	}
 }

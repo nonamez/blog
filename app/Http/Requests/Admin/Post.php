@@ -29,9 +29,9 @@ class Post extends FormRequest
 		];
 
 		if ($this->post_id) {
-			$rules['slug'][] = 'unique:blg_translated_posts,slug,' . $this->post_id;
+			$rules['slug'] = 'unique:blg_translated_posts,slug,' . $this->post_id;
 		} else {
-			$rules['slug'][] = 'unique:blg_translated_posts';
+			$rules['slug'] = 'unique:blg_translated_posts,slug';
 		}
 
 		return $rules;

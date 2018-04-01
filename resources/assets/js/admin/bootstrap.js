@@ -44,7 +44,7 @@ jQuery(document).ajaxError(function(event, jqXHR, ajaxSettings, errorThrown) {
 		toastr.warning('Item not found')
 	} else {
 		if (jqXHR.hasOwnProperty('responseJSON')) {
-			// toastr.error(jqXHR.responseJSON.message)
+			toastr.error(jqXHR.responseJSON.message)
 		} else {
 			toastr.error('A critical error has occured. Please reload the page and try again')
 		}

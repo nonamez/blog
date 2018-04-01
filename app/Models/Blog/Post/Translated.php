@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Translated extends Model {
 	
 	protected $table    = 'blg_translated_posts';
-	protected $fillable = ['slug', 'title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date', 'id'];
+	protected $fillable = ['title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date'];
 	protected $dates    = ['date'];
 
 	protected $appends  = ['routes'];
@@ -25,16 +25,6 @@ class Translated extends Model {
 
 		static::deleted(function($post) use($name) {
 			cache()->forget($name);
-		});
-
-		static::saving(function($post) {
-			// If post slug is empty use title
-			if (strlen($post->slug) == 0) {
-				$post->slug = $post->title;
-			}
-
-			// Doublecheck the slug
-			$post->slug = saniteziSlug($post->slug);
 		});
 	}
 
