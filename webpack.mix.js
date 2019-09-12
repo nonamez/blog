@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,18 +11,5 @@ const { mix } = require('laravel-mix');
  |
  */
 
-// mix.copy('bower_components/fontawesome', 'public/plugins/fontawesome')
-// mix.copy('bower_components/bootstrap/dist', 'public/plugins/bootstrap')
-// mix.copy('bower_components/jquery/dist', 'public/plugins/jquery')
-// mix.copy('bower_components/toastr', 'public/plugins/toastr')
-// mix.copy('bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css', 'public/plugins/abc')
-
-// mix.sass('admin.scss')
-// mix.sass('resources/assets/sass/blog.scss', 'public/css/blog.css')
-// mix.sass('portfolio.scss')
-
-mix.sass('resources/assets/sass/admin.scss', 'public/css/admin.css').version()
-mix.sass('resources/assets/sass/blog/style.scss', 'public/css/blog.css').version()
-
-mix.js('resources/assets/js/blog.js', 'public/js/blog.js').version()
-mix.js('resources/assets/js/admin/admin.js', 'public/js/admin.js').version()
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css');

@@ -44,6 +44,7 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
@@ -67,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [
@@ -98,7 +99,5 @@ return [
             'expire' => 60,
         ],
     ],
-
-    'allowed_ip' => explode(',', env('ALLOWED_IP'))
 
 ];

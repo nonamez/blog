@@ -1,4 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /admin
-Sitemap: http://www.nonamez.name/sitemap.xml
+Disallow:
