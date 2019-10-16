@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Validation\Rule;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class Post extends FormRequest
+{
+	public function authorize()
+	{
+		return TRUE;
+	}
+
+	public function rules()
+	{
+		$rules = [
+			'date'    => 'date_format:Y-m-d H:i:s',
+			'slug'    => ['min:3', 'nullable'],
+			'title'   => ['required', 'min:5'],
+			'locale'  => ['required', 'in:' . implode(',', config('app.locales'))],
+			'status'  => ['required', 'in:draft,published,hidden'],
+			'content' => ['required', 'min:10'],
+			'tags'    => ['array', 'min:1'],
+			'files'   => 'array',
+			'markdown' => ['required', 'boolean'],
+			'parent_post_id' => 'exists:blg_posts,id'
+		];
+
+		if ($this->post_id) {
+			$rules['slug'] = 'unique:blg_translated_posts,slug,' . $this->post_id;
+		} else {
+			$rules['slug'] = 'unique:blg_translated_posts,slug';
+		}
+
+		return $rules;
+	}
+}

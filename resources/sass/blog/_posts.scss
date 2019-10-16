@@ -1,0 +1,51 @@
+$border-top: 1px solid #bfbfbf;
+
+.post-meta {
+	line-height: 1;
+	font-size: 14px;
+
+	.post-left-part {
+		border-top: $border-top;
+		padding-top: 0.5rem;
+
+		margin-right: 1.25rem;
+
+	}
+
+	.post-left-part > time {
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.post-content {
+		padding: 0.5rem 0;
+		border-top: $border-top;
+	}
+
+	.post-title {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight: bold;
+		font-style: normal;
+		line-height: 1.2;
+
+		a {
+			text-decoration: none;
+			border-bottom: none;
+		}
+	}
+}
+
+@media (max-width: 48em) {
+	.post-meta {
+		.post-left-part {
+			padding-top: 1rem;
+			padding-bottom: 0.5rem;
+			margin: 0;
+		}
+
+		.post-content {
+			padding-top: 0;
+			border-top: none;
+		}
+	}
+}

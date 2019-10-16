@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
@@ -100,4 +100,5 @@ return [
         ],
     ],
 
+    'allowed_ip' => explode(',', env('ALLOWED_IP'))
 ];
