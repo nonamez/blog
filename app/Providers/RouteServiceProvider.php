@@ -28,7 +28,6 @@ class RouteServiceProvider extends ServiceProvider
         // Detect locale before routes
         if (app()->runningInConsole() == FALSE) {
             $locales = config('app.locales');
-
             if (in_array(request()->segment(1), $locales)) {
                 $locale = request()->segment(1);
             } elseif (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), $locales)) {

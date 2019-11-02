@@ -2,7 +2,7 @@ let mix = require('laravel-mix'),
 	tailwindcss = require('tailwindcss');
 
 mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css').options({
-	processCssUrls: false,
+	// processCssUrls: false,
 	postCss: [ tailwindcss('./tailwind.config.js') ],
 });
 

@@ -8,6 +8,7 @@
 /public/plugins
 
 /public/mix-manifest.json
+/public/mix.js.map
 
 /public/google*
 

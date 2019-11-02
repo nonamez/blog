@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', '/home/NoNameZ'),
+    'name' => '/home/NoNameZ',
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
 
     'url' => 'http://nonamez.name',
 
-    'asset_url' => env('ASSET_URL', null),
+    'asset_url' => 'http://nonamez.name',
 
     /*
     |--------------------------------------------------------------------------
