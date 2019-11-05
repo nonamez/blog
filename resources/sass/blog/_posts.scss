@@ -1,15 +1,15 @@
-$border-top: 1px solid #bfbfbf;
-
 .post-meta {
 	line-height: 1;
 	font-size: 14px;
 
-	.post-left-part {
-		border-top: $border-top;
-		padding-top: 0.5rem;
+	&:hover {
+		background-color: #f1f3f5;
+		border-color: transparent;
+		border-radius: 10px;
+    }
 
-		margin-right: 1.25rem;
-
+    .border-top {
+		border-top: 1px solid #bfbfbf;
 	}
 
 	.post-left-part > time {
@@ -17,20 +17,26 @@ $border-top: 1px solid #bfbfbf;
 		font-weight: bold;
 	}
 
-	.post-content {
-		padding: 0.5rem 0;
-		border-top: $border-top;
-	}
-
 	.post-title {
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		font-weight: bold;
 		font-style: normal;
 		line-height: 1.2;
+		font-size: 20px !important; 
 
 		a {
 			text-decoration: none;
 			border-bottom: none;
+		}
+	}
+}
+
+.post-standalone {
+	.content {
+		@for $index from 1 through 6 {
+			h#{$index}{
+				margin: 0.5rem auto;
+			}
 		}
 	}
 }

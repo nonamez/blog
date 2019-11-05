@@ -8,9 +8,9 @@ return [
 	],
 	'header' => [
 		'menu' => [
-			'home'      => 'Home',
-			'about_me'  => 'About Me',
-			'portfolio' => 'Portfolio'
+			'home'    => 'Home',
+			'about'   => 'About',
+			'contacts' => 'Contacts'
 		],
 		'title'       => 'Hey! I\'m Kiril.',
 		'description' => 'Thoughts, stories and ideas aloud'

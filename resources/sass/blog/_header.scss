@@ -1,18 +1,18 @@
 header {
 	position: relative;
+	padding-top: 5rem !important;
+	// padding-bottom: 1rem !important;
 	
 	h1 {
 		font-family: 'Patua One', cursive;
 		letter-spacing: -2px;
-		position: absolute;
-    	right: -52%;
-    	top: 10px;
 	}
 
 	nav > a {
+		font-size: 2.0rem;
 		padding: .25rem 0;
 		font-weight: 700;
-		color: #aaa;
+		color: theme('colors.grey.lighter');
 		border-bottom: .25rem solid transparent;
 	}
 
@@ -28,22 +28,25 @@ header {
 	}
 
 	nav > a.active {
-		color: #333;
-		border-bottom-color: #333;
+		color: theme('colors.grey.default');
+		border-bottom-color: theme('colors.grey.default');
 	}
 }
 
 @media (max-width: 48em) {
 	header {
+		text-align: center;
+
+		padding-top: inherit !important;
+		padding-bottom: inherit !important;
+
 		h1 {
-			text-align: center;
-			position: static;
-			right: auto;
-			top: auto;
+			float: none;
 		}
 
-		nav {
-			text-align: center;
+		nav > a:hover > span,
+		nav > a.active > span {
+			display: inline-block;
 		}
 	}
 }

@@ -8,9 +8,9 @@ return [
 	],
 	'header' => [
 		'menu' => [
-			'home'      => 'Pagrintinis',
-			'about_me'  => 'Apie mane',
-			'portfolio' => 'Portfolio'
+			'home'    => 'Pagrintinis',
+			'about'   => 'Apie mane',
+			'contact' => 'Кontaktai'
 		],
 		'title'       => 'Sveiki! Aš Kirilas.',
 		'description' => 'Mintys, istorijos ir idėjos apie programavimą.'

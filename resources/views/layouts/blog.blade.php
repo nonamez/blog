@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="{{ app()->getLocale() }}">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,22 +25,30 @@
 </head>
 
 <body>
-	<header class="container">
-		<h1>/home/NoNameZ</h1> 
-		<nav class="nav">
-			<a class="active" href="#">H<span class="hidden md:inline-block">ome</span></a>
-			<a href="#">A<span class="hidden md:inline-block">bout</span></a>
-			<a href="#">C<span class="hidden md:inline-block">ontact</span></a>
+	<header class="container pb-2">
+		<div class="float-none lg:float-right xl:float-right lg:text-right lg:text-right">
+			<h1 class="my-2">/home/NoNameZ</h1>
+			<div class="langs my-3">
+				@foreach(config('app.locales') as $locale)
+				[<a{!! app()->getLocale() == $locale ? ' class="active"' : '' !!} href="{{ url('/' . $locale) }}">{{ strtoupper($locale) }}</a>]
+				@endforeach
+			</div>
+		</div>
+		<nav class="nav pb-3">
+			@foreach($top_links as $top_link)
+			<a{!! $top_links_segment == $top_link['segment'] ? ' class="active"' : '' !!} href="{{ $top_link['url'] }}">{{ $top_link['char'] }}<span class="hidden md:inline-block lg:inline-block xl:inline-block">{{ $top_link['text'] }}</span></a>
+			@endforeach
 		</nav>
+		@include('blog.partials.tags', ['tags' => $tags_global])
 	</header>
 
-	<main class="container">
+	<main class="container px-2 lg:px-0 xl:px-0">
 		@yield('content')
 	</main>
 
-	<footer>
+	<footer class="py-2">
 		<div class="container">
-			footer
+			<a href="https://m.do.co/c/0bbcba259691" rel="nofollow">Hosted on Digital Ocean</a>
 		</div>
 	</footer>
 </body>
