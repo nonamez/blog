@@ -1,0 +1,22 @@
+{
+    "login": "login",
+    "logout": "logout",
+    "storage.file": "storage\/{date}\/{name}",
+    "sitemap.index": "sitemap.xml",
+    "sitemap.posts": "sitemap-posts-{locale}.xml",
+    "blog.locale": "{locale}",
+    "posts.show": "en\/post\/{slug}",
+    "tag": "en\/tag\/{slug}",
+    "about": "en\/about",
+    "dashboard.index": "dashboard",
+    "dashboard.posts.index": "dashboard\/posts",
+    "dashboard.posts.create": "dashboard\/posts\/create",
+    "dashboard.posts.store": "dashboard\/posts\/store",
+    "dashboard.posts.edit": "dashboard\/posts\/{post_id}\/edit",
+    "dashboard.posts.update": "dashboard\/posts\/{post_id}\/update",
+    "dashboard.posts.delete": "dashboard\/posts\/{post_id}\/delete\/{all?}",
+    "dashboard.files.index": "dashboard\/files",
+    "dashboard.files.store": "dashboard\/files\/upload",
+    "dashboard.files.update": "dashboard\/files\/{file_id}\/update",
+    "dashboard.files.delete": "dashboard\/files\/{file_id}\/delete"
+}

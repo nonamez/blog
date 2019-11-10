@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Posts;
+namespace App\Http\Controllers\Dashboard\Posts;
 
 use App\Models;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Helpers\Admin as Helpers;
+// use App\Helpers\Admin as Helpers;
 
 class PostController extends Controller
 {
 	public function index()
 	{
 		$posts = Models\Blog\Post\Translated::orderBy('date', 'DESC')->paginate(20);
-		
-		return view('admin.posts.index', compact('posts'));
+
+		return response()->json(compact('posts'));
 	}
 
 	public function create()

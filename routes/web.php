@@ -20,9 +20,9 @@ Route::get('/', function() {
 | Auth Routes
 |--------------------------------------------------------------------------
 */
-Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
-Route::get('logout', 'Auth\LoginController@logout');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 /*
 |--------------------------------------------------------------------------
@@ -70,26 +70,24 @@ Route::get('sleep/{time}', function($time) {
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
-	Route::get('/', function() {
-		return redirect()->route('admin.posts.index');
-	});
+Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function() {
+	Route::view('/', 'dashboard.index')->name('dashboard.index');
 
 	// Posts
 	Route::group(['prefix' => 'posts', 'namespace' => 'Posts'], function() {
-		Route::get('/', ['as' => 'admin.posts.index', 'uses' => 'PostController@index']);
-		Route::get('create', ['as' => 'admin.posts.create', 'uses' => 'PostController@create']);
-		Route::post('store', ['as' => 'admin.posts.store', 'uses' => 'PostController@store']);
-		Route::get('{post_id}/edit', ['as' => 'admin.posts.edit', 'uses' => 'PostController@edit']);
-		Route::post('{post_id}/update',['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
-		Route::get('{post_id}/delete/{all?}', ['as' => 'admin.posts.delete', 'uses' => 'PostController@delete']);
+		Route::get('/', ['as' => 'dashboard.posts.index', 'uses' => 'PostController@index']);
+		Route::get('create', ['as' => 'dashboard.posts.create', 'uses' => 'PostController@create']);
+		Route::post('store', ['as' => 'dashboard.posts.store', 'uses' => 'PostController@store']);
+		Route::get('{post_id}/edit', ['as' => 'dashboard.posts.edit', 'uses' => 'PostController@edit']);
+		Route::post('{post_id}/update',['as' => 'dashboard.posts.update', 'uses' => 'PostController@update']);
+		Route::get('{post_id}/delete/{all?}', ['as' => 'dashboard.posts.delete', 'uses' => 'PostController@delete']);
 	});
 
 	// Files
 	Route::group(['prefix' => 'files', 'namespace' => 'Files'], function() {
-		Route::get('/', ['as' => 'admin.files.index', 'uses' => 'FileController@index']);
-		Route::post('upload', ['as' => 'admin.files.store', 'uses' => 'FileController@store']);
-		Route::post('{file_id}/update', ['as' => 'admin.files.update', 'uses' => 'FileController@update']);
-		Route::get('{file_id}/delete', ['as' => 'admin.files.delete', 'uses' => 'FileController@delete']);
+		Route::get('/', ['as' => 'dashboard.files.index', 'uses' => 'FileController@index']);
+		Route::post('upload', ['as' => 'dashboard.files.store', 'uses' => 'FileController@store']);
+		Route::post('{file_id}/update', ['as' => 'dashboard.files.update', 'uses' => 'FileController@update']);
+		Route::get('{file_id}/delete', ['as' => 'dashboard.files.delete', 'uses' => 'FileController@delete']);
 	});
 });

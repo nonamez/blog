@@ -6,9 +6,9 @@
 		background-color: #f1f3f5;
 		border-color: transparent;
 		border-radius: 10px;
-    }
+	}
 
-    .border-top {
+	.border-top {
 		border-top: 1px solid #bfbfbf;
 	}
 
@@ -34,9 +34,25 @@
 .post-standalone {
 	.content {
 		@for $index from 1 through 6 {
-			h#{$index}{
+			h#{$index} {
+				text-indent: 0.5em;
 				margin: 0.5rem auto;
 			}
+		}
+
+		blockquote {
+			background: white;
+			padding: 20px 30px 20px 30px;
+			margin: 10px auto;
+			border: solid 2px;
+			box-shadow: 15px 15px 0 0 #f1f3f5;
+		}
+
+		p {
+			line-height: 1.7em;
+			margin: 0.5rem auto;
+			text-indent: 1.5em;
+			text-align: justify;
 		}
 	}
 }

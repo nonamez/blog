@@ -51,5 +51,7 @@
 			<a href="https://m.do.co/c/0bbcba259691" rel="nofollow">Hosted on Digital Ocean</a>
 		</div>
 	</footer>
+	@stack('js')
+	{{-- <script src="{{ mix('js/blog.js') }}"></script> --}}
 </body>
 </html>

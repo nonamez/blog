@@ -1,6 +1,24 @@
 let mix = require('laravel-mix'),
 	tailwindcss = require('tailwindcss');
 
+mix.webpackConfig({
+	module: {
+		rules: [
+		{
+			enforce: 'pre',
+			exclude: /node_modules/,
+			loader: 'eslint-loader',
+			test: /\.(js|vue)?$/ 
+		},
+		]
+	},
+	resolve: {
+		alias: {
+			helpers: path.resolve(__dirname, 'resources/js/helpers')
+		}
+	}
+});
+
 const purgecss = require('@fullhuman/postcss-purgecss')({
 
 	// Specify the paths to all of the template files in your project 
@@ -20,6 +38,14 @@ mix.options({
 	clearConsole: true
 });
 
+mix.version();
+
+if (mix.inProduction()) {
+	mix.sourceMaps();
+}
+
+mix.js('resources/js/blog.js', 'public/js/blog.js');
+
 mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css').options({
 	processCssUrls: false,
 	postCss: [
@@ -28,23 +54,5 @@ mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css').options({
 	],
 });
 
-mix.webpackConfig({
-	module: {
-		rules: [
-		{
-			enforce: 'pre',
-			exclude: /node_modules/,
-			loader: 'eslint-loader',
-			test: /\.(js|vue)?$/ 
-		},
-		]
-	}
-});
-
-// mix.js('resources/js/blog/app.js', 'public/js/blog.js');
-
-mix.version();
-
-if (mix.inProduction()) {
-	mix.sourceMaps();
-}
+mix.js('resources/js/dashboard/app.js', 'public/js/dashboard.js');
+mix.sass('resources/sass/dashboard/app.scss', 'public/css/dashboard.css');
