@@ -25,40 +25,35 @@
 								<td>{{ post.locale }}</td>
 								<td>{{ post.status }}</td>
 								<td>
-									<!-- <div class="btn-group btn-group-sm" role="group" aria-label="..." style="width: 75px;">
-										<a href="{{ route('admin.posts.edit', $post->id) }}"  class="btn btn-default">
-											<i class="fa fa-pencil"></i>
-										</a>
-										<div class="btn-group btn-group-sm" role="group">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-												<i class="fa fa-trash-o"></i>
-												<span class="caret"></span>
+								
+									<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+										<button type="button" class="btn btn-outline-secondary btn-sm" @click="$router.push({ name: 'posts.show', params: { id: post.id } })">
+											<i class="icond icon-pencil"></i>
+										</button>
+
+										<div class="btn-group" role="group">
+											<button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="icond icon-trash"></i>
 											</button>
-											<ul class="dropdown-menu" role="menu">
-												<li>
-													<a href="{{ route('admin.posts.delete', $post->id) }}">Current</a>
-												</li>
-												<li>
-													<a href="{{ route('admin.posts.delete', [$post->id, 'all']) }}">All</a>
-												</li>
-											</ul>
+											<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+												<a class="dropdown-item" href="#" @click.prevent="remove({id: post.id})">Current</a>
+												<a class="dropdown-item" href="#" @click.prevent="remove({id: post.id, all: true})">All</a>
+											</div>
 										</div>
-									</div> -->
+									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<pagination :data="pagination" @reload="load"></pagination>
 			</div>
 		</div>
-
 	</div>
 </template>
 <script>
 
-import route from 'helpers/route';
-
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
 	data() {
@@ -68,11 +63,15 @@ export default {
 	},
 
 	computed: {
-		...mapState('post', ['posts'])
+		...mapState('posts', ['posts', 'pagination'])
+	},
+
+	methods: {
+		...mapActions('posts', ['remove', 'load'])
 	},
 
 	created() {
-		this.$store.dispatch('post/load', route('dashboard.posts.index'));
+		this.$store.dispatch('posts/load');
 	}
 };
 </script>

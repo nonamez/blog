@@ -26,6 +26,8 @@ const router = new VueRouter({
 
 Vue.component('header-component', require('./components/header.vue').default);
 
+Vue.component('pagination', require('./components/_partials/pagination.vue').default);
+
 new Vue({
 	store,
 	router
