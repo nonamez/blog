@@ -31,7 +31,7 @@ class PostController extends Controller
 	{
 		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
 
-		return view('admin.posts.post', ['post' => $post]);
+		return response()->json(compact('post'));
 	}
 
 	public function update(Requests\Admin\Post $request, $post_id)
@@ -67,7 +67,7 @@ class PostController extends Controller
 			$message = 'The post "%s" successfully deleted';
 		}
 		
-		return redirect()->back()->with('message', 'success|' . sprintf($message, $title));
+		return response()->json(['message' => sprintf($message, $title)]);
 	}
 
 	private function processPostData($request, $translated_post = FALSE)

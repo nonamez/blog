@@ -14,7 +14,7 @@
 				</ul>
 
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" v-bind:class="{active: $router.currentRoute.name && $router.currentRoute.name.startsWith('posts')}">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Posts
 						</a>
@@ -25,7 +25,7 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
+						<a class="nav-link" href="#">Files</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" @click.prevent="logout()">Logout</a>
