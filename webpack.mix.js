@@ -4,12 +4,12 @@ let mix = require('laravel-mix'),
 mix.webpackConfig({
 	module: {
 		rules: [
-		{
-			enforce: 'pre',
-			exclude: /node_modules/,
-			loader: 'eslint-loader',
-			test: /\.(js|vue)?$/ 
-		},
+			{
+				enforce: 'pre',
+				exclude: /node_modules/,
+				loader: 'eslint-loader',
+				test: /\.(js|vue)?$/ 
+			}
 		]
 	},
 	resolve: {
@@ -25,9 +25,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 	content: [
 		'./resources/views/blog/*.php',
 		'./resources/views/blog/**/*.php',
-		'./resources/views/layouts/blog.blade.php',
-		// './resources/js/components/*.vue',
-		// './resources/js/components/**/*.vue',
+		'./resources/views/layouts/blog.blade.php'
 	],
 
 	// Include any special characters you're using in this regular expression
@@ -35,7 +33,12 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 });
 
 mix.options({
-	clearConsole: true
+	clearConsole: true,
+	processCssUrls: true,
+	postCss: [
+		tailwindcss('./tailwind.config.js'),
+		...process.env.NODE_ENV === 'production' ? [purgecss] : []
+	]
 });
 
 mix.version();
@@ -44,15 +47,5 @@ if (mix.inProduction()) {
 	mix.sourceMaps();
 }
 
-mix.js('resources/js/blog.js', 'public/js/blog.js');
-
-mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css').options({
-	processCssUrls: false,
-	postCss: [
-		tailwindcss('./tailwind.config.js'),
-		...process.env.NODE_ENV === 'production' ? [purgecss] : []
-	],
-});
-
-mix.js('resources/js/dashboard/app.js', 'public/js/dashboard.js');
-mix.sass('resources/sass/dashboard/app.scss', 'public/css/dashboard.css');
+mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css').js('resources/js/blog.js', 'public/js/blog.js');
+mix.sass('resources/sass/dashboard/app.scss', 'public/css/dashboard.css').js('resources/js/dashboard/app.js', 'public/js/dashboard.js');
