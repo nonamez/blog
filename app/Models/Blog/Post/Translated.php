@@ -45,8 +45,9 @@ class Translated extends Model {
 	{
 		return (object) [
 			'preview' => $this->getURL(),
-			'edit'    => route('dashboard.posts.edit', $this->id),
-			'update'  => route('dashboard.posts.update', $this->id)
+			
+			'save' => route('dashboard.posts.save', $this->id),
+			'find' => route('dashboard.posts.find', $this->id)
 		];  
 	}
 

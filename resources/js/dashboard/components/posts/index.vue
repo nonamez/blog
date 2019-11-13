@@ -27,7 +27,7 @@
 								<td>
 								
 									<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-										<button type="button" class="btn btn-outline-secondary btn-sm" @click="$router.push({ name: 'posts.show', params: { id: post.id } })">
+										<button type="button" class="btn btn-outline-secondary btn-sm" @click="$router.push({ name: 'posts.show', params: { post_id: post.id } })">
 											<i class="icond icon-pencil"></i>
 										</button>
 
@@ -46,14 +46,14 @@
 						</tbody>
 					</table>
 				</div>
-				<pagination :data="pagination" @reload="load"></pagination>
+				<pagination :data="pagination_simple" @reload="load"></pagination>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
 	data() {
@@ -63,7 +63,8 @@ export default {
 	},
 
 	computed: {
-		...mapState('posts', ['posts', 'pagination'])
+		...mapState('posts', ['posts']),
+		...mapGetters('posts', ['pagination_simple'])
 	},
 
 	methods: {

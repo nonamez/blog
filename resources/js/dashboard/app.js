@@ -20,6 +20,11 @@ const router = new VueRouter({
 			path: '/posts/show/:post_id?',
 			name: 'posts.show',
 			component: require('./components/posts/show').default
+		},
+
+		{
+			path: '/',
+			redirect: '/posts/index'
 		}
 	]
 });
@@ -27,6 +32,7 @@ const router = new VueRouter({
 Vue.component('header-component', require('./components/header.vue').default);
 
 Vue.component('pagination', require('./components/_partials/pagination.vue').default);
+Vue.component('form-group', require('./components/_partials/form-group.vue').default);
 
 new Vue({
 	store,

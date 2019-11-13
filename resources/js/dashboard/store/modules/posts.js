@@ -1,4 +1,4 @@
-import route from 'helpers/route';
+import { route, getParameterByName } from 'helpers';
 
 function initialState() {
 	return {
@@ -8,23 +8,16 @@ function initialState() {
 			next_page_url: false,
 			current_page: 1,
 			last_page: 1
-		}
+		},
+		post: null
 	};
 }
 
 const state = initialState();
 
 const getters = {
-
-};
-
-const mutations = {
-	setPosts(state, posts) {
-		state.posts = posts;
-	},
-
-	setPostsPagination(state, pagination) {
-		state.pagination = (({
+	pagination_simple: state => {
+		return (({
 			prev_page_url,
 			next_page_url,
 			current_page,
@@ -34,7 +27,23 @@ const mutations = {
 			next_page_url,
 			current_page,
 			last_page
-		}))(pagination);
+		}))(state.pagination);
+	}
+};
+
+const mutations = {
+	setPosts(state, posts) {
+		state.posts = posts;
+	},
+
+	setPost(state, post) {
+		state.post = post;
+	},
+
+	setPagination(state, pagination) {
+		delete pagination.data;
+
+		state.pagination = pagination;
 	},
 
 	remove(state, post_id) {
@@ -74,11 +83,25 @@ const mutations = {
 
 const actions = {
 	load({commit}, url = null) {
-		url = url ? url : route('dashboard.posts.index');
+		if (url == null) {
+			url = route('dashboard.posts.index');
+
+			let page = getParameterByName('page', window.location.href);
+
+			if (page > 0) {
+				url = `${url}?page=${page}`;
+			}
+		}
 
 		axios.get(url).then(response => {
 			commit('setPosts', response.data.posts.data);
-			commit('setPostsPagination', response.data.posts);
+			commit('setPagination', response.data.posts);
+		});
+	},
+
+	find({commit}, id) {
+		axios.get(route('dashboard.posts.find', id)).then(response => {
+			commit('setPost', response.data.post);
 		});
 	},
 

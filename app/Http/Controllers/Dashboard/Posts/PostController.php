@@ -17,28 +17,11 @@ class PostController extends Controller
 		return response()->json(compact('posts'));
 	}
 
-	public function create()
-	{
-		return view('admin.posts.post', ['post' => FALSE]);
-	}
-
-	public function store(Requests\Admin\Post $request)
-	{
-		return $this->processPostData($request);
-	}
-	
-	public function edit($post_id)
+	public function find($post_id)
 	{
 		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
 
 		return response()->json(compact('post'));
-	}
-
-	public function update(Requests\Admin\Post $request, $post_id)
-	{
-		$post = Models\Blog\Post\Translated::findOrFail($post_id);
-
-		return $this->processPostData($request, $post);
 	}
 
 	public function delete($post_id, $all = FALSE)

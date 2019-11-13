@@ -1,11 +1,13 @@
 <template>
 	<div class="text-center">
-		<button class="btn btn-outline-dark" @click="load(data.prev_page_url)" :disabled="!data.prev_page_url">Previous</button>
-		<span class="mx-3 font-weight-bolder">Page {{ data.current_page }} of {{data.last_page}}</span>
-		<button class="btn btn-outline-dark" @click="load(data.next_page_url)" :disabled="!data.next_page_url">Next</button>
+		<button class="btn btn-outline-dark" @click="load(data.prev_page_url)" :disabled="! data.prev_page_url">Previous</button>
+		<span class="mx-3 font-weight-bolder">Page {{ data.current_page }} of {{ data.last_page }}</span>
+		<button class="btn btn-outline-dark" @click="load(data.next_page_url)" :disabled="! data.next_page_url">Next</button>
 	</div>
 </template>
 <script>
+import { getParameterByName } from 'helpers';
+
 function initialData() {
 	return {
 		prev_page_url: false,
@@ -14,6 +16,7 @@ function initialData() {
 		last_page: 1
 	};
 }
+
 export default {
 	props: {
 		data: {
@@ -25,6 +28,10 @@ export default {
 	methods: {
 		load(url) {
 			this.$emit('reload', url);
+
+			if (this.$router) {
+				this.$router.push({ query: { ...this.$route.query, page: getParameterByName('page', url) }});
+			}
 		}
 	}
 };

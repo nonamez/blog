@@ -36,7 +36,7 @@
 	</nav>
 </template>
 <script>
-import route from 'helpers/route';
+import { route } from 'helpers';
 
 export default {
 	methods: {
