@@ -12,7 +12,7 @@ export function route() {
 	}
 }
 
-export function getParameterByName(name, url) {
+export function getURLParameterByName(name, url) {
 	if (!url) {
 		url = window.location.href;
 	}

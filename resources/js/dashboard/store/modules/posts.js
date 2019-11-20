@@ -1,4 +1,4 @@
-import { route, getParameterByName } from 'helpers';
+import { route, getURLParameterByName } from 'helpers';
 
 function initialState() {
 	return {
@@ -8,8 +8,7 @@ function initialState() {
 			next_page_url: false,
 			current_page: 1,
 			last_page: 1
-		},
-		post: null
+		}
 	};
 }
 
@@ -34,10 +33,6 @@ const getters = {
 const mutations = {
 	setPosts(state, posts) {
 		state.posts = posts;
-	},
-
-	setPost(state, post) {
-		state.post = post;
 	},
 
 	setPagination(state, pagination) {
@@ -86,7 +81,7 @@ const actions = {
 		if (url == null) {
 			url = route('dashboard.posts.index');
 
-			let page = getParameterByName('page', window.location.href);
+			let page = getURLParameterByName('page', window.location.href);
 
 			if (page > 0) {
 				url = `${url}?page=${page}`;
@@ -96,12 +91,6 @@ const actions = {
 		axios.get(url).then(response => {
 			commit('setPosts', response.data.posts.data);
 			commit('setPagination', response.data.posts);
-		});
-	},
-
-	find({commit}, id) {
-		axios.get(route('dashboard.posts.find', id)).then(response => {
-			commit('setPost', response.data.post);
 		});
 	},
 

@@ -24,7 +24,7 @@ class ViewComposerProvider extends ServiceProvider
 				$tags = Models\Blog\Tag::whereHas('translated_posts', function($query) {
 					$query->where('locale', '=', app()->getLocale());
 					$query->whereIn('status', ['published', 'hidden']);
-				})->ordered()->take(config('blog.tags_in_header'))->get();
+				})->ordered()->take(15)->get();
 
 				return $tags;
 			});
@@ -43,7 +43,7 @@ class ViewComposerProvider extends ServiceProvider
 
 				[
 					'segment' => 'about',
-					'url'  => route('about'),
+					'url'  => route('about', app()->getLocale()),
 					'char' => mb_substr(trans('blog.header.menu.about'), 0, 1),
 					'text' => mb_substr(trans('blog.header.menu.about'), 1),
 				],

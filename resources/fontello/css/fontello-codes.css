@@ -1,3 +1,6 @@
 
+.icon-plus:before { content: '\e800'; } /* '' */
+.icon-arrows-cw:before { content: '\e801'; } /* '' */
 .icon-trash:before { content: '\e802'; } /* '' */
+.icon-plus-circled:before { content: '\e803'; } /* '' */
 .icon-pencil:before { content: '\e804'; } /* '' */

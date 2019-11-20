@@ -16,7 +16,6 @@
 	<!-- Styles -->
 	<link href="{{ mix('css/dashboard.css') }}" rel="stylesheet">
 
-	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<script>
 		var _BASE_URL = '{{ url('/') }}';
 	</script>

@@ -31,6 +31,11 @@ const router = new VueRouter({
 
 Vue.component('header-component', require('./components/header.vue').default);
 
+Vue.component('card', require('./components/_partials/card.vue').default);
+
+Vue.component('enterable', require('./components/_partials/inputs/enterable.vue').default);
+// Vue.component('textable', require('./components/_partials/inputs/textable.vue').default);
+
 Vue.component('pagination', require('./components/_partials/pagination.vue').default);
 Vue.component('form-group', require('./components/_partials/form-group.vue').default);
 

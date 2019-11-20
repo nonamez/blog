@@ -6,7 +6,7 @@
 	</div>
 </template>
 <script>
-import { getParameterByName } from 'helpers';
+import { getURLParameterByName } from 'helpers';
 
 function initialData() {
 	return {
@@ -30,7 +30,7 @@ export default {
 			this.$emit('reload', url);
 
 			if (this.$router) {
-				this.$router.push({ query: { ...this.$route.query, page: getParameterByName('page', url) }});
+				this.$router.push({ query: { ...this.$route.query, page: getURLParameterByName('page', url) }});
 			}
 		}
 	}
