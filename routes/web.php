@@ -86,8 +86,8 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'dashboard', 'nam
 	// Files
 	Route::group(['prefix' => 'files', 'namespace' => 'Files'], function() {
 		Route::get('/', ['as' => 'dashboard.files.index', 'uses' => 'FileController@index']);
-		Route::post('upload', ['as' => 'dashboard.files.store', 'uses' => 'FileController@store']);
-		Route::post('{file_id}/update', ['as' => 'dashboard.files.update', 'uses' => 'FileController@update']);
-		Route::get('{file_id}/delete', ['as' => 'dashboard.files.delete', 'uses' => 'FileController@delete']);
+		Route::post('upload', 'FileController@store')->name('dashboard.files.store');
+		Route::post('{file_id}/update', 'FileController@update')->name('dashboard.files.update');
+		Route::post('{file_id}/delete', 'FileController@delete')->name('dashboard.files.delete');
 	});
 });

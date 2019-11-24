@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Files;
+namespace App\Http\Controllers\Dashboard\Files;
 
 use Illuminate\Http\Request;
 
 use App\Utils;
 use App\Models;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Str;
+
 
 use File;
 
@@ -24,7 +27,7 @@ class FileController extends Controller {
 	public function store(Request $request)
 	{
 		$request->validate([
-			'file' => ['required', 'mimes:' . implode(',', self::ALLOWED_TYPES],
+			'file' => ['required', 'mimes:' . implode(',', self::ALLOWED_TYPES)],
 			'watermark' => ['required', 'boolean']
 		]);
 
@@ -46,11 +49,8 @@ class FileController extends Controller {
 		}
 
 		$name = basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension());
-		$name = str_replace(' ', '-', $name);
-		$name = preg_replace('/[^\w-_]+/', '', $name);
-		$name = strlen($name) > 50 ? sprintf('%s_%s', substr($name, 0, 30), str_random(10)) : $name;
-		$name = sprintf('%s_%s.%s', $name, str_random(5), $file->getClientOriginalExtension());
-		$name = strtolower($name);
+		$name = Str::slug($name, '-');
+		$name = sprintf('%s_%s.%s', substr($name, 0, 30), Str::random(7), $file->getClientOriginalExtension());
 		
 		$file->move($path, $name);
 		
@@ -62,7 +62,7 @@ class FileController extends Controller {
 
 		$new_file->save();
 			
-		return response()->json($new_file);
+		return response()->json(['file' => $new_file]);
 	}
 	
 	public function update(Request $request, $file_id)
@@ -86,10 +86,6 @@ class FileController extends Controller {
 
 		$file->delete();
 		
-		if ($request->ajax()) {
-			return response()->json();
-		} else {
-			return redirect()->back();
-		}
+		return response()->json();
 	}
 }

@@ -7,11 +7,11 @@
 						General
 					</template>
 					<template v-slot:body>
-						<form-group title="Title">
-							<enterable @returnable="setTitle($event)" :default="title"></enterable>
+						<form-group title="Title" v-slot="{id}">
+							<enterable @returnable="setTitle($event)" :default="title" :id="id"></enterable>
 						</form-group>
-						<form-group title="Content">
-							<enterable @input="setContent($event)" :default="content" type="textarea"></enterable>
+						<form-group title="Content" v-slot="{id}">
+							<enterable @returnable="setContent($event)" :default="content" type="textarea" :id="id"></enterable>
 						</form-group>
 					</template>
 				</card>
@@ -21,11 +21,11 @@
 						Meta
 					</template>
 					<template v-slot:body>
-						<form-group title="Keywords">
-							<enterable @returnable="setMetaKeywords($event)" :default="meta_keywords"></enterable>
+						<form-group title="Keywords" v-slot="{id}">
+							<enterable @returnable="setMetaKeywords($event)" :default="meta_keywords" :id="id"></enterable>
 						</form-group>
-						<form-group title="Description">
-							<enterable @input="setMetaDescription($event)" :default="meta_description" type="textarea"></enterable>
+						<form-group title="Description" v-slot="{id}">
+							<enterable @returnable="setMetaDescription($event)" :default="meta_description" type="textarea" :id="id"></enterable>
 						</form-group>
 					</template>
 				</card>
@@ -40,13 +40,13 @@
 								<input type="text" class="form-control" v-model="tag.slug" placeholder="Enter Slug">
 								<div class="input-group-append border-right-0">
 									<span class="input-group-text">
-										<i class="icon icon-arrows-cw"></i>
+										<i class="icon-arrows-cw"></i>
 									</span>
 								</div>
 								<input type="text" class="form-control border-left-0" v-model="tag.name" placeholder="Enter Name">
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="tag-button-add" @click="addTag()">
-										<i class="icon icon-plus-circled"></i>
+									<button class="btn btn-outline-secondary secondary-button-light-border" type="button" @click="addTag()">
+										<i class="icon-plus-circled"></i>
 									</button>
 								</div>
 							</div>
@@ -54,7 +54,7 @@
 						<div class="btn-group btn-group-sm mr-2 mb-2" role="group" v-for="(tag, index) in tags" v-bind:key="tag.id">
 							<a :href="getTagRoute(tag.slug)" class="btn btn-outline-primary" target="blank">{{ tag.name }}</a>
 							<button type="button" class="btn btn-danger" @click="removeTag(index)">
-								<i class="icon icon-trash"></i>
+								<i class="icon-trash"></i>
 							</button>
 						</div>
 					</template>
@@ -65,9 +65,32 @@
 						Files
 					</template>
 					<template v-slot:body>
-						<form-group title="title">
-							<input type="text" class="form-control">
-						</form-group>
+						<div class="input-group mb-3 px-5">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="input-file">
+								<label class="custom-file-label" for="input-file">Choose file</label>
+							</div>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary secondary-button-light-border" type="button" @click="uploadFile()">
+									<i class="icon-plus-circled"></i>
+								</button>
+							</div>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item d-flex justify-content-between" v-for="file in files" v-bind:key="file.id">
+								<div>
+									{{ file.name }}
+								</div>
+								<div class="btn-group btn-group-sm" role="group">
+									<a :href="file.routes.preview" target="blank" type="button" class="btn btn-outline-secondary">
+										<i class="icon-file-image"></i>
+									</a>
+									<button type="button" class="btn btn-outline-secondary" @click="removeFile(file)">
+										<i class="icon-trash"></i>
+									</button>
+								</div>
+							</li>
+						</ul>
 					</template>
 				</card>
 			</main>
@@ -77,8 +100,25 @@
 						Publish
 					</template>
 					<template v-slot:body>
-						<form-group title="title">
-							<input type="text" class="form-control">
+						<form-group title="Date" v-slot="{id}">
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" :id="id" v-model="date">
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button" @click="setDate(new Date)">Now</button>
+								</div>
+							</div>
+						</form-group>
+						<form-group title="Locale" v-slot="{id}">
+							<selectable :options="locales" :id="id" @returnable="setLocale($event)" :default="locale"></selectable>
+						</form-group>
+						<form-group title="Status" v-slot="{id}">
+							<selectable :options="statuses" :id="id" @returnable="setStatus($event)" :default="status"></selectable>
+						</form-group>
+						<form-group title="Parent" v-slot="{id}">
+							<enterable :id="id"></enterable>
+						</form-group>
+						<form-group title="Markdown" v-slot="{id}">
+							<input type="checkbox" class="form-control" :id="id">
 						</form-group>
 					</template>
 				</card>
@@ -88,13 +128,13 @@
 </template>
 
 <style>
-	#tag-button-add {
+	.secondary-button-light-border {
 		border-color: #ced4da;
 	}
 </style>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import { route } from 'helpers';
 
 export default {
@@ -103,16 +143,42 @@ export default {
 			tag: {
 				name: '',
 				slug: '',
+			},
+
+			locales: {
+				en: 'English',
+				ru: 'Русский',
+				lt: 'Lietuviškai',
+			},
+
+			statuses: {
+				draft: 'Draft',
+				published: 'Published',
+				hidden: 'Hidden',
 			}
 		};
 	},
 
 	computed: {
-		...mapState('post', ['title', 'content', 'meta_description', 'meta_keywords', 'tags', 'locale'])
+		...mapState('post', ['title', 'content', 'meta_description', 'meta_keywords', 'tags', 'locale', 'status', 'date']),
+		...mapState('post', {
+			post_id: 'id'
+		}),
+		...mapState('files', ['files']),
+		date() {
+			let d = this.$store.state.post.date;
+
+			if (d) {
+				d = d.split(' ').shift();
+			}
+
+			return d;
+		}
 	},
 
 	methods: {
-		...mapMutations('post', ['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'removeTag']),
+		...mapMutations('post', ['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'removeTag', 'setDate', 'setLocale', 'setStatus']),
+		...mapActions('files', ['removeFile']),
 
 		getTagRoute(slug) {
 			return route('tag', this.locale, slug);
@@ -126,13 +192,38 @@ export default {
 
 			this.tag.name = '';
 			this.tag.slug = '';
+		},
+
+		uploadFile() {
+			this.$store.dispatch('files/uploadFile', document.getElementById('input-file').files[0]).then(status => {
+				if (status) {
+					document.querySelector('label.custom-file-label').textContent = 'Choose file';
+					document.querySelector('#input-file').value = null;
+				}
+			});
 		}
+	},
+
+	beforeRouteLeave() {
+		this.$store.commit('files/resetFiles');
 	},
 
 	created() {
 		if (this.$route.params.post_id) {
 			this.$store.dispatch('post/find', this.$route.params.post_id);
 		}
+
+		setTimeout(() => {
+			jQuery('#input-file').change(function() {
+				let name = this.files[0].name;
+
+				if (name.length > 30) {
+					name = '...' +  name.substr(-30);
+				}
+
+				document.querySelector('label.custom-file-label').textContent = name;
+			});
+		});
 	}
 };
 </script>

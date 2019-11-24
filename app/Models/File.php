@@ -9,27 +9,28 @@ class File extends Model {
 	protected $table    = 'files';
 	protected $fillable = ['name', 'description'];
 
-	protected $appends  = ['links'];
+	protected $appends  = ['routes'];
 
-	protected $visible = ['id', 'name', 'description', 'links', 'private'];
+	protected $visible = ['id', 'name', 'description', 'routes', 'private'];
 
 	public static function boot()
 	{
 		parent::boot();
 
 		static::deleting(function($file) {
-			\Illuminate\Support\Facades\File::Delete($file->getPath());
+			\Illuminate\Support\Facades\File::delete($file->getPath());
 		});
 	}
 
 	// ========================= Attributes ========================= //
 
-	public function getLinksAttribute()
+	public function getRoutesAttribute()
 	{
-		return [
-			'get'    => $this->getURL(),
-			'update' => $this->getUpdateURL(),
-			'delete' => $this->getDeleteURL()
+		return (object) [
+			'preview' => $this->getURL(),
+			
+			'update' => route('dashboard.files.update', $this->id),
+			'delete' => route('dashboard.files.delete', $this->id)
 		];  
 	}
 
@@ -60,16 +61,6 @@ class File extends Model {
 	public function getURL()
 	{
 		return route('storage.file', [$this->created_at->format('Y/m/d'), $this->name]);
-	}
-
-	public function getUpdateURL()
-	{
-		return route('admin.files.update', $this->id);
-	}
-
-	public function getDeleteURL()
-	{
-		return route('admin.files.delete', $this->id);
 	}
 
 	// ========================= Relations ========================= //

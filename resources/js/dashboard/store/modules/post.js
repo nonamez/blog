@@ -1,4 +1,4 @@
-import { route } from 'helpers';
+import { route, toMysqlFormat } from 'helpers';
 
 function initialState() {
 	return {
@@ -21,7 +21,6 @@ function initialState() {
 			find: null,
 		},
 		tags: [],
-		files: [],
 	};
 }
 
@@ -62,12 +61,16 @@ const mutations = {
 		state.tags.splice(index, 1);
 	},
 
-	reset(state) {
-		const s = initialState();
+	setDate(state, date) {
+		state.date = toMysqlFormat(date);
+	},
 
-		Object.keys(s).forEach(key => {
-			state[key] = s[key];
-		});
+	setLocale(state, locale) {
+		state.locale = locale;
+	},
+
+	setStatus(state, status) {
+		state.status = status;
 	}
 };
 
@@ -75,6 +78,7 @@ const actions = {
 	find({commit}, id) {
 		axios.get(route('dashboard.posts.find', id)).then(response => {
 			commit('setPost', response.data.post);
+			commit('files/setFiles', response.data.post.files, { root: true });
 		});
 	}
 };

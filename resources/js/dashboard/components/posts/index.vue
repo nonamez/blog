@@ -72,6 +72,8 @@ export default {
 	},
 
 	created() {
+		console.log(this.$store);
+		
 		this.$store.dispatch('posts/load');
 	}
 };

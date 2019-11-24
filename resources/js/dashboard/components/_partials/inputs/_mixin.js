@@ -1,7 +1,7 @@
 import { debounce } from 'lodash';
 
 export default {
-	props: ['default', 'type'],
+	props: ['default', 'type', 'id'],
 
 	computed: {
 		returnable: {
@@ -13,5 +13,5 @@ export default {
 				this.$emit('returnable', value);
 			}, 500)
 		}
-	}
+	},
 };
