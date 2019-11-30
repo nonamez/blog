@@ -81,7 +81,7 @@ class Translated extends Model {
 
 	public function parent()
 	{
-		return $this->belongsTo(Post::class, 'parent_post_id');
+		return $this->belongsTo(Post::class, 'parent_id');
 	}
 	
 	public function tags()

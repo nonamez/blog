@@ -115,11 +115,16 @@
 							<selectable :options="statuses" :id="id" @returnable="setStatus($event)" :default="status"></selectable>
 						</form-group>
 						<form-group title="Parent" v-slot="{id}">
-							<enterable :id="id"></enterable>
+							<enterable @returnable="setParentId($event)" :default="parent_id" :id="id"></enterable>
 						</form-group>
 						<form-group title="Markdown" v-slot="{id}">
 							<input type="checkbox" class="form-control" :id="id">
 						</form-group>
+						<div class="my-2 text-center">
+							<button class="btn btn-success" @click="save()">
+								Save
+							</button>
+						</div>
 					</template>
 				</card>
 			</aside>
@@ -160,7 +165,7 @@ export default {
 	},
 
 	computed: {
-		...mapState('post', ['title', 'content', 'meta_description', 'meta_keywords', 'tags', 'locale', 'status', 'date']),
+		...mapState('post', ['title', 'content', 'meta_description', 'meta_keywords', 'tags', 'locale', 'status', 'date', 'parent_id']),
 		...mapState('post', {
 			post_id: 'id'
 		}),
@@ -177,7 +182,8 @@ export default {
 	},
 
 	methods: {
-		...mapMutations('post', ['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'removeTag', 'setDate', 'setLocale', 'setStatus']),
+		...mapMutations('post', ['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'removeTag', 'setDate', 'setLocale', 'setStatus', 'setParentId']),
+		...mapActions('post', ['save']),
 		...mapActions('files', ['removeFile']),
 
 		getTagRoute(slug) {
@@ -204,8 +210,11 @@ export default {
 		}
 	},
 
-	beforeRouteLeave() {
-		this.$store.commit('files/resetFiles');
+	beforeRouteLeave(to, from, next) {
+		this.$store.commit('files/reset');
+		this.$store.commit('post/reset');
+
+		next();
 	},
 
 	created() {

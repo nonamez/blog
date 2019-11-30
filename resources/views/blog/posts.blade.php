@@ -2,9 +2,9 @@
 @section('content')
 <section>
 	@foreach ($posts as $post)
-	<div class="post-meta flex flex-wrap">
+	<article class="post-short flex flex-wrap">
 		<div class="w-full md:w-1/5">
-			<div class="flex flex-wrap mr-5 px-5 py-3 md:px-1 md:h-full border-top">
+			<div class="flex flex-wrap mr-5 px-5 py-3 md:px-1 md:h-full left-side">
 				<div class="w-1/2 md:w-full md:mb-2">
 					<time datetime="{{ $post->date }}">{{ $post->date->diffForHumans() }}</time>
 				</div>
@@ -16,13 +16,13 @@
 			</div>
 		</div>
 		<div class="w-full md:w-4/5">
-			<div class="p-2 border-top">
-				<h1 class="post-title">
+			<div class="p-2 right-side">
+				<h1 class="title">
 					<a href="{{ $post->routes->preview }}">{{ $post->title }}</a>
 				</h1>
 			</div>
 		</div>
-	</div>
+	</article>
 	@endforeach
 	
 	@if ($posts->hasPages())

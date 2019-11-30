@@ -12,7 +12,7 @@ const router = new VueRouter({
 	base: '/dashboard',
 	routes: [
 		{
-			path: '/posts/index',
+			path: '/posts',
 			name: 'posts.index',
 			component: require('./components/posts/index').default
 		},
@@ -24,7 +24,7 @@ const router = new VueRouter({
 
 		{
 			path: '/',
-			redirect: '/posts/index'
+			redirect: '/posts'
 		}
 	]
 });

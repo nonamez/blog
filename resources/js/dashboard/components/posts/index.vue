@@ -71,9 +71,7 @@ export default {
 		...mapActions('posts', ['remove', 'load'])
 	},
 
-	created() {
-		console.log(this.$store);
-		
+	created() {		
 		this.$store.dispatch('posts/load');
 	}
 };

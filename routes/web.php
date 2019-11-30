@@ -78,9 +78,9 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'dashboard', 'nam
 	// Posts
 	Route::group(['prefix' => 'posts', 'namespace' => 'Posts'], function() {
 		Route::get('/', 'PostController@index')->name('dashboard.posts.index');
-		Route::post('save/{post_id?}', 'PostController@save')->name('dashboard.posts.save');
-		Route::get('{post_id}/find', 'PostController@find')->name('dashboard.posts.find');
-		Route::get('{post_id}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
+		Route::post('save/{translated_post?}', 'PostController@save')->name('dashboard.posts.save');
+		Route::get('{translated_post}/find', 'PostController@find')->name('dashboard.posts.find');
+		Route::get('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
 	});
 
 	// Files

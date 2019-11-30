@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+
+use App\Models;
 
 use Carbon\Carbon;
 
@@ -40,6 +42,10 @@ class RouteServiceProvider extends ServiceProvider
             
             Carbon::setLocale($locale);
         }
+
+        Route::bind('translated_post', function($id) {
+            return Models\Blog\Post\Translated::find($id) ?? abort(404);
+        });
 
         parent::boot();
     }

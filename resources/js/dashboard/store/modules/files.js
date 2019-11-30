@@ -9,7 +9,7 @@ function initialState() {
 const state = initialState();
 
 const getters = {
-	
+	files_id: state => state.files.map(f => f.id)
 };
 
 const mutations = {
@@ -29,15 +29,13 @@ const mutations = {
 		state.files.splice(state.files.findIndex(f => f.id == file.id), 1);
 	},
 
-	resetFiles(state) {
+	reset(state) {
 		const s = initialState();
 
 		Object.keys(s).forEach(key => {
 			state[key] = s[key];
 		});
-	},
-
-
+	}
 };
 
 const actions = {

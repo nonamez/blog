@@ -27,7 +27,7 @@
 <body>
 	<header class="container pb-2">
 		<div class="float-none lg:float-right xl:float-right lg:text-right lg:text-right">
-			<h1 class="my-2">/home/NoNameZ</h1>
+			<h1 class="my-2 sm:m-0 md:m-0 lg:m-0">/home/NoNameZ</h1>
 			<div class="langs my-3">
 				@foreach(config('app.locales') as $locale)
 				[<a{!! app()->getLocale() == $locale ? ' class="active"' : '' !!} href="{{ url('/' . $locale) }}">{{ strtoupper($locale) }}</a>]
@@ -48,7 +48,9 @@
 
 	<footer class="py-2">
 		<div class="container">
-			<a href="https://m.do.co/c/0bbcba259691" rel="nofollow">Hosted on Digital Ocean</a>
+			<a href="https://m.do.co/c/0bbcba259691" rel="nofollow" class="mr-2">Hosted on Digital Ocean</a>
+			<a href="https://github.com/nonamez/blog" rel="nofollow" class="mr-2">Saved on GitHub</a>
+			<a href="https://laravel.com" rel="nofollow" class="mr-2">Made with Laravel</a>
 		</div>
 	</footer>
 	@stack('js')

@@ -1,10 +1,10 @@
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
+@charset "UTF-8";
 
 @import "~highlight.js/styles/default";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 html {
 	height: 100%
@@ -44,19 +44,6 @@ h6 { font-size: 17px; }
 
 	blockquote {
 		background-color:#f6f6f6
-	}
-}
-
-@media (min-width: 768px) {
-	.container:after {
-		background-color: rgba(0, 0, 0, 0.02);
-		content: "";
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 3px;
-		z-index: 1
 	}
 }
 

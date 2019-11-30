@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard\Posts;
 
-use App\Models;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-// use App\Helpers\Admin as Helpers;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
+use App\Models;
+
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -17,11 +20,11 @@ class PostController extends Controller
 		return response()->json(compact('posts'));
 	}
 
-	public function find($post_id)
+	public function find(Models\Blog\Post\Translated $translated_post)
 	{
-		$post = Models\Blog\Post\Translated::with('tags', 'files')->findOrFail($post_id);
+		$translated_post->load('tags', 'files');
 
-		return response()->json(compact('post'));
+		return response()->json(['post' => $translated_post]);
 	}
 
 	public function delete($post_id, $all = FALSE)
@@ -53,30 +56,44 @@ class PostController extends Controller
 		return response()->json(['message' => sprintf($message, $title)]);
 	}
 
-	private function processPostData($request, $translated_post = FALSE)
+	public function save(Request $request, Models\Blog\Post\Translated $translated_post = NULL)
 	{
-		$slug = $request->get('slug');
+		$rules = [
+			'date'    => 'date_format:Y-m-d H:i:s',
+			'slug'    => ['min:3', 'nullable'],
+			'title'   => ['required', 'min:5'],
+			'locale'  => ['required', 'in:' . implode(',', config('app.locales'))],
+			'status'  => ['required', 'in:draft,published,hidden'],
+			'content' => ['required', 'min:10'],
+			'tags'    => ['array', 'min:1'],
+			'files'   => 'array',
+			'markdown' => ['required', 'boolean'],
+			'parent_id' => 'exists:blg_posts,id'
+		];
 
-		if (is_null($slug)) {
-			$slug = $request->get('title');
+		if ($translated_post) {
+			$rules['slug'] = 'unique:blg_translated_posts,slug,' . $translated_post->id;
+		} else {
+			$rules['slug'] = 'unique:blg_translated_posts,slug';
 		}
 
-		$slug = saniteziSlug($slug);
+		$request->validate($rules);
+
+		$slug = $request->get('slug', $request->get('title'));
+		$slug = Str::slug($slug);
 
 		// Check if new slug exists
-		$translated_post_by_slug = Models\Blog\Post\Translated::where('slug', $slug)->first();
+		$translated_post_by_slug = Models\Blog\Post\Translated::where('slug', $slug)->select('id')->first();
 
 		// If slugs exists && (post is new or current slug exists in orther post)
-		if ($translated_post_by_slug && (($translated_post == FALSE) || ($translated_post_by_slug->id != $translated_post->id))) {
+		if ($translated_post_by_slug && (($translated_post == NULL) || ($translated_post_by_slug->id != $translated_post->id))) {
 			return response()->json(['errors' => ['slug' => 'The slug has already been taken.']], 422);
 		}
 
 		unset($translated_post_by_slug);
 
-		if ($translated_post == FALSE) {
+		if ($translated_post == NULL) {
 			$translated_post = new Models\Blog\Post\Translated;
-
-			$translated_post->date = date('Y-m-d H:i:s');
 		}
 
 		$translated_post->fill($request->only((new Models\Blog\Post\Translated)->getFillable()));
@@ -84,12 +101,12 @@ class PostController extends Controller
 		$translated_post->slug = $slug;
 
 		// Select parent or create new
-		$parent_post = Models\Blog\Post\Post::findOrNew($request->parent_post_id);
+		$parent_post = Models\Blog\Post\Post::findOrNew($request->get('parent_id'));
 
-		if (is_null($parent_post->id)) {
+		if ($parent_post->exists == FALSE) {
 			$parent_post->save();
 		}
-		
+
 		$parent_post->translated()->save($translated_post);
 
 		// ========================= Tags ========================= //
@@ -101,11 +118,15 @@ class PostController extends Controller
 				$tag['slug'] = $tag['name'];
 			}
 
-			$tag['slug'] = saniteziSlug($tag['slug']);
+			$tag['slug'] = Str::slug($tag['slug']);
 
-			$tag = Models\Blog\Tag::firstOrCreate(['slug' => $tag['slug']], ['name' => $tag['name']]);
+			$tag = Models\Blog\Tag::firstOrCreate([
+				'slug' => $tag['slug']
+			], [
+				'name' => $tag['name']
+			]);
 
-			array_push($tags, $tag->id);
+			$tags[] = $tag->id;
 		}
 
 		$translated_post->tags()->sync($tags);
@@ -113,15 +134,13 @@ class PostController extends Controller
 		// ========================= Files ========================= //
 
 		// Here we also could do "UPDATE" by ids for faster performance
-		foreach ($request->get('files', []) as $file) {
-			$file = Models\File::findOrFail($file['id']);
-
-			$translated_post->files()->save($file);
-		}
+		DB::table((new Models\File)->getTable())->whereIn('id', $request->get('files'))->update([
+			'fileable_id' => $translated_post->id,
+			'fileable_type' => 'posts'
+		]);
 
 		$translated_post->load('files', 'tags');
 
 		return response()->json(['post' => $translated_post]);
-
 	}
 }
