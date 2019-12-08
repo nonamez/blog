@@ -31,13 +31,13 @@ const router = new VueRouter({
 
 Vue.component('header-component', require('./components/header.vue').default);
 
-Vue.component('card', require('./components/_partials/card.vue').default);
+Vue.component('card', require('./components/partials/card.vue').default);
 
-Vue.component('enterable', require('./components/_partials/inputs/enterable.vue').default);
-Vue.component('selectable', require('./components/_partials/inputs/selectable.vue').default);
+Vue.component('enterable', require('./components/partials/inputs/enterable.vue').default);
+Vue.component('selectable', require('./components/partials/inputs/selectable.vue').default);
 
-Vue.component('pagination', require('./components/_partials/pagination.vue').default);
-Vue.component('form-group', require('./components/_partials/form-group.vue').default);
+Vue.component('pagination', require('./components/partials/pagination.vue').default);
+Vue.component('form-group', require('./components/partials/form-group.vue').default);
 
 new Vue({
 	store,
