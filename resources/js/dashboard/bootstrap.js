@@ -9,14 +9,30 @@ require('bootstrap');
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+axios.interceptors.request.use(function (config) {
+	jQuery('.is-invalid').removeClass('is-invalid').next('div.invalid-feedback').remove();
+	return config;
+}, function (error) {
+	// Do something with request error
+	return Promise.reject(error);
+});
+
 axios.interceptors.response.use(function (response) {
 	// Do something with response data
 	return response;
 }, function (error) {
 	if (error.response.status == 422) {
-		jQuery.each(error.response.data.errors, function(key, text) {
-			toastr.warning(text[0]);
-		});
+		let errors = error.response.data.errors;
+
+		for (let key in errors) {
+			let el = jQuery(`[name="${key}"]`);
+
+			if (el.length > 0) {
+				jQuery(`[name="${key}"]`).addClass('is-invalid').after(jQuery('<div/>').addClass('invalid-feedback').text(errors[key]));
+			} else {
+				toastr.warning(errors[key]);
+			}
+		}
 	} else {
 		toastr.error(error.response.statusText);
 	}

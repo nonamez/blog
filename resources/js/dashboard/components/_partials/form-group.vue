@@ -7,12 +7,14 @@
 	</div>
 </template>
 <script>
+import { getId } from 'helpers';
+
 export default {
 	props: ['title'],
 
 	computed: {
 		id() {
-			return (~~(Math.random()*1e8)).toString(16);
+			return getId();
 		}
 	}
 };

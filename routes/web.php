@@ -1,6 +1,6 @@
 <?php
 
-Route::pattern('locale', 'en|ru|lt');
+Route::pattern('locale', implode('|', config('app.locales')));
 
 /*
 |--------------------------------------------------------------------------
@@ -49,12 +49,12 @@ Route::get('/sitemap-posts-{locale}.xml', ['as' => 'sitemap.posts', 'uses' => 'S
 |--------------------------------------------------------------------------
 */
 
-Route::get('/{locale}', ['as' => 'blog.locale', 'uses' => 'Blog\PostController@index'])->where('locale', implode('|', config('app.locales')));
-
 // Blog
-Route::group(['prefix' => '{locale}'], function() {
-	Route::get('post/{slug}', ['as' => 'posts.show', 'uses' => 'Blog\PostController@show']);
-	Route::get('tag/{slug}', 'Blog\PostController@postsByTag')->name('tag');
+Route::group(['prefix' => '{locale}', 'middleware' => 'localize'], function() {
+	Route::get('/', 'Blog\PostController@index');
+
+	Route::get('post/{slug}', 'Blog\PostController@show')->name('blog.posts.show');
+	Route::get('tag/{slug}', 'Blog\PostController@postsByTag')->name('blog.posts.tag');
 	
 	Route::view('about', 'blog.about')->name('about');
 });

@@ -52,3 +52,17 @@ export function toMysqlFormat(d = false) {
 
 	return d.getFullYear() + '-' + twoDigits(1 + d.getMonth()) + '-' + twoDigits(d.getDate()) + ' ' + twoDigits(d.getHours()) + ':' + twoDigits(d.getMinutes()) + ':' + twoDigits(d.getSeconds());
 }
+
+export function debounce(fn, delay = 500, id = 'GLOBAL') {
+	let timeout = {};
+
+	return function (...args) {
+		clearTimeout(timeout[id]);
+
+		timeout[id] = setTimeout(() => fn.call(this, ...args), delay);
+	};
+}
+
+export function getId() {
+	return (~~(Math.random()*1e8)).toString(16);
+}

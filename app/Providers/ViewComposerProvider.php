@@ -59,13 +59,6 @@ class ViewComposerProvider extends ServiceProvider
 			$view->with('top_links', $top_links);
 			$view->with('top_links_segment', request()->segment(2));
 		});
-
-		// View::composer('admin.posts.*', function($view) {
-		// 	$locales = config('app.locales');
-		// 	$locales = array_combine($locales, $locales);
-
-		// 	$view->with('locales', $locales);
-		// });
 	}
 
 	/**

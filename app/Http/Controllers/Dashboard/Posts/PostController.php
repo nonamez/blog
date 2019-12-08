@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard\Posts;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 use App\Models;
 
@@ -58,50 +61,33 @@ class PostController extends Controller
 
 	public function save(Request $request, Models\Blog\Post\Translated $translated_post = NULL)
 	{
+		$inputs = $request->all();
+
+		$inputs['slug'] = Str::slug($inputs['slug']);
+
 		$rules = [
 			'date'    => 'date_format:Y-m-d H:i:s',
-			'slug'    => ['min:3', 'nullable'],
+			'slug'    => ['min:3', 'required', 'unique:blg_translated_posts,slug,' . optional($translated_post)->id],
 			'title'   => ['required', 'min:5'],
 			'locale'  => ['required', 'in:' . implode(',', config('app.locales'))],
 			'status'  => ['required', 'in:draft,published,hidden'],
 			'content' => ['required', 'min:10'],
-			'tags'    => ['array', 'min:1'],
+			'tags'    => 'array',
 			'files'   => 'array',
 			'markdown' => ['required', 'boolean'],
-			'parent_id' => 'exists:blg_posts,id'
+			'parent_id' => ['nullable', 'exists:blg_posts,id']
 		];
 
-		if ($translated_post) {
-			$rules['slug'] = 'unique:blg_translated_posts,slug,' . $translated_post->id;
-		} else {
-			$rules['slug'] = 'unique:blg_translated_posts,slug';
-		}
-
-		$request->validate($rules);
-
-		$slug = $request->get('slug', $request->get('title'));
-		$slug = Str::slug($slug);
-
-		// Check if new slug exists
-		$translated_post_by_slug = Models\Blog\Post\Translated::where('slug', $slug)->select('id')->first();
-
-		// If slugs exists && (post is new or current slug exists in orther post)
-		if ($translated_post_by_slug && (($translated_post == NULL) || ($translated_post_by_slug->id != $translated_post->id))) {
-			return response()->json(['errors' => ['slug' => 'The slug has already been taken.']], 422);
-		}
-
-		unset($translated_post_by_slug);
+		Validator::make($inputs, $rules)->validate();
 
 		if ($translated_post == NULL) {
 			$translated_post = new Models\Blog\Post\Translated;
 		}
 
-		$translated_post->fill($request->only((new Models\Blog\Post\Translated)->getFillable()));
-
-		$translated_post->slug = $slug;
+		$translated_post->fill($inputs);
 
 		// Select parent or create new
-		$parent_post = Models\Blog\Post\Post::findOrNew($request->get('parent_id'));
+		$parent_post = Models\Blog\Post\Post::findOrNew($inputs['parent_id']);
 
 		if ($parent_post->exists == FALSE) {
 			$parent_post->save();

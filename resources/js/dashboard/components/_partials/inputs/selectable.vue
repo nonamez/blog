@@ -1,5 +1,5 @@
 <template>
-	<select :id="id" class="form-control" v-model="returnable">
+	<select :id="id" class="form-control" v-model="returnable" :name="name">
 		<option v-for="(opt, index) in options" :value="index" v-bind:key="index">{{ opt }}</option>
 	</select>
 </template>

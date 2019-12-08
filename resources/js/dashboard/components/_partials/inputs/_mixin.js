@@ -1,7 +1,18 @@
-import { debounce } from 'lodash';
+import { debounce, getId } from 'helpers';
 
 export default {
-	props: ['default', 'type', 'id'],
+	props: {
+		default: null, 
+		type: null, 
+		id: {
+			type: String,
+			default: getId()
+		},
+		name: {
+			type: String,
+			default: null
+		}
+	},
 
 	computed: {
 		returnable: {
@@ -9,9 +20,15 @@ export default {
 				return this.default;
 			},
 
-			set: debounce(function(value) {
-				this.$emit('returnable', value);
-			}, 500)
+			set(value) {
+				this.debounced(value);
+			}
 		}
 	},
+
+	created() {
+		this.debounced = debounce((value) => {		
+			this.$emit('returnable', value);
+		}, 500, this.id);
+	}
 };

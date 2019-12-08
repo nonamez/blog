@@ -4,10 +4,10 @@ function initialState() {
 	return {
 		id: null,
 		parent_id: null,
-		locale: null,
-		status: null,
-		date: null,
-		markdown: null,
+		locale: 'en',
+		status: 'draft',
+		date: toMysqlFormat(new Date),
+		markdown: 0,
 		slug: null,
 		title: null,
 		content: null,
@@ -20,7 +20,7 @@ function initialState() {
 			save: null,
 			find: null,
 		},
-		tags: [],
+		tags: []
 	};
 }
 
@@ -29,17 +29,22 @@ const state = initialState();
 const getters = {
 	data: (state, getters, rootState, rootGetters) => {
 		return {
-			parent_id: state.parent_id,
+			date: state.date,
 			locale: state.locale,
 			status: state.status,
-			date: state.date,
+			parent_id: state.parent_id,
+
 			markdown: state.markdown,
-			slug: state.slug,
+
 			title: state.title,
 			content: state.content,
-			meta_description: state.meta_description,
+			slug: state.slug ? state.slug : state.title,
+
 			meta_keywords: state.meta_keywords,
+			meta_description: state.meta_description,
+
 			tags: state.tags,
+
 			files: rootGetters['files/files_id']
 		};
 	}
@@ -94,6 +99,14 @@ const mutations = {
 		state.parent_id = parseInt(id);
 	},
 
+	setSlug(state, slug) {
+		state.slug = slug;
+	},
+
+	setMarkdown(state, markdown) {
+		state.markdown = markdown;
+	},
+
 	reset(state) {
 		const s = initialState();
 
@@ -111,11 +124,16 @@ const actions = {
 		});
 	},
 
-	save({state, getters}) {
+	save({state, getters, commit}) {
 		let url = state.routes.save ? state.routes.save : route('dashboard.posts.save');
 
-		axios.post(url, getters.data).then(response => {
-			console.log(response);
+		return new Promise((resolve) => {
+			axios.post(url, getters.data).then(response => {
+				commit('setPost', response.data.post);
+				commit('files/setFiles', response.data.post.files, { root: true });
+
+				resolve();
+			});
 		});
 	}
 };
