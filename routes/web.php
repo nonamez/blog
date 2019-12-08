@@ -80,7 +80,7 @@ Route::group(['middleware' => ['user_ip', 'auth'], 'prefix' => 'dashboard', 'nam
 		Route::get('/', 'PostController@index')->name('dashboard.posts.index');
 		Route::post('save/{translated_post?}', 'PostController@save')->name('dashboard.posts.save');
 		Route::get('{translated_post}/find', 'PostController@find')->name('dashboard.posts.find');
-		Route::get('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
+		Route::post('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
 	});
 
 	// Files

@@ -30,28 +30,26 @@ class PostController extends Controller
 		return response()->json(['post' => $translated_post]);
 	}
 
-	public function delete($post_id, $all = FALSE)
-	{
-		$post = Models\Blog\Post\Translated::findOrFail($post_id);
-		
-		$title = $post->title;
+	public function delete(Models\Blog\Post\Translated $translated_post, $all = FALSE)
+	{	
+		$title = $translated_post->title;
 
 		if ($all) {
-			foreach ($post->parent->translated as $translated_post) {
-				foreach ($translated_post->files as $file) {
+			foreach ($translated_post->parent->translated as $t) {
+				foreach ($t->files as $file) {
 					$file->delete();
 				}
-				
-				$post->parent->delete();
 			}
+
+			$t->parent->delete();
 			
 			$message = 'The post "%s" and its translations successfully deleted';
 		} else {
-			foreach ($post->files as $file) {
+			foreach ($translated_post->files as $file) {
 				$file->delete();
 			}
 			
-			$post->delete();
+			$translated_post->delete();
 			
 			$message = 'The post "%s" successfully deleted';
 		}

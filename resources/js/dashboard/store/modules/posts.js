@@ -89,7 +89,7 @@ const actions = {
 	remove({dispatch}, {id, all}) {
 		let url = route('dashboard.posts.delete', id, all ? 'all' : '');
 
-		axios.get(url).then(() => {
+		axios.post(url).then(() => {
 			dispatch('load');
 		});
 	}
