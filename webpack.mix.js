@@ -23,9 +23,14 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 
 	// Specify the paths to all of the template files in your project 
 	content: [
-		'./resources/views/blog/*.php',
-		'./resources/views/blog/**/*.php',
-		'./resources/views/layouts/blog.blade.php'
+		'./resources/js/*.js',
+		'./resources/js/**/*.js',
+
+		'./resources/js/*.vue',
+		'./resources/js/**/*.vue',
+
+		'./resources/views/*.php',
+		'./resources/views/**/*.php',
 	],
 
 	// Include any special characters you're using in this regular expression
