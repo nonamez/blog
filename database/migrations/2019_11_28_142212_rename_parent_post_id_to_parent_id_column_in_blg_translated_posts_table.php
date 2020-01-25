@@ -13,10 +13,7 @@ class RenameParentPostIdToParentIdColumnInBlgTranslatedPostsTable extends Migrat
 	 */
 	public function up()
 	{
-		Schema::table('blg_translated_posts', function (Blueprint $table) {
-			DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `parent_post_id` `parent_id` INT(10)  UNSIGNED  NOT NULL;');
-
-		});
+		DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `parent_post_id` `parent_id` INT(10)  UNSIGNED  NOT NULL;');
 	}
 
 	/**
@@ -26,8 +23,6 @@ class RenameParentPostIdToParentIdColumnInBlgTranslatedPostsTable extends Migrat
 	 */
 	public function down()
 	{
-		Schema::table('blg_translated_posts', function (Blueprint $table) {
-			DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `parent_id` `parent_post_id` INT(10)  UNSIGNED  NOT NULL;');
-		});
+		DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `parent_id` `parent_post_id` INT(10)  UNSIGNED  NOT NULL;');
 	}
 }
