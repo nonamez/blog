@@ -13,10 +13,9 @@ class AlterTranslatedPostsChangeMeta extends Migration
      */
     public function up()
     {
-
-        DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `meta_keywords` `meta_keywords` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_unicode_ci  NULL  DEFAULT '';');
-        DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `meta_description` `meta_description` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_unicode_ci  NULL  DEFAULT '';');
-        DB::statement('ALTER TABLE `nnm_blg_translated_posts` DROP `meta_title`;');
+        DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `meta_keywords` `meta_keywords` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_unicode_ci  NULL  DEFAULT \'\'');
+        DB::statement('ALTER TABLE `nnm_blg_translated_posts` CHANGE `meta_description` `meta_description` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_unicode_ci  NULL  DEFAULT \'\'');
+        DB::statement('ALTER TABLE `nnm_blg_translated_posts` DROP `meta_title`');
     }
 
     /**
