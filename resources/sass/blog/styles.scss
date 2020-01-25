@@ -1,11 +1,14 @@
 @charset "UTF-8";
 
+/* purgecss start ignore */
 @import "~highlight.js/styles/default";
+/* purgecss end ignore */
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* purgecss start ignore */
 html {
 	height: 100%
 }
