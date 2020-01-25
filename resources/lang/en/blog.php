@@ -26,8 +26,8 @@ return [
 		'design_inspired_by' => 'Design Inspired By'
 	],
 	'about' => [
-		'iam' => ' Hey! I\'m Kiril - self-taught freelance web developer based in Klaipeda, Lithuania.',
-		'contact' => 'You can conctact me via :img or',
+		'iam' => 'Hey! My name is Kiril and I\'m self-taught full stack developer based in Klaipeda, Lithuania.',
+		'contact' => 'You can conctact me via :img or :telegram',
 		'ps' => 'I like simple things. And coding. And cats. And music. And sports.'
 	]
 ];

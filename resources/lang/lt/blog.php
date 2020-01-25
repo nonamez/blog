@@ -28,7 +28,7 @@ return [
 	],
 	'about' => [
 		'iam' => 'Sveiki! Mano vardas Kirilas. Aš esu savamokslis web programuotojas iš Klaipėdos.',
-		'contact' => 'Jūs galite susisiekti su manimi el. paštu :img arba',
+		'contact' => 'Jūs galite susisiekti su manimi el. paštu :img arba :telegram',
 		'ps' => 'Man patinka paprasti dalykai. Ir katės. Ir dviračiai. Ir bėgimas. Ir plaukimas'
 	]
 ];

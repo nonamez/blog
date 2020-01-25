@@ -47,13 +47,6 @@ class ViewComposerProvider extends ServiceProvider
 					'char' => mb_substr(trans('blog.header.menu.about'), 0, 1),
 					'text' => mb_substr(trans('blog.header.menu.about'), 1),
 				],
-
-				[
-					'segment' => 'contacts',
-					'url'  => url('/'),
-					'char' => mb_substr(trans('blog.header.menu.contacts'), 0, 1),
-					'text' => mb_substr(trans('blog.header.menu.contacts'), 1),
-				]
 			];
 
 			$view->with('top_links', $top_links);
