@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="app">
+<div id="app" v-cloak>
 	<header-component></header-component>
 	<main class="my-4">
 		<router-view></router-view>

@@ -19,9 +19,11 @@ class FileController extends Controller {
 	
 	public function index()
 	{
-		$files = Models\File::orderBy('created_at', 'DESC')->paginate(20);
+		$files = Models\File::with('fileable:id,title,locale,slug')->orderBy('created_at', 'DESC')->paginate(20);
 
-		return view('admin.files.index', compact('files'));
+		// dd($files);
+
+		return response()->json(compact('files'));
 	}
 	
 	public function store(Request $request)

@@ -3,30 +3,39 @@
 namespace App\Models\Blog\Post;
 
 use App\Misc;
+use App\Events;
+use App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Translated extends Model {
 	
 	protected $table    = 'blg_translated_posts';
+	
 	protected $fillable = ['title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date', 'slug'];
 	protected $dates    = ['date'];
 
 	protected $appends  = ['routes'];
 
-	public static function boot()
-	{
-		parent::boot();
+	protected $dispatchesEvents = [
+		'saved' => Events\Blog\Post\Translated\Saved::class,
+		'deleting' => Events\Blog\Post\Translated\Deleting::class,
+	];
+
+	// public static function boot()
+	// {
+	// 	parent::boot();
 		
-		$name = 'header_tags_' . request('locale');
+	// 	$name = 'header_tags_' . request('locale');
 
-		static::saved(function($post) use($name) {
-			cache()->forget($name);
-		});
+	// 	static::saved(function($post) use($name) {
+	// 		cache()->forget($name);
+	// 	});
 
-		static::deleted(function($post) use($name) {
-			cache()->forget($name);
-		});
-	}
+	// 	static::deleted(function($post) use($name) {
+	// 		cache()->forget($name);
+	// 	});
+	// }
 
 	// ========================= Scopes ========================= //
 
@@ -86,11 +95,11 @@ class Translated extends Model {
 	
 	public function tags()
 	{
-		return $this->belongsToMany(\App\Models\Blog\Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
+		return $this->belongsToMany(Models\Blog\Tag::class, 'blg_posts_tags', 'post_id', 'tag_id');
 	}
 	
 	public function files()
 	{
-		return $this->morphMany(\App\Models\File::class, 'fileable');
+		return $this->morphMany(Models\File::class, 'fileable');
 	}
 }

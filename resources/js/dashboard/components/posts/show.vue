@@ -193,7 +193,9 @@ export default {
 
 	methods: {
 		...mapMutations('post', ['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'removeTag', 'setDate', 'setLocale', 'setStatus', 'setParentId', 'setSlug']),
-		...mapActions('files', ['removeFile']),
+		...mapActions('files', {
+			removeFile: 'remove'
+		}),
 
 		getTagRoute(slug) {
 			return route('tag', this.locale, slug);

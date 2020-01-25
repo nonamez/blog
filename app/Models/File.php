@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events;
+
 use Illuminate\Database\Eloquent\Model;
+
 
 class File extends Model {
 
@@ -11,16 +14,11 @@ class File extends Model {
 
 	protected $appends  = ['routes'];
 
-	protected $visible = ['id', 'name', 'description', 'routes', 'private'];
+	protected $visible = ['id', 'name', 'original_name', 'description', 'created_at', 'routes', 'fileable'];
 
-	public static function boot()
-	{
-		parent::boot();
-
-		static::deleting(function($file) {
-			\Illuminate\Support\Facades\File::delete($file->getPath());
-		});
-	}
+	protected $dispatchesEvents = [
+		'deleting' => Events\File\Deleting::class,
+	];
 
 	// ========================= Attributes ========================= //
 
@@ -32,21 +30,6 @@ class File extends Model {
 			'update' => route('dashboard.files.update', $this->id),
 			'delete' => route('dashboard.files.delete', $this->id)
 		];  
-	}
-
-	// ========================= Scopes ========================= //
-
-	public function scopeOfType($query, $type)
-	{
-		$types = [
-			'post'      => 'App\Models\Blog\TranslatedPost',
-		];
-
-		if (array_key_exists($type, $types)) {
-			$query->where('fileable_type', '=', $types[$type]);
-		}
-
-		return $query;
 	}
 
 	// ========================= Custom Methods ========================= //

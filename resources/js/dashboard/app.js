@@ -23,6 +23,12 @@ const router = new VueRouter({
 		},
 
 		{
+			path: '/files/',
+			name: 'files.index',
+			component: require('./components/files/index').default
+		},
+
+		{
 			path: '/',
 			redirect: '/posts'
 		}

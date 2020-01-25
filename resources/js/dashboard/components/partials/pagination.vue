@@ -30,7 +30,11 @@ export default {
 			this.$emit('reload', url);
 
 			if (this.$router) {
-				this.$router.push({ query: { ...this.$route.query, page: getURLParameterByName('page', url) }});
+				this.$router.push({
+					query: {
+						...this.$route.query, page: getURLParameterByName('page', url)
+					}
+				});
 			}
 		}
 	}

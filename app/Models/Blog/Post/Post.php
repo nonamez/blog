@@ -2,11 +2,17 @@
 
 namespace App\Models\Blog\Post;
 
+use App\Events;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model {
 
 	protected $table = 'blg_posts';
+
+	protected $dispatchesEvents = [
+		'deleting' => Events\Post\Deleting::class,
+	];
 
 	// ========================= Custom Methods ========================= //
 		
