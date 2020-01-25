@@ -1,5 +1,4 @@
 {
-    "index": "\/",
     "login": "login",
     "logout": "logout",
     "storage.file": "storage\/{date}\/{name}",

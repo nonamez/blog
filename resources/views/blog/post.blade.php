@@ -19,7 +19,7 @@
 			@include('blog.partials.tags', ['tags' => $post->tags])
 		</li>
 	</ul>
-	<div class="content">
+	<div class="post-content">
 		{!! prepareContent($post) !!}
 	</div>
 

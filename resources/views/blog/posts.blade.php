@@ -26,7 +26,6 @@
 	@endforeach
 	
 	@if ($posts->hasPages())
-
 	<div class="flex mt-4 px-8">
 		<div class="w-1/2">
 			@if($posts->onFirstPage() == FALSE)

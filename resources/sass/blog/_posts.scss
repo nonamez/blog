@@ -53,12 +53,31 @@ $border-top: 1px solid #bfbfbf;
 }
 
 .post-standalone {
-	.content {
+	.post-content {
 		@for $index from 1 through 6 {
 			h#{$index} {
-				text-indent: 0.5em;
+				// text-indent: 0.5em;
 				margin: 0.5rem auto;
 			}
+		}
+
+		a {
+			border-bottom: 1px dotted;
+
+			&:hover,
+			&:focus {
+				border-bottom: 1px dashed;
+			}
+		}
+
+		mark {
+			background-color: #eee;
+			padding: 1px 5px;
+			white-space: pre-wrap;
+		}
+
+		h4 {
+			font-weight: 500;
 		}
 
 		blockquote {
@@ -69,11 +88,40 @@ $border-top: 1px solid #bfbfbf;
 			box-shadow: 15px 15px 0 0 #f1f3f5;
 		}
 
+		ul {
+			// text-indent: 1em;
+
+			display: block;
+
+			list-style-type: disc;
+
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+
+			padding-inline-start: 40px;
+
+			li {
+				margin: 0.2rem auto;
+			}
+		}
+
 		p {
-			line-height: 1.7em;
-			margin: 0.5rem auto;
-			text-indent: 1.5em;
-			text-align: justify;
+			margin: 0 0 10px;
+			line-height: 1.8;
+		}
+
+		pre {
+			margin-bottom: 10px;
+
+			&.inline {
+				display: inline;
+			}
+			&.inline > code {
+				display: inline;
+			}
 		}
 	}
 }

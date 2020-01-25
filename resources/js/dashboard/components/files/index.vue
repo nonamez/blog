@@ -10,9 +10,9 @@
 						<thead>
 							<tr>
 								<th>Name</th>
-								<th>Original name</th>
-								<th>Type</th>
-								<th>Created</th>
+								<th>Original Name</th>
+								<th>Assigned</th>
+								<th style="max-width: 50px">Created</th>
 								<th>Actions</th>
 							</tr>
 						</thead>

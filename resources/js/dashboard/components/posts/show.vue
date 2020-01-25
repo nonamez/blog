@@ -129,6 +129,9 @@
 							<button class="btn btn-success" @click="save()">
 								Save
 							</button>
+							<a class="btn btn-outline-secondary" v-if="preview_url" :href="preview_url" target="blank">
+								Preview
+							</a>
 						</div>
 					</template>
 				</card>
@@ -137,7 +140,7 @@
 	</div>
 </template>
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 import { route } from 'helpers';
 
 export default {
@@ -166,8 +169,10 @@ export default {
 		...mapState('post', ['title', 'content', 'slug', 'meta_keywords', 'meta_description', 'tags', 'locale', 'status', 'date', 'parent_id']),
 		
 		...mapState('post', {
-			post_id: 'id'
+			post_id: 'id',
 		}),
+
+		...mapGetters('post', ['preview_url']),
 
 		...mapState('files', ['files']),
 
@@ -198,7 +203,7 @@ export default {
 		}),
 
 		getTagRoute(slug) {
-			return route('tag', this.locale, slug);
+			return route('blog.posts.tag', this.locale, slug);
 		},
 
 		addTag() {

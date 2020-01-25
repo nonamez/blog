@@ -47,6 +47,14 @@ const getters = {
 
 			files: rootGetters['files/files_id']
 		};
+	},
+
+	preview_url: state => {
+		if (state.routes && state.routes.preview) {
+			return state.routes.preview;
+		}
+
+		return false;
 	}
 };
 
