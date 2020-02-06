@@ -16,17 +16,17 @@
 				</ul>
 
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown" v-bind:class="{active: $router.currentRoute.name && $router.currentRoute.name.startsWith('posts')}">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item dropdown" v-bind:class="{active: route_active.startsWith('posts')}">
+						<a class="nav-link dropdown-toggle" href="#" id="posts-menu-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Posts
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu" aria-labelledby="posts-menu-dropdown">
 							<router-link :to="{ name: 'posts.index' }" class="dropdown-item">Posts</router-link>
 							<div class="dropdown-divider"></div>
 							<router-link :to="{ name: 'posts.show' }" class="dropdown-item">Create</router-link>
 						</div>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" v-bind:class="{active: route_active.startsWith('files')}">
 						<router-link :to="{ name: 'files.index' }" class="nav-link">Files</router-link>
 					</li>
 					<li class="nav-item">
@@ -43,11 +43,19 @@ import { route } from 'helpers';
 export default {
 	data() {
 		return {
+			route_active: this.$router.currentRoute ? this.$router.currentRoute.name : '',
+
 			routes: {
 				index: _BASE_URL,
 				dashboard: route('dashboard.index'),
 			}
 		};
+	},
+
+	watch: {
+		$route(to) {
+			this.route_active = to.name;
+		}
 	},
 
 	methods: {
