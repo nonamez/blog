@@ -14,7 +14,8 @@ mix.webpackConfig({
 	},
 	resolve: {
 		alias: {
-			helpers: path.resolve(__dirname, 'resources/js/helpers')
+			helpers: path.resolve(__dirname, 'resources/js/helpers'),
+			'dashboard-components': path.resolve(__dirname, 'resources/js/dashboard/components')
 		}
 	}
 });

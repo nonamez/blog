@@ -14,18 +14,18 @@ const router = new VueRouter({
 		{
 			path: '/posts',
 			name: 'posts.index',
-			component: require('./components/posts/index').default
+			component: require('dashboard-components/posts/index').default
 		},
 		{
 			path: '/posts/show/:post_id?',
 			name: 'posts.show',
-			component: require('./components/posts/show').default
+			component: require('dashboard-components/posts/show').default
 		},
 
 		{
 			path: '/files/',
 			name: 'files.index',
-			component: require('./components/files/index').default
+			component: require('dashboard-components/files/index').default
 		},
 
 		{
@@ -35,15 +35,15 @@ const router = new VueRouter({
 	]
 });
 
-Vue.component('header-component', require('./components/header.vue').default);
+Vue.component('header-component', require('dashboard-components/header.vue').default);
 
-Vue.component('card', require('./components/partials/card.vue').default);
+Vue.component('card', require('dashboard-components/partials/card.vue').default);
 
-Vue.component('enterable', require('./components/partials/inputs/enterable.vue').default);
-Vue.component('selectable', require('./components/partials/inputs/selectable.vue').default);
+Vue.component('enterable', require('dashboard-components/partials/inputs/enterable.vue').default);
+Vue.component('selectable', require('dashboard-components/partials/inputs/selectable.vue').default);
 
-Vue.component('pagination', require('./components/partials/pagination.vue').default);
-Vue.component('form-group', require('./components/partials/form-group.vue').default);
+Vue.component('pagination', require('dashboard-components/partials/pagination.vue').default);
+Vue.component('form-group', require('dashboard-components/partials/form-group.vue').default);
 
 new Vue({
 	store,
