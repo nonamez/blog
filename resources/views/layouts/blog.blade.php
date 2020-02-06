@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
+	
 	<link rel="stylesheet" href="{{ mix('css/blog.css') }}">
 
 	<title>@yield('title') /home/NoNameZ</title>
