@@ -74,7 +74,7 @@ const actions = {
 		});
 	},
 
-	uploadFile({commit}, file,  watermark = false) {
+	upload({commit}, file,  watermark = false) {
 		return new Promise(resolve => {
 			watermark = watermark ? 1 : 0;
 
@@ -83,7 +83,7 @@ const actions = {
 			form_data.append('file', file);
 			form_data.append('watermark', watermark);
 
-			window.axios.post(route('dashboard.files.store'), form_data, {
+			axios.post(route('dashboard.files.store'), form_data, {
 				headers: {
 					'Content-Type': 'multipart/form-data'
 				}

@@ -223,7 +223,7 @@ export default {
 		},
 
 		uploadFile() {
-			this.$store.dispatch('files/uploadFile', document.getElementById('input-file').files[0]).then(status => {
+			this.$store.dispatch('files/upload', document.getElementById('input-file').files[0]).then(status => {
 				if (status) {
 					document.querySelector('label.custom-file-label').textContent = 'Choose file';
 					document.querySelector('#input-file').value = null;
