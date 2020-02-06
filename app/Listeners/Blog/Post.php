@@ -16,7 +16,7 @@ class Post
 		}
 	}
 
-	public function onPostDeleting(Events\Blog\Post\Translated\Deleting $event)
+	public function onPostDeleting(Events\Blog\Post\Deleting $event)
 	{
 		foreach ($event->post->translated as $translated) {
 			foreach ($translated->files as $file) {
@@ -34,7 +34,7 @@ class Post
 
 		$events->listen(
 			'App\Events\Blog\Post\Deleting',
-			'App\Listeners\Blog\Post@onPostTranslatedDeleting'
+			'App\Listeners\Blog\Post@onPostDeleting'
 		);
 	}
 }

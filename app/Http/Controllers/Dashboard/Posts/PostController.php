@@ -35,20 +35,10 @@ class PostController extends Controller
 		$title = $translated_post->title;
 
 		if ($all) {
-			foreach ($translated_post->parent->translated as $t) {
-				foreach ($t->files as $file) {
-					$file->delete();
-				}
-			}
-
-			$t->parent->delete();
+			$translated_post->parent->delete();
 			
 			$message = 'The post "%s" and its translations successfully deleted';
 		} else {
-			foreach ($translated_post->files as $file) {
-				$file->delete();
-			}
-			
 			$translated_post->delete();
 			
 			$message = 'The post "%s" successfully deleted';

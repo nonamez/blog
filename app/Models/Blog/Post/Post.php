@@ -11,7 +11,7 @@ class Post extends Model {
 	protected $table = 'blg_posts';
 
 	protected $dispatchesEvents = [
-		'deleting' => Events\Post\Deleting::class,
+		'deleting' => Events\Blog\Post\Deleting::class,
 	];
 
 	// ========================= Custom Methods ========================= //
