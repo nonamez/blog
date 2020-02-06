@@ -8,7 +8,7 @@ export function route() {
 	if (routes[name] === undefined) {
 		console.error('Unknown route ', name);
 	} else {
-		return _BASE_URL + '/' + routes[name].split('/').map(s => s[0] == '{' ? args.shift() : s).join('/');
+		return _BASE_URL + '/' + routes[name].split('/').map(s => s[0] == '{' ? args.shift() : s).join('/').replace(/\/$/, '');
 	}
 }
 
