@@ -1,33 +1,19 @@
 import { route, getURLParameterByName } from 'helpers';
 
+import pagination from './_pagination';
+
 function initialState() {
 	return {
-		posts: [],
-		pagination: {
-			prev_page_url: false,
-			next_page_url: false,
-			current_page: 1,
-			last_page: 1
-		}
+		...pagination.state,
+
+		posts: []
 	};
 }
 
 const state = initialState();
 
 const getters = {
-	pagination_simple: state => {
-		return (({
-			prev_page_url,
-			next_page_url,
-			current_page,
-			last_page
-		}) => ({
-			prev_page_url,
-			next_page_url,
-			current_page,
-			last_page
-		}))(state.pagination);
-	}
+	...pagination.getters
 };
 
 const mutations = {

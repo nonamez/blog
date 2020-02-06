@@ -1,36 +1,21 @@
 import { route, getURLParameterByName } from 'helpers';
 
+import pagination from './_pagination';
+
 function initialState() {
 	return {
-		files: [],
+		...pagination.state,
 
-		pagination: {
-			prev_page_url: false,
-			next_page_url: false,
-			current_page: 1,
-			last_page: 1
-		}
+		files: []
 	};
 }
 
 const state = initialState();
 
 const getters = {
-	files_id: state => state.files.map(f => f.id),
+	...pagination.getters,
 
-	pagination_simple: state => {
-		return (({
-			prev_page_url,
-			next_page_url,
-			current_page,
-			last_page
-		}) => ({
-			prev_page_url,
-			next_page_url,
-			current_page,
-			last_page
-		}))(state.pagination);
-	}
+	files_id: state => state.files.map(f => f.id),
 };
 
 const mutations = {
