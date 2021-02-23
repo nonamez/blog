@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* purgecss start ignore */
+@import "~highlight.js/styles/default";
+/* purgecss end ignore */
+
+/* purgecss start ignore */
+html {
+	height: 100%
+}
+
+body {
+	display: flex;
+
+	flex-direction: column;
+
+	height: 100%;
+	line-height: 1.6em;
+	color: theme('colors.black.default');
+
+	font-size: 18px;
+	font-weight: 400;
+
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+
+h1 { font-size: 36px; }
+
+h2 { font-size: 30px; }
+
+h3 { font-size: 24px; }
+
+h4 { font-size: 20px; }
+
+h5 { font-size: 17px; }
+
+h6 { font-size: 17px; }
+
+.container {
+	margin: 0 auto;
+	max-width: 915px;
+	// padding: 10px 15px;
+	position: relative;
+
+	blockquote {
+		background-color:#f6f6f6
+	}
+}
+
+.langs {
+	font-size: 15px !important;
+	font-weight: 700;
+
+	a {
+		font-size:13px !important;
+		color: theme('colors.grey.lighter');
+		&.active,
+		&:hover,
+		&:focus {
+			color: theme('colors.grey.default');
+		}
+	}
+}
+
+.tags {
+	a {
+		font-size: 12px !important;
+		font-weight: 300;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+@import 'header';
+@import 'main';
+@import 'about';
+@import 'footer';

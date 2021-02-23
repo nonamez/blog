@@ -1,0 +1,128 @@
+/* purgecss start ignore */
+$border-top: 1px solid #bfbfbf;
+
+.post-short {
+	line-height: 1;
+	font-size: 14px;
+
+	&:hover {
+		background-color: #f1f3f5;
+		border-color: transparent;
+		border-radius: 10px;
+	}
+
+	.left-side {
+		border-top: $border-top;
+
+		> time {
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+	}
+
+	.right-side {
+		border-top: $border-top;
+	}
+
+	.title {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight: bold;
+		font-style: normal;
+		line-height: 1.2;
+		font-size: 20px !important; 
+
+		a {
+			text-decoration: none;
+			border-bottom: none;
+		}
+	}
+}
+
+@media (max-width: 48em) {
+	.post-short {
+		.left-side {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			margin: 0;
+		}
+
+		.right-side {
+			padding-top: 0;
+			border-top: none;
+		}
+	}
+}
+
+.post-standalone {
+	.post-content {
+		@for $index from 1 through 6 {
+			h#{$index} {
+				// text-indent: 0.5em;
+				margin: 0.5rem auto;
+			}
+		}
+
+		a {
+			border-bottom: 1px dotted;
+
+			&:hover,
+			&:focus {
+				border-bottom: 1px dashed;
+			}
+		}
+
+		mark {
+			background-color: #eee;
+			padding: 1px 5px;
+			white-space: pre-wrap;
+		}
+
+		h4 {
+			font-weight: 500;
+		}
+
+		blockquote {
+			background: white;
+			padding: 20px 30px 20px 30px;
+			margin: 10px auto;
+			border: solid 2px;
+			box-shadow: 15px 15px 0 0 #f1f3f5;
+		}
+
+		ul {
+			// text-indent: 1em;
+
+			display: block;
+
+			list-style-type: disc;
+
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+
+			padding-inline-start: 40px;
+
+			li {
+				margin: 0.2rem auto;
+			}
+		}
+
+		p {
+			margin: 0 0 10px;
+			line-height: 1.8;
+		}
+
+		pre {
+			margin-bottom: 10px;
+
+			&.inline {
+				display: inline;
+			}
+			&.inline > code {
+				display: inline;
+			}
+		}
+	}
+}

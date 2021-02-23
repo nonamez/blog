@@ -1,0 +1,16 @@
+footer {
+	color: #aaa;
+	font-size: 14px;
+	line-height: 21px;
+	position: relative;
+}
+
+footer:after {
+	background-color: rgba(0, 0, 0, 0.03);
+	bottom: 100%;
+	content: "";
+	height: 3px;
+	left: 0;
+	position: absolute;
+	width: 100%
+}
