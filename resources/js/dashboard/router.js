@@ -1,30 +1,16 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createWebHashHistory, createRouter } from 'vue-router';
 
-Vue.use(VueRouter);
+const router = createRouter({
+	history: createWebHashHistory('/dashboard'),
+	
+	routes: [
+		{
+			path: '/',
+			redirect: '/posts'
+		},
 
-const router = new VueRouter({
-    base: '/',
-    routes: [
-        {
-            path: '/',
-            redirect: '/orders'
-        },
-        
-        ...require('modules/orders/_routes.js').default,
-        ...require('modules/tasks/_routes.js').default,
-        ...require('modules/users/_routes.js').default,
-    ],
-    linkActiveClass: 'active',
-    linkExactActiveClass: 'active'
-});
-
-router.beforeEach((to, from, next) => {
-    if (to.meta.ability && router.app.$auth.abilities.includes(to.meta.ability)) {
-        return next();
-    }
-
-    console.error(`The ability ${to.meta.ability} not given for user`);
+		...require('d-modules/posts/_routes.js').default,
+	],
 });
 
 export default router;

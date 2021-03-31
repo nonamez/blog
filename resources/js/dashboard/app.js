@@ -1,35 +1,29 @@
 require('./bootstrap');
 
-import { createApp } from 'vue';
+import { createApp, reactive, h } from 'vue';
 
-import Header from './partials/header.vue';
+import Router from './router';
+// import Store from './store/store';
 
-const App = {
-	components: {
-		'header-component': Header
-	}
-};
+import Dashboard from './layouts/Dashboard.vue';
 
-createApp(App).mount('#dashboard');
+axios.get('/auth').then(response => {
+	const app = createApp({
+		render: () => h(Dashboard)
+	});
 
-// import store from './store/store';
-// import router from './router';
+	app.config.globalProperties.$auth = reactive(response.data.data);
 
-// import Layout from './layout.vue';
+	// app.use(Store);
+	app.use(Router);
+	
+	app.mount('#dashboard');
+}).catch((err) => {
+	console.error(err);
+
+	document.write('App not mounted');
+});
 
 // Load all components
 // const files = require.context('components', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-// axios.get('/auth').then(response => {
-// 	Vue.prototype.$auth = Vue.observable(response.data.data);
-
-// 	new Vue({
-// 		// store,
-// 		// router,
-
-// 		render: h => h(App),
-// 	}).$mount('#app');
-// }).catch(() => {
-// 	document.write('Auth not found');
-// });

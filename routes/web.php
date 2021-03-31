@@ -12,6 +12,8 @@ Route::pattern('locale', implode('|', config('blog.locales')));
 |--------------------------------------------------------------------------
 */
 
+require __DIR__ . '/auth.php';
+
 // Redirect from / to lang
 Route::get('/', function() {
 	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), config('blog.locales'))) {
@@ -20,8 +22,6 @@ Route::get('/', function() {
 		return redirect()->to(config('app.fallback_locale'));
 	}
 });
-
-require __DIR__ . '/auth.php';
 
 // Blog
 Route::prefix('{locale}')->middleware('localize')->group(function() {
@@ -33,7 +33,7 @@ Route::prefix('{locale}')->middleware('localize')->group(function() {
 	Route::view('about', 'blog.about')->name('blog.about');
 });
 
-Route::middleware([/*'user_ip', 'auth'*/])->prefix('dashboard')->namespace('Dashboard')->group(function() {
+Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->namespace('Dashboard')->group(function() {
 	Route::view('/', 'dashboard.index')->name('dashboard.index');
 
 	// Posts
@@ -52,6 +52,12 @@ Route::middleware([/*'user_ip', 'auth'*/])->prefix('dashboard')->namespace('Dash
 		Route::post('{file_id}/delete', 'FileController@delete')->name('dashboard.files.delete');
 	});
 });
+
+Route::get('/auth', function() {
+    $user = auth()->user();
+
+	return new App\Http\Resources\Dashboard\Users\User($user);
+})->middleware('auth');
 
 // // Helpers for posts examples
 // Route::get('sleep/{time}', function($time) {

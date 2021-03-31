@@ -25,9 +25,9 @@ mix.webpackConfig({
 		alias: {
 			// helpers: path.resolve(__dirname, 'resources/js/helpers'),
 			// store: path.resolve(__dirname, 'resources/js/store'),
-			// modules: path.resolve(__dirname, 'resources/js/modules'),
+			'd-modules': path.resolve(__dirname, 'resources/js/dashboard/modules'),
 			// components: path.resolve(__dirname, 'resources/js/components'),
-			// partials: path.resolve(__dirname, 'resources/js/partials'),
+			'd-partials': path.resolve(__dirname, 'resources/js/dashboard/partials'),
 			// 'event-bus': path.resolve(__dirname, 'resources/js/event-bus.js'),
 
 			// sass: path.join(__dirname, 'resources/sass')
