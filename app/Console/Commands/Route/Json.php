@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands\Route;
 
-use File;
-
-use Illuminate\Routing\Router;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class Json extends Command
 {
@@ -42,7 +40,7 @@ class Json extends Command
     {
         $routes = [];
 
-        foreach ($this->router->getRoutes() as $route) {
+        foreach (app()->router->getRoutes() as $route) {
             $name = $route->getName();
 
             if (strlen($name) > 0) {
@@ -50,7 +48,7 @@ class Json extends Command
             }
         }
 
-        $path = resource_path('js/helpers/_routes.json');
+        $path = resource_path('js/dashboard/helpers/_routes.json');
         
         File::put($path, json_encode($routes, JSON_PRETTY_PRINT));
 

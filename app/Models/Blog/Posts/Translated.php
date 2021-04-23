@@ -13,6 +13,8 @@ class Translated extends Model
 
     protected $table = 'blg_post_translated';
 
+    protected $appends  = ['routes'];
+
     protected $casts = [
         'date' => 'date'
     ];

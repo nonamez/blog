@@ -26,7 +26,7 @@
 		</button> -->
 		<div x-data="{ dropdownOpen: false }" class="relative">
 			<button class="flex items-center space-x-2 relative focus:outline-none">
-				<h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">{{ $auth.name }}</h2>
+				<h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block"></h2>
 				<img class="h-9 w-9 rounded-full border-2 border-purple-500 object-cover" src="https://images.unsplash.com/photo-1553267751-1c148a7280a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Your avatar">
 			</button>
 			<!-- <div class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10">

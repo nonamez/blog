@@ -1,6 +1,21 @@
-import { createStore } from 'vuex';
+import { createStore, createLogger } from 'vuex';
 
-export const store = createStore({
+// Load all modules
+const files = require.context('./modules', true, /\.js$/i);
+
+const modules = files.keys().slice(1).reduce(function(map, path) {
+	let key = path.split('/').pop().split('.')[0];
+
+	map[key] = files(path).default;
+
+	return map;
+}, {});
+
+const store = createStore({
+	plugins: [createLogger()],
+	
+	modules,
+
 	state () {
 		return {
 			is_loading: false,
@@ -18,3 +33,5 @@ export const store = createStore({
 		}
 	}
 });
+
+export default store;

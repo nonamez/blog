@@ -1,5 +1,6 @@
-let mix = require('laravel-mix'),
+const mix = require('laravel-mix'),
 	path = require('path'),
+	webpack = require('webpack'),
 	tailwindcss = require('tailwindcss');
 
 mix.options({
@@ -21,13 +22,19 @@ mix.webpackConfig({
 			}
 		]
 	},
+	plugins: [
+		new webpack.DefinePlugin({
+			__VUE_OPTIONS_API__: false,
+			__VUE_PROD_DEVTOOLS__: false,
+		}),
+	],
 	resolve: {
 		alias: {
-			// helpers: path.resolve(__dirname, 'resources/js/helpers'),
+			helpers: path.resolve(__dirname, 'resources/js/dashboard/helpers'),
 			// store: path.resolve(__dirname, 'resources/js/store'),
-			'd-modules': path.resolve(__dirname, 'resources/js/dashboard/modules'),
+			modules: path.resolve(__dirname, 'resources/js/dashboard/modules'),
 			// components: path.resolve(__dirname, 'resources/js/components'),
-			'd-partials': path.resolve(__dirname, 'resources/js/dashboard/partials'),
+			partials: path.resolve(__dirname, 'resources/js/dashboard/partials'),
 			// 'event-bus': path.resolve(__dirname, 'resources/js/event-bus.js'),
 
 			// sass: path.join(__dirname, 'resources/sass')

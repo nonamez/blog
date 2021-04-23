@@ -33,12 +33,13 @@ Route::prefix('{locale}')->middleware('localize')->group(function() {
 	Route::view('about', 'blog.about')->name('blog.about');
 });
 
-Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->namespace('Dashboard')->group(function() {
+Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function() {
 	Route::view('/', 'dashboard.index')->name('dashboard.index');
 
 	// Posts
 	Route::group(['prefix' => 'posts', 'namespace' => 'Posts'], function() {
-		Route::get('/', 'PostController@index')->name('dashboard.posts.index');
+		Route::get('/', [Controllers\Dashboard\Posts\PostController::class, 'index'])->name('dashboard.posts.index');
+		
 		Route::post('save/{translated_post?}', 'PostController@save')->name('dashboard.posts.save');
 		Route::get('{translated_post}/find', 'PostController@find')->name('dashboard.posts.find');
 		Route::post('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');

@@ -2,6 +2,6 @@ export default [
 	{
 		path: '/posts',
 		name: 'posts.index',
-		component: require('d-modules/posts/index').default,
+		component: require('modules/posts/index').default,
 	},
 ];

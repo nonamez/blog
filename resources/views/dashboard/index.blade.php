@@ -13,6 +13,10 @@
 		<!-- Styles -->
 		<link rel="stylesheet" href="{{ mix('css/dashboard.css') }}">
 
+		<script>
+            var _BASE_URL = '{{ url('/') }}';
+        </script>
+
 		<!-- Scripts -->
 		<script src="{{ mix('js/dashboard.js') }}" defer></script>
 		{{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}

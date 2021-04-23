@@ -14,7 +14,7 @@
 	</div>
 </template>
 <script>
-import { Header, Sidebar } from 'd-partials';
+import { Header, Sidebar } from 'partials';
 
 export default {
 	components: {

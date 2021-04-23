@@ -9,7 +9,7 @@ const router = createRouter({
 			redirect: '/posts'
 		},
 
-		...require('d-modules/posts/_routes.js').default,
+		...require('modules/posts/_routes.js').default,
 	],
 });
 
