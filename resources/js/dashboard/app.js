@@ -12,6 +12,13 @@ axios.get('/auth').then(response => {
 
 	app.config.globalProperties.$auth = reactive(response.data.data);
 
+	// Loading all global components
+	const files = require.context('./components', true, /\.vue$/i);
+
+	files.keys().reduce(function(map, path) {
+		app.component(path.split('/').pop().split('.')[0], files(path).default);
+	}, {});
+
 	app.use(Store);
 	app.use(Router);
 	
@@ -21,7 +28,3 @@ axios.get('/auth').then(response => {
 
 	document.write('App not mounted');
 });
-
-// Load all components
-// const files = require.context('components', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));

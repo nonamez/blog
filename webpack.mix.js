@@ -5,7 +5,7 @@ const mix = require('laravel-mix'),
 
 mix.options({
 	clearConsole: true,
-	processCssUrls: false,
+	processCssUrls: true,
 	postCss: [
 		tailwindcss('./tailwind.config.js'),
 	]
@@ -31,7 +31,7 @@ mix.webpackConfig({
 	resolve: {
 		alias: {
 			helpers: path.resolve(__dirname, 'resources/js/dashboard/helpers'),
-			// store: path.resolve(__dirname, 'resources/js/store'),
+			store: path.resolve(__dirname, 'resources/js/dashboard/store'),
 			modules: path.resolve(__dirname, 'resources/js/dashboard/modules'),
 			// components: path.resolve(__dirname, 'resources/js/components'),
 			partials: path.resolve(__dirname, 'resources/js/dashboard/partials'),

@@ -1,16 +1,10 @@
 @charset "UTF-8";
 
+@import '../../fontello/css/fontello';
+
 @import "bootstrap";
-
-// @import "tailwindcss/base";
-// @import "tailwindcss/components";
-// @import "tailwindcss/utilities";
-
 
 [v-cloak] {
     display: block;
     padding: 50px 0;
 }
-
-// @import 'table';
-// @import 'posts';

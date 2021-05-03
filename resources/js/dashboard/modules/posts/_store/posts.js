@@ -1,4 +1,4 @@
-import {route} from 'helpers';
+import { route } from 'helpers';
 
 function initialState() {
 	return {

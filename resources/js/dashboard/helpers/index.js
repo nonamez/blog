@@ -33,6 +33,26 @@ export function getURLParameterByName(name, url) {
 	return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+export function twoDigits(d) {
+	if (0 <= d && d < 10) {
+		return '0' + d.toString();
+	}
+
+	if (-10 < d && d < 0) {
+		return '-0' + (-1 * d).toString();
+	}
+	
+	return d.toString();
+}
+
+export function toMysqlFormat(d = false) {
+	if (d == false) {
+		d = new Date;
+	}
+
+	return d.getFullYear() + '-' + twoDigits(1 + d.getMonth()) + '-' + twoDigits(d.getDate()) + ' ' + twoDigits(d.getHours()) + ':' + twoDigits(d.getMinutes()) + ':' + twoDigits(d.getSeconds());
+}
+
 export function debounce(fn, delay = 500, id = 'GLOBAL') {
 	let timeout = {};
 
