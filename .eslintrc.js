@@ -1,11 +1,15 @@
 module.exports = {
+	'parserOptions': {
+		'ecmaVersion': 2020,
+		'sourceType': 'module'
+	},
 	'env': {
 		'browser': true,
 		'es6': true
 	},
 	'extends': [
 		'eslint:recommended',
-		'plugin:vue/essential'
+		'plugin:vue/vue3-essential',
 	],
 	'globals': {
 		'Atomics': 'readonly',
@@ -16,10 +20,6 @@ module.exports = {
 		'jQuery': 'readonly',
 		'require': 'readonly',
 		'_BASE_URL': 'readonly',
-	},
-	'parserOptions': {
-		'ecmaVersion': 2018,
-		'sourceType': 'module'
 	},
 	'plugins': [
 		'vue'
@@ -40,6 +40,6 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
-		]
+		],
 	}
 };

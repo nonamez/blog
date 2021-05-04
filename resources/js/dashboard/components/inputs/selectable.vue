@@ -9,7 +9,7 @@ import { props, returnable } from './_mixin.js';
 export default {
 	props: {
 		options: {
-			type: Array,
+			// type: Array,
 			default: function() {
 				return [];
 			}

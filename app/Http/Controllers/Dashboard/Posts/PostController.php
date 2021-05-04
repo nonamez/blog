@@ -17,4 +17,11 @@ class PostController extends Controller
 
         return new Resources\Dashboard\Posts\PostCollection($posts);
     }
+
+    public function find(Models\Blog\Posts\Translated $translated_post)
+    {
+        $translated_post->load('tags', 'files');
+
+        return new Resources\Dashboard\Posts\Post($translated_post);
+    }
 }

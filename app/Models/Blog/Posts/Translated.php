@@ -54,6 +54,11 @@ class Translated extends Model
     	return $this->belongsToMany(Models\Blog\Tags\Tag::class, 'blg_translated_posts_tags', 'post_id' ,'tag_id')->withTimestamps();
     }
 
+    public function files()
+    {
+        return $this->morphMany(Models\Files\File::class, 'fileable');
+    }
+
     // ========================= Custom Methods ========================= //
 
     public function getUrl()

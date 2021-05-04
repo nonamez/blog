@@ -41,7 +41,7 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 		Route::get('/', [Controllers\Dashboard\Posts\PostController::class, 'index'])->name('dashboard.posts.index');
 		
 		Route::post('save/{translated_post?}', 'PostController@save')->name('dashboard.posts.save');
-		Route::get('{translated_post}/find', 'PostController@find')->name('dashboard.posts.find');
+		Route::get('{translated_post}/find', [Controllers\Dashboard\Posts\PostController::class, 'find'])->name('dashboard.posts.find');
 		Route::post('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
 	});
 

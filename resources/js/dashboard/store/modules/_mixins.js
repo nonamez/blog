@@ -1,7 +1,7 @@
 export default function(initialState) {
 	return {
 		mutations: {
-			_set(state, data) {       
+			_set(state, data) {     
 				for (let key in data) {
 					if (key in state) {
 						state[key] = data[key];

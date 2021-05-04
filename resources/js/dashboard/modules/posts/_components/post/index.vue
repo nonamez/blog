@@ -38,28 +38,7 @@
 						Tags
 					</template>
 					<template v-slot:body>
-						<div class="mb-3">
-							<div class="input-group mb-3">
-								<input type="text" class="form-control" v-model="tag.slug" placeholder="Enter Slug">
-								<div class="input-group-append border-right-0">
-									<span class="input-group-text">
-										<i class="icon-exchange"></i>
-									</span>
-								</div>
-								<input type="text" class="form-control border-left-0" v-model="tag.name" placeholder="Enter Name">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary secondary-button-light-border" type="button" @click="addTag()">
-										<i class="icon-plus-circled"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="btn-group btn-group-sm mr-2 mb-2" role="group" v-for="(tag, index) in tags" v-bind:key="tag.id">
-							<a :href="getTagRoute(tag.slug)" class="btn btn-outline-primary" target="blank">{{ tag.name }}</a>
-							<button type="button" class="btn btn-danger" @click="removeTag(index)">
-								<i class="icon-trash"></i>
-							</button>
-						</div>
+						<tags></tags>
 					</template>
 				</card>
 
@@ -68,130 +47,51 @@
 						Files
 					</template>
 					<template v-slot:body>
-						<div class="input-group mb-3 px-5">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="input-file">
-								<label class="custom-file-label" for="input-file">Choose file</label>
-							</div>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary secondary-button-light-border" type="button" @click="uploadFile()">
-									<i class="icon-plus-circled"></i>
-								</button>
-							</div>
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item d-flex justify-content-between" v-for="file in files" v-bind:key="file.id">
-								<div>
-									{{ file.name }}
-								</div>
-								<div class="btn-group btn-group-sm" role="group">
-									<a :href="file.routes.preview" target="blank" type="button" class="btn btn-outline-secondary">
-										<i class="icon-file-image"></i>
-									</a>
-									<button type="button" class="btn btn-outline-secondary" @click="removeFile(file)">
-										<i class="icon-trash"></i>
-									</button>
-								</div>
-							</li>
-						</ul>
+						<files></files>
 					</template>
 				</card>
 			</main>
-			<!-- <aside class="col-12 col-lg-4">
+			<aside class="col-12 col-lg-4">
 				<card>
 					<template v-slot:header>
 						Publish
 					</template>
 					<template v-slot:body>
-						<form-group title="Date" v-slot="{id}">
-							<div class="input-group mb-3">
-								<input type="text" class="form-control" :id="id" v-model="date">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary secondary-button-light-border" type="button" @click="setDate(new Date)">
-										<i class="icon-arrows-cw"></i>
-									</button>
-								</div>
-							</div>
-						</form-group>
-						<form-group title="Locale" v-slot="{id}">
-							<selectable :options="locales" :id="id" @returnable="setLocale($event)" :default="locale" name="locale"></selectable>
-						</form-group>
-						<form-group title="Status" v-slot="{id}">
-							<selectable :options="statuses" :id="id" @returnable="setStatus($event)" :default="status" name="status"></selectable>
-						</form-group>
-						<form-group title="Parent" v-slot="{id}">
-							<enterable @returnable="setParentId($event)" :default="parent_id" :id="id"></enterable>
-						</form-group>
-						<form-group title="Markdown" v-slot="{id}">
-							<input type="checkbox" class="form-control" :id="id" v-model="markdown">
-						</form-group>
-						<div class="my-2 text-center">
-							<button class="btn btn-success" @click="save()">
-								Save
-							</button>
-							<a class="btn btn-outline-secondary" v-if="preview_url" :href="preview_url" target="blank">
-								Preview
-							</a>
-						</div>
+						<sidebar></sidebar>
 					</template>
 				</card>
-			</aside> -->
+			</aside>
 		</div>
 	</div>
 </template>
 <script>
-import { computed } from 'vue';
+// import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
+
 // import { route } from 'helpers';
 import { createNamespacedHelpers } from 'vuex-composition-helpers';
 
 const VUEX_MODULE = 'posts/post';
 
-const { useState } = createNamespacedHelpers(VUEX_MODULE); // specific module name
+const { useState, useMutations } = createNamespacedHelpers(VUEX_MODULE);
 
 export default {
+	components: {
+		tags: require('./partials/tags.vue').default,
+		files: require('./partials/files.vue').default,
+		sidebar: require('./partials/sidebar.vue').default
+	},
+
 	setup() {
 		const store = useStore();
+		const route = useRoute();
 
-		const data = {
-			tag: {
-				name: '',
-				slug: '',
-			},
-
-			locales: {
-				en: 'English',
-				ru: 'Русский',
-				lt: 'Lietuviškai',
-			},
-
-			statuses: {
-				draft: 'Draft',
-				published: 'Published',
-				hidden: 'Hidden',
-			}
-		};
-
-		const date = computed(() => {
-			let d = store.state[VUEX_MODULE].date;
-
-			if (d) {
-				d = d.split(' ').shift();
-			}
-
-			return d;
-		});
-
+		store.dispatch(`${VUEX_MODULE}/find`, route.params.id);
+		
 		return {
-			...data,
-
-			date,
-
-			...useState(['title', 'content', 'slug', 'meta_keywords', 'meta_description', 'tags', 'locale', 'status', 'parent_id']),
-
-			// ...useState({
-			// 	post_id: 'id'
-			// })
+			...useState(['title', 'content', 'slug', 'meta_keywords', 'meta_description', 'locale', 'status', 'parent_id']),
+			...useMutations(['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'setLocale', 'setStatus', 'setParentId', 'setSlug'])
 		};
 	},
 

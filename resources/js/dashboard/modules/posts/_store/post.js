@@ -1,5 +1,7 @@
 import { route, toMysqlFormat } from 'helpers';
-import _MIXINS from 'store/modules/_mixins';
+import mixins from 'store/modules/_mixins';
+
+const _MIXINS = mixins(initialState);
 
 function initialState() {
 	return {
@@ -114,7 +116,7 @@ const mutations = {
 const actions = {
 	find({commit}, id) {
 		axios.get(route('dashboard.posts.find', id)).then(response => {
-			commit('_set', response.data.post);
+			commit('_set', response.data.data);
 			commit('files/setFiles', response.data.post.files, { root: true });
 		});
 	},
