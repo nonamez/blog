@@ -117,7 +117,7 @@ const actions = {
 	find({commit}, id) {
 		axios.get(route('dashboard.posts.find', id)).then(response => {
 			commit('_set', response.data.data);
-			commit('files/setFiles', response.data.post.files, { root: true });
+			commit('files/setFiles', response.data.data.files, { root: true });
 		});
 	},
 

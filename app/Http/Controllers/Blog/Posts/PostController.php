@@ -23,4 +23,13 @@ class PostController extends Controller
 
 		return view('blog.posts.show', compact('post'));
 	}
+
+	public function postsByTag($locale, $tag)
+	{
+		$tag = Models\Blog\Tags\Tag::where('slug', '=', $tag)->firstOrFail();
+		
+		$posts = $tag->posts()->permitted()->where('locale', '=', $locale)->orderBy('date', 'DESC')->paginate(10);
+				
+		return view('blog.posts.index', compact('posts'));
+	}
 }

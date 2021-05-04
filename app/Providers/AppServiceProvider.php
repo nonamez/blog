@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
+
+        \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
+            'user' => 'App\Models\Users\User',
+            'post-translated' => 'App\Models\Posts\Translated',
+        ]);
     }
 }

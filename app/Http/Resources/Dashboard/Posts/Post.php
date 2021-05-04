@@ -4,6 +4,8 @@ namespace App\Http\Resources\Dashboard\Posts;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Http\Resources;
+
 class Post extends JsonResource
 {
     /**
@@ -33,6 +35,8 @@ class Post extends JsonResource
 
             'tags'   => $this->tags,
             'routes' => $this->routes,
+
+            'files' => Resources\Files\File::collection($this->files),
 
             'created_at' => $this->created_at->format('Y-m-d H:i:s')
         ];

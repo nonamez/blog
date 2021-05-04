@@ -87,6 +87,8 @@ export default {
 		const store = useStore();
 		const route = useRoute();
 
+		console.log(store);
+
 		store.dispatch(`${VUEX_MODULE}/find`, route.params.id);
 		
 		return {
