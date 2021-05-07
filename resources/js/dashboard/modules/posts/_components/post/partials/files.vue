@@ -24,12 +24,12 @@
 	</ul>
 </template>
 <script>
-import { createNamespacedHelpers } from 'vuex-composition-helpers';
 import { useStore } from 'vuex';
+import { createNamespacedHelpers } from 'vuex-composition-helpers';
 
-const VUEX_MODULE = 'files';
+const VUEX_MODULE = 'posts/post';
 
-const { useState } = createNamespacedHelpers(VUEX_MODULE);
+const { useState, useActions } = createNamespacedHelpers(VUEX_MODULE);
 
 export default {
 	setup() {
@@ -37,11 +37,18 @@ export default {
 
 		return {
 			...useState(['files']),
+			...useActions(['removeFile']),
 
 			uploadFile() {
 				const el = document.getElementById('input-file');
+
+				if (!el.files[0]) {
+					alert('File not selected');
+
+					return;
+				}
 				
-				store.dispatch('files/upload', el.files[0]).then(status => {
+				store.dispatch(`${VUEX_MODULE}/uploadFile`, el.files[0]).then(status => {
 					if (status) {
 						el.value = null;
 					}

@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
 
         \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
             'user' => 'App\Models\Users\User',
-            'post-translated' => 'App\Models\Posts\Translated',
+            'post-translated' => 'App\Models\Blog\Posts\Translated',
         ]);
     }
 }

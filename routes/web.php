@@ -50,7 +50,7 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 		Route::get('/', ['as' => 'dashboard.files.index', 'uses' => 'FileController@index']);
 		Route::post('upload', [Controllers\Dashboard\Files\FileController::class, 'store'])->name('dashboard.files.store');
 		Route::post('{file_id}/update', 'FileController@update')->name('dashboard.files.update');
-		Route::post('{file_id}/delete', 'FileController@delete')->name('dashboard.files.delete');
+		Route::post('{file_id}/delete', [Controllers\Dashboard\Files\FileController::class, 'delete'])->name('dashboard.files.delete');
 	});
 });
 

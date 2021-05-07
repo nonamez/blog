@@ -23,14 +23,15 @@ function initialState() {
 			save: null,
 			find: null,
 		},
-		tags: []
+		tags: [],
+		files: [],
 	};
 }
 
 const state = initialState();
 
 const getters = {
-	data: (state, getters, rootState, rootGetters) => {
+	data: (state) => {
 		return {
 			date: state.date,
 			locale: state.locale,
@@ -48,7 +49,7 @@ const getters = {
 
 			tags: state.tags,
 
-			files: rootGetters['files/files_id']
+			files: state.files.map(f => f.id)
 		};
 	},
 
@@ -110,14 +111,22 @@ const mutations = {
 
 	setMarkdown(state, markdown) {
 		state.markdown = markdown;
-	}
+	},
+
+	addFile(state, file) {
+		state.files.push(file);
+	},
+
+	removeFile(state, file) {
+		state.files.splice(state.files.findIndex(f => f.id == file.id), 1);
+	},
 };
 
 const actions = {
 	find({commit}, id) {
 		axios.get(route('dashboard.posts.find', id)).then(response => {
 			commit('_set', response.data.data);
-			commit('files/setFiles', response.data.data.files, { root: true });
+			// commit('files/setFiles', response.data.data.files, { root: true });
 		});
 	},
 
@@ -127,12 +136,46 @@ const actions = {
 		return new Promise((resolve) => {
 			axios.post(url, getters.data).then(response => {
 				commit('_set', response.data.post);
-				commit('files/setFiles', response.data.post.files, { root: true });
+				// commit('files/setFiles', response.data.post.files, { root: true });
 
 				resolve();
 			});
 		});
-	}
+	},
+
+	uploadFile({commit}, file,  watermark = false) {
+		return new Promise(resolve => {
+			watermark = watermark ? 1 : 0;
+
+			let form_data = new FormData();
+
+			form_data.append('file', file);
+			form_data.append('watermark', watermark);
+
+			if (state.id) {
+				form_data.append('id', state.id);
+				form_data.append('model', 'post-translated');
+			}
+
+			axios.post(route('dashboard.files.store'), form_data, {
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			}).then(response => {
+				commit('addFile', response.data.data);
+				
+				resolve(true);
+			}).catch(() => {
+				resolve(false);
+			});
+		});
+	},
+
+	removeFile({commit}, file) {
+		axios.post(file.routes.delete).then(() => {
+			commit('removeFile', file);
+		});
+	},
 };
 
 export default {

@@ -3,15 +3,19 @@ import { computed } from 'vue';
 
 const props =  {
 	default: null, 
-	type: null, 
+	
+	type: null,
+
 	id: {
 		type: String,
 		default: () => getId()
 	},
+
 	name: {
 		type: String,
 		default: null
 	},
+	
 	title: {
 		type: String,
 		default: ''

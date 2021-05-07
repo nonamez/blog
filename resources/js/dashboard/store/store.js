@@ -2,10 +2,6 @@ import { createStore, createLogger } from 'vuex';
 
 const store = createStore({
 	plugins: [createLogger()],
-
-	modules: {
-		files: require('./modules/files').default
-	},
 	
 	state () {
 		return {

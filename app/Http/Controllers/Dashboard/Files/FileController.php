@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Dashboard\Files;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 use App\Utils;
 use App\Models;
 
+use App\Http\Resources;
 use App\Http\Controllers\Controller;
 
 class FileController extends Controller {
@@ -25,9 +28,10 @@ class FileController extends Controller {
 	
 	public function store(Request $request)
 	{
+		// ToDo: validate id and model
 		$request->validate([
 			'file' => ['required', 'mimes:' . implode(',', self::ALLOWED_TYPES)],
-			'watermark' => ['required', 'boolean']
+			'watermark' => ['required', 'boolean'],
 		]);
 
 		$file = $request->file('file');
@@ -59,9 +63,14 @@ class FileController extends Controller {
 		// $new_file->description   = $request->get('description', NULL);
 		$new_file->original_name = $file->getClientOriginalName();
 
+		if ($request->has(['id', 'model'])) {
+			$new_file->fileable_id   = $request->get('id');
+			$new_file->fileable_type = $request->get('model');
+		}
+
 		$new_file->save();
-			
-		return response()->json(['file' => $new_file]);
+
+		return new Resources\Files\File($new_file);
 	}
 	
 	public function update(Request $request, $file_id)
