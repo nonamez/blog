@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Dashboard\Posts;
+namespace App\Http\Resources\Blog\Posts;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

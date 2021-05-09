@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Dashboard\Posts;
+namespace App\Http\Resources\Blog\Posts;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -33,7 +33,9 @@ class Post extends JsonResource
             'meta_description' => $this->meta_description,
             'meta_keywords'    => $this->meta_keywords,
 
-            'tags'   => $this->tags,
+            'markdown' => $this->markdown,
+
+            'tags'   => Resources\Blog\Tags\Tag::collection($this->tags),
             'routes' => $this->routes,
 
             'files' => Resources\Files\File::collection($this->files),

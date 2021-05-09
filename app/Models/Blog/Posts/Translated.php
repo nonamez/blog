@@ -13,11 +13,10 @@ class Translated extends Model
 
     protected $table = 'blg_post_translated';
 
-    protected $appends  = ['routes'];
+    protected $fillable = ['title', 'locale', 'status', 'content', 'meta_keywords', 'meta_description', 'meta_title', 'markdown', 'date', 'slug'];
+    protected $dates    = ['date'];
 
-    protected $casts = [
-        'date' => 'date'
-    ];
+    protected $appends  = ['routes'];
 
     // ========================= Attributes ========================= //
 
@@ -26,8 +25,8 @@ class Translated extends Model
         return (object) [
             'preview' => $this->getUrl(),
             
-            // 'save' => route('dashboard.posts.save', $this->id),
-            // 'find' => route('dashboard.posts.find', $this->id)
+            'save' => route('dashboard.posts.save', $this->id),
+            'find' => route('dashboard.posts.find', $this->id)
         ];  
     }
 

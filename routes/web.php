@@ -40,7 +40,7 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 	Route::prefix('posts')->group(function() {
 		Route::get('/', [Controllers\Dashboard\Posts\PostController::class, 'index'])->name('dashboard.posts.index');
 		
-		Route::post('save/{translated_post?}', 'PostController@save')->name('dashboard.posts.save');
+		Route::post('save/{translated_post?}', [Controllers\Dashboard\Posts\PostController::class, 'save'])->name('dashboard.posts.save');
 		Route::get('{translated_post}/find', [Controllers\Dashboard\Posts\PostController::class, 'find'])->name('dashboard.posts.find');
 		Route::post('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
 	});
@@ -57,7 +57,7 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 Route::get('/auth', function() {
     $user = auth()->user();
 
-	return new App\Http\Resources\Dashboard\Users\User($user);
+	return new App\Http\Resources\Users\User($user);
 })->middleware('auth');
 
 // // Helpers for posts examples

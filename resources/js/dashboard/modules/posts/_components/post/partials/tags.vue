@@ -11,7 +11,7 @@
 			</button>
 		</div>
 	</div>
-	<div class="btn-group btn-group-sm mr-2 mb-2" role="group" v-for="(tag, index) in tags" v-bind:key="tag.id">
+	<div class="btn-group btn-group-sm me-2 mb-2" role="group" v-for="(tag, index) in tags" v-bind:key="tag.id">
 		<a :href="getTagRoute(tag.slug)" class="btn btn-outline-primary" target="blank">{{ tag.name }}</a>
 		<button type="button" class="btn btn-danger" @click="removeTag(index)">
 			<i class="icon-trash"></i>
