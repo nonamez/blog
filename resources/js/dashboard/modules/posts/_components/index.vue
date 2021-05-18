@@ -33,14 +33,14 @@
 							<i class="icond icon-pencil"></i>
 						</button>
 
-						<div class="btn-group" role="group">
-							<button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<div class="dropdown">
+							<button class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-in-group" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="icond icon-trash"></i>
 							</button>
-							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-								<a class="dropdown-item" href="#" @click.prevent="remove({id: post.id})">Current</a>
-								<a class="dropdown-item" href="#" @click.prevent="remove({id: post.id, all: true})">All</a>
-							</div>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#" @click.prevent="remove({id: p.id})">Current</a></li>
+								<li><a class="dropdown-item" href="#" @click.prevent="remove({id: p.id, all: true})">All</a></li>
+							</ul>
 						</div>
 					</div>
 				</td>
@@ -58,13 +58,14 @@ export default {
 	setup() {
 		const store = useStore();
 
-		// console.log(store)
-
 		store.dispatch(`${VUEX_MODULE}/fetch`);
 
 		return {
+			title_length: 35,
+
 			posts: computed(() => store.state[VUEX_MODULE].posts),
-			title_length: 35
+
+			remove: options => store.dispatch(`${VUEX_MODULE}/remove`, options)
 		};
 	}
 };

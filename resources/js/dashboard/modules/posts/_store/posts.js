@@ -38,6 +38,14 @@ const actions = {
 			});
 		});
 	},
+
+	remove({dispatch}, {id, all}) {
+		let url = route('dashboard.posts.delete', id, all ? 'all' : '');
+
+		axios.post(url).then(() => {
+			dispatch('fetch');
+		});
+	}
 };
 
 export default {

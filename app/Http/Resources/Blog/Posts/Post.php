@@ -18,7 +18,7 @@ class Post extends JsonResource
     {
         return [
             'id' => $this->id,
-            'parent_id' => $this->parent_id,
+            'parent_post_id' => $this->parent_post_id,
 
             'locale' => $this->locale,
             'status' => $this->status,

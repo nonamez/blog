@@ -28,10 +28,6 @@ class PostController extends Controller
         return new Resources\Blog\Posts\Post($translated_post);
     }
 
-    // public function save(Request $request, Models\Blog\Posts\Translated $translated_post = NULL)
-    // {
-    //     dd($translated_post);
-    // }
 
     public function save(Request $request, Models\Blog\Posts\Translated $translated_post = NULL)
     {
@@ -104,5 +100,22 @@ class PostController extends Controller
         $translated_post->load('files', 'tags');
 
         return $this->find($translated_post);
+    }
+
+    public function delete(Models\Blog\Posts\Translated $translated_post, $all = FALSE)
+    {   
+        $title = $translated_post->title;
+
+        if ($all) {
+            $translated_post->parent->delete();
+            
+            $message = 'The post "%s" and its translations successfully deleted';
+        } else {
+            $translated_post->delete();
+            
+            $message = 'The post "%s" successfully deleted';
+        }
+        
+        return response()->json(['message' => sprintf($message, $title)]);
     }
 }

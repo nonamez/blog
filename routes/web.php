@@ -42,7 +42,7 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 		
 		Route::post('save/{translated_post?}', [Controllers\Dashboard\Posts\PostController::class, 'save'])->name('dashboard.posts.save');
 		Route::get('{translated_post}/find', [Controllers\Dashboard\Posts\PostController::class, 'find'])->name('dashboard.posts.find');
-		Route::post('{translated_post}/delete/{all?}', 'PostController@delete')->name('dashboard.posts.delete');
+		Route::post('{translated_post}/delete/{all?}', [Controllers\Dashboard\Posts\PostController::class, 'delete'])->name('dashboard.posts.delete');
 	});
 
 	// Files
