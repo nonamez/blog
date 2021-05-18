@@ -19,7 +19,7 @@
 							<ul class="dropdown-menu" aria-labelledby="header-dropdown-posts">
 								<router-link :to="{ name: 'posts.index' }" class="dropdown-item">Posts</router-link>
 								<div class="dropdown-divider"></div>
-								<!-- <router-link :to="{ name: 'posts.show' }" class="dropdown-item">Create</router-link> -->
+								<router-link :to="{ name: 'posts.post' }" class="dropdown-item">Create</router-link>
 							</ul>
 						</li>
 						<li class="nav-item">

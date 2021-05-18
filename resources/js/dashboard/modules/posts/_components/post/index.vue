@@ -65,11 +65,9 @@
 	</div>
 </template>
 <script>
-// import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 
-// import { route } from 'helpers';
 import { createNamespacedHelpers } from 'vuex-composition-helpers';
 
 const VUEX_MODULE = 'posts/post';
@@ -87,7 +85,9 @@ export default {
 		const store = useStore();
 		const route = useRoute();
 
-		store.dispatch(`${VUEX_MODULE}/find`, route.params.id);
+		if (route.params.id) {
+			store.dispatch(`${VUEX_MODULE}/find`, route.params.id);
+		}
 		
 		return {
 			...useState(['title', 'content', 'slug', 'meta_keywords', 'meta_description', 'locale', 'status', 'parent_id']),
@@ -95,116 +95,12 @@ export default {
 		};
 	},
 
-	// computed: {
-	// 	...mapState('post', ['title', 'content', 'slug', 'meta_keywords', 'meta_description', 'tags', 'locale', 'status', 'date', 'parent_id']),
-		
-	// 	...mapState('post', {
-	// 		post_id: 'id',
-	// 	}),
+	beforeRouteUpdate() {
+		this.$store.commit(`${VUEX_MODULE}/_reset`);
+	},
 
-	// 	...mapGetters('post', ['preview_url']),
-
-	// 	...mapState('files', ['files']),
-
-	// 	// date() {
-	// 	// 	let d = this.$store.state.post.date;
-
-	// 	// 	if (d) {
-	// 	// 		d = d.split(' ').shift();
-	// 	// 	}
-
-	// 	// 	return d;
-	// 	// },
-
-	// 	markdown:{
-	// 		get() {
-	// 			return this.$store.state.post.markdown == 1 ? true : false;
-	// 		},
-	// 		set(value) {
-	// 			this.$store.commit('post/setMarkdown', (value ? 1 : 0));
-	// 		}
-	// 	}
-	// },
-
-	// methods: {
-	// 	...mapMutations('post', ['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'removeTag', 'setDate', 'setLocale', 'setStatus', 'setParentId', 'setSlug']),
-	// 	...mapActions('files', {
-	// 		removeFile: 'remove'
-	// 	}),
-
-	// 	getTagRoute(slug) {
-	// 		return route('blog.posts.tag', this.locale, slug);
-	// 	},
-
-	// 	addTag() {
-	// 		if (this.tag.name.length == 0) {
-	// 			toastr.warning('Tag name can\'t be empty');
-
-	// 			return;
-	// 		}
-
-	// 		this.$store.commit('post/addTag', {
-	// 			name: this.tag.name,
-	// 			slug: this.tag.slug.length == 0 ? this.tag.name : this.tag.slug
-	// 		});
-
-	// 		this.tag.name = '';
-	// 		this.tag.slug = '';
-	// 	},
-
-	// 	uploadFile() {
-	// 		this.$store.dispatch('files/upload', document.getElementById('input-file').files[0]).then(status => {
-	// 			if (status) {
-	// 				document.querySelector('label.custom-file-label').textContent = 'Choose file';
-	// 				document.querySelector('#input-file').value = null;
-	// 			}
-	// 		});
-	// 	},
-
-	// 	save() {
-	// 		this.$store.dispatch('post/save').then(() => {
-	// 			toastr.success('Successfully saved');
-
-	// 			if (this.$route.params.post_id == null) {
-	// 				window.history.pushState('page2', 'Title', window.location.href + '/' + this.$store.state.post.id);
-	// 			}
-	// 		});
-	// 	}
-	// },
-
-	// beforeRouteUpdate(to, from, next) {
-	// 	this.$store.commit('files/reset');
-	// 	this.$store.commit('post/reset');
-
-	// 	next();
-	// },
-
-	// beforeRouteLeave(to, from, next) {
-	// 	this.$store.commit('files/reset');
-	// 	this.$store.commit('post/reset');
-
-	// 	next();
-	// },
-
-	// created() {
-	// 	if (this.$route.params.post_id) {
-	// 		this.$store.dispatch('post/find', this.$route.params.post_id);
-	// 	} else {
-	// 		this.$store.commit('files/reset');
-	// 		this.$store.commit('post/reset');
-	// 	}
-
-	// 	setTimeout(() => {
-	// 		jQuery('#input-file').change(function() {
-	// 			let name = this.files[0].name;
-
-	// 			if (name.length > 30) {
-	// 				name = '...' +  name.substr(-30);
-	// 			}
-
-	// 			document.querySelector('label.custom-file-label').textContent = name;
-	// 		});
-	// 	});
-	// }
+	beforeRouteLeave() {
+		this.$store.commit(`${VUEX_MODULE}/_reset`);
+	}
 };
 </script>
