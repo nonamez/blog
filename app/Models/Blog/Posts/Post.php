@@ -5,11 +5,17 @@ namespace App\Models\Blog\Posts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Events;
+
 class Post extends Model
 {
 	use HasFactory;
 
 	protected $table = 'blg_posts';
+
+	protected $dispatchesEvents = [
+        'deleting' => Events\Blog\Post\Deleting::class,
+    ];
 
 	// ========================= Relations ========================= //
 

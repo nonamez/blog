@@ -5,6 +5,8 @@ namespace App\Listeners\Subscribers\Blog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
+use App\Events;
+
 class PostEventSubscriber
 {
     public function onPostTranslatedDeleting(Events\Blog\Post\Translated\Deleting $event)
@@ -16,7 +18,7 @@ class PostEventSubscriber
 
     public function onPostDeleting(Events\Blog\Post\Deleting $event)
     {
-        foreach ($event->post->translated as $translated) {
+        foreach ($event->post->translations as $translated) {
             foreach ($translated->files as $file) {
                 $file->delete();
             }
@@ -31,7 +33,7 @@ class PostEventSubscriber
         );
 
         $events->listen(
-            'App\Listeners\Blog\Post@onPostDeleting',
+            'App\Events\Blog\Post\Deleting',
             [PostEventSubscriber::class, 'onPostDeleting']
         );
     }

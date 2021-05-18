@@ -5,6 +5,7 @@ namespace App\Models\Blog\Posts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Events;
 use App\Models;
 
 class Translated extends Model
@@ -17,6 +18,10 @@ class Translated extends Model
     protected $dates    = ['date'];
 
     protected $appends  = ['routes'];
+
+    protected $dispatchesEvents = [
+        'deleting' => Events\Blog\Post\Translated\Deleting::class,
+    ];
 
     // ========================= Attributes ========================= //
 

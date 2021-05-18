@@ -23,7 +23,7 @@ class Deleting
 	 *
 	 * @return void
 	 */
-	public function __construct(Models\Blog\Post\Translated $post)
+	public function __construct(Models\Blog\Posts\Translated $post)
 	{
 		$this->post = $post;
 	}
