@@ -93,7 +93,7 @@ if (function_exists('prepareContent') == FALSE) {
 		}
 
 		if ($post->markdown) {
-			$content = (new Parsedown())->text($content);
+			$content = Illuminate\Mail\Markdown::parse($content);
 		}
 
 		return $content;
