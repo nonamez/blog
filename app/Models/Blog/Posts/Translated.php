@@ -20,6 +20,7 @@ class Translated extends Model
     protected $appends  = ['routes'];
 
     protected $dispatchesEvents = [
+        'saved'    => Events\Blog\Post\Translated\Saved::class,
         'deleting' => Events\Blog\Post\Translated\Deleting::class,
     ];
 

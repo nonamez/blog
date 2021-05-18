@@ -13,16 +13,10 @@ class Tags extends Component
         $name = 'header-tags-' . app()->getLocale();
 
         $tags = cache()->rememberForever($name, function() {
-            $tags = Models\Blog\Tags\Tag::take(15)->join('blg_translated_posts_tags', function($query) {
-                $query->on('blg_translated_posts_tags.tag_id', '=', 'blg_tags.id');
-            })->join('blg_post_translated', function($query) {
-                $query->on('blg_translated_posts_tags.tag_id', '=', 'blg_post_translated.id');
-                
+            $tags = Models\Blog\Tags\Tag::take(5)->withCount(['posts' => function($query) {
                 $query->where('locale', '=', app()->getLocale());
                 $query->whereIn('status', ['published', 'hidden']);
-            })->selectRaw('`blg_tags`.`id`, `blg_tags`.`slug`, `blg_tags`.`name`, COUNT(`blg_translated_posts_tags`.`tag_id`) as aggregate')->groupByRaw(
-                '`blg_translated_posts_tags`.`tag_id`, `blg_tags`.`id`, `blg_tags`.`slug`, `blg_tags`.`name`'
-            )->orderByRaw('aggregate DESC')->get();
+            }])->orderBy('posts_count', 'desc')->get();
 
             return $tags;
         });

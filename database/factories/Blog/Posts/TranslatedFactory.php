@@ -41,8 +41,6 @@ class TranslatedFactory extends Factory
         return $this->afterCreating(function(Models\Blog\Posts\Translated $post) {
             $tag = Models\Blog\Tags\Tag::inRandomOrder()->first();
 
-            dd($tag);
-
             if ($tag) {
                 $post->tags()->attach($tag);
             }
