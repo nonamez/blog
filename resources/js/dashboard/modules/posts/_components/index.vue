@@ -2,11 +2,6 @@
 	<table class="table">
 		<thead>
 			<tr class="text-left">
-				<!-- <th>
-					<label>
-						<input type="checkbox">
-					</label>
-				</th> -->
 				<th>Title</th>
 				<th>Parent ID</th>
 				<th>Locale</th>
@@ -16,11 +11,6 @@
 		</thead>
 		<tbody>
 			<tr v-for="p in posts" v-bind:key="p.id">
-				<!-- <td>
-					<label>
-						<input type="checkbox" name="1">
-					</label>
-				</td> -->
 				<td>
 					<a :href="p.routes.preview">{{ p.title.slice(0, title_length) + (p.title.length > title_length ? '...' : '') }}</a>
 				</td>
