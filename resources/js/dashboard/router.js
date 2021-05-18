@@ -10,6 +10,7 @@ const router = createRouter({
 		},
 
 		...require('modules/posts/_routes.js').default,
+		...require('modules/files/_routes.js').default,
 	],
 });
 

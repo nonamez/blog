@@ -23,7 +23,7 @@
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="#">Files</a>
+							<router-link :to="{ name: 'files.index' }" class="nav-link" aria-current="page">Files</router-link>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-danger" href="#" @click.prevent="logout()">Logout</a>

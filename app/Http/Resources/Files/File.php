@@ -14,6 +14,22 @@ class File extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+
+            'name' => $this->name,
+            'original_name' => $this->original_name,
+
+            'routes' => $this->routes,
+
+            'assigned' => $this->when($this->fileable, function() {
+                return [
+                    'title'   => $this->fileable->title,
+                    'preview' => $this->fileable->routes->preview,
+                ];
+            }),
+
+            'created_at' => $this->created_at->format('Y-m-d H:i:s')
+        ];
     }
 }

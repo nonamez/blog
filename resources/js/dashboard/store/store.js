@@ -26,5 +26,6 @@ const store = createStore({
 
 store.registerModule('posts', require('modules/posts/_store/posts').default);
 store.registerModule(['posts', 'post'], require('modules/posts/_store/post').default);
+store.registerModule('files', require('modules/files/_store/files').default);
 
 export default store;

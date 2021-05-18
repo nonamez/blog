@@ -21,9 +21,9 @@ class FileController extends Controller {
 	
 	public function index()
 	{
-		$files = Models\Files\File::with('fileable:id,title,locale,slug')->orderBy('created_at', 'DESC')->paginate(20);
+		$files = Models\Files\File::with('fileable')->orderBy('created_at', 'DESC')->paginate(20);
 
-		return response()->json(compact('files'));
+		return new Resources\Files\FileCollection($files);
 	}
 	
 	public function store(Request $request)
