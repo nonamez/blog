@@ -16,7 +16,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Models\Blog\Posts\Translated::orderBy('date', 'DESC')->paginate(20);
+        $posts = Models\Blog\Posts\Translated::orderBy('date', 'DESC')->paginate(100);
 
         return new Resources\Blog\Posts\PostCollection($posts);
     }

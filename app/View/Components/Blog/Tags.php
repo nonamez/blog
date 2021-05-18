@@ -8,12 +8,18 @@ use App\Models;
 
 class Tags extends Component
 {
+    public $tags;
+
+    function __construct($tags = NULL) {
+        $this->tags = $tags == NULL ? $this->getTags() : $tags;
+    }
+
     private function getTags()
     {
         $name = 'header-tags-' . app()->getLocale();
 
         $tags = cache()->rememberForever($name, function() {
-            $tags = Models\Blog\Tags\Tag::take(5)->withCount(['posts' => function($query) {
+            $tags = Models\Blog\Tags\Tag::take(15)->withCount(['posts' => function($query) {
                 $query->where('locale', '=', app()->getLocale());
                 $query->whereIn('status', ['published', 'hidden']);
             }])->orderBy('posts_count', 'desc')->get();
@@ -31,6 +37,6 @@ class Tags extends Component
      */
     public function render()
     {
-        return view('components.blog.tags')->with('tags', $this->getTags());
+        return view('components.blog.tags');
     }
 }
