@@ -1,6 +1,15 @@
 <x-blog-layout>
 	<article class="post-standalone" id="post-{{ $post['id'] }}">
-		<h2 class="mb-1">{{ $post->title }}</h2>
+		<div class="flex justify-between">
+			<div>
+				<h2>{{ $post->title }}</h2>
+			</div>
+			<div class="langs">
+				@foreach($post->parent->localesExcept(app()->getLocale())->where('status', 'published') as $other_post)
+				[<a{!! $other_post->locale == app()->getLocale() ? ' class="active"' : '' !!} href="{{ url(sprintf('%s/post/%s', $other_post->locale, $other_post->slug)) }}">{{ strtoupper($other_post->locale) }}</a>]
+				@endforeach
+			</div>
+		</div>
 
 		<ul class="flex pl-2">
 			<li class="mr-3">
