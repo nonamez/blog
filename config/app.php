@@ -52,9 +52,11 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://nonamez.name'),
 
     'asset_url' => env('ASSET_URL', null),
+
+    'domain' => parse_url(env('APP_URL', 'https://nonamez.name'), PHP_URL_HOST),
 
     /*
     |--------------------------------------------------------------------------

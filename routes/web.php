@@ -6,11 +6,9 @@ use App\Http\Controllers;
 
 Route::pattern('locale', implode('|', config('blog.locales')));
 
-/*
-|--------------------------------------------------------------------------
-| Locale Detection
-|--------------------------------------------------------------------------
-*/
+Route::domain('cv.' . config('app.domain'))->group(function () {
+    Route::view('/', 'cv.index');
+});
 
 require __DIR__ . '/auth.php';
 
@@ -49,7 +47,6 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 	Route::prefix('files')->group(function() {
 		Route::get('/', [Controllers\Dashboard\Files\FileController::class, 'index'])->name('dashboard.files.index');
 		Route::post('upload', [Controllers\Dashboard\Files\FileController::class, 'store'])->name('dashboard.files.store');
-		Route::post('{file_id}/update', 'FileController@update')->name('dashboard.files.update');
 		Route::post('{file_id}/delete', [Controllers\Dashboard\Files\FileController::class, 'delete'])->name('dashboard.files.delete');
 	});
 });
@@ -60,17 +57,9 @@ Route::get('/auth', function() {
 	return new App\Http\Resources\Users\User($user);
 })->middleware('auth');
 
-// // Helpers for posts examples
-// Route::get('sleep/{time}', function($time) {
-// 	sleep(intval($time));
+// Helpers for posts examples
+Route::get('sleep/{time}', function($time) {
+	sleep(intval($time));
 
-// 	return response()->json(['quote' => Illuminate\Foundation\Inspiring::quote()]);
-// });
-
-// Route::view('/about', 'blog.about')->name('blog.about');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
-// require __DIR__.'/auth.php';
+	return response()->json(['quote' => Illuminate\Foundation\Inspiring::quote()]);
+});
