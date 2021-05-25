@@ -17,7 +17,7 @@ services:
         platform: linux/amd64
         build:
             args:
-                user: kiril
+                user: nonamez
                 uid: 1000
             context: .
             dockerfile: docker-compose/php/Dockerfile
