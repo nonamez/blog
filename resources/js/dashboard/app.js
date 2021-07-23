@@ -5,7 +5,7 @@ import { createApp, reactive } from 'vue';
 import Router from './router';
 import Store from './store/store';
 
-import Dashboard from './layouts/Dashboard.vue';
+import Dashboard from './layouts/dashboard.vue';
 
 axios.get('/auth').then(response => {
 	const app = createApp(Dashboard);
