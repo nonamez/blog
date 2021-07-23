@@ -33,8 +33,8 @@ class CreateBlgPostTranslatedTable extends Migration
             
             $table->longText('content');
 
-            $table->string('meta_description', 255)->default(NULL);
-            $table->string('meta_keywords', 255)->default(NULL);
+            $table->string('meta_description', 255)->nullable()->default(NULL);
+            $table->string('meta_keywords', 255)->nullable()->default(NULL);
             
             $table->timestamps();
             
