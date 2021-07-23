@@ -25,6 +25,12 @@
 						<li class="nav-item">
 							<router-link :to="{ name: 'files.index' }" class="nav-link" aria-current="page">Files</router-link>
 						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" v-bind:class="{active: currentRouteName.startsWith('invoices')}" href="#" id="header-dropdown-invoices" data-bs-toggle="dropdown" aria-expanded="false">Invoices</a>
+							<ul class="dropdown-menu" aria-labelledby="header-dropdown-invoices">
+								<router-link :to="{ name: 'invoices.clients.index' }" class="dropdown-item">Clients</router-link>
+							</ul>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link text-danger" href="#" @click.prevent="logout()">Logout</a>
 						</li>

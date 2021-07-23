@@ -50,6 +50,7 @@ if (mix.inProduction()) {
 
 mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css');
 mix.sass('resources/sass/dashboard/styles.scss', 'public/css/dashboard.css');
+mix.sass('resources/sass/dashboard/invoices/journal.scss', 'public/css/dashboard/invoices/journal.css');
 
 mix.js('resources/js/dashboard/app.js', 'public/js/dashboard.js').vue();
 

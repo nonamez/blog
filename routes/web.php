@@ -49,6 +49,18 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 		Route::post('upload', [Controllers\Dashboard\Files\FileController::class, 'store'])->name('dashboard.files.store');
 		Route::post('{file_id}/delete', [Controllers\Dashboard\Files\FileController::class, 'delete'])->name('dashboard.files.delete');
 	});
+
+	// Invoices
+	Route::prefix('invoices')->group(function() {
+		Route::prefix('output')->group(function() {
+			Route::get('/journal', [Controllers\Dashboard\Invoices\OutputController::class, 'journal'])->name('dashboard.invoices.journal');
+			Route::get('/clients', [Controllers\Dashboard\Invoices\OutputController::class, 'clients'])->name('dashboard.invoices.clients');
+		});
+
+		Route::prefix('clients')->group(function() {
+			Route::get('/', [Controllers\Dashboard\Invoices\ClientController::class, 'index'])->name('dashboard.invoices.clients.index');
+		});
+	});
 });
 
 Route::get('/auth', function() {

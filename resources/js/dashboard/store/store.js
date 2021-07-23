@@ -26,6 +26,11 @@ const store = createStore({
 
 store.registerModule('posts', require('modules/posts/_store/posts').default);
 store.registerModule(['posts', 'post'], require('modules/posts/_store/post').default);
+
 store.registerModule('files', require('modules/files/_store/files').default);
+
+store.registerModule('invoices', {namespaced: true});
+store.registerModule(['invoices', 'clients'], require('modules/invoices/_store/clients/clients').default);
+// store.registerModule(['invoices', 'clients', 'client'], require('modules/invoices/_store/clients/client').default);
 
 export default store;
