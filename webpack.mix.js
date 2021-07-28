@@ -48,10 +48,9 @@ if (mix.inProduction()) {
 	mix.sourceMaps();
 }
 
-mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css');
-mix.sass('resources/sass/dashboard/styles.scss', 'public/css/dashboard.css');
+mix.sass('resources/sass/blog/styles.scss', 'public/css/blog.css').js('resources/js/blog/app.js', 'public/js/blog.js')
 
-mix.js('resources/js/dashboard/app.js', 'public/js/dashboard.js').vue();
+mix.sass('resources/sass/dashboard/styles.scss', 'public/css/dashboard.css').js('resources/js/dashboard/app.js', 'public/js/dashboard.js').vue();
 
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),

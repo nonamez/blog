@@ -40,3 +40,6 @@
 		</footer>
 	</article>
 </x-blog-layout>
+@push('js')
+<script src="https://{{ config('services.disqus.shortname') }}.disqus.com/embed.js"></script>
+@endpush

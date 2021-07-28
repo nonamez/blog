@@ -49,7 +49,7 @@
 			<a href="https://laravel.com" rel="nofollow" class="mr-2">Made with Laravel</a>
 		</div>
 	</footer>
-	{{-- <script src="{{ mix('js/blog.js') }}"></script> --}}
+	<script src="{{ mix('js/blog.js') }}"></script>
 	@stack('js')
 </body>
 </html>
