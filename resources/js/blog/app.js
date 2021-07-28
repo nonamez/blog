@@ -1,4 +1,4 @@
-let hljs = require('highlight.js/lib/highlight.js');
+const hljs = require('highlight.js');
 
 hljs.registerLanguage('apache', require('highlight.js/lib/languages/apache'));
 hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
@@ -15,4 +15,4 @@ hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
 
-hljs.initHighlightingOnLoad();
+hljs.highlightAll();

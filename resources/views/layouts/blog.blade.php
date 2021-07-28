@@ -50,6 +50,6 @@
 		</div>
 	</footer>
 	<script src="{{ mix('js/blog.js') }}"></script>
-	@stack('js')
+	@stack('scripts')
 </body>
 </html>

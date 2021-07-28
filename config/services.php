@@ -30,4 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'analytics' => env('GOOGLE_ANALYTICS', FALSE)
+    ],
+
+    'disqus' => [
+        'shortname' => env('DISQUS_SHORTNAME', FALSE),
+        'publickey' => env('DISQUS_PUBLICKEY', FALSE)
+    ]
+
 ];
