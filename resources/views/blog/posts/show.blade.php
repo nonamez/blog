@@ -1,3 +1,6 @@
+@push('scripts')
+<script src="https://{{ config('services.disqus.shortname') }}.disqus.com/embed.js"></script>
+@endpush
 <x-blog-layout>
 	<article class="post-standalone" id="post-{{ $post['id'] }}">
 		<div class="flex justify-between">
