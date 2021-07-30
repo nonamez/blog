@@ -59,6 +59,9 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 
 		Route::prefix('clients')->group(function() {
 			Route::get('/', [Controllers\Dashboard\Invoices\ClientController::class, 'index'])->name('dashboard.invoices.clients.index');
+			Route::get('{client}/find', [Controllers\Dashboard\Invoices\ClientController::class, 'find'])->name('dashboard.invoices.clients.find');
+
+			Route::post('save/{client?}', [Controllers\Dashboard\Invoices\ClientController::class, 'save'])->name('dashboard.invoices.clients.save');
 		});
 	});
 });

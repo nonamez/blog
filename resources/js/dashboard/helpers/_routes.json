@@ -24,5 +24,6 @@
     "dashboard.files.delete": "dashboard\/files\/{file_id}\/delete",
     "dashboard.invoices.journal": "dashboard\/invoices\/output\/journal",
     "dashboard.invoices.clients": "dashboard\/invoices\/output\/clients",
-    "dashboard.invoices.clients.index": "dashboard\/invoices\/clients"
+    "dashboard.invoices.clients.index": "dashboard\/invoices\/clients",
+    "dashboard.invoices.clients.find": "dashboard\/invoices\/clients\/{client}\/find"
 }

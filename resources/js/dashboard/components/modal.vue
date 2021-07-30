@@ -25,18 +25,20 @@ export default {
 		title: {
 			type: String,
 			default: '',
-		},
-
-		// name: {
-		// 	type: String,
-		// 	default: null,
-		// 	required: true
-		// }
+		}
 	},
 
-	setup() {
+	emits: ['close'],
+
+	setup(props,{emit}) {
 		const ID = getId();
 		const ID_SELECTOR = `#${ID}-modal`;
+
+		const onClose = () => {
+			emit('close');
+
+			document.getElementById(ID_SELECTOR).removeEventListener('hide.bs.modal', onClose);
+		};
 
 		return {
 			is_loading: null,
@@ -45,43 +47,15 @@ export default {
 			ID_SELECTOR,
 
 			show: () => {
-				console.log('show');
-
 				const myModal = new window.bootstrap.Modal(document.getElementById(ID_SELECTOR), {
 					keyboard: false
 				});
+
+				document.getElementById(ID_SELECTOR).addEventListener('hide.bs.modal', onClose);
 
 				myModal.show();
 			}
 		};
 	},
-
-	// computed: {
-	// 	is_loading() {
-	// 		return this.$store.state.is_loading == this.name;
-	// 	}
-	// },
-
-	// methods: {
-		
-
-	// 	onModalClose() {
-	// 		this.$emit('close');
-	// 	},
-
-	// 	getId() {
-	// 		return this.id;
-	// 	}
-	// },
-
-	// beforeUnmount() {
-	// 	jQuery(this.ID_SELECTOR).off('hide.bs.modal', this.onModalClose);
-	// },
-
-	// created() {
-	// 	this.$nextTick(() => {
-	// 		jQuery(this.ID_SELECTOR).on('hide.bs.modal', this.onModalClose);
-	// 	});
-	// }
 };
 </script>

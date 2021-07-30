@@ -28,7 +28,6 @@ class PostController extends Controller
         return new Resources\Blog\Posts\Post($translated_post);
     }
 
-
     public function save(Request $request, Models\Blog\Posts\Translated $translated_post = NULL)
     {
         $request->merge([

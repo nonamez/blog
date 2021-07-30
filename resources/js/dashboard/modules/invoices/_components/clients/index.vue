@@ -11,7 +11,7 @@
 				<td>{{ c.name }}</td>
 				<td>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-outline-secondary btn-sm" @click="presentClientModal()">
+						<button type="button" class="btn btn-outline-secondary btn-sm" @click="presentClientModal(c.id)">
 							<i class="icond icon-pencil"></i>
 						</button>
 					</div>
@@ -43,8 +43,8 @@ export default {
 
 			clients: computed(() => store.state.invoices.clients.clients),
 
-			presentClientModal: () => {
-				clientModal.value?.show();
+			presentClientModal: (id) => {
+				clientModal.value?.show(id);
 			}
 
 			// remove: options => store.dispatch(`${VUEX_MODULE}/remove`, options)
