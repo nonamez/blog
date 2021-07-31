@@ -35,13 +35,13 @@ const actions = {
 		});
 	},
 
-	// remove({dispatch}, {id, all}) {
-	// 	let url = route('dashboard.posts.delete', id, all ? 'all' : '');
+	remove({dispatch}, id) {
+		let url = route('dashboard.invoices.clients.delete', id);
 
-	// 	axios.post(url).then(() => {
-	// 		dispatch('fetch');
-	// 	});
-	// }
+		axios.delete(url).then(() => {
+			dispatch('fetch');
+		});
+	}
 };
 
 export default {

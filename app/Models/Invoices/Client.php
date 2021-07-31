@@ -32,8 +32,16 @@ class Client extends Model
     public function getRoutesAttribute()
     {
         return (object) [            
-            'save' => route('dashboard.invoices.clients.save', $this->id),
-            'find' => route('dashboard.invoices.clients.find', $this->id)
+            'save'   => route('dashboard.invoices.clients.save', $this->id),
+            'find'   => route('dashboard.invoices.clients.find', $this->id),
+            'delete' => route('dashboard.invoices.clients.delete', $this->id)
         ];  
+    }
+
+    public function scopeOfUser($query)
+    {
+        $query->where('user_id', auth()->id());
+
+        return $query;
     }
 }

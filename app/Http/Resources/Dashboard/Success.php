@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Users;
+namespace App\Http\Resources\Dashboard;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class User extends JsonResource
+class Success extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,6 @@ class User extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            
-            'abilities' => $this->abilities->pluck('name')
-        ];
+        return parent::toArray($request);
     }
 }

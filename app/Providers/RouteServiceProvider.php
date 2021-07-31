@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+use App\Models;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -59,5 +61,25 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+
+    /**
+     * Configure the Gates for the application.
+     */
+    private function configureGates(): void
+    {
+        Gate::before(function($user, $ability) {
+            if ($user->is_admin) {
+                return TRUE;
+            }
+        });
+
+        $abilities = config('abilities');
+
+        foreach ($abilities as $abilty) {
+            Gate::define($abilty, function($user) use($abilty) {
+                return $user->abilities()->where('name', $abilty)->exists();
+            });
+        }
     }
 }

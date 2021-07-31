@@ -20,7 +20,7 @@ axios.get('/auth').then(response => {
 	}, {});
 
 	app.use(Store);
-	app.use(Router);
+	app.use(Router, app);
 	
 	app.mount('#dashboard');
 }).catch((err) => {

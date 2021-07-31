@@ -34,6 +34,8 @@ class CreateInvClientsTable extends Migration
             $table->string('url', 50)->nullable()->default(NULL);
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

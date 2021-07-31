@@ -15,4 +15,20 @@ const router = createRouter({
 	],
 });
 
-export default router;
+export default {
+	install(app) {
+		router.install(app);
+
+		router.beforeEach((to, from, next) => {
+			if (to.meta.ability) {
+				if (app.config.globalProperties.$auth.abilities.includes(to.meta.ability)) {
+					return next();
+				} else {
+					console.error(`The ability "${to.meta.ability}" not given for user`);
+				}
+			} else {
+				return next();
+			}
+		});
+	},
+};
