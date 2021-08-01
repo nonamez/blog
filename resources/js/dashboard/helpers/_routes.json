@@ -27,5 +27,7 @@
     "dashboard.invoices.clients.index": "dashboard\/invoices\/clients",
     "dashboard.invoices.clients.find": "dashboard\/invoices\/clients\/{client}\/find",
     "dashboard.invoices.clients.save": "dashboard\/invoices\/clients\/save\/{client?}",
-    "dashboard.invoices.clients.delete": "dashboard\/invoices\/clients\/{client}\/delete"
+    "dashboard.invoices.clients.delete": "dashboard\/invoices\/clients\/{client}\/delete",
+    "dashboard.invoices.index": "dashboard\/invoices",
+    "dashboard.invoices.find": "dashboard\/invoices\/{invoice}\/find"
 }

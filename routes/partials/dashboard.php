@@ -33,8 +33,12 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 			Route::get('/', [Controllers\Dashboard\Invoices\ClientController::class, 'index'])->name('dashboard.invoices.clients.index');
 			Route::get('{client}/find', [Controllers\Dashboard\Invoices\ClientController::class, 'find'])->middleware('can:find,client')->name('dashboard.invoices.clients.find');
 
-			Route::post('save/{client?}', [Controllers\Dashboard\Invoices\ClientController::class, 'save'])->middleware('can:save,client')->name('dashboard.invoices.clients.save');
+			Route::post('save/{client?}', [Controllers\Dashboard\Invoices\ClientController::class, 'save'])->name('dashboard.invoices.clients.save');
+			
 			Route::delete('{client}/delete', [Controllers\Dashboard\Invoices\ClientController::class, 'delete'])->middleware('can:delete,client')->name('dashboard.invoices.clients.delete');
 		});
+
+		Route::get('/', [Controllers\Dashboard\Invoices\InvoiceController::class, 'index'])->name('dashboard.invoices.index');
+		Route::get('/{invoice}/find', [Controllers\Dashboard\Invoices\InvoiceController::class, 'find'])->middleware('can:find,invoice')->name('dashboard.invoices.find');
 	});
 });

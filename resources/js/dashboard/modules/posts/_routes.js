@@ -2,12 +2,12 @@ export default [
 	{
 		path: '/posts',
 		name: 'posts.index',
-		component: require('modules/posts/_components/index.vue').default,
+		component: () => import('modules/posts/_components/index.vue'),
 	},
 
 	{
 		path: '/posts/post/:id?',
 		name: 'posts.post',
-		component: require('modules/posts/_components/post/index.vue').default,
+		component: () => import('modules/posts/_components/post/index.vue'),
 	},
 ];

@@ -102,7 +102,7 @@ const actions = {
 	save({state, getters, commit}) {
 		commit('setIsLoading', 'invoices-clients', {root: true});
 
-		let url = state.routes.save ? state.routes.save : route('dashboard.invoices.clients.save');
+		let url = state.routes ? state.routes.save : route('dashboard.invoices.clients.save');
 
 		return new Promise((resolve) => {
 			axios.post(url, getters.data).then(() => {

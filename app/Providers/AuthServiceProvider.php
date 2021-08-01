@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Models\Invoices\Client::class => Policies\Invoices\Client::class,
+        Models\Invoices\Invoice::class => Policies\Invoices\Invoice::class,
     ];
 
     /**

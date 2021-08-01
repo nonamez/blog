@@ -1,4 +1,7 @@
 <template>
+	<div class="text-end">
+		<button type="button" class="btn btn-success" @click="presentClientModal()">Create</button>
+	</div>
 	<table class="table">
 		<thead>
 			<tr class="text-left">

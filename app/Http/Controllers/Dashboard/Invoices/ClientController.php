@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard\Invoices;
 use Illuminate\Http\Request;
 
 use App\Models;
-use App\Policies;
 use App\Http\Resources;
 
 use App\Http\Controllers\Controller;
@@ -37,9 +36,9 @@ class ClientController extends Controller
             'vat_code'     => ['present'],
 
             'email' => ['required_without:phone', 'nullable', 'email'],
-            'phone' => ['required_without:email', 'nullable', 'regex:\+\d+'],
+            'phone' => ['required_without:email', 'nullable', 'regex:/\+?\d+/'],
 
-            'url' => 'url'
+            'url' => ['url', 'nullable']
         ];
 
         $request->validate($rules);
@@ -48,6 +47,8 @@ class ClientController extends Controller
             $client = new Models\Invoices\Client;
 
             $client->user_id = auth()->id();
+        } else {
+            $this->authorize('update', $client);
         }
 
         $client->fill($request->only('name', 'address', 'city', 'country', 'company_code', 'vat_code', 'email', 'phone', 'url'));

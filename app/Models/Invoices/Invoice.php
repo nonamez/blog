@@ -8,7 +8,18 @@ class Invoice extends Model
 {
 	protected $table = 'inv_invoices';
 
+	protected $appends = ['total'];
+	
 	protected $dates = ['paid_at'];
+
+	public function scopeOfUser($query)
+	{
+		$query->whereHas('client', function($query) {
+			$query->ofUser();
+		});
+
+		return $query;
+	}
 
 	public function client()
 	{

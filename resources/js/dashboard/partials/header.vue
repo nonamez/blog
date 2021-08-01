@@ -29,6 +29,7 @@
 							<a class="nav-link dropdown-toggle" v-bind:class="{active: currentRouteName.startsWith('invoices')}" href="#" id="header-dropdown-invoices" data-bs-toggle="dropdown" aria-expanded="false">Invoices</a>
 							<ul class="dropdown-menu" aria-labelledby="header-dropdown-invoices">
 								<router-link :to="{ name: 'invoices.clients.index' }" class="dropdown-item">Clients</router-link>
+								<router-link :to="{ name: 'invoices.index' }" class="dropdown-item">Invoices</router-link>
 							</ul>
 						</li>
 						<li class="nav-item">

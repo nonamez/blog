@@ -45,12 +45,15 @@ export default {
 			modal,
 
 			show: (id) => {
-				store.dispatch(`${VUEX_MODULE}/find`, id);
+				if (id) {
+					store.dispatch(`${VUEX_MODULE}/find`, id);
+				}
 
 				modal.value?.show();
 			},
 
 			onClose() {
+				store.commit('invoices/clients/client/_reset');
 				store.dispatch('invoices/clients/fetch');
 			}
 		};

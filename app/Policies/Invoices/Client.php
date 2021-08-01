@@ -15,13 +15,9 @@ class Client
         return $client->user_id == $user->id;
     }
 
-    public function save(Models\Users\User $user, Models\Invoices\Client $client = NULL)
+    public function update(Models\Users\User $user, Models\Invoices\Client $client)
     {
-        if ($client) {
-            return $client->user_id == $user->id;
-        }
-
-        return TRUE;
+        return $client->user_id == $user->id;
     }
 
     public function delete(Models\Users\User $user, Models\Invoices\Client $client)
