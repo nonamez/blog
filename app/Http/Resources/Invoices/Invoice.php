@@ -22,10 +22,13 @@ class Invoice extends JsonResource
             'client' => new Clients\Client($this->whenLoaded('client')),
             'items'  => new Items\ItemCollection($this->whenLoaded('items')),
 
+            'status' => $this->status,
+
             'total' => $this->total,
             
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'paid_at'    => $this->created_at->format('Y-m-d'),
+            'invoiced_at' => $this->invoiced_at,
+            'due_until'   => $this->due_until,
+            'paid_at'     => $this->paid_at
         ];
     }
 }

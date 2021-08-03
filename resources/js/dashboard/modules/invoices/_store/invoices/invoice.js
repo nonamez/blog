@@ -5,12 +5,19 @@ import mixins from 'store/modules/_mixins';
 const _MIXINS = mixins(initialState);
 
 function initialState() {
+	let date_due = new Date();
+	
+	date_due.setDate(date_due.getDate() + 10); 
+	
 	return {
 		id: null,
 		
 		client_id: null,
 
-		items: null,
+		date_invoice: (new Date().toISOString().slice(0, 19).replace('T', ' ').split(' ').shift()),
+		date_due: (date_due.toISOString().slice(0, 19).replace('T', ' ').split(' ').shift()),
+
+		items: [],
 	};
 }
 
@@ -21,6 +28,9 @@ const mutations = {
 
 	setClientId(state, client_id) {
 		state.client_id = client_id;
+	},
+	setInvoiceDate(state, date) {
+		state.date = date;
 	}
 };
 

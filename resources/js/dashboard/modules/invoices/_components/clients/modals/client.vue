@@ -27,7 +27,7 @@ import { useStore } from 'vuex';
 
 import { createNamespacedHelpers } from 'vuex-composition-helpers';
 
-const VUEX_MODULE = 'invoices/clients/client';
+const VUEX_MODULE = 'invoices/client';
 
 const { useState, useMutations, useActions } = createNamespacedHelpers(VUEX_MODULE);
 
@@ -53,7 +53,7 @@ export default {
 			},
 
 			onClose() {
-				store.commit('invoices/clients/client/_reset');
+				store.commit('invoices/client/_reset');
 				store.dispatch('invoices/clients/fetch');
 			}
 		};

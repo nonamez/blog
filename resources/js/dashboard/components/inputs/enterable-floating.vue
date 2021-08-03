@@ -1,6 +1,6 @@
 <template>
 	<div class="form-floating">
-		<input type="text" class="form-control" v-model="returnable" :id="id" :name="name" :placeholder="title">
+		<input :type="type" class="form-control" v-model="returnable" :id="id" :name="name" :placeholder="title">
 		<label :for="id">{{ title }}</label>
 	</div>
 </template>
@@ -8,7 +8,14 @@
 import { props, returnable } from './_mixin.js';
 
 export default {
-	props,
+	props: {
+		...props,
+		
+		type: {
+			type: String,
+			default: 'text'
+		}
+	},
 
 	setup(props, {emit}) {
 		return {

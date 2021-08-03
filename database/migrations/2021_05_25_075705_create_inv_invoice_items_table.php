@@ -20,10 +20,10 @@ class CreateInvInvoiceItemsTable extends Migration
 
             $table->foreign('invoice_id')->references('id')->on('inv_invoices')->onDelete('restrict');
 
-            $table->decimal('sum', 9, 2);
-            $table->unsignedTinyInteger('count')->default(1);
+            $table->decimal('price', 9, 2);
+            $table->unsignedTinyInteger('quantity')->default(1);
 
-            $table->text('comment')->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });

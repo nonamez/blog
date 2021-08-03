@@ -17,13 +17,18 @@ class CreateInvInvoicesTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('client_id');
-
             $table->foreign('client_id')->references('id')->on('inv_clients')->onDelete('restrict');
+
+            $table->enum('status', ['draft', 'sent'])->default('draft');
+
+            $table->text('notes')->nullable();
 
             $table->timestamps();
             
-            $table->timestamp('paid_at')->nullable();
-            $table->timestamp('returned_at')->nullable();
+            $table->date('invoiced_at')->nullable();
+            $table->date('due_until')->nullable();
+            $table->date('paid_at')->nullable();
+            $table->date('returned_at')->nullable();
 
             $table->softDeletes();
         });

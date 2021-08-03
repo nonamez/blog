@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ability::class);
     }
+
+    public function clients()
+    {
+        return $this->hasMany(Models\Invoices\Client::class);
+    }
 }

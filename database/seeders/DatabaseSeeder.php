@@ -16,14 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	$status = ['published', 'draft', 'hidden'];
-
-    	Models\Blog\Tags\Tag::factory(20)->create();
-
-        Models\Users\User::factory(10)->has(Models\Blog\Posts\Post::factory(rand(1,5))->has(Models\Blog\Posts\Translated::factory(3)->state(new Sequence(
-            ['locale' => 'en'],
-            ['locale' => 'lt'],
-            ['locale' => 'ru'],
-        )), 'translations'))->create();
+        $this->call(UsersSeeder::class);
+        $this->call(BlogTagsSeeder::class);
+        $this->call(BlogPostsSeeder::class);
+        $this->call(InvoiceClientsSeeder::class);
+        $this->call(InvoiceInvoicesSeeder::class);
     }
 }

@@ -1,19 +1,18 @@
 <?php
 
-namespace Database\Factories\Blog\Posts;
+namespace Database\Factories\Invoices;
 
 use App\Models;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PostFactory extends Factory
+class InvoiceFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Models\Blog\Posts\Post::class;
+    protected $model = Models\Invoices\Invoice::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +22,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => Models\Users\User::inRandomOrder()->first()->id
+            'client_id'  => Models\Invoices\Client::inRandomOrder()->first()->id,
+            
+            'invoiced_at' => now(),
+            'due_until'   => now()->addDays(10),
         ];
     }
 }

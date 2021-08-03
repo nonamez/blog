@@ -16,7 +16,7 @@ export default [
 		}
 	},
 	{
-		path: '/invoices/:id',
+		path: '/invoices/view/:id?',
 		name: 'invoices.invoice',
 		component: () => import('modules/invoices/_components/invoices/invoice/index.vue'),
 		meta: {

@@ -4,9 +4,13 @@ namespace App\Models\Invoices;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Models;
 
 class Client extends Model
 {
+    use HasFactory;
     use SoftDeletes;
     
     protected $table    = 'inv_clients';
@@ -43,5 +47,10 @@ class Client extends Model
         $query->where('user_id', auth()->id());
 
         return $query;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Models\Users\User::class);
     }
 }

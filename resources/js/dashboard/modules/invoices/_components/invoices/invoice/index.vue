@@ -9,10 +9,10 @@
 			<div class="col">
 				<div class="row mb-3">
 					<div class="col">
-						<enterable-floating title="Invoice Date"></enterable-floating>
+						<enterable-floating title="Invoice Date" type="date" :default="date_invoice" @returnable="setInvoiceDate($event)"></enterable-floating>						
 					</div>
 					<div class="col">
-						<enterable-floating title="Due Date"></enterable-floating>
+						<enterable-floating title="Due Date" type="date" :default="date_due"></enterable-floating>
 					</div>
 				</div>
 				<div class="row">
@@ -34,16 +34,7 @@
 			</div>
 		</div>
 		<div class="row mb-3">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Items</th>
-						<th>Quantity</th>
-						<th>Price</th>
-						<th>Amount</th>
-					</tr>
-				</thead>
-			</table>
+			<items></items>
 		</div>
 		<div class="row border border-danger">
 			<div class="col">Notes</div>
@@ -88,13 +79,14 @@ import { useRoute } from 'vue-router';
 
 import { createNamespacedHelpers } from 'vuex-composition-helpers';
 
-const VUEX_MODULE = 'invoices/invoices/invoice';
+const VUEX_MODULE = 'invoices/invoice';
 
 const { useState, useMutations } = createNamespacedHelpers(VUEX_MODULE);
 
 export default {
 	components: {
-		'client-select': require('./partials/client-select.vue').default
+		'client-select': require('./partials/client-select.vue').default,
+		items: require('./partials/items.vue').default,
 	},
 
 	setup() {
@@ -106,8 +98,8 @@ export default {
 		}
 		
 		return {
-			...useState(['items', 'total']),
-			...useMutations(['setTitle', 'setContent', 'setMetaKeywords', 'setMetaDescription', 'setLocale', 'setStatus', 'setParentId', 'setSlug'])
+			...useState(['items', 'total', 'date_invoice', 'date_due']),
+			...useMutations(['setInvoiceDate'])
 		};
 	},
 

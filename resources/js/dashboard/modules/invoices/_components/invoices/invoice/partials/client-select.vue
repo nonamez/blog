@@ -12,10 +12,12 @@ export default {
 		store.dispatch('invoices/clients/fetch');
 
 		return {
-			client_id: computed(() => store.state.invoices.invoices.invoice.client_id),
-			clients: computed(() => store.state.invoices.clients.clients),
+			client_id: computed(() => store.state.invoices.invoice.client_id),
+			
+			clients: computed(() => store.state.invoices.clients),
+
 			setClientId: (id) => {
-				store.commit('invoices/invoices/invoice/setClientId', id);
+				store.commit('invoices/invoice/setClientId', id);
 			}
 		};
 	}

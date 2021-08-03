@@ -1,22 +1,26 @@
 <template>
 	<div class="text-end">
-		<button type="button" class="btn btn-success">Create</button>
+		<button type="button" class="btn btn-success" @click="$router.push({ name: 'invoices.invoice' })">Create</button>
 	</div>
 	<table class="table">
 		<thead>
 			<tr class="text-left">
+				<th>Number</th>
+				<th>Date</th>
 				<th>Client</th>
-				<th>Total</th>
-				<th>Created At</th>
-				<th>Paid At</th>
+				<th>Status</th>
+				<th>Amount</th>
+				<th>Paid</th>
 				<th class="text-end">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr v-for="inv in invoices" v-bind:key="inv.id">
+				<td>INV-{{ inv.id }}</td>
+				<td>{{ inv.invoiced_at }}</td>
 				<td>{{ inv.client.name }}</td>
+				<td>{{ inv.status }}</td>
 				<td>{{ inv.total }}</td>
-				<td>{{ inv.created_at }}</td>
 				<td>{{ inv.paid_at }}</td>
 				<td class="text-end">
 					<div class="btn-group" role="group">

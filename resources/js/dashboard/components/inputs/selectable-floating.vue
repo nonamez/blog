@@ -1,7 +1,7 @@
 <template>
 	<div class="form-floating">
 		<select class="form-select" :id="id" v-model="returnable" :name="name">
-			<option selected="selected" disabled="disabled">Open this select menu</option>
+			<option value="null" disabled="disabled">Click to select</option>
 			<option v-for="(opt, index) in options" :value="opt.id ?? index" v-bind:key="index">{{ opt.name ?? opt }}</option>
 		</select>
 		<label :for="id">{{ title }}</label>

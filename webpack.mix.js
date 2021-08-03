@@ -33,7 +33,7 @@ mix.webpackConfig({
 			helpers: path.resolve(__dirname, 'resources/js/dashboard/helpers'),
 			store: path.resolve(__dirname, 'resources/js/dashboard/store'),
 			modules: path.resolve(__dirname, 'resources/js/dashboard/modules'),
-			// components: path.resolve(__dirname, 'resources/js/components'),
+			components: path.resolve(__dirname, 'resources/js/dashboard/components'),
 			partials: path.resolve(__dirname, 'resources/js/dashboard/partials'),
 			// 'event-bus': path.resolve(__dirname, 'resources/js/event-bus.js'),
 
