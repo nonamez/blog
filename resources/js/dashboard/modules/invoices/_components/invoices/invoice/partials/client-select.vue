@@ -14,7 +14,7 @@ export default {
 		return {
 			client_id: computed(() => store.state.invoices.invoice.client_id),
 			
-			clients: computed(() => store.state.invoices.clients),
+			clients: computed(() => store.state.invoices.clients.clients),
 
 			setClientId: (id) => {
 				store.commit('invoices/invoice/setClientId', id);

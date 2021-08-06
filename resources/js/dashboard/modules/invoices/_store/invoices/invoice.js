@@ -29,8 +29,25 @@ const mutations = {
 	setClientId(state, client_id) {
 		state.client_id = client_id;
 	},
+	
 	setInvoiceDate(state, date) {
 		state.date = date;
+	},
+	
+	addNewItem(state) {
+		state.items.push({});
+	},
+
+	editItemDescription(state, {index, value}) {
+		state.items[index].description = value;
+	},
+
+	editItemQuantity(state, {index, value}) {
+		state.items[index].quantity = parseInt(value);
+	},
+
+	editItemPrice(state, {index, value}) {
+		state.items[index].price = parseFloat(value);
 	}
 };
 
