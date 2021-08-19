@@ -29,7 +29,7 @@ services:
         networks:
             - nonamez
 
-    db:
+    mysql:
         platform: linux/amd64
         image: mariadb:10.5.8
         container_name: nonamez-db
@@ -39,16 +39,11 @@ services:
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_USER: ${DB_USERNAME}
-            SERVICE_TAGS: dev
-            SERVICE_NAME: mysql
-        volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
         networks:
             - nonamez
 
     node:
-        platform: linux/amd64
-        image: node:latest
+        image: node:16.7
         container_name: nonamez-node
         working_dir: /var/www/
         volumes:
