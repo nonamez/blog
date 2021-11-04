@@ -2,7 +2,7 @@
 
 @import '../../fontello/css/fontello';
 
-@import "bootstrap";
+@import 'bootstrap';
 
 [v-cloak] > * { display:none }
 [v-cloak]::before { content: "loading…" }
@@ -11,4 +11,11 @@
 	border-left: 0;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+}
+
+// Example usage
+.mb-3-mobile {
+    @include media-breakpoint-down(md) {
+        // margin-bottom: ;
+    }
 }

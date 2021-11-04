@@ -40,5 +40,7 @@ Route::middleware([/*'user_ip',*/ 'auth'])->prefix('dashboard')->group(function(
 
 		Route::get('/', [Controllers\Dashboard\Invoices\InvoiceController::class, 'index'])->name('dashboard.invoices.index');
 		Route::get('/{invoice}/find', [Controllers\Dashboard\Invoices\InvoiceController::class, 'find'])->middleware('can:find,invoice')->name('dashboard.invoices.find');
+		
+		Route::get('/save/{invoice?}', [Controllers\Dashboard\Invoices\InvoiceController::class, 'save'])->name('dashboard.invoices.save');
 	});
 });

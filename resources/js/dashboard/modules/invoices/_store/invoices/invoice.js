@@ -1,6 +1,6 @@
 import { route } from 'helpers';
 import mixins from 'store/modules/_mixins';
-// import pick from 'lodash/pick';
+import pick from 'lodash/pick';
 
 const _MIXINS = mixins(initialState);
 
@@ -14,14 +14,39 @@ function initialState() {
 		
 		client_id: null,
 
-		date_invoice: (new Date().toISOString().slice(0, 19).replace('T', ' ').split(' ').shift()),
-		date_due: (date_due.toISOString().slice(0, 19).replace('T', ' ').split(' ').shift()),
+		invoiced_at: (new Date().toISOString().slice(0, 19).replace('T', ' ').split(' ').shift()),
+		due_until: (date_due.toISOString().slice(0, 19).replace('T', ' ').split(' ').shift()),
 
 		items: [],
+
+		invoice_number: 0,
+		invoice_prefix: 'INV',
 	};
 }
 
 const state = initialState();
+
+const getters = {
+	data: (state) => {
+		let data = pick(state, ['client_id', 'invoiced_at', 'due_until']);
+
+		data.items = state.items.filter(x => {
+			return x.description && x.quantity && x.price;
+		});
+
+		return data;
+	},
+
+	subTotal: (state) => {
+		return state.items.reduce((a, x) => a + (x.quantity * x.price), 0).toFixed(2);
+	},
+
+	total: (state, getters) => {
+		return getters.subTotal;
+	},
+
+
+};
 
 const mutations = {
 	..._MIXINS.mutations,
@@ -30,12 +55,20 @@ const mutations = {
 		state.client_id = client_id;
 	},
 	
-	setInvoiceDate(state, date) {
-		state.date = date;
+	setInvoicedAtDate(state, date) {
+		state.invoiced_at = date;
+	},
+
+	setDueUntilDate(state, date) {
+		state.due_until = date;
 	},
 	
 	addNewItem(state) {
-		state.items.push({});
+		state.items.push({
+			description: null,
+			quantity: null,
+			price: null,
+		});
 	},
 
 	editItemDescription(state, {index, value}) {
@@ -71,11 +104,28 @@ const actions = {
 			});
 		});
 	},
+
+	save({getters, commit}) {
+		commit('setIsLoading', 'invoices', {root: true});
+
+		let url = state.routes ? state.routes.save : route('dashboard.invoices.save');
+
+		console.log(getters.data, url);
+
+		// return new Promise((resolve) => {
+		// 	axios.post(url, getters.data).then(() => {
+		// 		resolve();
+		// 	}).finally(() => {
+		// 		commit('setIsLoading', false, {root: true});
+		// 	});
+		// });
+	}
 };
 
 export default {
 	namespaced: true,
 	state,
 	mutations,
-	actions
+	actions,
+	getters
 };

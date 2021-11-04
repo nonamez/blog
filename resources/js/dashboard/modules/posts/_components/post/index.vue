@@ -11,7 +11,7 @@
 							<enterable @returnable="setTitle($event)" :default="title" name="title" :id="id"></enterable>
 						</form-group>
 						<form-group title="Content" v-slot="{id}">
-							<enterable @returnable="setContent($event)" :default="content" name="content" type="textarea" :id="id"></enterable>
+							<enterable-big @returnable="setContent($event)" :default="content" name="content" :id="id"></enterable-big>
 						</form-group>
 						<form-group title="Slug" v-slot="{id}">
 							<enterable @returnable="setSlug($event)" :default="slug" name="slug" :id="id"></enterable>
@@ -28,7 +28,7 @@
 							<enterable @returnable="setMetaKeywords($event)" :default="meta_keywords" name="meta_keywords" :id="id"></enterable>
 						</form-group>
 						<form-group title="Description" v-slot="{id}">
-							<enterable @returnable="setMetaDescription($event)" :default="meta_description" type="textarea" name="meta_description" :id="id"></enterable>
+							<enterable-big @returnable="setMetaDescription($event)" :default="meta_description" name="meta_description" :id="id"></enterable-big>
 						</form-group>
 					</template>
 				</card>

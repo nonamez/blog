@@ -24,4 +24,9 @@ class InvoiceController extends Controller
 
         return new Resources\Invoices\Invoice($invoice);
     }
+
+    public function save(Request $request, Models\Invoices\Invoice $invoice)
+    {
+        // code...
+    }
 }

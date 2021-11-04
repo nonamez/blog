@@ -14,6 +14,14 @@ class Item extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+
+            'invoice_id' => $this->invoice_id,
+
+            'description' => $this->description,
+            'quantity' => $this->quantity,
+            'price' => (float) $this->price,
+        ];
     }
 }
