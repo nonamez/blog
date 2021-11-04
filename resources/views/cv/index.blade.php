@@ -44,7 +44,7 @@
 		<h1>Kiril Čalkin</h1>
 		<h2>Personal information</h2>
 		<p>
-			I'm Kiril - self-taught full-stack web developer with a keen interest in back-end technologies. I consider myself as an active geek. Aside from code, I have a passion for running, cycling, swimming, wake/snow-boarding and cats. I also have an outgoing and sarcastic personality so with me will be fun.
+			I'm Kiril - self-taught full-stack web developer with a keen interest in back-end technologies. I consider myself as an active geek. Aside from code, I have a passion for running, cycling, swimming, different types of boards and cats. I also have an outgoing and sarcastic personality so working with me will be fun.
 		</p>
 		<ul>
 			<li>Date of birth: August 25th, 1991</li>
@@ -63,32 +63,32 @@
 				<a href="https://t.me/kotoffzky">https://t.me/kotoffzky</a>
 			</li>
 			<li>
-				<a href="https://www.instagram.com/cyclist_without_helmet">https://www.instagram.com/cyclist_without_helmet</a>
+				<a href="https://www.instagram.com/k1r1ll_pch3lk1n">https://www.instagram.com/k1r1ll_pch3lk1n</a>
 			</li>
 		</ul>
-		<h2>Skills</h2>
+		<h2 style="page-break-before: always; margin-bottom: 0">Skills</h2>
 		<ul class="with-nested">
 			<li>PHP
 				<ul>
-					<li>Laravel, SlimPHP, Wordpress, Symfony (Junior), ImpressPages;</li>
+					<li>Laravel, SlimPHP, Wordpress, Symfony (Junior), ImpressPages</li>
 				</ul>
 			</li>
 			<li>JavaScript / NodeJS
 				<ul>
-					<li>Vue/Vuex, Angular, React (Junior), jQuery/jQuery UI;</li>
-					<li>Socket.io, Restify, Sequelize;</li>
+					<li>Vue/Vuex, Angular, React (Junior), jQuery/jQuery UI</li>
+					<li>Socket.io, Restify, Sequelize</li>
 				</ul>
 			</li>
 			<li>
 				Python (Junior)
 				<ul>
-					<li>Odoo (Junior);</li>
+					<li>Odoo (Junior)</li>
 				</ul>
 			</li>
 			<li>Client-side
 				<ul>
-					<li>HTML, CSS;</li>
-					<li>Bootstrap, Tailwind CSS, Foundation (Junior);</li>
+					<li>HTML, CSS</li>
+					<li>Bootstrap, Tailwind CSS, Foundation (Junior)</li>
 				</ul>
 			</li>
 			<li>Database
@@ -100,27 +100,37 @@
 			</li>
 			<li>Android/iOS
 				<ul>
-					<li>Cordova / Ionic, React Native (Intermediate)</li>
+					<li>Cordova / Ionic</li>
+					<li>React Native (Intermediate)</li>
 				</ul>
 			</li>
 			<li>OS
 				<ul>
-					<li>Ubuntu, Linux Mint, OS X;</li>
+					<li>Ubuntu, Linux Mint, Debian</li>
+					<li>OS X</li>
 				</ul>
 			</li>
 			<li>Other
 				<ul>
-					<li>NGINX/Apache, Redis, Git, Docker (Junior);</li>
-					<li>TypeScript, GraphQL, JSX;</li>
-					<li>Security (Inj, XSS and etc.);</li>
-					<li>Various SDK's and API's;</li>
-					<li>GitHub/Bitbucket, Bamboo;</li>
+					<li>NGINX/Apache, Redis, Git, Docker</li>
+					<li>TypeScript, GraphQL, JSX</li>
+					<li>Security (Inj, XSS and etc.)</li>
+					<li>Various SDK's and API's</li>
+					<li>GitHub, GitHub Actions, Bitbucket, Bamboo</li>
 				</ul>
 			</li>
 		</ul>
 		<h2 style="page-break-before: always; margin-bottom: 0">Professional experience</h2>
 		<ul class="companies" style="margin-top: 10px">
-			<!-- Your company name here for 1700 eu/month after taxes -->
+			<!-- Your company name here for 2500 eu/month after taxes -->
+			<li>
+				<h3>Hector.team, September 2021 - Present</h3>
+				<p>Responsible for back-end</p>
+			</li>
+			<li>
+				<h3>Code Academy, March 2019 - Present</h3>
+				<p>Full-stack course mentor</p>
+			</li>
 			<li>
 				<h3>Innoversion.ee, January 2020 - Present</h3>
 				<p>Responsible for various web projects and mobile apps</p>
