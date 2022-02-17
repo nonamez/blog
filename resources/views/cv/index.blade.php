@@ -132,7 +132,7 @@
 				<p>Full-stack course mentor</p>
 			</li>
 			<li>
-				<h3>Innoversion.ee, January 2020 - Present</h3>
+				<h3>Innoversion.ee, January 2020 - Octorber 2021</h3>
 				<p>Responsible for various web projects and mobile apps</p>
 				<ul>
 					<li>Odoo</li>
