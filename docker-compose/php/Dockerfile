@@ -1,33 +1,57 @@
-FROM php:7.4-fpm
+FROM php:7.4-fpm-alpine3.14
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
+# Add Build Dependencies
+RUN apk update && apk add --no-cache --virtual .build-deps  \
+    $PHPIZE_DEPS \
+    # imagemagick-dev \
+    zlib-dev \
+    libjpeg-turbo-dev \
     libpng-dev \
-    libonig-dev \
     libxml2-dev \
-    zip \
-    unzip
+    bzip2-dev \
+    zip
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Add Production Dependencies
+RUN apk add --update --no-cache \
+    # supervisor \
+    # imagemagick \
+    icu-dev \
+    freetype-dev \
+    mysql-client \
+    libzip-dev
+
+RUN pear update-channels \
+    pecl update-channels
+
+RUN pecl install redis \
+    docker-php-ext-enable redis 
+
+# RUN docker-php-ext-enable imagick
+
+# Configure & Install Extension
+RUN docker-php-ext-install \
+    mysqli \
+    pdo \
+    pdo_mysql \
+    intl \
+    bz2 \
+    pcntl \
+    bcmath \
+    zip 
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.1.14 /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && chown -R $user:$user /home/$user
+# Remove Build Dependencies
+RUN apk del -f .build-deps
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+COPY ./custom-docker-entrypoint /usr/local/bin/custom-docker-entrypoint
+COPY ./conf/* /usr/local/etc/php/conf.d/
+COPY ./fpm/* /usr/local/etc/php-fpm.d
 
-# Set working directory
+ENTRYPOINT ["custom-docker-entrypoint"]
+
+# Setup Working Dir
 WORKDIR /var/www
 
-USER $user
+EXPOSE 9000
