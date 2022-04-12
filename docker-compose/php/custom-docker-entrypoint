@@ -41,7 +41,7 @@ then
     php artisan migrate --force    
 fi
 
-chmod -R 777 /var/www/storage/log
+chmod -R 777 /var/www/storage/logs
 chmod -R 777 /var/www/storage/framework
 chmod -R 777 /var/www/bootstrap/cache
 

@@ -44,7 +44,7 @@
 		<h1>Kiril Čalkin</h1>
 		<h2>Personal information</h2>
 		<p>
-			I'm Kiril - self-taught full-stack web developer with a keen interest in back-end technologies. I consider myself as an active geek. Aside from code, I have a passion for running, cycling, swimming, wake/snow-boarding and cats. I also have an outgoing and sarcastic personality so with me will be fun.
+			I'm Kiril - self-taught full-stack web developer with a keen interest in back-end technologies. I consider myself as an active geek. Aside from code, I have a passion for running, cycling, swimming, different types of boards and cats. I also have an outgoing and sarcastic personality so working with me will be fun.
 		</p>
 		<ul>
 			<li>Date of birth: August 25th, 1991</li>
@@ -63,74 +63,90 @@
 				<a href="https://t.me/kotoffzky">https://t.me/kotoffzky</a>
 			</li>
 			<li>
-				<a href="https://www.instagram.com/cyclist_without_helmet">https://www.instagram.com/cyclist_without_helmet</a>
+				<a href="https://www.instagram.com/k1r1ll_pch3lk1n">https://www.instagram.com/k1r1ll_pch3lk1n</a>
 			</li>
 		</ul>
-		<h2>Skills</h2>
+		<h2 style="page-break-before: always; margin-bottom: 0">Skills</h2>
 		<ul class="with-nested">
 			<li>PHP
 				<ul>
-					<li>Laravel, SlimPHP, Wordpress, Symfony (Junior), ImpressPages;</li>
+					<li>Laravel, SlimPHP, Wordpress, Symfony (Junior), ImpressPages</li>
 				</ul>
 			</li>
 			<li>JavaScript / NodeJS
 				<ul>
-					<li>Vue/Vuex, Angular, React (Junior), jQuery/jQuery UI;</li>
-					<li>Socket.io, Restify, Sequelize;</li>
+					<li>Vue/Vuex [2|3], Angular, React (Junior), jQuery/jQuery UI</li>
+					<li>Socket.io, Restify, Sequelize</li>
 				</ul>
 			</li>
 			<li>
 				Python (Junior)
 				<ul>
-					<li>Odoo (Junior);</li>
+					<li>Odoo (Junior)</li>
 				</ul>
 			</li>
 			<li>Client-side
 				<ul>
-					<li>HTML, CSS;</li>
-					<li>Bootstrap, Tailwind CSS, Foundation (Junior);</li>
+					<li>HTML, CSS</li>
+					<li>Bootstrap, Tailwind CSS, Foundation (Junior)</li>
 				</ul>
 			</li>
 			<li>Database
 				<ul>
 					<li>MySQL / MariaDB</li>
-					<li>MongoDB</li>
-					<li>MS-SQL</li>
+					<li>MongoDB (Junior)</li>
+					<li>MS-SQL (Junior)</li>
 				</ul>
 			</li>
 			<li>Android/iOS
 				<ul>
-					<li>Cordova / Ionic, React Native (Intermediate)</li>
+					<li>Cordova / Ionic</li>
+					<li>React Native (Intermediate)</li>
 				</ul>
 			</li>
 			<li>OS
 				<ul>
-					<li>Ubuntu, Linux Mint, OS X;</li>
+					<li>Ubuntu, Linux Mint, Debian</li>
+					<li>OS X</li>
 				</ul>
 			</li>
 			<li>Other
 				<ul>
-					<li>NGINX/Apache, Redis, Git, Docker (Junior);</li>
-					<li>TypeScript, GraphQL, JSX;</li>
-					<li>Security (Inj, XSS and etc.);</li>
-					<li>Various SDK's and API's;</li>
-					<li>GitHub/Bitbucket, Bamboo;</li>
+					<li>NGINX/Apache, Redis, Git, Docker</li>
+					<li>TypeScript, GraphQL, JSX - (Junior)</li>
+					<li>Security (Inj, XSS and etc.)</li>
+					<li>Various SDK's and API's</li>
+					<li>GitHub, GitHub Actions, Bitbucket, Bamboo</li>
 				</ul>
 			</li>
 		</ul>
 		<h2 style="page-break-before: always; margin-bottom: 0">Professional experience</h2>
 		<ul class="companies" style="margin-top: 10px">
-			<!-- Your company name here for 1700 eu/month after taxes -->
+			<span style="color:#fff">Your company name here for 2500 eu/month after taxes</span>
 			<li>
-				<h3>Innoversion.ee, January 2020 - Present</h3>
+				<h3>Adeoweb.biz, March 2022 - Present</h3>
+				<p>Magento 2 developer</p>
+			</li>
+			<li>
+				<h3>Hector.team, September 2021 - March 2022</h3>
+				<p>Responsible for apps back-end using <strong>Laravel</strong> and <strong>DevOPS</strong></p>
+			</li>
+			<li>
+				<h3>Innoversion.ee, January 2020 - Octorber 2021</h3>
 				<p>Responsible for various web projects and mobile apps</p>
 				<ul>
-					<li>Odoo</li>
-					<li>Mobile app for construction company</li>
+					<li>Furtinute fabric
+						<ul>
+							<li>Mobile app for scanning parts at the warehouse using <strong>ReactNative/NodeJS</strong> and <strong>Zebra TC20</strong></li>
+							<li>Odoo integration</li>
+						</ul>
+					</li>
+					<li>"BAU-LIVE" mobile app for construction company using <strong>Ionic/Laravel</strong></li>
 				</ul>
 			</li>
 			<li>
-				<h3>Freelance Developer, September 2019 - January 2020</h3>
+				<h3>Code Academy, March 2019 - Present</h3>
+				<p>Full-stack course mentor</p>
 			</li>
 			<li>
 				<h3 style="margin:0">Creative Partner, Web Developer, March 2019 - September, 2019</h3>
@@ -140,10 +156,10 @@
 				<h3 style="margin:0">Initsys, Web Developer, February 2013 - March 2019</h3>
 				<p>Responsible for most of the company's web projects</p>
 				<ul>
-					<li>SMTP server to serve IP-Cameras using Python</li>
-					<li>"ONVIF" protocol implementation using Python</li>
-					<li>"MerlinPHP" - simplified functionality of the desktop program "Merlin" using Laravel/Vue</li>
-					<li>"Nimbus IMS" hybrid mobile app for iOS/Android using Ionic</li>
+					<li>SMTP server to serve IP-Cameras using <strong>Python</strong></li>
+					<li>"ONVIF" protocol implementation using <strong>Python</strong></li>
+					<li>"MerlinPHP" - simplified functionality of the desktop program "Merlin" using <strong>Laravel/Vue</strong></li>
+					<li>"Nimbus IMS" hybrid mobile app for iOS/Android using <strong>Ionic</strong></li>
 					<li>Various parts of "VSaaS" system using</li>
 				</ul>
 			</li>
