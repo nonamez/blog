@@ -23,7 +23,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => Models\Users\User::inRandomOrder()->first()->id
+            'user_id' => Models\Users\User::factory()
         ];
     }
 }
