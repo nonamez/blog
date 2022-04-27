@@ -34,7 +34,7 @@ if [ "$role" = "app"  ]
 then
     while ! mysqladmin ping -h"$DB_HOST" --silent; do
         echo "Waiting for mysql"
-        sleep 1
+        sleep 5
     done
 
     echo "Run migration"

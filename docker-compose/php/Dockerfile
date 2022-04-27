@@ -13,7 +13,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps  \
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
-    # supervisor \
+    supervisor \
     # imagemagick \
     icu-dev \
     freetype-dev \
@@ -37,7 +37,10 @@ RUN docker-php-ext-install \
     bz2 \
     pcntl \
     bcmath \
-    zip 
+    zip
+
+# # PostgreSQL support
+# RUN apk add --no-cache libpq postgresql-dev && docker-php-ext-install pdo pdo_pgsql pgsql
 
 # Get latest Composer
 COPY --from=composer:2.1.14 /usr/bin/composer /usr/bin/composer

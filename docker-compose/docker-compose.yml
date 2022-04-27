@@ -51,9 +51,10 @@ services:
         env_file:
             - .env
         volumes:
-            - ./mysql/data:/var/lib/mysql
+            - ./.temp/database:/var/lib/mysql
             
     mariadb-test:
+        container_name: ${APP_NAME}-mariadb-test
         image: mariadb:10.7
         env_file:
             - .env
