@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine3.14
+FROM php:8.1.4-fpm-alpine3.14
 
 # Add Build Dependencies
 RUN apk update && apk add --no-cache --virtual .build-deps  \

@@ -15,7 +15,7 @@ help:
 	echo
 
 up:
-	docker-compose --env-file ./docker-compose/.env -p $(APP_NAME) -f ./docker-compose/docker-compose.yml up $(ARGS)
+	docker-compose --env-file ./docker/.env -p $(APP_NAME) -f ./docker/docker-compose.yml up $(ARGS) --remove-orphans
 
 recreate: ARGS := --force-recreate
 recreate: up
@@ -24,7 +24,13 @@ build: ARGS := --build
 build: up
 
 down:
-	docker-compose -p $(APP_NAME) -f ./docker-compose/docker-compose.yml down
+	docker-compose -p $(APP_NAME) -f ./docker/docker-compose.yml down
+
+stop:
+	docker-compose -p $(APP_NAME) -f ./docker/docker-compose.yml stop
 
 exec-php:
-	docker exec -itu nobody $(APP_NAME)-php /bin/sh
+	docker exec -it $(APP_NAME)-php bash
+
+exec-mysql:
+	docker exec -itu root $(APP_NAME)-mysql bash
