@@ -8,7 +8,7 @@ Route::pattern('locale', implode('|', config('blog.locales')));
 // Redirect from / to lang
 Route::get('/', function() {
 	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2), config('blog.locales'))) {
-		$locate = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+		$locale = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 	} else {
 		$locale = config('app.fallback_locale');
 	}

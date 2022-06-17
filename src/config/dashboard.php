@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'allowed_ip' => explode(',', env('ALLOWED_IP'))
+	'allowed_ip' => env('ALLOWED_IP') ? explode(',', env('ALLOWED_IP')) : []
 ];

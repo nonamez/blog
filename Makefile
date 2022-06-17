@@ -30,7 +30,13 @@ stop:
 	docker-compose -p $(APP_NAME) -f ./docker/docker-compose.yml stop
 
 exec-php:
-	docker exec -it $(APP_NAME)-php bash
+	docker exec -it $(APP_NAME)-php /bin/sh
+
+exec-php-supervisor:
+	docker exec -it $(APP_NAME)-php-supervisor /bin/sh
 
 exec-mysql:
-	docker exec -itu root $(APP_NAME)-mysql bash
+	docker exec -itu root $(APP_NAME)-mysql /bin/sh
+
+exec-postgres:
+	docker exec -itu root $(APP_NAME)-postgres /bin/sh
