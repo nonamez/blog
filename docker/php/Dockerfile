@@ -30,17 +30,20 @@ RUN pecl install redis \
 
 # Configure & Install Extension
 RUN docker-php-ext-install \
-    mysqli \
-    pdo \
-    pdo_mysql \
     intl \
     bz2 \
     pcntl \
     bcmath \
     zip 
 
-# Get latest Composer
-COPY --from=composer:2.1.14 /usr/bin/composer /usr/bin/composer
+# MySQL Support
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# PostgreSQL
+# RUN apk add --no-cache libpq postgresql-dev && docker-php-ext-install pdo pdo_pgsql pgsql
+
+# Composer
+COPY --from=composer:2.3.7 /usr/bin/composer /usr/bin/composer
 
 # Remove Build Dependencies
 RUN apk del -f .build-deps
@@ -48,6 +51,9 @@ RUN apk del -f .build-deps
 COPY ./custom-docker-entrypoint /usr/local/bin/custom-docker-entrypoint
 COPY ./conf/* /usr/local/etc/php/conf.d/
 COPY ./fpm/* /usr/local/etc/php-fpm.d
+
+COPY ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./supervisor/conf /etc/supervisor/conf.d
 
 ENTRYPOINT ["custom-docker-entrypoint"]
 
