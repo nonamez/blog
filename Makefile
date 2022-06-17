@@ -1,6 +1,6 @@
 .SILENT:
 
-include ./docker-compose/.env
+include ./docker/.env
 
 help:
 	echo
