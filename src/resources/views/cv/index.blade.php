@@ -113,8 +113,8 @@
 			<li>Other
 				<ul>
 					<li>NGINX/Apache, Redis, Git, Docker</li>
-					<li>TypeScript, GraphQL, JSX - (Junior)</li>
-					<li>Security (Inj, XSS and etc.)</li>
+					<li>TypeScript, GraphQL (Junior), JSX (Junior)</li>
+					<li>Security (Inj, XSS, CSRF and etc.)</li>
 					<li>Various SDK's and API's</li>
 					<li>GitHub, GitHub Actions, Bitbucket, Bamboo</li>
 				</ul>
@@ -124,8 +124,8 @@
 		<ul class="companies" style="margin-top: 10px">
 			<span style="color:#fff">Your company name here for 2500 eu/month after taxes</span>
 			<li>
-				<h3>Adeoweb.biz, March 2022 - Present</h3>
-				<p>Magento 2 developer</p>
+				<h3>Addendum Solutions, March 2022 - July 2022</h3>
+				<p>FullStack Web Developer</p>
 			</li>
 			<li>
 				<h3>Hector.team, September 2021 - March 2022</h3>
