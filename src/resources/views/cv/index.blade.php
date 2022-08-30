@@ -37,6 +37,14 @@
 			max-width: 800px;
 			margin: 0 auto;
 		}
+
+		@media print
+		{    
+		    .no-print, .no-print *
+		    {
+		        display: none !important;
+		    }
+		}
 	</style>
 </head>
 <body>
@@ -122,7 +130,15 @@
 		</ul>
 		<h2 style="page-break-before: always; margin-bottom: 0">Professional experience</h2>
 		<ul class="companies" style="margin-top: 10px">
-			<span style="color:#fff">Your company name here for 2500 eu/month after taxes</span>
+			<span style="color:#fff" class="no-print">Your company name here for 2500 eu/month after taxes</span>
+			<li>
+				<h3>CGates, July 2022 - Present</h3>
+				<p>FullStack Developer</p>
+			</li>
+			<li>
+				<h3>Code Academy, March 2019 - Present</h3>
+				<p>Full-stack course mentor</p>
+			</li>
 			<li>
 				<h3>Addendum Solutions, March 2022 - July 2022</h3>
 				<p>FullStack Web Developer</p>
@@ -143,10 +159,6 @@
 					</li>
 					<li>"BAU-LIVE" mobile app for construction company using <strong>Ionic/Laravel</strong></li>
 				</ul>
-			</li>
-			<li>
-				<h3>Code Academy, March 2019 - Present</h3>
-				<p>Full-stack course mentor</p>
 			</li>
 			<li>
 				<h3 style="margin:0">Creative Partner, Web Developer, March 2019 - September, 2019</h3>
